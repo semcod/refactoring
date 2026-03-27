@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2026-03-27
+
+### Test
+- Update tests/test_refactoring.py
+
+### Other
+- Update refactoring/__init__.py
+- Update refactoring/cli.py
+- Update refactoring/core.py
+- Update refactoring/utils.py
+
 ## [0.0.1] - 2026-03-27
 
 ### Other
