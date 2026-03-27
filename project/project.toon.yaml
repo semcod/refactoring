@@ -42,8 +42,8 @@ HOTSPOTS[10]:
 
 REFACTOR[6]:
   [1] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
-  [2] M/L Split ExtendedConfig.from_yaml (CC=15 → target CC<10)
-  [3] M/L Split UnusedImports.fix (CC=21 → target CC<10)
+  [2] M/L Split UnusedImports.fix (CC=21 → target CC<10)
+  [3] M/L Split ExtendedConfig.from_yaml (CC=15 → target CC<10)
   [4] M/M Reduce PrefactTreeProvider.activate fan-out (currently 20)
   [5] M/M Reduce CompositeRuleFactory.create_composite_rule fan-out (currently 18)
 

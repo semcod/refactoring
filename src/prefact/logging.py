@@ -1,4 +1,4 @@
-"""Structured logging system for prefact.
+"""Structured logging system for pprefact.
 
 This module provides enterprise-grade logging with:
 - Structured JSON logging
@@ -23,7 +23,7 @@ from prefact.config import Config
 
 
 class LogLevel(str, Enum):
-    """Log levels for prefact."""
+    """Log levels for pprefact."""
     DEBUG = "DEBUG"
     INFO = "INFO"
     WARNING = "WARNING"
@@ -31,12 +31,12 @@ class LogLevel(str, Enum):
     CRITICAL = "CRITICAL"
 
 
-class PrefactLogger:
-    """Structured logger for prefact with enterprise features."""
+class PprefactLogger:
+    """Structured logger for pprefact with enterprise features."""
     
     def __init__(
         self,
-        name: str = "prefact",
+        name: str = "pprefact",
         level: Union[LogLevel, str] = LogLevel.INFO,
         format_type: str = "json",
         output_file: Optional[Path] = None,
@@ -216,8 +216,8 @@ class JsonFormatter(logging.Formatter):
         return json.dumps(data)
 
 
-class PrefactException(Exception):
-    """Base exception for prefact."""
+class PprefactException(Exception):
+    """Base exception for pprefact."""
     
     def __init__(
         self,
@@ -231,12 +231,12 @@ class PrefactException(Exception):
         self.timestamp = datetime.utcnow()
 
 
-class ConfigurationError(PrefactException):
+class ConfigurationError(PprefactException):
     """Raised when configuration is invalid."""
     pass
 
 
-class RuleError(PrefactException):
+class RuleError(PprefactException):
     """Raised when a rule encounters an error."""
     
     def __init__(
@@ -251,7 +251,7 @@ class RuleError(PrefactException):
         self.file_path = file_path
 
 
-class PluginError(PrefactException):
+class PluginError(PprefactException):
     """Raised when a plugin encounters an error."""
     
     def __init__(
@@ -264,28 +264,28 @@ class PluginError(PrefactException):
         self.plugin_name = plugin_name
 
 
-class CacheError(PrefactException):
+class CacheError(PprefactException):
     """Raised when cache operations fail."""
     pass
 
 
-class PerformanceError(PrefactException):
+class PerformanceError(PprefactException):
     """Raised when performance issues are detected."""
     pass
 
 
 # Global logger instance
-_logger: Optional[PrefactLogger] = None
+_logger: Optional[PprefactLogger] = None
 
 
-def get_logger() -> PrefactLogger:
+def get_logger() -> PprefactLogger:
     """Get the global logger instance."""
     if _logger is None:
         raise RuntimeError("Logger not initialized. Call setup_logging() first.")
     return _logger
 
 
-def setup_logging(config: Config) -> PrefactLogger:
+def setup_logging(config: Config) -> PprefactLogger:
     """Setup logging from configuration."""
     global _logger
     
@@ -301,7 +301,7 @@ def setup_logging(config: Config) -> PrefactLogger:
     enable_telemetry = config.get_rule_option("_telemetry", "enabled", False)
     
     # Create logger
-    _logger = PrefactLogger(
+    _logger = PprefactLogger(
         level=level,
         format_type=format_type,
         output_file=output_file,
@@ -356,7 +356,7 @@ def setup_telemetry(config: Config) -> None:
 class LogContext:
     """Context manager for logging with additional context."""
     
-    def __init__(self, logger: PrefactLogger, **context):
+    def __init__(self, logger: PprefactLogger, **context):
         self.logger = logger
         self.context = context
     
@@ -377,7 +377,7 @@ class LogContext:
 
 
 # Decorator for logging function calls
-def log_execution(logger: Optional[PrefactLogger] = None):
+def log_execution(logger: Optional[PprefactLogger] = None):
     """Decorator to log function execution."""
     def decorator(func):
         def wrapper(*args, **kwargs):

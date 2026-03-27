@@ -1,4 +1,4 @@
-"""Parallel processing engine for prefact.
+"""Parallel processing engine for pprefact.
 
 This module provides multiprocessing capabilities to scan multiple files
 in parallel, significantly improving performance on large codebases.
@@ -70,7 +70,7 @@ class ParallelScanTask:
 
 
 class ParallelEngine:
-    """Parallel processing engine for prefact."""
+    """Parallel processing engine for pprefact."""
     
     def __init__(self, config: Config):
         self.config = config

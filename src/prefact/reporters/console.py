@@ -20,7 +20,7 @@ def print_report(result: PipelineResult, *, verbose: bool = False) -> None:
 
     mode = "[dim](dry-run)[/]" if result.dry_run else ""
     console.print()
-    console.print(Panel(f"[bold]prefact Report[/bold] {mode}", border_style="blue", expand=False))
+    console.print(Panel(f"[bold]pprefact Report[/bold] {mode}", border_style="blue", expand=False))
 
     if result.issues_found:
         table = Table(title="Issues Found", show_lines=False)

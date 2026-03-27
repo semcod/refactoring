@@ -1,7 +1,7 @@
-"""Git hooks integration for prefact.
+"""Git hooks integration for pprefact.
 
 This module provides utilities for installing and managing Git hooks
-that run prefact scans before commits and other Git operations.
+that run pprefact scans before commits and other Git operations.
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from prefact.engine import RefactoringEngine
 
 
 class GitHooks:
-    """Manages Git hooks for prefact."""
+    """Manages Git hooks for pprefact."""
     
     def __init__(self, repo_root: Path, config: Optional[Config] = None):
         self.repo_root = repo_root.resolve()
@@ -35,7 +35,7 @@ class GitHooks:
         return git_dir
     
     def install_hooks(self, hook_types: Optional[List[str]] = None) -> None:
-        """Install Git hooks for prefact."""
+        """Install Git hooks for pprefact."""
         if hook_types is None:
             hook_types = ["pre-commit", "pre-push", "commit-msg"]
         
@@ -52,7 +52,7 @@ class GitHooks:
         
         # Backup existing hook if it exists
         if hook_path.exists():
-            backup_path = hook_path.with_suffix(".prefact.bak")
+            backup_path = hook_path.with_suffix(".pprefact.bak")
             hook_path.rename(backup_path)
             print(f"Backed up existing hook to {backup_path}")
         
@@ -79,8 +79,8 @@ class GitHooks:
     def _pre_commit_hook(self) -> str:
         """Generate pre-commit hook script."""
         return f"""#!/bin/bash
-# Prefact pre-commit hook
-# Runs prefact on staged files before commit
+# Pprefact pre-commit hook
+# Runs pprefact on staged files before commit
 
 set -e
 
@@ -88,72 +88,72 @@ set -e
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\\.py$' || true)
 
 if [ -z "$STAGED_FILES" ]; then
-    echo "No Python files staged, skipping prefact check"
+    echo "No Python files staged, skipping pprefact check"
     exit 0
 fi
 
-echo "Running prefact on staged Python files..."
+echo "Running pprefact on staged Python files..."
 echo "Files: $STAGED_FILES"
 
-# Run prefact scan
-if command -v prefact &> /dev/null; then
-    # Use installed prefact
-    echo "$STAGED_FILES" | xargs prefact scan --path -
+# Run pprefact scan
+if command -v pprefact &> /dev/null; then
+    # Use installed pprefact
+    echo "$STAGED_FILES" | xargs pprefact scan --path -
 else
-    # Use python -m prefact
-    echo "$STAGED_FILES" | xargs python -m prefact scan --path -
+    # Use python -m pprefact
+    echo "$STAGED_FILES" | xargs python -m pprefact scan --path -
 fi
 
 # Check if any issues were found
 if [ $? -ne 0 ]; then
     echo ""
-    echo "prefact found issues in staged files."
+    echo "pprefact found issues in staged files."
     echo "Fix them before committing, or use --no-verify to bypass."
     echo ""
     echo "To fix automatically:"
-    echo "  prefact fix --path <file>"
+    echo "  pprefact fix --path <file>"
     echo ""
     exit 1
 fi
 
-echo "prefact check passed"
+echo "pprefact check passed"
 exit 0
 """
     
     def _pre_push_hook(self) -> str:
         """Generate pre-push hook script."""
         return f"""#!/bin/bash
-# Prefact pre-push hook
-# Runs prefact on all files before pushing
+# Pprefact pre-push hook
+# Runs pprefact on all files before pushing
 
 set -e
 
-echo "Running prefact check before push..."
+echo "Running pprefact check before push..."
 
-# Run prefact on the entire project
-if command -v prefact &> /dev/null; then
-    prefact scan --path {self.repo_root}
+# Run pprefact on the entire project
+if command -v pprefact &> /dev/null; then
+    pprefact scan --path {self.repo_root}
 else
-    python -m prefact scan --path {self.repo_root}
+    python -m pprefact scan --path {self.repo_root}
 fi
 
 # Check if any issues were found
 if [ $? -ne 0 ]; then
     echo ""
-    echo "prefact found issues in the repository."
+    echo "pprefact found issues in the repository."
     echo "Fix them before pushing, or use --no-verify to bypass."
     echo ""
     exit 1
 fi
 
-echo "prefact check passed"
+echo "pprefact check passed"
 exit 0
 """
     
     def _commit_msg_hook(self) -> str:
         """Generate commit-msg hook script."""
         return f"""#!/bin/bash
-# Prefact commit-msg hook
+# Pprefact commit-msg hook
 # Validates commit messages
 
 set -e
@@ -187,12 +187,12 @@ exit 0
         
         for hook_type in hook_types:
             hook_path = self.hooks_dir / hook_type
-            backup_path = hook_path.with_suffix(".prefact.bak")
+            backup_path = hook_path.with_suffix(".pprefact.bak")
             
             if hook_path.exists():
-                # Check if it's a prefact hook
+                # Check if it's a pprefact hook
                 content = hook_path.read_text()
-                if "prefact" in content:
+                if "pprefact" in content:
                     hook_path.unlink()
                     
                     # Restore backup if it exists
@@ -211,7 +211,7 @@ exit 0
             hook_path = self.hooks_dir / hook_type
             if hook_path.exists():
                 content = hook_path.read_text()
-                status[hook_type] = "prefact" in content
+                status[hook_type] = "pprefact" in content
             else:
                 status[hook_type] = False
         
@@ -240,36 +240,36 @@ exit 0
 
 
 class PreCommitConfig:
-    """Generate pre-commit configuration for prefact."""
+    """Generate pre-commit configuration for pprefact."""
     
     @staticmethod
     def generate_config(repo_root: Path) -> str:
         """Generate .pre-commit-config.yaml content."""
-        return f"""# Pre-commit configuration for prefact
+        return f"""# Pre-commit configuration for pprefact
 # See https://pre-commit.com for more information
 
 repos:
   - repo: local
     hooks:
-      - id: prefact-scan
-        name: prefact scan
-        entry: prefact
+      - id: pprefact-scan
+        name: pprefact scan
+        entry: pprefact
         language: system
         args: [scan, --path, .]
         types: [python]
         pass_filenames: false
         always_run: false
         
-      - id: prefact-fix
-        name: prefact fix
-        entry: prefact
+      - id: pprefact-fix
+        name: pprefact fix
+        entry: pprefact
         language: system
         args: [fix, --path, .]
         types: [python]
         pass_filenames: false
         always_run: false
         
-  # Additional hooks that work well with prefact
+  # Additional hooks that work well with pprefact
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.5.6
     hooks:
@@ -295,7 +295,7 @@ repos:
         config_path = repo_root / ".pre-commit-config.yaml"
         
         if config_path.exists():
-            backup_path = config_path.with_suffix(".prefact.bak")
+            backup_path = config_path.with_suffix(".pprefact.bak")
             config_path.rename(backup_path)
             print(f"Backed up existing config to {backup_path}")
         
@@ -357,7 +357,7 @@ def list_git_hooks(repo_root: Optional[Path] = None) -> None:
     
     print("Git hooks status:")
     for hook_type, installed in status.items():
-        status_str = "✓ Installed (prefact)" if installed else "✗ Not installed"
+        status_str = "✓ Installed (pprefact)" if installed else "✗ Not installed"
         print(f"  {hook_type}: {status_str}")
 
 
@@ -366,7 +366,7 @@ def main():
     """Main CLI for Git hooks management."""
     import argparse
     
-    parser = argparse.ArgumentParser(description="Manage Git hooks for prefact")
+    parser = argparse.ArgumentParser(description="Manage Git hooks for pprefact")
     parser.add_argument("command", choices=["install", "uninstall", "list", "test"])
     parser.add_argument("--path", type=Path, default=Path.cwd(), help="Repository path")
     parser.add_argument("--hooks", nargs="+", help="Specific hooks to manage")

@@ -1,4 +1,4 @@
-"""Plugin system for prefact with dynamic loading and validation.
+"""Plugin system for pprefact with dynamic loading and validation.
 
 This module provides a secure plugin system that supports both setuptools
 entry points for third-party plugins and dynamic module loading for user plugins.
@@ -103,8 +103,8 @@ class PluginManager:
         # Plugin directories
         self.plugin_dirs = [
             Path(__file__).parent / "plugins",  # Built-in plugins
-            Path.home() / ".prefact" / "plugins",  # User plugins
-            Path.cwd() / ".prefact" / "plugins",  # Project plugins
+            Path.home() / ".pprefact" / "plugins",  # User plugins
+            Path.cwd() / ".pprefact" / "plugins",  # Project plugins
         ]
     
     def discover_plugins(self) -> List[PluginMetadata]:
@@ -126,7 +126,7 @@ class PluginManager:
         plugins = []
         
         try:
-            entry_points = importlib.metadata.entry_points(group="prefact.plugins")
+            entry_points = importlib.metadata.entry_points(group="pprefact.plugins")
             
             for ep in entry_points:
                 metadata = PluginMetadata(
@@ -161,7 +161,7 @@ class PluginManager:
                 module = importlib.util.module_from_spec(spec)
                 
                 # Temporarily add to sys.modules for relative imports
-                sys.modules[f"prefact_plugin_{plugin_file.stem}"] = module
+                sys.modules[f"pprefact_plugin_{plugin_file.stem}"] = module
                 spec.loader.exec_module(module)
                 
                 # Get metadata
@@ -176,7 +176,7 @@ class PluginManager:
                 plugins.append(metadata)
                 
                 # Clean up
-                del sys.modules[f"prefact_plugin_{plugin_file.stem}"]
+                del sys.modules[f"pprefact_plugin_{plugin_file.stem}"]
                 
             except Exception as e:
                 print(f"Warning: Could not load plugin {plugin_file}: {e}")
@@ -208,13 +208,13 @@ class PluginManager:
                 if metadata.entry_point:
                     plugin_path = Path(metadata.entry_point)
                     spec = importlib.util.spec_from_file_location(
-                        f"prefact_plugin_{metadata.name}", plugin_path
+                        f"pprefact_plugin_{metadata.name}", plugin_path
                     )
                     module = importlib.util.module_from_spec(spec)
                     spec.loader.exec_module(module)
                 else:
                     # Try to import by name
-                    module = importlib.import_module(f"prefact.plugins.{metadata.name}")
+                    module = importlib.import_module(f"pprefact.plugins.{metadata.name}")
                 
                 rules = module.rules
             

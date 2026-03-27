@@ -1,1 +1,1 @@
-"""Output reporters for the prefact pipeline."""
+"""Output reporters for the pprefact pipeline."""

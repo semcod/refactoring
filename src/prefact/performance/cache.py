@@ -1,4 +1,4 @@
-"""Caching system for prefact using diskcache.
+"""Caching system for pprefact using diskcache.
 
 This module provides persistent caching functionality to improve performance
 by storing scan results, rule configurations, and other computed data.
@@ -30,7 +30,7 @@ class Cache:
             raise ImportError("diskcache is required for caching. Install with: pip install diskcache")
         
         if cache_dir is None:
-            cache_dir = Path.home() / ".prefact" / "cache"
+            cache_dir = Path.home() / ".pprefact" / "cache"
         
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)

@@ -1,6 +1,6 @@
-"""prefact.rules
+"""pprefact.rules
 
-Registry for prefact rules.
+Registry for pprefact rules.
 
 The registry uses lazy loading to avoid importing all rule modules at startup,
 significantly improving CLI cold-start performance.
@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 
 
 class BaseRule(abc.ABC):
-    """Base class every refactoring rule must implement."""
+    """Base class every prefactoring rule must implement."""
 
     rule_id: str = ""
     description: str = ""

@@ -1,24 +1,24 @@
-# code2llm | 50f 10775L | python:48,typescript:1,shell:1 | 2026-03-27
+# code2llm | 50f 10775L | python:48,shell:1,typescript:1 | 2026-03-27
 # CC̄=3.1 | critical:3/653 | dups:0 | cycles:0
 
 HEALTH[3]:
   🟡 CC    scan_file CC=15 (limit:15)
-  🟡 CC    from_yaml CC=15 (limit:15)
   🟡 CC    fix CC=21 (limit:15)
+  🟡 CC    from_yaml CC=15 (limit:15)
 
 REFACTOR[1]:
   1. split 3 high-CC methods  (CC>15)
 
 PIPELINES[509]:
-  [1] Src [__init__]: __init__
+  [1] Src [__init__]: __init__ → get_all_rules
       PURITY: 100% pure
-  [2] Src [run]: run
+  [2] Src [validate_file]: validate_file
       PURITY: 100% pure
-  [3] Src [scan_only]: scan_only
+  [3] Src [main]: main → find_examples
       PURITY: 100% pure
-  [4] Src [run_file]: run_file
+  [4] Src [__init__]: __init__
       PURITY: 100% pure
-  [5] Src [__init__]: __init__ → get_all_rules
+  [5] Src [_find_git_dir]: _find_git_dir
       PURITY: 100% pure
 
 LAYERS:

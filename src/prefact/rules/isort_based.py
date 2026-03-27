@@ -1,4 +1,4 @@
-"""ISort-based import sorting rules for prefact.
+"""ISort-based import sorting rules for pprefact.
 
 This module provides integration with ISort for sorting and organizing imports
 according to PEP8 conventions.
@@ -37,7 +37,7 @@ class ISortHelper:
             "profile": "black",
             "multi_line_output": 3,
             "line_length": 88,
-            "known_first_party": ["prefact"],
+            "known_first_party": ["pprefact"],
         }
         
         if config:
@@ -144,7 +144,7 @@ class ISortHelper:
             "profile": "black",
             "multi_line_output": 3,
             "line_length": 88,
-            "known_first_party": ["prefact"],
+            "known_first_party": ["pprefact"],
         }
         
         if config:
@@ -170,7 +170,7 @@ class ISortedImports(BaseRule):
             "profile": self.config.get_rule_option(self.rule_id, "profile", "black"),
             "line_length": self.config.get_rule_option(self.rule_id, "line_length", 88),
             "known_first_party": self.config.get_rule_option(
-                self.rule_id, "known_first_party", [self.config.package_name or "prefact"]
+                self.rule_id, "known_first_party", [self.config.package_name or "pprefact"]
             ),
             "sections": self.config.get_rule_option(
                 self.rule_id, "sections", ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
@@ -242,7 +242,7 @@ class ImportSectionSeparator(BaseRule):
         super().__init__(config)
         self.isort_config = {
             "profile": config.get_rule_option("sorted-imports", "profile", "black"),
-            "known_first_party": [config.package_name or "prefact"],
+            "known_first_party": [config.package_name or "pprefact"],
         }
     
     def scan_file(self, path: Path, source: str) -> List[Issue]:

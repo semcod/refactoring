@@ -205,8 +205,8 @@ class PerformanceProfiler:
 
 
 # Configuration for enabling Ruff-based rules
-def add_ruff_config_to_prefact_yaml(config_path: Path) -> None:
-    """Add Ruff-specific configuration to prefact.yaml."""
+def add_ruff_config_to_pprefact_yaml(config_path: Path) -> None:
+    """Add Ruff-specific configuration to pprefact.yaml."""
     import yaml
     
     with open(config_path) as f:

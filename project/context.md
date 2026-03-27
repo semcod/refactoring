@@ -161,7 +161,7 @@ Main execution flows into the system:
 - **Calls**: click.command, click.option, click.option, print, User, print, DataProcessor, processor.add_item
 
 ### src.prefact.autonomous.AutonomousRefact.run_autonomous
-> Run autonomous refact process.
+> Run autonomous prefact process.
 - **Calls**: console.print, Panel.fit, console.print, console.print, self.scan_project, console.print, self.update_planfile, console.print
 
 ### src.prefact.performance.cache.cached_file_operation
@@ -187,8 +187,8 @@ Main execution flows into the system:
 ### src.prefact.cli.autonomous_cmd
 > Run autonomous refact mode (-a).
 
-Automatically initializes refact.yaml if missing, runs examples,
-scans for issues, and creates tickets in planfile.y
+Automatically initializes prefact.yaml if missing, runs examples,
+scans for issues, and creates tickets in planfile.
 - **Calls**: main.command, click.option, click.option, click.option, click.option, Console, AutonomousRefact, auto.run_autonomous
 
 ### src.prefact.rules.unimport_based.UnimportUnusedImports.scan_file
@@ -300,9 +300,9 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 - **Key Methods**: vscode-extension.src.extension.PrefactTreeProvider.refresh, vscode-extension.src.extension.PrefactTreeProvider.getTreeItem, vscode-extension.src.extension.PrefactTreeProvider.getChildren, vscode-extension.src.extension.PrefactTreeProvider.issuesByFile, vscode-extension.src.extension.PrefactTreeProvider.file, vscode-extension.src.extension.PrefactTreeProvider.item, vscode-extension.src.extension.PrefactTreeProvider.fileIssues, vscode-extension.src.extension.PrefactTreeProvider.item, vscode-extension.src.extension.PrefactTreeProvider.activate, vscode-extension.src.extension.PrefactTreeProvider.diagnosticsProvider
 
 ### src.prefact.autonomous.AutonomousRefact
-> Autonomous refact manager.
+> Autonomous prefact manager.
 - **Methods**: 15
-- **Key Methods**: src.prefact.autonomous.AutonomousRefact.__init__, src.prefact.autonomous.AutonomousRefact.run_autonomous, src.prefact.autonomous.AutonomousRefact.create_refact_config, src.prefact.autonomous.AutonomousRefact.detect_project_info, src.prefact.autonomous.AutonomousRefact.run_examples, src.prefact.autonomous.AutonomousRefact.scan_project, src.prefact.autonomous.AutonomousRefact.group_issues, src.prefact.autonomous.AutonomousRefact.update_planfile, src.prefact.autonomous.AutonomousRefact.create_default_planfile, src.prefact.autonomous.AutonomousRefact.create_ticket_from_issue
+- **Key Methods**: src.prefact.autonomous.AutonomousRefact.__init__, src.prefact.autonomous.AutonomousRefact.run_autonomous, src.prefact.autonomous.AutonomousRefact.create_prefact_config, src.prefact.autonomous.AutonomousRefact.detect_project_info, src.prefact.autonomous.AutonomousRefact.run_examples, src.prefact.autonomous.AutonomousRefact.scan_project, src.prefact.autonomous.AutonomousRefact.group_issues, src.prefact.autonomous.AutonomousRefact.update_planfile, src.prefact.autonomous.AutonomousRefact.create_default_planfile, src.prefact.autonomous.AutonomousRefact.create_ticket_from_issue
 
 ### src.prefact.logging.PrefactLogger
 > Structured logger for prefact with enterprise features.
@@ -426,6 +426,28 @@ Key functions that process and transform data:
 ### src.prefact.rules.magic_numbers.MagicNumberRule.validate
 - **Output to**: self.scan_file, ValidationResult, len, len
 
+### src.prefact.rules.ruff_based.RuffWildcardImports.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.ruff_based.RuffPrintStatements.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.ruff_based.RuffUnusedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len, len
+
+### src.prefact.rules.ruff_based.RuffSortedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len
+
+### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.unused_imports._process_assignment_for_all
+> Process assignment to __all__ and add exported names to used set.
+- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
+
+### src.prefact.rules.unused_imports.UnusedImports.validate
+- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
+
 ### src.prefact.config_extended.ConfigValidator.validate
 > Validate configuration and return list of errors.
 - **Output to**: config.tools.items, errors.extend, config.rules.items, ConfigValidator._validate_performance_config, errors.extend
@@ -449,28 +471,6 @@ Key functions that process and transform data:
 ### src.prefact.config_extended.ConfigValidator._validate_rule_config
 > Validate individual rule configuration.
 - **Output to**: errors.append, isinstance, all, isinstance, errors.append
-
-### src.prefact.rules.ruff_based.RuffWildcardImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffPrintStatements.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffUnusedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len, len
-
-### src.prefact.rules.ruff_based.RuffSortedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len
-
-### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.unused_imports._process_assignment_for_all
-> Process assignment to __all__ and add exported names to used set.
-- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
-
-### src.prefact.rules.unused_imports.UnusedImports.validate
-- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
 
 ### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
 - **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len

@@ -1,7 +1,7 @@
 """Autonomous prefact module for self-configuring and self-testing.
 
-This module provides autonomous functionality for pprefact including:
-- Automatic pprefact.yaml generation
+This module provides autonomous functionality for prefact including:
+- Automatic prefact.yaml generation
 - Example testing and verification
 - Planfile.yaml ticket management
 - TODO.md and CHANGELOG.md management
@@ -23,9 +23,9 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.progress import Progress, TaskID
 
-from pprefact.config import Config
-from pprefact.config_extended import ConfigGenerator, ExtendedConfig
-from pprefact.engine import RefactoringEngine
+from prefact.config import Config
+from prefact.config_extended import ConfigGenerator, ExtendedConfig
+from prefact.engine import RefactoringEngine
 
 console = Console()
 
@@ -35,7 +35,7 @@ class AutonomousRefact:
     
     def __init__(self, project_root: Optional[Path] = None):
         self.project_root = project_root or Path.cwd()
-        self.prefact_config_path = self.project_root / "pprefact.yaml"
+        self.refact_config_path = self.project_root / "prefact.yaml"
         self.planfile_path = self.project_root / "planfile.yaml"
         self.todo_path = self.project_root / "TODO.md"
         self.changelog_path = self.project_root / "CHANGELOG.md"
@@ -51,9 +51,9 @@ class AutonomousRefact:
         
         try:
             # Step 1: Initialize if needed
-            if not self.prefact_config_path.exists():
-                console.print("📝 Creating pprefact.yaml configuration...")
-                self.create_prefact_config()
+            if not self.refact_config_path.exists():
+                console.print("📝 Creating prefact.yaml configuration...")
+                self.create_refact_config()
             
             # Step 2: Run examples and verify
             console.print("🧪 Running examples verification...")
@@ -80,8 +80,8 @@ class AutonomousRefact:
             console.print(f"❌ Error: {e}", style="red")
             return False
     
-    def create_prefact_config(self) -> None:
-        """Create pprefact.yaml configuration automatically."""
+    def create_refact_config(self) -> None:
+        """Create prefact.yaml configuration automatically."""
         # Detect project type and characteristics
         project_info = self.detect_project_info()
         
@@ -105,10 +105,10 @@ class AutonomousRefact:
             config["rules"]["magic-numbers"] = {"enabled": True}
         
         # Write configuration
-        with open(self.prefact_config_path, 'w') as f:
+        with open(self.refact_config_path, 'w') as f:
             yaml.dump(config, f, default_flow_style=False, sort_keys=False)
         
-        console.print(f"✅ Created {self.prefact_config_path}")
+        console.print(f"✅ Created {self.refact_config_path}")
     
     def detect_project_info(self) -> Dict[str, Any]:
         """Detect project characteristics."""
@@ -146,8 +146,8 @@ class AutonomousRefact:
             console.print("⚠️ No examples directory found", style="yellow")
             return True
         
-        # Find all pprefact.yaml files in examples
-        example_configs = list(self.examples_dir.rglob("pprefact.yaml"))
+        # Find all prefact.yaml files in examples
+        example_configs = list(self.examples_dir.rglob("prefact.yaml"))
         
         if not example_configs:
             console.print("⚠️ No example configurations found", style="yellow")
@@ -162,9 +162,9 @@ class AutonomousRefact:
                 example_dir = config_path.parent
                 
                 try:
-                    # Run pprefact scan
+                    # Run prefact scan
                     result = subprocess.run(
-                        [sys.executable, "-m", "pprefact.cli", "scan", "--path", str(example_dir), "--config", str(config_path)],
+                        [sys.executable, "-m", "prefact.cli", "scan", "--path", str(example_dir), "--config", str(config_path)],
                         capture_output=True,
                         text=True,
                         cwd=self.project_root
@@ -188,7 +188,7 @@ class AutonomousRefact:
         """Scan project for issues."""
         try:
             # Load configuration
-            config = ExtendedConfig.from_yaml(self.prefact_config_path)
+            config = ExtendedConfig.from_yaml(self.refact_config_path)
             engine = RefactoringEngine(config)
             
             # Run full scan
@@ -285,14 +285,14 @@ class AutonomousRefact:
             "project_name": self.project_root.name,
             "project_type": "prefactoring",
             "domain": "dev-tools",
-            "goal": "Improve code quality using pprefact",
+            "goal": "Improve code quality using prefact",
             "goals": [
-                "Fix all pprefact-detected issues",
+                "Fix all prefact-detected issues",
                 "Improve code maintainability",
                 "Ensure consistent code style"
             ],
             "quality_gates": [
-                {"metric": "Pprefact Issues", "threshold": "0"}
+                {"metric": "Prefact Issues", "threshold": "0"}
             ],
             "sprints": []
         }
@@ -358,7 +358,7 @@ class AutonomousRefact:
         
         # Write TODO.md
         if todos:
-            content = f"# TODO\n\nGenerated by pprefact on {datetime.now().isoformat()}\n\n"
+            content = f"# TODO\n\nGenerated by prefact on {datetime.now().isoformat()}\n\n"
             content += "\n".join(todos)
             
             # Append to existing TODO.md or create new

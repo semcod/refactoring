@@ -1,4 +1,4 @@
-"""Lazy-loading rule registry for prefact.
+"""Lazy-loading rule registry for pprefact.
 
 This module provides a lazy-loading registry to avoid importing all rule modules
 at startup, significantly improving CLI cold-start performance.
@@ -21,70 +21,70 @@ class LazyRuleRegistry:
         # Map rule IDs to module paths for lazy loading
         self._rule_modules: Dict[str, str] = {
             # Core AST-based rules
-            "relative-imports": "prefact.rules.relative_imports",
-            "unused-imports": "prefact.rules.unused_imports",
-            "duplicate-imports": "prefact.rules.duplicate_imports",
-            "wildcard-imports": "prefact.rules.wildcard_imports",
-            "sorted-imports": "prefact.rules.sorted_imports",
-            "string-concat": "prefact.rules.string_concat",
-            "print-statements": "prefact.rules.print_statements",
-            "missing-return-type": "prefact.rules.type_hints",
+            "relative-imports": "pprefact.rules.relative_imports",
+            "unused-imports": "pprefact.rules.unused_imports",
+            "duplicate-imports": "pprefact.rules.duplicate_imports",
+            "wildcard-imports": "pprefact.rules.wildcard_imports",
+            "sorted-imports": "pprefact.rules.sorted_imports",
+            "string-concat": "pprefact.rules.string_concat",
+            "print-statements": "pprefact.rules.print_statements",
+            "missing-return-type": "pprefact.rules.type_hints",
             
             # Ruff-based rules
-            "ruff-unused-imports": "prefact.rules.ruff_based",
-            "ruff-duplicate-imports": "prefact.rules.ruff_based",
-            "ruff-wildcard-imports": "prefact.rules.ruff_based",
-            "ruff-print-statements": "prefact.rules.ruff_based",
-            "ruff-sorted-imports": "prefact.rules.ruff_based",
+            "ruff-unused-imports": "pprefact.rules.ruff_based",
+            "ruff-duplicate-imports": "pprefact.rules.ruff_based",
+            "ruff-wildcard-imports": "pprefact.rules.ruff_based",
+            "ruff-print-statements": "pprefact.rules.ruff_based",
+            "ruff-sorted-imports": "pprefact.rules.ruff_based",
             
             # MyPy-based rules
-            "mypy-missing-return-type": "prefact.rules.mypy_based",
-            "mypy-type-checking": "prefact.rules.mypy_based",
-            "smart-return-type": "prefact.rules.mypy_based",
+            "mypy-missing-return-type": "pprefact.rules.mypy_based",
+            "mypy-type-checking": "pprefact.rules.mypy_based",
+            "smart-return-type": "pprefact.rules.mypy_based",
             
             # ISort-based rules
-            "isorted-imports": "prefact.rules.isort_based",
-            "import-section-separators": "prefact.rules.isort_based",
-            "custom-import-organization": "prefact.rules.isort_based",
+            "isorted-imports": "pprefact.rules.isort_based",
+            "import-section-separators": "pprefact.rules.isort_based",
+            "custom-import-organization": "pprefact.rules.isort_based",
             
             # Autoflake-based rules
-            "autoflake-unused-imports": "prefact.rules.autoflake_based",
-            "autoflake-unused-variables": "prefact.rules.autoflake_based",
-            "autoflake-duplicate-keys": "prefact.rules.autoflake_based",
-            "autoflake-all": "prefact.rules.autoflake_based",
+            "autoflake-unused-imports": "pprefact.rules.autoflake_based",
+            "autoflake-unused-variables": "pprefact.rules.autoflake_based",
+            "autoflake-duplicate-keys": "pprefact.rules.autoflake_based",
+            "autoflake-all": "pprefact.rules.autoflake_based",
             
             # String transformation rules
-            "string-concat-fstring": "prefact.rules.string_transformations",
-            "flynt-string-formatting": "prefact.rules.string_transformations",
-            "context-aware-string-concat": "prefact.rules.string_transformations",
+            "string-concat-fstring": "pprefact.rules.string_transformations",
+            "flynt-string-formatting": "pprefact.rules.string_transformations",
+            "context-aware-string-concat": "pprefact.rules.string_transformations",
             
             # Pylint-based rules
-            "pylint-print-statements": "prefact.rules.pylint_based",
-            "pylint-string-concat": "prefact.rules.pylint_based",
-            "pylint-comprehensive": "prefact.rules.pylint_based",
+            "pylint-print-statements": "pprefact.rules.pylint_based",
+            "pylint-string-concat": "pprefact.rules.pylint_based",
+            "pylint-comprehensive": "pprefact.rules.pylint_based",
             
             # Unimport-based rules
-            "unimport-unused-imports": "prefact.rules.unimport_based",
-            "unimport-duplicate-imports": "prefact.rules.unimport_based",
-            "unimport-star-imports": "prefact.rules.unimport_based",
-            "unimport-all": "prefact.rules.unimport_based",
+            "unimport-unused-imports": "pprefact.rules.unimport_based",
+            "unimport-duplicate-imports": "pprefact.rules.unimport_based",
+            "unimport-star-imports": "pprefact.rules.unimport_based",
+            "unimport-all": "pprefact.rules.unimport_based",
             
             # ImportChecker-based rules
-            "importchecker-unused-imports": "prefact.rules.importchecker_based",
-            "importchecker-duplicate-imports": "prefact.rules.importchecker_based",
-            "import-dependency-analysis": "prefact.rules.importchecker_based",
-            "import-optimizer": "prefact.rules.importchecker_based",
+            "importchecker-unused-imports": "pprefact.rules.importchecker_based",
+            "importchecker-duplicate-imports": "pprefact.rules.importchecker_based",
+            "import-dependency-analysis": "pprefact.rules.importchecker_based",
+            "import-optimizer": "pprefact.rules.importchecker_based",
             
             # Import-linter-based rules
-            "import-linter-layers": "prefact.rules.import_linter_based",
-            "import-linter-no-relative": "prefact.rules.import_linter_based",
-            "import-linter-independence": "prefact.rules.import_linter_based",
-            "import-linter-custom-architecture": "prefact.rules.import_linter_based",
+            "import-linter-layers": "pprefact.rules.import_linter_based",
+            "import-linter-no-relative": "pprefact.rules.import_linter_based",
+            "import-linter-independence": "pprefact.rules.import_linter_based",
+            "import-linter-custom-architecture": "pprefact.rules.import_linter_based",
             
             # Composite rules
-            "composite-unused-imports": "prefact.rules.composite",
-            "composite-imports": "prefact.rules.composite",
-            "composite-type-checking": "prefact.rules.composite",
+            "composite-unused-imports": "pprefact.rules.composite",
+            "composite-imports": "pprefact.rules.composite",
+            "composite-type-checking": "pprefact.rules.composite",
         }
         
         # Cache for loaded rule classes
@@ -207,47 +207,47 @@ def _initialize_built_in_rules():
     registry = get_lazy_registry()
     
     # Add rule mappings for modules that have multiple rules
-    registry.register_rule_module("ruff-duplicate-imports", "prefact.rules.ruff_based")
-    registry.register_rule_module("ruff-wildcard-imports", "prefact.rules.ruff_based")
-    registry.register_rule_module("ruff-print-statements", "prefact.rules.ruff_based")
-    registry.register_rule_module("ruff-sorted-imports", "prefact.rules.ruff_based")
+    registry.register_rule_module("ruff-duplicate-imports", "pprefact.rules.ruff_based")
+    registry.register_rule_module("ruff-wildcard-imports", "pprefact.rules.ruff_based")
+    registry.register_rule_module("ruff-print-statements", "pprefact.rules.ruff_based")
+    registry.register_rule_module("ruff-sorted-imports", "pprefact.rules.ruff_based")
     
-    registry.register_rule_module("mypy-type-checking", "prefact.rules.mypy_based")
-    registry.register_rule_module("smart-return-type", "prefact.rules.mypy_based")
+    registry.register_rule_module("mypy-type-checking", "pprefact.rules.mypy_based")
+    registry.register_rule_module("smart-return-type", "pprefact.rules.mypy_based")
     
-    registry.register_rule_module("import-section-separators", "prefact.rules.isort_based")
-    registry.register_rule_module("custom-import-organization", "prefact.rules.isort_based")
+    registry.register_rule_module("import-section-separators", "pprefact.rules.isort_based")
+    registry.register_rule_module("custom-import-organization", "pprefact.rules.isort_based")
     
-    registry.register_rule_module("autoflake-unused-variables", "prefact.rules.autoflake_based")
-    registry.register_rule_module("autoflake-duplicate-keys", "prefact.rules.autoflake_based")
-    registry.register_rule_module("autoflake-all", "prefact.rules.autoflake_based")
+    registry.register_rule_module("autoflake-unused-variables", "pprefact.rules.autoflake_based")
+    registry.register_rule_module("autoflake-duplicate-keys", "pprefact.rules.autoflake_based")
+    registry.register_rule_module("autoflake-all", "pprefact.rules.autoflake_based")
     
-    registry.register_rule_module("flynt-string-formatting", "prefact.rules.string_transformations")
-    registry.register_rule_module("context-aware-string-concat", "prefact.rules.string_transformations")
+    registry.register_rule_module("flynt-string-formatting", "pprefact.rules.string_transformations")
+    registry.register_rule_module("context-aware-string-concat", "pprefact.rules.string_transformations")
     
-    registry.register_rule_module("pylint-string-concat", "prefact.rules.pylint_based")
-    registry.register_rule_module("pylint-comprehensive", "prefact.rules.pylint_based")
+    registry.register_rule_module("pylint-string-concat", "pprefact.rules.pylint_based")
+    registry.register_rule_module("pylint-comprehensive", "pprefact.rules.pylint_based")
     
-    registry.register_rule_module("unimport-duplicate-imports", "prefact.rules.unimport_based")
-    registry.register_rule_module("unimport-star-imports", "prefact.rules.unimport_based")
-    registry.register_rule_module("unimport-all", "prefact.rules.unimport_based")
+    registry.register_rule_module("unimport-duplicate-imports", "pprefact.rules.unimport_based")
+    registry.register_rule_module("unimport-star-imports", "pprefact.rules.unimport_based")
+    registry.register_rule_module("unimport-all", "pprefact.rules.unimport_based")
     
-    registry.register_rule_module("importchecker-duplicate-imports", "prefact.rules.importchecker_based")
-    registry.register_rule_module("import-dependency-analysis", "prefact.rules.importchecker_based")
-    registry.register_rule_module("import-optimizer", "prefact.rules.importchecker_based")
+    registry.register_rule_module("importchecker-duplicate-imports", "pprefact.rules.importchecker_based")
+    registry.register_rule_module("import-dependency-analysis", "pprefact.rules.importchecker_based")
+    registry.register_rule_module("import-optimizer", "pprefact.rules.importchecker_based")
     
-    registry.register_rule_module("import-linter-no-relative", "prefact.rules.import_linter_based")
-    registry.register_rule_module("import-linter-independence", "prefact.rules.import_linter_based")
-    registry.register_rule_module("import-linter-custom-architecture", "prefact.rules.import_linter_based")
+    registry.register_rule_module("import-linter-no-relative", "pprefact.rules.import_linter_based")
+    registry.register_rule_module("import-linter-independence", "pprefact.rules.import_linter_based")
+    registry.register_rule_module("import-linter-custom-architecture", "pprefact.rules.import_linter_based")
     
-    registry.register_rule_module("composite-imports", "prefact.rules.composite")
-    registry.register_rule_module("composite-type-checking", "prefact.rules.composite")
+    registry.register_rule_module("composite-imports", "pprefact.rules.composite")
+    registry.register_rule_module("composite-type-checking", "pprefact.rules.composite")
     
     # LLM-specific rules
-    registry.register_rule_module("llm-hallucinations", "prefact.rules.llm_specific")
-    registry.register_rule_module("magic-numbers", "prefact.rules.llm_specific")
-    registry.register_rule_module("llm-generated-code", "prefact.rules.llm_specific")
-    registry.register_rule_module("ai-boilerplate", "prefact.rules.llm_specific")
+    registry.register_rule_module("llm-hallucinations", "pprefact.rules.llm_specific")
+    registry.register_rule_module("magic-numbers", "pprefact.rules.llm_specific")
+    registry.register_rule_module("llm-generated-code", "pprefact.rules.llm_specific")
+    registry.register_rule_module("ai-boilerplate", "pprefact.rules.llm_specific")
 
 
 # Initialize built-in rules

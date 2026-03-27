@@ -22,7 +22,7 @@ from prefact.reporters import json_reporter
 @click.option("--skip-examples", is_flag=True, help="Skip running examples.")
 @click.version_option(package_name="prefact")
 def main(ctx, autonomous, init_only, skip_tests, skip_examples) -> None:
-    """prefact – automatic Python refactoring toolkit.
+    """prefact – automatic Python prefactoring toolkit.
 
     Detect, fix, and validate common code issues – especially those
     introduced by LLMs (e.g. relative imports, unused imports).
@@ -172,7 +172,7 @@ rules:
 @click.option("--skip-tests", is_flag=True, help="Skip running tests.")
 @click.option("--skip-examples", is_flag=True, help="Skip running examples.")
 def autonomous_cmd(project_path, init_only, skip_tests, skip_examples) -> None:
-    """Run autonomous refact mode (-a).
+    """Run autonomous prefact mode (-a).
     
     Automatically initializes prefact.yaml if missing, runs examples,
     scans for issues, and creates tickets in planfile.yaml.
@@ -181,13 +181,13 @@ def autonomous_cmd(project_path, init_only, skip_tests, skip_examples) -> None:
     
     console = Console()
     
-    # Initialize autonomous refact
+    # Initialize autonomous prefact
     auto = AutonomousRefact(Path(project_path))
     
     if init_only:
         if not auto.refact_config_path.exists():
             console.print("📝 Creating prefact.yaml configuration...")
-            auto.create_refact_config()
+            auto.create_prefact_config()
             console.print("✅ Initialization complete!", style="green")
         else:
             console.print("ℹ️ prefact.yaml already exists", style="blue")

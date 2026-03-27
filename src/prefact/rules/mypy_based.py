@@ -1,4 +1,4 @@
-"""MyPy-based type checking rules for prefact.
+"""MyPy-based type checking rules for pprefact.
 
 This module provides integration with MyPy for detecting type-related issues,
 particularly missing return type annotations.
@@ -187,7 +187,7 @@ class MyPyTypeChecking(BaseRule):
         results = MyPyHelper.check_file(path, self.mypy_config)
         
         for item in results:
-            # Map MyPy severity to prefact severity
+            # Map MyPy severity to pprefact severity
             severity = (
                 Severity.ERROR if item.get("severity") == "error" 
                 else Severity.WARNING
