@@ -62,10 +62,12 @@ for rule in */; do
     fi
 done
 
+cd ..
+
 # Test multiple rules
 echo ""
 echo "📁 Testing multiple-rules..."
-cd ../../02-multiple-rules
+cd 02-multiple-rules
 if prefact scan --path . --config prefact.yaml > /dev/null 2>&1; then
     print_status "multiple-rules scan successful"
 else

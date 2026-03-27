@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-03-27
+
+### Docs
+- Update examples/01-individual-rules/duplicate-imports/README.md
+- Update examples/01-individual-rules/missing-return-type/README.md
+- Update examples/01-individual-rules/print-statements/README.md
+- Update examples/01-individual-rules/relative-imports/README.md
+- Update examples/01-individual-rules/sorted-imports/README.md
+- Update examples/01-individual-rules/string-concat/README.md
+- Update examples/01-individual-rules/wildcard-imports/README.md
+
+### Other
+- Update examples/03-output-formats/test-report.json
+- Update examples/run_all.sh
+
 ## [0.1.2] - 2026-03-27
 
 ### Docs
