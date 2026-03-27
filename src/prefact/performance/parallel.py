@@ -4,8 +4,6 @@ This module provides multiprocessing capabilities to scan multiple files
 in parallel, significantly improving performance on large codebases.
 """
 
-from __future__ import annotations
-
 import hashlib
 import multiprocessing
 import os
@@ -17,7 +15,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from prefact.config import Config
 from prefact.engine import RefactoringEngine
-from prefact.models import Issue, ScanResult
+from prefact.models import ScanResult
 
 
 class ParallelScanTask:
@@ -333,7 +331,7 @@ class PerformanceMonitor:
         
         total_cache_operations = stats["cache_hits"] + stats["cache_misses"]
         if total_cache_operations > 0:
-            stats["cache_hit_rate"] = stats["cache_hits"] / total_cache_operations
+            stats["cache_hit_rate"] = f"{stats['cache_hits'] / total_cache_operations}"
         
         return stats
 

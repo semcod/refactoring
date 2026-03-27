@@ -4,15 +4,11 @@ This module provides integration with Pylint for advanced static analysis,
 including custom checkers for print statements and string concatenations.
 """
 
-from __future__ import annotations
-
-import ast
 import json
-import re
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
@@ -30,7 +26,7 @@ class PylintHelper:
             "pylint",
             "--output-format=json",
             "--disable=all",
-            "--enable=print-statement,consider-using-f-string",
+            "--enable=consider-using-f-string",
             str(file_path)
         ]
         
@@ -251,7 +247,7 @@ class PylintComprehensive(BaseRule):
         return {
             "enable_codes": self.config.get_rule_option(
                 self.rule_id, "enable_codes",
-                "print-statement,consider-using-f-string,unused-import,"
+                "consider-using-f-string,unused-import,"
                 "duplicate-key,unnecessary-comprehension"
             ),
             "disable_codes": self.config.get_rule_option(
@@ -364,32 +360,27 @@ class PylintComprehensive(BaseRule):
 # Pylint configuration generator
 def generate_pylint_rc(config: Config, output_path: Path) -> None:
     """Generate a .pylintrc file based on prefact configuration."""
-    content = """[MAIN]
-disable=all
-
-[MESSAGES CONTROL]
-enable=print-statement,consider-using-f-string,unused-import,duplicate-key
-
-[FORMAT]
-max-line-length=88
-
-[DESIGN]
-max-args=7
-max-locals=15
-max-returns=6
-max-branches=12
-max-statements=50
-max-parents=7
-max-attributes=7
-min-public-methods=2
-max-public-methods=20
-
-[TYPECHECK]
-ignored-modules=
-ignored-classes=
-generated-members=
-
-"""
+    content = "[MAIN]\n"
+    content += "disable=all\n\n"
+    content += "[MESSAGES CONTROL]\n"
+    content += "# Enable specific rules\n"
+    content += "enable=consider-using-f-string,unused-import,duplicate-key\n\n"
+    content += "[FORMAT]\n"
+    content += "max-line-length=88\n\n"
+    content += "[DESIGN]\n"
+    content += "max-args=7\n"
+    content += "max-locals=15\n"
+    content += "max-returns=6\n"
+    content += "max-branches=12\n"
+    content += "max-statements=50\n"
+    content += "max-parents=7\n"
+    content += "max-attributes=7\n"
+    content += "min-public-methods=2\n"
+    content += "max-public-methods=20\n\n"
+    content += "[TYPECHECK]\n"
+    content += "ignored-modules=\n"
+    content += "ignored-classes=\n"
+    content += "generated-members=\n\n"
     
     # Add custom configurations
     for rule_id, rule_config in config.rules.items():

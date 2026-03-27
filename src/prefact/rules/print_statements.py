@@ -4,8 +4,6 @@ Flags bare ``print()`` calls. Configurable: ignore files matching patterns
 (e.g. CLI modules, scripts).
 """
 
-from __future__ import annotations
-
 import ast
 from pathlib import Path
 

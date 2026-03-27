@@ -15,6 +15,10 @@ import yaml
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# Constants for configuration
+DEFAULT_CACHE_SIZE = 104857600  # 100MB
+DEFAULT_MAX_LINE_LENGTH = 88
+
 from prefact.config import Config, RuleConfig
 
 
@@ -303,7 +307,7 @@ class ConfigGenerator:
             },
             "performance": {
                 "max_workers": 4,
-                "cache_size": 104857600,  # 100MB
+                "cache_size": DEFAULT_CACHE_SIZE,  # 100MB
                 "chunk_size": 10,
             },
             "rules": {},
@@ -340,7 +344,7 @@ class ConfigGenerator:
         if "ruff" in tools:
             config["tools"]["ruff"] = {
                 "enabled": True,
-                "max_line_length": 88,
+                "max_line_length": DEFAULT_MAX_LINE_LENGTH,
                 "select": ["E", "F", "W", "I"],
                 "ignore": ["E501"],
             }

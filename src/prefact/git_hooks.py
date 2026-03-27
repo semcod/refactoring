@@ -4,16 +4,12 @@ This module provides utilities for installing and managing Git hooks
 that run prefact scans before commits and other Git operations.
 """
 
-from __future__ import annotations
-
-import os
 import stat
 import subprocess
 from pathlib import Path
 from typing import Dict, List, Optional
 
 from prefact.config import Config
-from prefact.engine import RefactoringEngine
 
 
 class GitHooks:
@@ -362,7 +358,7 @@ def list_git_hooks(repo_root: Optional[Path] = None) -> None:
 
 
 # CLI commands
-def main():
+def main() -> None:
     """Main CLI for Git hooks management."""
     import argparse
     

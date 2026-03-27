@@ -1,7 +1,5 @@
 """Engine – orchestrates the full scan → fix → validate pipeline."""
 
-from __future__ import annotations
-
 from pathlib import Path
 
 from prefact.config import Config

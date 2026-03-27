@@ -1,61 +1,64 @@
-# prefact | 50f 11019L | python:48,typescript:1,shell:1 | 2026-03-27
-# stats: 576 func | 0 cls | 50 mod | CC̄=3.2 | critical:3 | cycles:0
-# alerts[5]: fan-out AutonomousRefact.scan_project=28; fan-out PrefactTreeProvider.activate=20; CC UnusedImports.fix=21; fan-out CompositeRuleFactory.create_composite_rule=18; fan-out ExtendedConfig.from_yaml=16
-# hotspots[5]: AutonomousRefact.scan_project fan=28; PrefactTreeProvider.activate fan=20; CompositeRuleFactory.create_composite_rule fan=18; ExtendedConfig.from_yaml fan=16; AutonomousRefact.update_planfile fan=15
+# prefact | 50f 11007L | python:48,shell:1,typescript:1 | 2026-03-27
+# stats: 576 func | 0 cls | 50 mod | CC̄=3.2 | critical:4 | cycles:0
+# alerts[5]: fan-out AutonomousRefact.scan_project=28; fan-out AutonomousRefact.update_todo_md=21; fan-out PrefactTreeProvider.activate=20; CC AutonomousRefact.update_todo_md=23; CC UnusedImports.fix=21
+# hotspots[5]: AutonomousRefact.scan_project fan=28; AutonomousRefact.update_todo_md fan=21; PrefactTreeProvider.activate fan=20; CompositeRuleFactory.create_composite_rule fan=18; ExtendedConfig.from_yaml fan=16
 # evolution: CC̄ 3.2→3.2 (flat 0.0)
 # Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
 M[50]:
   project.sh,23
   src/prefact/__init__.py,3
-  src/prefact/autonomous.py,548
-  src/prefact/cli.py,239
+  src/prefact/autonomous.py,613
+  src/prefact/cli.py,237
   src/prefact/config.py,193
-  src/prefact/config_extended.py,462
-  src/prefact/engine.py,74
+  src/prefact/config_extended.py,466
+  src/prefact/engine.py,72
   src/prefact/fixer.py,46
-  src/prefact/git_hooks.py,391
-  src/prefact/logging.py,436
+  src/prefact/git_hooks.py,387
+  src/prefact/logging.py,434
   src/prefact/models.py,92
   src/prefact/performance/__init__.py,41
   src/prefact/performance/cache.py,434
-  src/prefact/performance/parallel.py,350
-  src/prefact/plugins/__init__.py,323
+  src/prefact/performance/parallel.py,348
+  src/prefact/plugins/__init__.py,321
   src/prefact/plugins/builtin.py,13
   src/prefact/reporters/__init__.py,1
-  src/prefact/reporters/console.py,66
-  src/prefact/reporters/json_reporter.py,59
+  src/prefact/reporters/console.py,64
+  src/prefact/reporters/json_reporter.py,57
   src/prefact/rules/__init__.py,179
-  src/prefact/rules/ai_boilerplate.py,65
-  src/prefact/rules/autoflake_based.py,467
-  src/prefact/rules/benchmark.py,167
-  src/prefact/rules/composite_factory.py,116
-  src/prefact/rules/composite_rules.py,271
+  src/prefact/rules/ai_boilerplate.py,62
+  src/prefact/rules/autoflake_based.py,465
+  src/prefact/rules/benchmark.py,165
+  src/prefact/rules/composite_factory.py,114
+  src/prefact/rules/composite_rules.py,268
   src/prefact/rules/duplicate_imports.py,77
-  src/prefact/rules/import_linter_based.py,449
-  src/prefact/rules/importchecker_based.py,482
-  src/prefact/rules/isort_based.py,468
-  src/prefact/rules/llm_generated_code.py,189
-  src/prefact/rules/llm_hallucinations.py,212
-  src/prefact/rules/magic_numbers.py,136
-  src/prefact/rules/migration.py,230
-  src/prefact/rules/mypy_based.py,400
-  src/prefact/rules/print_statements.py,56
-  src/prefact/rules/pylint_based.py,401
-  src/prefact/rules/registry.py,254
-  src/prefact/rules/relative_imports.py,214
-  src/prefact/rules/ruff_based.py,310
-  src/prefact/rules/sorted_imports.py,57
-  src/prefact/rules/strategies.py,150
-  src/prefact/rules/string_concat.py,64
-  src/prefact/rules/string_transformations.py,491
-  src/prefact/rules/type_hints.py,44
-  src/prefact/rules/unimport_based.py,453
+  src/prefact/rules/import_linter_based.py,446
+  src/prefact/rules/importchecker_based.py,480
+  src/prefact/rules/isort_based.py,465
+  src/prefact/rules/llm_generated_code.py,187
+  src/prefact/rules/llm_hallucinations.py,210
+  src/prefact/rules/magic_numbers.py,134
+  src/prefact/rules/migration.py,228
+  src/prefact/rules/mypy_based.py,395
+  src/prefact/rules/print_statements.py,54
+  src/prefact/rules/pylint_based.py,397
+  src/prefact/rules/registry.py,250
+  src/prefact/rules/relative_imports.py,212
+  src/prefact/rules/ruff_based.py,307
+  src/prefact/rules/sorted_imports.py,55
+  src/prefact/rules/strategies.py,148
+  src/prefact/rules/string_concat.py,62
+  src/prefact/rules/string_transformations.py,488
+  src/prefact/rules/type_hints.py,42
+  src/prefact/rules/unimport_based.py,451
   src/prefact/rules/unused_imports.py,164
-  src/prefact/rules/wildcard_imports.py,43
+  src/prefact/rules/wildcard_imports.py,41
   src/prefact/scanner.py,145
   src/prefact/validator.py,30
   vscode-extension/src/extension.ts,441
 D:
+  src/prefact/autonomous.py:
+    e: AutonomousRefact
+    AutonomousRefact: __init__(1),run_autonomous(0),create_refact_config(0),detect_project_info(0),run_examples(0),scan_project(0),group_issues(1),update_planfile(0),create_default_planfile(0),create_ticket_from_issue(1),ticket_exists(2),manage_documentation(0),update_todo_md(0),update_changelog_md(0),run_tests(0)  # Autonomous prefact manager...
   src/prefact/rules/unused_imports.py:
     e: UnusedImports,_collect_imported_names,_collect_used_names,_get_import_lines,_get_attribute_root,_process_assignment_for_all
     UnusedImports(BaseRule): scan_file(2),fix(3),validate(3)
@@ -74,9 +77,6 @@ D:
     ConfigGenerator: generate_extended_config(2),generate_composite_rule_config(3),save_config(1)  # Generate configuration files...
     load_config_with_env(config_path;environment)
     merge_configs(base;override)
-  src/prefact/autonomous.py:
-    e: AutonomousRefact
-    AutonomousRefact: __init__(1),run_autonomous(0),create_refact_config(0),detect_project_info(0),run_examples(0),scan_project(0),group_issues(1),update_planfile(0),create_default_planfile(0),create_ticket_from_issue(1),ticket_exists(2),manage_documentation(0),update_todo_md(0),update_changelog_md(0),run_tests(0)  # Autonomous prefact manager...
   src/prefact/reporters/console.py:
     e: print_report
     print_report(result)

@@ -4,8 +4,6 @@ This module provides integration with the unimport library for fast and accurate
 unused import detection and removal.
 """
 
-from __future__ import annotations
-
 import ast
 import subprocess
 import tempfile

@@ -4,14 +4,14 @@ This module provides persistent caching functionality to improve performance
 by storing scan results, rule configurations, and other computed data.
 """
 
-from __future__ import annotations
-
 import hashlib
 import json
-import pickle
 import time
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+# Constants for caching
+DEFAULT_CACHE_EXPIRE = 1800  # 30 minutes
 
 try:
     import diskcache
@@ -208,7 +208,7 @@ class RuleResultCache:
         file_hash: str, 
         config_hash: str,
         issues: List[Any],
-        expire: int = 1800  # 30 minutes
+        expire: int = DEFAULT_CACHE_EXPIRE  # 30 minutes
     ) -> None:
         """Cache rule result."""
         key = self.get_key(rule_id, file_path, file_hash, config_hash)
@@ -315,7 +315,7 @@ def cleanup_cache() -> None:
 
 
 # Cache decorators
-def cached_result(expire: int = 3600, key_func=None):
+def cached_result(expire: int = 3600, key_func=None) -> Any:
     """Decorator to cache function results."""
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -345,7 +345,7 @@ def cached_result(expire: int = 3600, key_func=None):
     return decorator
 
 
-def cached_file_operation(expire: int = 1800):
+def cached_file_operation(expire: int = DEFAULT_CACHE_EXPIRE) -> Any:
     """Decorator to cache file operations."""
     def decorator(func):
         def wrapper(file_path: Path, *args, **kwargs):

@@ -4,14 +4,11 @@ This module provides composite rules that orchestrate multiple tools
 to provide more comprehensive code analysis and fixing.
 """
 
-from __future__ import annotations
-
-from collections import defaultdict
 from pathlib import Path
 from typing import List
 
 from prefact.config import Config
-from prefact.models import Fix, Issue, Severity, ValidationResult
+from prefact.models import Fix, Issue, ValidationResult
 from prefact.rules import BaseRule, register
 from prefact.rules.strategies import ParallelScanStrategy, ToolStrategy
 

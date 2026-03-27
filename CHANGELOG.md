@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.22] - 2026-03-27
+
+### Added
+- Parallel processing support for faster scanning (configurable max_workers)
+- Smart file filtering to skip large files (>100KB) and empty files
+- Autonomous mode header with version information
+- Deduplication logic for TODO.md and planfile.yaml tickets
+
+### Changed
+- Removed deprecated `print-statement` rule from pylint configuration
+- Optimized exclude patterns to include test directories and examples
+- Updated header display to be more compact
+
+### Fixed
+- Escape sequence issues in f-strings causing Python 3.8 compatibility errors
+- Duplicate ticket creation within the same run
+- Unused imports across multiple modules (cli.py, logging.py, plugins, rules)
+- String concatenation issues converted to f-strings
+
+### Code Cleanup
+- Removed unused `from __future__ import annotations` from multiple files
+- Cleaned up unused imports (json, shutil, os, pickle, etc.)
+- Removed duplicate imports in autoflake_based.py and unimport_based.py
+- Simplified type annotations by removing unused Union imports
+
 ## [0.1.10] - 2026-03-27
 
 ### Fixed
@@ -228,6 +253,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix unused-imports issues (ticket-c1ba2cf8)
 
 ## [Unreleased]
+
+## [0.1.23] - 2026-03-27
+
+### Docs
+- Update CHANGELOG.md
+- Update README.md
+- Update TODO.md
+- Update docs/README.md
+- Update project/context.md
+
+### Other
+- Update project/analysis.toon.yaml
+- Update project/calls.mmd
+- Update project/calls.png
+- Update project/duplication.toon.yaml
+- Update project/evolution.toon.yaml
+- Update project/index.html
+- Update project/map.toon.yaml
+- Update project/project.toon.yaml
+- Update project/prompt.txt
 
 ## [0.1.22] - 2026-03-27
 

@@ -121,6 +121,10 @@ Main execution flows into the system:
 > Scan project for issues.
 - **Calls**: ExtendedConfig.from_yaml, RefactoringEngine, Scanner, list, console.print, self.group_issues, None.total_seconds, console.print
 
+### src.prefact.autonomous.AutonomousRefact.update_todo_md
+> Update TODO.md with current issues, marking completed tasks.
+- **Calls**: self.todo_path.exists, src.prefact.performance.cache.Cache.set, src.prefact.performance.cache.Cache.set, existing_todos.items, self.todo_path.write_text, console.print, self.todo_path.read_text, existing_content.split
+
 ### src.prefact.config_extended.ExtendedConfig.from_yaml
 > Load configuration from YAML file with environment support.
 - **Calls**: None.items, raw.pop, raw.pop, raw.pop, raw.pop, raw.pop, raw.pop, cls
@@ -171,10 +175,6 @@ Main execution flows into the system:
 ### src.prefact.autonomous.AutonomousRefact.update_planfile
 > Update planfile.yaml with new tickets.
 - **Calls**: self.planfile_path.exists, src.prefact.performance.cache.Cache.set, None.extend, console.print, self.create_default_planfile, self.create_ticket_from_issue, None.append, open
-
-### src.prefact.autonomous.AutonomousRefact.update_todo_md
-> Update TODO.md with current issues.
-- **Calls**: src.prefact.performance.cache.Cache.set, None.join, self.todo_path.exists, self.todo_path.write_text, console.print, self.todo_path.read_text, todos.append, seen.add
 
 ### src.prefact.performance.cache.cached_file_operation
 > Decorator to cache file operations.
@@ -240,52 +240,54 @@ Key execution flows identified:
 scan_project [src.prefact.autonomous.AutonomousRefact]
 ```
 
-### Flow 2: from_yaml
+### Flow 2: update_todo_md
+```
+update_todo_md [src.prefact.autonomous.AutonomousRefact]
+  └─ →> set
+  └─ →> set
+```
+
+### Flow 3: from_yaml
 ```
 from_yaml [src.prefact.config_extended.ExtendedConfig]
 ```
 
-### Flow 3: _initialize_built_in_rules
+### Flow 4: _initialize_built_in_rules
 ```
 _initialize_built_in_rules [src.prefact.rules.registry]
   └─> get_lazy_registry
 ```
 
-### Flow 4: main
+### Flow 5: main
 ```
 main [examples.run_examples]
   └─> find_examples
 ```
 
-### Flow 5: print_report
+### Flow 6: print_report
 ```
 print_report [src.prefact.reporters.console]
 ```
 
-### Flow 6: scan_file
+### Flow 7: scan_file
 ```
 scan_file [src.prefact.rules.magic_numbers.MagicNumberRule]
 ```
 
-### Flow 7: check_file
+### Flow 8: check_file
 ```
 check_file [src.prefact.rules.mypy_based.MyPyHelper]
 ```
 
-### Flow 8: create_composite_rule
+### Flow 9: create_composite_rule
 ```
 create_composite_rule [src.prefact.rules.composite_factory.CompositeRuleFactory]
   └─ →> get_all_rules
 ```
 
-### Flow 9: activate
+### Flow 10: activate
 ```
 activate [vscode-extension.src.extension.PrefactTreeProvider]
-```
-
-### Flow 10: validate
-```
-validate [src.prefact.rules.relative_imports.RelativeToAbsoluteImports]
 ```
 
 ## Key Classes
@@ -425,28 +427,6 @@ Key functions that process and transform data:
 ### src.prefact.rules.magic_numbers.MagicNumberRule.validate
 - **Output to**: self.scan_file, ValidationResult, len, len
 
-### src.prefact.rules.ruff_based.RuffWildcardImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffPrintStatements.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffUnusedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len, len
-
-### src.prefact.rules.ruff_based.RuffSortedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len
-
-### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.unused_imports._process_assignment_for_all
-> Process assignment to __all__ and add exported names to used set.
-- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
-
-### src.prefact.rules.unused_imports.UnusedImports.validate
-- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
-
 ### src.prefact.config_extended.ConfigValidator.validate
 > Validate configuration and return list of errors.
 - **Output to**: config.tools.items, errors.extend, config.rules.items, ConfigValidator._validate_performance_config, errors.extend
@@ -470,6 +450,28 @@ Key functions that process and transform data:
 ### src.prefact.config_extended.ConfigValidator._validate_rule_config
 > Validate individual rule configuration.
 - **Output to**: errors.append, isinstance, all, isinstance, errors.append
+
+### src.prefact.rules.unused_imports._process_assignment_for_all
+> Process assignment to __all__ and add exported names to used set.
+- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
+
+### src.prefact.rules.unused_imports.UnusedImports.validate
+- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
+
+### src.prefact.rules.ruff_based.RuffWildcardImports.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.ruff_based.RuffPrintStatements.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.ruff_based.RuffUnusedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len, len
+
+### src.prefact.rules.ruff_based.RuffSortedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len
+
+### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
+- **Output to**: ValidationResult
 
 ### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
 - **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
@@ -528,6 +530,7 @@ Key functions that process and transform data:
 Functions exposed as public API (no underscore prefix):
 
 - `src.prefact.autonomous.AutonomousRefact.scan_project` - 57 calls
+- `src.prefact.autonomous.AutonomousRefact.update_todo_md` - 36 calls
 - `src.prefact.config_extended.ExtendedConfig.from_yaml` - 31 calls
 - `examples.06-api-usage.example.run_prefact_example` - 28 calls
 - `examples.run_examples.main` - 25 calls
@@ -543,7 +546,6 @@ Functions exposed as public API (no underscore prefix):
 - `examples.sample-project.cli.main` - 18 calls
 - `src.prefact.autonomous.AutonomousRefact.run_autonomous` - 16 calls
 - `src.prefact.autonomous.AutonomousRefact.update_planfile` - 16 calls
-- `src.prefact.autonomous.AutonomousRefact.update_todo_md` - 16 calls
 - `src.prefact.performance.cache.cached_file_operation` - 16 calls
 - `src.prefact.rules.benchmark.print_benchmark_results` - 16 calls
 - `src.prefact.rules.migration.RuleMigrationManager.create_hybrid_rule` - 16 calls
@@ -579,6 +581,10 @@ graph TD
     scan_project --> Scanner
     scan_project --> list
     scan_project --> print
+    update_todo_md --> exists
+    update_todo_md --> set
+    update_todo_md --> items
+    update_todo_md --> write_text
     from_yaml --> items
     from_yaml --> pop
     _initialize_built_in --> get_lazy_registry
@@ -600,10 +606,6 @@ graph TD
     check_file --> get
     create_composite_rul --> __init__
     create_composite_rul --> _create_strategy
-    create_composite_rul --> _load_tools
-    create_composite_rul --> get_all_rules
-    create_composite_rul --> scan
-    activate --> log
 ```
 
 ## Reverse Engineering Guidelines

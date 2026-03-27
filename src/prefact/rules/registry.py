@@ -4,13 +4,9 @@ This module provides a lazy-loading registry to avoid importing all rule modules
 at startup, significantly improving CLI cold-start performance.
 """
 
-from __future__ import annotations
-
 import importlib
-from pathlib import Path
 from typing import Dict, List, Optional, Type, Union
 
-from prefact.config import Config
 from prefact.rules import BaseRule
 
 

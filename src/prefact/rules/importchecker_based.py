@@ -4,13 +4,11 @@ This module provides integration with importchecker for detailed analysis
 of unused and duplicate imports with high precision.
 """
 
-from __future__ import annotations
-
 import ast
 import sys
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult

@@ -4,8 +4,6 @@ This module provides integration with MyPy for detecting type-related issues,
 particularly missing return type annotations.
 """
 
-from __future__ import annotations
-
 import ast
 import json
 import subprocess
@@ -229,7 +227,6 @@ class ReturnTypeInferrer:
     @staticmethod
     def infer_return_type(source: str, func_name: str) -> Optional[str]:
         """Try to infer return type of a function."""
-        import ast
         
         try:
             tree = ast.parse(source)
@@ -337,7 +334,6 @@ class SmartReturnTypeRule(BaseRule):
     description = "Detect missing return types and suggest inferred types"
     
     def scan_file(self, path: Path, source: str) -> List[Issue]:
-        import ast
         
         issues = []
         try:
@@ -371,7 +367,6 @@ class SmartReturnTypeRule(BaseRule):
         return issues
     
     def fix(self, path: Path, source: str, issues: List[Issue]) -> tuple[str, List[Fix]]:
-        import ast
         import libcst as cst
         
         if not issues:

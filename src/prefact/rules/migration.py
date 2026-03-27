@@ -4,8 +4,6 @@ This module shows how to gradually replace existing rules with Ruff equivalents
 while maintaining backward compatibility.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
 from typing import Dict, List, Type
 

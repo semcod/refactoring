@@ -4,10 +4,8 @@ This module provides utilities for creating composite rules
 based on configuration.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
-from typing import Dict, List, Type
+from typing import List, Type
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, ValidationResult

@@ -3,15 +3,13 @@
 Run this module to see performance comparisons for your project.
 """
 
-from __future__ import annotations
-
 import time
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 from prefact.config import Config
 from prefact.rules import get_all_rules
-from prefact.rules.migration import PerformanceProfiler, RuleMigrationManager
+from prefact.rules.migration import RuleMigrationManager
 
 
 def benchmark_file(file_path: Path, config: Config) -> Dict:

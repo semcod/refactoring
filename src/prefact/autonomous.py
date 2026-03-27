@@ -7,8 +7,6 @@ This module provides autonomous functionality for prefact including:
 - TODO.md and CHANGELOG.md management
 """
 
-from __future__ import annotations
-
 import hashlib
 import subprocess
 import sys
@@ -23,9 +21,11 @@ from rich.panel import Panel
 from rich.progress import Progress
 
 from prefact import __version__
-from prefact.config import Config
 from prefact.config_extended import ConfigGenerator, ExtendedConfig
 from prefact.engine import RefactoringEngine
+
+# Constants for code analysis
+MIN_CODE_SIZE = 50
 
 console = Console()
 
@@ -47,7 +47,7 @@ class AutonomousRefact:
         
     def run_autonomous(self) -> bool:
         """Run autonomous prefact process."""
-        console.print(Panel.fit(f"🤖 Prefact v {__version__}", style="bold blue"))
+        console.print(Panel.fit(f" Prefact v {__version__} ", style="bold blue"))
         
         try:
             # Step 1: Initialize if needed
@@ -227,7 +227,7 @@ class AutonomousRefact:
                             source = file_path.read_text(encoding="utf-8")
                             
                             # Skip files with no actual code (mostly comments/strings)
-                            if len(source.strip()) < 50:
+                            if len(source.strip()) < MIN_CODE_SIZE:
                                 return file_path, file_issues
                             
                             for rule in scanner._rules:
@@ -268,7 +268,7 @@ class AutonomousRefact:
                             source = file_path.read_text(encoding="utf-8")
                             
                             # Skip files with no actual code (mostly comments/strings)
-                            if len(source.strip()) < 50:
+                            if len(source.strip()) < MIN_CODE_SIZE:
                                 continue
                             
                             for rule in scanner._rules:
@@ -437,38 +437,103 @@ class AutonomousRefact:
         self.update_changelog_md()
     
     def update_todo_md(self) -> None:
-        """Update TODO.md with current issues."""
-        todos = []
+        """Update TODO.md with current issues, marking completed tasks."""
+        # Parse existing TODO.md if it exists
+        existing_todos = {}
+        completed_todos = []
+        
+        if self.todo_path.exists():
+            existing_content = self.todo_path.read_text()
+            
+            # Parse existing TODO entries
+            lines = existing_content.split("\n")
+            i = 0
+            while i < len(lines):
+                line = lines[i].strip()
+                
+                if line.startswith("- [ ] ") or line.startswith("- [x] "):
+                    # Extract file, line, and message from todo
+                    # Format: - [ ] file:line - message
+                    content = line[6:]  # Remove "- [ ] " or "- [x] "
+                    
+                    # Handle multi-line messages
+                    while i + 1 < len(lines) and not lines[i + 1].strip().startswith("- [") and lines[i + 1].strip():
+                        content += " " + lines[i + 1].strip()
+                        i += 1
+                    
+                    if " - " in content:
+                        file_line_part = content.split(" - ", 1)[0]
+                        message_part = content.split(" - ", 1)[1]
+                        
+                        # Parse file and line
+                        if ":" in file_line_part:
+                            file_part = file_line_part.rsplit(":", 1)[0]
+                            line_part = file_line_part.rsplit(":", 1)[1]
+                            try:
+                                line_num = int(line_part)
+                                key = (file_part, line_num, message_part)
+                                existing_todos[key] = {
+                                    'status': 'completed' if line.startswith("- [x] ") else 'pending',
+                                    'original_line': line
+                                }
+                            except ValueError:
+                                # Line number is not an integer, treat differently
+                                key = (file_part, message_part)
+                                existing_todos[key] = {
+                                    'status': 'completed' if line.startswith("- [x] ") else 'pending',
+                                    'original_line': line
+                                }
+                i += 1
+        
+        # Create set of current issues
+        current_issues = set()
+        new_todos = []
         seen = set()
         
-        # Add issues as TODOs with deduplication
         for issue_group in self.issues_found:
             for example in issue_group["examples"]:
-                todo_key = (issue_group['file'], example['line'], example['message'])
-                if todo_key not in seen:
-                    todos.append(f"- [ ] {issue_group['file']}:{example['line']} - {example['message']}")
-                    seen.add(todo_key)
+                key = (issue_group['file'], example['line'], example['message'])
+                current_issues.add(key)
+                
+                # Check if this is a new issue or existing one
+                if key in existing_todos:
+                    # Keep existing status
+                    status = existing_todos[key]['status']
+                    checkbox = "[x]" if status == 'completed' else "[ ]"
+                else:
+                    # New issue
+                    checkbox = "[ ]"
+                
+                # Avoid duplicates
+                if key not in seen:
+                    new_todos.append(f"- {checkbox} {issue_group['file']}:{example['line']} - {example['message']}")
+                    seen.add(key)
+        
+        # Find completed tasks (exist in TODO.md but not in current issues)
+        for key, todo_info in existing_todos.items():
+            if key not in current_issues and todo_info['status'] == 'pending':
+                # Mark as completed
+                completed_todos.append(f"- [x] {todo_info['original_line'][6:]}")
+        
+        # Build content
+        content = f"# TODO\n\nGenerated by prefact on {datetime.now().isoformat()}\n\n"
+        
+        # Add completed tasks first
+        if completed_todos:
+            content += "## Completed\n\n"
+            content += "\n".join(completed_todos)
+            content += "\n\n"
+        
+        # Add current tasks
+        if new_todos:
+            content += "## Current Issues\n\n"
+            content += "\n".join(new_todos)
         
         # Write TODO.md
-        if todos:
-            content = f"# TODO\n\nGenerated by prefact on {datetime.now().isoformat()}\n\n"
-            content += "\n".join(todos)
-            
-            # Append to existing TODO.md or create new
-            if self.todo_path.exists():
-                existing = self.todo_path.read_text()
-                if "# TODO" in existing:
-                    # Update existing
-                    lines = existing.split("\n")
-                    todo_start = next(i for i, line in enumerate(lines) if line.startswith("# TODO"))
-                    new_content = '\n'.join(lines[:todo_start]) + '\n' + content
-                else:
-                    new_content = existing + '\n\n' + content
-            else:
-                new_content = content
-            
-            self.todo_path.write_text(new_content)
-            console.print(f"📝 Updated TODO.md with {len(todos)} items")
+        self.todo_path.write_text(content)
+        
+        total_items = len(new_todos) + len(completed_todos)
+        console.print(f"📝 Updated TODO.md: {len(new_todos)} active, {len(completed_todos)} completed ({total_items} total)")
     
     def update_changelog_md(self) -> None:
         """Update CHANGELOG.md with recent changes."""
@@ -494,7 +559,7 @@ class AutonomousRefact:
             while insert_pos < len(lines) and not lines[insert_pos].startswith("##"):
                 insert_pos += 1
             
-            new_content = '\n'.join(lines[:insert_pos]) + '\n' + entry + '\n' + '\n'.join(lines[insert_pos:])
+            new_content = f"{'\n'.join(lines[:insert_pos])}\n{entry}\n{'\n'.join(lines[insert_pos:])}"
         else:
             new_content = f"# Changelog\n\n{entry}"
         

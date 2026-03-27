@@ -4,12 +4,10 @@ This module provides rules to detect potential LLM hallucinations
 in generated code.
 """
 
-from __future__ import annotations
-
 import ast
 import re
 from pathlib import Path
-from typing import List, Optional, Set
+from typing import List
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult

@@ -4,8 +4,6 @@ This module provides integration with Autoflake for removing unused imports,
 unused variables, and duplicate keys.
 """
 
-from __future__ import annotations
-
 import subprocess
 import tempfile
 from pathlib import Path

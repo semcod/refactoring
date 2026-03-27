@@ -35,10 +35,16 @@ from planfile.loaders.yaml_loader import save_strategy_yaml
 | Wildcard imports | `wildcard-imports` | 🔍 | Flags `from x import *` |
 | Unsorted imports | `sorted-imports` | 🔍 | Flags import blocks not ordered stdlib→3rd-party→local |
 | String concatenation | `string-concat` | 🔍 | Flags `"Hello " + name` → suggests f-strings |
-| Print statements | `print-statements` | 🔍 | Flags debug `print()` calls |
 | Missing return types | `missing-return-type` | 🔍 | Flags public functions without return type hints |
 
 ✅ = auto-fix  ·  🔍 = scan-only (report)
+
+## Performance Improvements
+
+- **Parallel Processing**: Scans files in parallel when enabled
+- **Smart Filtering**: Automatically skips large files (>100KB) and empty files
+- **Optimized Scanning**: Excludes test directories and examples by default
+- **Deduplication**: Prevents duplicate tickets and TODO entries
 
 ## Examples
 
@@ -130,6 +136,15 @@ include:
 exclude:
   - "**/venv/**"
   - "**/build/**"
+  - "**/tests/**"
+  - "**/test*/**"
+  - "**/examples/**"
+
+tools:
+  parallel: true
+  cache: true
+  performance:
+    max_workers: 4
 
 rules:
   relative-imports:
@@ -147,13 +162,33 @@ rules:
     enabled: false
   string-concat:
     enabled: true
-  print-statements:
-    enabled: true
-    options:
-      ignore_patterns: ["cli.py", "scripts/"]
   missing-return-type:
     enabled: false
 ```
+
+## Autonomous Mode
+
+Prefact includes an autonomous mode that automatically:
+- Scans your project for issues
+- Generates TODO.md with all found issues
+- Creates tickets in planfile.yaml for tracking
+- Updates CHANGELOG.md with fixes
+
+```bash
+# Run full autonomous workflow
+prefact -a
+
+# Or skip tests/examples for faster runs
+prefact -a --skip-tests --skip-examples
+```
+
+## Performance Improvements
+
+Recent updates have significantly improved performance:
+- **Parallel Processing**: Scans files using multiple workers (configurable)
+- **Smart Filtering**: Skips large files (>100KB) and files with minimal content
+- **Optimized Exclusions**: Automatically excludes test directories and examples
+- **Deduplication**: Prevents duplicate tickets and TODO entries across runs
 
 ## Python API
 

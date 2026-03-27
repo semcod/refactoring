@@ -1,51 +1,51 @@
-# prefact | 576 func | 44f | 12105L | python | 2026-03-27
+# prefact | 576 func | 44f | 12093L | python | 2026-03-27
 
 HEALTH:
-  CC̄=3.2  critical=18 (limit:10)  dup=0  cycles=0
+  CC̄=3.2  critical=19 (limit:10)  dup=0  cycles=0
 
 ALERTS[20]:
   !!! high_fan_out     AutonomousRefact.scan_project = 28 (limit:10)
+  !!! high_fan_out     AutonomousRefact.update_todo_md = 21 (limit:10)
   !!! high_fan_out     PrefactTreeProvider.activate = 20 (limit:10)
+  !!  cc_exceeded      AutonomousRefact.update_todo_md = 23 (limit:15)
   !!  cc_exceeded      UnusedImports.fix = 21 (limit:15)
   !!  high_fan_out     CompositeRuleFactory.create_composite_rule = 18 (limit:10)
   !!  high_fan_out     ExtendedConfig.from_yaml = 16 (limit:10)
   !!  high_fan_out     AutonomousRefact.update_planfile = 15 (limit:10)
-  !!  high_fan_out     AutonomousRefact.update_todo_md = 15 (limit:10)
   !   cc_exceeded      MagicNumberRule.scan_file = 15 (limit:15)
   !   cc_exceeded      ExtendedConfig.from_yaml = 15 (limit:15)
-  !   high_fan_out     cached_file_operation = 13 (limit:10)
 
 MODULES[50] (top by size):
-  M[src/prefact/autonomous.py] 548L C:1 F:15 CC↑14 D:0 (python)
-  M[src/prefact/rules/string_transformations.py] 491L C:6 F:27 CC↑8 D:0 (python)
-  M[src/prefact/rules/importchecker_based.py] 482L C:5 F:24 CC↑14 D:0 (python)
-  M[src/prefact/rules/isort_based.py] 468L C:4 F:23 CC↑13 D:0 (python)
-  M[src/prefact/rules/autoflake_based.py] 467L C:5 F:23 CC↑11 D:0 (python)
-  M[src/prefact/config_extended.py] 462L C:3 F:18 CC↑15 D:0 (python)
-  M[src/prefact/rules/unimport_based.py] 453L C:5 F:22 CC↑14 D:0 (python)
-  M[src/prefact/rules/import_linter_based.py] 449L C:5 F:24 CC↑8 D:0 (python)
+  M[src/prefact/autonomous.py] 613L C:1 F:15 CC↑23 D:0 (python)
+  M[src/prefact/rules/string_transformations.py] 488L C:6 F:27 CC↑8 D:0 (python)
+  M[src/prefact/rules/importchecker_based.py] 480L C:5 F:24 CC↑14 D:0 (python)
+  M[src/prefact/config_extended.py] 466L C:3 F:18 CC↑15 D:0 (python)
+  M[src/prefact/rules/isort_based.py] 465L C:4 F:23 CC↑13 D:0 (python)
+  M[src/prefact/rules/autoflake_based.py] 465L C:5 F:23 CC↑11 D:0 (python)
+  M[src/prefact/rules/unimport_based.py] 451L C:5 F:22 CC↑14 D:0 (python)
+  M[src/prefact/rules/import_linter_based.py] 446L C:5 F:24 CC↑8 D:0 (python)
   M[vscode-extension/src/extension.ts] 441L C:5 F:48 CC↑14 D:21 (typescript)
-  M[src/prefact/logging.py] 436L C:10 F:28 CC↑4 D:0 (python)
   M[src/prefact/performance/cache.py] 434L C:6 F:37 CC↑5 D:9 (python)
-  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:0 (python)
-  M[src/prefact/rules/mypy_based.py] 400L C:6 F:22 CC↑9 D:0 (python)
-  M[src/prefact/git_hooks.py] 391L C:2 F:17 CC↑8 D:0 (python)
-  M[src/prefact/performance/parallel.py] 350L C:4 F:23 CC↑7 D:0 (python)
+  M[src/prefact/logging.py] 434L C:10 F:28 CC↑4 D:0 (python)
+  M[src/prefact/rules/pylint_based.py] 397L C:5 F:22 CC↑6 D:0 (python)
+  M[src/prefact/rules/mypy_based.py] 395L C:6 F:22 CC↑9 D:0 (python)
+  M[src/prefact/git_hooks.py] 387L C:2 F:17 CC↑8 D:0 (python)
+  M[src/prefact/performance/parallel.py] 348L C:4 F:23 CC↑7 D:0 (python)
   LANGS: python:48/typescript:1/shell:1
 
 HOTSPOTS[10]:
   ★ AutonomousRefact.scan_project fan=28  // Scan project for issues.
+  ★ AutonomousRefact.update_todo_md fan=21  // Update TODO.md with current issues, marking completed tasks.
   ★ PrefactTreeProvider.activate fan=20  // Orchestrates 20 calls
   ★ CompositeRuleFactory.create_composite_rule fan=18  // Create a composite rule dynamically.
   ★ ExtendedConfig.from_yaml fan=16  // Load configuration from YAML file with environment support.
-  ★ AutonomousRefact.update_planfile fan=15  // Update planfile.yaml with new tickets.
 
-REFACTOR[7]:
-  [1] H/H Split god module src/prefact/autonomous.py (548L, 1 classes)
-  [2] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
-  [3] M/L Split UnusedImports.fix (CC=21 → target CC<10)
+REFACTOR[8]:
+  [1] H/H Split god module src/prefact/autonomous.py (613L, 1 classes)
+  [2] M/L Split AutonomousRefact.update_todo_md (CC=23 → target CC<10)
+  [3] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
   [4] M/L Split ExtendedConfig.from_yaml (CC=15 → target CC<10)
-  [5] M/M Reduce AutonomousRefact.scan_project fan-out (currently 28)
+  [5] M/L Split UnusedImports.fix (CC=21 → target CC<10)
 
 EVOLUTION:
-  2026-03-27 CC̄=3.2 crit=18 12105L // Automated analysis
+  2026-03-27 CC̄=3.2 crit=19 12093L // Automated analysis

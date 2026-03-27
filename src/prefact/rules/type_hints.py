@@ -1,7 +1,5 @@
 """Rule: detect public functions / methods missing return type annotations."""
 
-from __future__ import annotations
-
 import ast
 from pathlib import Path
 

@@ -4,8 +4,6 @@ This module provides different strategies for orchestrating multiple tools
 to provide comprehensive code analysis and fixing.
 """
 
-from __future__ import annotations
-
 import concurrent.futures
 from abc import ABC, abstractmethod
 from collections import defaultdict

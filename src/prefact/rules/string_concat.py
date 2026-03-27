@@ -8,8 +8,6 @@ and suggests:
 Scan-only – no auto-fix (too many edge cases with nested quotes).
 """
 
-from __future__ import annotations
-
 import ast
 from pathlib import Path
 

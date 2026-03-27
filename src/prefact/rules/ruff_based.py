@@ -1,13 +1,10 @@
 """Ruff-based rules - fast implementation for multiple rule types."""
 
-from __future__ import annotations
-
 import json
 import subprocess
 from pathlib import Path
 from typing import Dict, List
 
-from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
 

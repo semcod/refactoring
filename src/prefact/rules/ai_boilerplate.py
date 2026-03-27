@@ -4,13 +4,10 @@ This module provides rules to detect AI boilerplate and
 template code in source files.
 """
 
-from __future__ import annotations
-
 import re
 from pathlib import Path
 from typing import List
 
-from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
 

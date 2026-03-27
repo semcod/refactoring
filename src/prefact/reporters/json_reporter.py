@@ -1,7 +1,5 @@
 """JSON reporter – structured output for CI pipelines."""
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 

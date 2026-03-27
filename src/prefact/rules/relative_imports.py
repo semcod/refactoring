@@ -8,8 +8,6 @@ and converts them to:
 Uses libcst for syntax-safe, formatting-preserving transformations.
 """
 
-from __future__ import annotations
-
 import ast
 from pathlib import Path
 

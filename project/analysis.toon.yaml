@@ -1,71 +1,72 @@
-# code2llm | 50f 11019L | python:48,typescript:1,shell:1 | 2026-03-27
-# CC̄=3.2 | critical:3/655 | dups:0 | cycles:0
+# code2llm | 50f 11007L | python:48,shell:1,typescript:1 | 2026-03-27
+# CC̄=3.2 | critical:4/655 | dups:0 | cycles:0
 
-HEALTH[3]:
+HEALTH[4]:
+  🟡 CC    update_todo_md CC=23 (limit:15)
   🟡 CC    scan_file CC=15 (limit:15)
-  🟡 CC    fix CC=21 (limit:15)
   🟡 CC    from_yaml CC=15 (limit:15)
+  🟡 CC    fix CC=21 (limit:15)
 
 REFACTOR[1]:
-  1. split 3 high-CC methods  (CC>15)
+  1. split 4 high-CC methods  (CC>15)
 
-PIPELINES[509]:
+PIPELINES[508]:
   [1] Src [__init__]: __init__ → get_all_rules
       PURITY: 100% pure
   [2] Src [validate_file]: validate_file
       PURITY: 100% pure
-  [3] Src [__init__]: __init__
+  [3] Src [main]: main → find_examples
       PURITY: 100% pure
-  [4] Src [run]: run
+  [4] Src [__init__]: __init__
       PURITY: 100% pure
-  [5] Src [scan_only]: scan_only
+  [5] Src [run]: run
       PURITY: 100% pure
 
 LAYERS:
   src/                            CC̄=3.2    ←in:0  →out:0
-  │ !! autonomous                 548L  1C   15m  CC=14     ←0
-  │ string_transformations     491L  6C   27m  CC=8      ←0
-  │ importchecker_based        482L  5C   24m  CC=14     ←0
-  │ isort_based                468L  4C   23m  CC=13     ←0
-  │ autoflake_based            467L  5C   23m  CC=11     ←0
-  │ !! config_extended            462L  3C   18m  CC=15     ←2
-  │ unimport_based             453L  5C   22m  CC=14     ←0
-  │ import_linter_based        449L  5C   24m  CC=8      ←0
-  │ logging                    436L  10C   28m  CC=4      ←0
+  │ !! autonomous                 613L  1C   15m  CC=23     ←0
+  │ string_transformations     488L  6C   27m  CC=8      ←0
+  │ importchecker_based        480L  5C   24m  CC=14     ←0
+  │ !! config_extended            466L  3C   18m  CC=15     ←2
+  │ isort_based                465L  4C   23m  CC=13     ←0
+  │ autoflake_based            465L  5C   23m  CC=11     ←0
+  │ unimport_based             451L  5C   22m  CC=14     ←0
+  │ import_linter_based        446L  5C   24m  CC=8      ←0
   │ cache                      434L  6C   37m  CC=5      ←9
-  │ pylint_based               401L  5C   22m  CC=6      ←0
-  │ mypy_based                 400L  6C   22m  CC=9      ←0
-  │ git_hooks                  391L  2C   17m  CC=8      ←0
-  │ parallel                   350L  4C   23m  CC=7      ←0
-  │ __init__                   323L  3C   17m  CC=10     ←0
-  │ ruff_based                 310L  6C   19m  CC=4      ←0
-  │ composite_rules            271L  3C   16m  CC=12     ←0
-  │ registry                   254L  1C   13m  CC=8      ←8
-  │ cli                        239L  0C   10m  CC=6      ←1
-  │ migration                  230L  3C   10m  CC=5      ←0
-  │ relative_imports           214L  2C    9m  CC=14     ←0
-  │ llm_hallucinations         212L  1C    9m  CC=8      ←0
+  │ logging                    434L  10C   28m  CC=4      ←0
+  │ pylint_based               397L  5C   22m  CC=6      ←0
+  │ mypy_based                 395L  6C   22m  CC=9      ←0
+  │ git_hooks                  387L  2C   17m  CC=8      ←0
+  │ parallel                   348L  4C   23m  CC=7      ←0
+  │ __init__                   321L  3C   17m  CC=10     ←0
+  │ ruff_based                 307L  6C   19m  CC=4      ←0
+  │ composite_rules            268L  3C   16m  CC=12     ←0
+  │ registry                   250L  1C   13m  CC=8      ←8
+  │ cli                        237L  0C   10m  CC=6      ←1
+  │ migration                  228L  3C   10m  CC=5      ←0
+  │ relative_imports           212L  2C    9m  CC=14     ←0
+  │ llm_hallucinations         210L  1C    9m  CC=8      ←0
   │ config                     193L  2C   13m  CC=5      ←2
-  │ llm_generated_code         189L  1C    9m  CC=7      ←0
+  │ llm_generated_code         187L  1C    9m  CC=7      ←0
   │ __init__                   179L  1C    7m  CC=1      ←0
-  │ benchmark                  167L  0C    4m  CC=7      ←0
+  │ benchmark                  165L  0C    4m  CC=7      ←0
   │ !! unused_imports             164L  1C    8m  CC=21     ←0
-  │ strategies                 150L  4C   10m  CC=5      ←0
+  │ strategies                 148L  4C   10m  CC=5      ←0
   │ scanner                    145L  1C    6m  CC=12     ←0
-  │ !! magic_numbers              136L  1C    6m  CC=15     ←0
-  │ composite_factory          116L  1C    2m  CC=4      ←0
+  │ !! magic_numbers              134L  1C    6m  CC=15     ←0
+  │ composite_factory          114L  1C    2m  CC=4      ←0
   │ models                      92L  6C    0m  CC=0.0    ←0
   │ duplicate_imports           77L  1C    3m  CC=11     ←0
-  │ engine                      74L  1C    4m  CC=7      ←0
-  │ console                     66L  0C    1m  CC=14     ←0
-  │ ai_boilerplate              65L  1C    3m  CC=4      ←0
-  │ string_concat               64L  1C    5m  CC=6      ←0
-  │ json_reporter               59L  0C    2m  CC=4      ←1
-  │ sorted_imports              57L  1C    4m  CC=7      ←0
-  │ print_statements            56L  1C    3m  CC=9      ←0
+  │ engine                      72L  1C    4m  CC=7      ←0
+  │ console                     64L  0C    1m  CC=14     ←0
+  │ string_concat               62L  1C    5m  CC=6      ←0
+  │ ai_boilerplate              62L  1C    3m  CC=4      ←0
+  │ json_reporter               57L  0C    2m  CC=4      ←1
+  │ sorted_imports              55L  1C    4m  CC=7      ←0
+  │ print_statements            54L  1C    3m  CC=9      ←0
   │ fixer                       46L  1C    2m  CC=8      ←0
-  │ type_hints                  44L  1C    3m  CC=6      ←0
-  │ wildcard_imports            43L  1C    3m  CC=7      ←0
+  │ type_hints                  42L  1C    3m  CC=6      ←0
+  │ wildcard_imports            41L  1C    3m  CC=7      ←0
   │ __init__                    41L  0C    0m  CC=0.0    ←0
   │ validator                   30L  1C    2m  CC=4      ←0
   │ builtin                     13L  0C    0m  CC=0.0    ←0

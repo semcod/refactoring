@@ -4,8 +4,6 @@ This module provides a secure plugin system that supports both setuptools
 entry points for third-party plugins and dynamic module loading for user plugins.
 """
 
-from __future__ import annotations
-
 import importlib
 import importlib.metadata
 import importlib.util

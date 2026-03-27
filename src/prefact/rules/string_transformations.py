@@ -4,14 +4,11 @@ This module provides rules for converting string concatenations to f-strings
 using LibCST for safe, formatting-preserving transformations.
 """
 
-from __future__ import annotations
-
 import ast
 from pathlib import Path
 from typing import List, Optional
 
 import libcst as cst
-from libcst import matchers as m
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult

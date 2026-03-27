@@ -5,14 +5,11 @@ architectural constraints on imports, including layering rules and
 relative import restrictions.
 """
 
-from __future__ import annotations
-
-import json
 import subprocess
 import tempfile
 import yaml
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult

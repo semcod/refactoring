@@ -1,19 +1,23 @@
 # code2llm/evolution | 576 func | 44f | 2026-03-27
 
-NEXT[4] (ranked by impact):
+NEXT[5] (ranked by impact):
   [1] !! SPLIT           src/prefact/autonomous.py
-      WHY: 548L, 1 classes, max CC=14
-      EFFORT: ~4h  IMPACT: 7672
+      WHY: 613L, 1 classes, max CC=23
+      EFFORT: ~4h  IMPACT: 14099
 
-  [2] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
+  [2] !  SPLIT-FUNC      AutonomousRefact.update_todo_md  CC=23  fan=21
+      WHY: CC=23 exceeds 15
+      EFFORT: ~1h  IMPACT: 483
+
+  [3] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
       WHY: CC=21 exceeds 15
       EFFORT: ~1h  IMPACT: 273
 
-  [3] !  SPLIT-FUNC      ExtendedConfig.from_yaml  CC=15  fan=16
+  [4] !  SPLIT-FUNC      ExtendedConfig.from_yaml  CC=15  fan=16
       WHY: CC=15 exceeds 15
       EFFORT: ~1h  IMPACT: 240
 
-  [4] !  SPLIT-FUNC      MagicNumberRule.scan_file  CC=15  fan=9
+  [5] !  SPLIT-FUNC      MagicNumberRule.scan_file  CC=15  fan=9
       WHY: CC=15 exceeds 15
       EFFORT: ~1h  IMPACT: 135
 
@@ -23,9 +27,9 @@ RISKS[1]:
 
 METRICS-TARGET:
   CC̄:          3.2 → ≤2.2
-  max-CC:      21 → ≤10
+  max-CC:      23 → ≤11
   god-modules: 1 → 0
-  high-CC(≥15): 3 → ≤1
+  high-CC(≥15): 4 → ≤2
   hub-types:   0 → ≤0
 
 PATTERNS (language parser shared logic):
