@@ -80,10 +80,24 @@ class Config:
     def rule_enabled(self, rule_id: str) -> bool:
         rc = self.rules.get(rule_id)
         return rc.enabled if rc else True
+    
+    def is_rule_enabled(self, rule_id: str) -> bool:
+        """Alias for rule_enabled for compatibility."""
+        return self.rule_enabled(rule_id)
 
     def rule_options(self, rule_id: str) -> dict[str, Any]:
         rc = self.rules.get(rule_id)
         return rc.options if rc else {}
+    
+    def get_rule_option(self, rule_id: str, option: str, default: Any = None) -> Any:
+        """Get a specific option for a rule."""
+        return self.rule_options(rule_id).get(option, default)
+    
+    def set_rule_option(self, rule_id: str, option: str, value: Any) -> None:
+        """Set a specific option for a rule."""
+        if rule_id not in self.rules:
+            self.rules[rule_id] = RuleConfig()
+        self.rules[rule_id].options[option] = value
 
     def detect_package_name(self) -> str:
         """Try to auto-detect the package name from pyproject.toml or project layout."""

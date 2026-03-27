@@ -1,5 +1,7 @@
 # Sample Project for prefact
 
+> 📚 **Back to Examples**: [See all examples](../README.md) | 📖 **Main Docs**: [prefact README.md](../../README.md)
+
 This is a deliberately messy Python project that demonstrates all the issues that prefact can fix.
 
 ## Issues Present

@@ -1,5 +1,10 @@
 # prefact
 
+[![PyPI version](https://badge.fury.io/py/prefact.svg)](https://badge.fury.io/py/prefact)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 Automatic Python refactoring toolkit — detect, fix, and validate common code issues introduced by LLMs and humans alike.
 
 ## The Problem
@@ -91,6 +96,8 @@ prefact check ./my_project/src/mypackage/core/service.py --package mypackage
 # JSON output for CI
 prefact fix --path . --format json -o report.json
 ```
+
+📚 **Want to see prefact in action?** Check out our [comprehensive examples](examples/) with real-world scenarios!
 
 ## Pipeline Architecture
 

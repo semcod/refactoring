@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-03-27
+
+### Docs
+- Update README.md
+- Update docs/MIGRATION_GUIDE.md
+- Update examples/01-individual-rules/README.md
+- Update examples/06-api-usage/README.md
+- Update examples/README.md
+- Update examples/sample-project/README.md
+
+### Test
+- Update tests/test_integrations.py
+
+### Other
+- Update examples/requirements.txt
+
 ## [0.1.3] - 2026-03-27
 
 ### Docs

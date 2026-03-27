@@ -1,5 +1,7 @@
 # prefact Examples
 
+> 📚 **Main Documentation**: See the [main README.md](../README.md) for installation and usage instructions.
+
 This directory contains comprehensive examples demonstrating all features of the prefact library.
 
 ## 📁 Directory Structure

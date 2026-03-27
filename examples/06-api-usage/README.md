@@ -1,5 +1,7 @@
 # Python API Usage Example
 
+> 📚 **Back to Examples**: [See all examples](../README.md) | 📖 **Main Docs**: [prefact README.md](../../README.md)
+
 This example shows how to use prefact programmatically from Python code.
 
 ## Basic Usage

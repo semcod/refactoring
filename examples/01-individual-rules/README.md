@@ -1,5 +1,7 @@
 # Individual Rule Examples
 
+> 📚 **Back to Examples**: [See all examples](../README.md) | 📖 **Main Docs**: [prefact README.md](../../README.md)
+
 This directory contains examples for each individual prefact rule.
 
 ## Structure

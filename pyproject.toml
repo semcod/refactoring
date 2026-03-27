@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prefact"
-version = "0.1.3"
+version = "0.1.4"
 description = "Automatic Python refactoring toolkit – detect, fix, and validate common code issues introduced by LLMs and humans alike."
 readme = "README.md"
 requires-python = ">=3.10"
