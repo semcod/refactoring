@@ -1,0 +1,11 @@
+flowchart TD
+    examples__01_individual_rules["examples.01-individual-rules<br/>38 funcs"]
+    examples__04_custom_rules["examples.04-custom-rules<br/>7 funcs"]
+    examples__06_api_usage["examples.06-api-usage<br/>4 funcs"]
+    examples__sample_project["examples.sample-project<br/>18 funcs"]
+    src__prefact["src.prefact<br/>512 funcs"]
+    vscode_extension__src["vscode-extension.src<br/>48 funcs"]
+    src__prefact ==>|40| vscode_extension__src
+    examples__01_individual_rules -->|2| examples__sample_project
+    examples__06_api_usage -->|1| src__prefact
+    examples__04_custom_rules -->|1| vscode_extension__src

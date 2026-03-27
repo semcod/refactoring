@@ -1,0 +1,94 @@
+# code2llm | 45f 10580L | python:43,typescript:1,shell:1 | 2026-03-27
+# CC̄=3.2 | critical:6/639 | dups:0 | cycles:0
+
+HEALTH[8]:
+  🔴 GOD   src/prefact/rules/composite.py = 502L, 8 classes, 28m, max CC=12
+  🔴 GOD   src/prefact/rules/llm_specific.py = 555L, 4 classes, 27m, max CC=15
+  🟡 CC    detect_package_name CC=16 (limit:15)
+  🟡 CC    from_yaml CC=15 (limit:15)
+  🟡 CC    _collect_used_names CC=17 (limit:15)
+  🟡 CC    fix CC=21 (limit:15)
+  🟡 CC    scan_file CC=15 (limit:15)
+  🟡 CC    infer_return_type CC=16 (limit:15)
+
+REFACTOR[3]:
+  1. split src/prefact/rules/composite.py  (god module)
+  2. split src/prefact/rules/llm_specific.py  (god module)
+  3. split 6 high-CC methods  (CC>15)
+
+PIPELINES[502]:
+  [1] Src [__init__]: __init__
+      PURITY: 100% pure
+  [2] Src [run]: run
+      PURITY: 100% pure
+  [3] Src [scan_only]: scan_only
+      PURITY: 100% pure
+  [4] Src [run_file]: run_file
+      PURITY: 100% pure
+  [5] Src [__init__]: __init__ → get_all_rules
+      PURITY: 100% pure
+
+LAYERS:
+  src/                            CC̄=3.2    ←in:0  →out:0
+  │ !! llm_specific               555L  4C   27m  CC=15     ←0
+  │ !! composite                  502L  8C   28m  CC=12     ←0
+  │ string_transformations     491L  6C   27m  CC=8      ←0
+  │ importchecker_based        482L  5C   24m  CC=14     ←0
+  │ autoflake_based            468L  5C   23m  CC=11     ←0
+  │ !! config_extended            462L  3C   18m  CC=15     ←2
+  │ autonomous                 455L  1C   15m  CC=9      ←0
+  │ unimport_based             454L  5C   22m  CC=14     ←0
+  │ import_linter_based        449L  5C   24m  CC=8      ←0
+  │ isort_based                440L  4C   23m  CC=12     ←0
+  │ logging                    436L  10C   28m  CC=4      ←0
+  │ cache                      434L  6C   37m  CC=5      ←8
+  │ pylint_based               401L  5C   22m  CC=6      ←1
+  │ git_hooks                  391L  2C   17m  CC=8      ←0
+  │ !! mypy_based                 377L  5C   17m  CC=16     ←0
+  │ parallel                   350L  4C   23m  CC=7      ←0
+  │ __init__                   325L  3C   17m  CC=10     ←0
+  │ ruff_based                 310L  6C   19m  CC=4      ←0
+  │ registry                   254L  1C   13m  CC=8      ←8
+  │ cli                        240L  0C   10m  CC=6      ←1
+  │ migration                  230L  3C   10m  CC=5      ←0
+  │ relative_imports           214L  2C    9m  CC=14     ←0
+  │ benchmark                  167L  0C    4m  CC=7      ←0
+  │ !! config                     144L  2C    7m  CC=16     ←2
+  │ !! unused_imports             140L  1C    5m  CC=21     ←0
+  │ __init__                   138L  1C    7m  CC=1      ←0
+  │ models                      92L  6C    0m  CC=0.0    ←0
+  │ duplicate_imports           77L  1C    3m  CC=11     ←0
+  │ engine                      74L  1C    4m  CC=7      ←0
+  │ console                     66L  0C    1m  CC=14     ←0
+  │ string_concat               64L  1C    5m  CC=6      ←0
+  │ json_reporter               59L  0C    2m  CC=4      ←1
+  │ sorted_imports              57L  1C    4m  CC=7      ←0
+  │ print_statements            56L  1C    3m  CC=9      ←0
+  │ scanner                     50L  1C    4m  CC=6      ←0
+  │ fixer                       46L  1C    2m  CC=8      ←0
+  │ type_hints                  44L  1C    3m  CC=6      ←0
+  │ wildcard_imports            43L  1C    3m  CC=7      ←0
+  │ __init__                    41L  0C    0m  CC=0.0    ←0
+  │ validator                   30L  1C    2m  CC=4      ←0
+  │ builtin                     13L  0C    0m  CC=0.0    ←0
+  │ __init__                     3L  0C    0m  CC=0.0    ←0
+  │ __init__                     1L  0C    0m  CC=0.0    ←0
+  │
+  vscode-extension/               CC̄=2.9    ←in:0  →out:0
+  │ extension.ts               441L  5C   48m  CC=14     ←17
+  │
+  ./                              CC̄=0.0    ←in:0  →out:0
+  │ project.sh                  14L  0C    0m  CC=0.0    ←0
+  │
+
+COUPLING:
+                                 src.prefact  vscode-extension.src
+           src.prefact                    ──                    40  !! fan-out
+  vscode-extension.src                   ←40                    ──  hub
+  CYCLES: none
+  HUB: vscode-extension.src/ (fan-in=40)
+  SMELL: src.prefact/ fan-out=40 → split needed
+
+EXTERNAL:
+  validation: run `vallm batch .` → validation.toon
+  duplication: run `redup scan .` → duplication.toon
