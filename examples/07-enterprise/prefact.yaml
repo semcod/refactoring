@@ -1,0 +1,281 @@
+# Enterprise configuration for prefact with all features enabled
+# This configuration demonstrates the full power of prefact's enterprise features
+
+project_root: .
+package_name: myproject
+
+# File patterns to include/exclude
+include:
+  - "**/*.py"
+  - "**/*.pyi"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/.venv/**"
+  - "**/venv/**"
+  - "**/.git/**"
+  - "**/build/**"
+  - "**/dist/**"
+  - "**/*.egg-info/**"
+  - "**/migrations/**"
+  - "**/vendor/**"
+
+# Tool-specific configurations
+tools:
+  # Parallel processing settings
+  parallel: true
+  max_workers: 8
+  chunk_size: 20
+  
+  # Caching configuration
+  cache: true
+  cache_dir: "~/.prefact/cache"
+  cache_size: 524288000  # 500MB
+  
+  # Ruff configuration
+  ruff:
+    enabled: true
+    max_line_length: 88
+    select: ["E", "F", "W", "I", "B", "C4", "UP"]
+    ignore: ["E501", "B008"]
+    target_version: "py38"
+    
+  # MyPy configuration
+  mypy:
+    enabled: true
+    strict: true
+    ignore_missing_imports: true
+    warn_return_any: true
+    disallow_untyped_defs: true
+    
+  # ISort configuration
+  isort:
+    enabled: true
+    profile: "black"
+    multi_line_output: 3
+    line_length: 88
+    known_first_party: ["myproject"]
+    
+  # Pylint configuration
+  pylint:
+    enabled: true
+    disable_codes: "R0903,C0114"
+    enable_codes: "print-statement,consider-using-f-string"
+    
+  # Import-linter configuration
+  import_linter:
+    enabled: true
+    root_package: "myproject"
+    layers:
+      - name: "domain"
+        modules: ["myproject.domain.*"]
+      - name: "service"
+        modules: ["myproject.service.*"]
+      - name: "api"
+        modules: ["myproject.api.*"]
+    dependencies:
+      - layers: ["api"]
+        may_depend_on: ["service", "domain"]
+      - layers: ["service"]
+        may_depend_on: ["domain"]
+
+# Rule configurations with enterprise features
+rules:
+  # Import rules
+  unused-imports:
+    enabled: true
+    tools: ["ruff", "autoflake", "unimport"]
+    severity: "error"
+    auto_fix: true
+    
+  duplicate-imports:
+    enabled: true
+    tools: ["ruff", "pylint"]
+    severity: "warning"
+    
+  relative-imports:
+    enabled: true
+    tools: ["libcst", "import-linter"]
+    severity: "error"
+    auto_fix: true
+    
+  wildcard-imports:
+    enabled: true
+    tools: ["ruff", "pylint"]
+    severity: "warning"
+    
+  sorted-imports:
+    enabled: true
+    tools: ["isort"]
+    severity: "info"
+    auto_fix: true
+    
+  # Code quality rules
+  print-statements:
+    enabled: true
+    tools: ["ruff", "pylint"]
+    severity: "warning"
+    ignore_patterns: ["**/tests/**", "**/debug/**"]
+    
+  string-concat:
+    enabled: true
+    tools: ["pylint", "libcst"]
+    severity: "info"
+    auto_fix: true
+    
+  missing-return-type:
+    enabled: true
+    tools: ["mypy"]
+    severity: "warning"
+    
+  # LLM-specific rules
+  llm-hallucinations:
+    enabled: true
+    patterns:
+      - pattern: "TODO: implement this properly"
+        severity: "warning"
+        message: "TODO comment - likely incomplete implementation"
+      - pattern: "placeholder code"
+        severity: "error"
+        message: "Placeholder code detected"
+      - pattern: "from openai.api import"
+        severity: "error"
+        message: "Incorrect OpenAI import - API has changed"
+      - pattern: "raise NotImplementedError("
+        severity: "warning"
+        message: "NotImplementedError - incomplete implementation"
+    
+  magic-numbers:
+    enabled: true
+    threshold: 10
+    allowed_numbers: [0, 1, -1, 2, 10, 100, 1000]
+    ignore_patterns: ["**/tests/**", "**/constants.py"]
+    
+  llm-generated-code:
+    enabled: true
+    comment_ratio_threshold: 0.5
+    
+  ai-boilerplate:
+    enabled: true
+    
+  # Composite rules
+  composite-unused-imports:
+    enabled: true
+    strategy: "parallel"
+    max_workers: 4
+    tools: ["ruff-unused-imports", "unused-imports", "unimport-unused-imports"]
+    tool_priorities:
+      ruff-unused-imports: 3
+      unused-imports: 2
+      unimport-unused-imports: 1
+      
+  composite-imports:
+    enabled: true
+    strategy: "priority"
+    tools: ["composite-unused-imports", "duplicate-imports", "sorted-imports"]
+    
+  composite-type-checking:
+    enabled: true
+    tools: ["mypy-type-checking", "pylint-comprehensive"]
+
+# Plugin system configuration
+plugins:
+  enabled: true
+  directories:
+    - "~/.prefact/plugins"
+    - "./.prefact/plugins"
+    - "./plugins"
+  
+  # Plugin-specific settings
+  custom_rules:
+    enabled: true
+    
+  enterprise_rules:
+    enabled: true
+    api_key: "${ENTERPRISE_API_KEY}"
+    endpoint: "https://api.prefact.dev/v1"
+
+# Performance settings
+performance:
+  max_workers: 8
+  cache: true
+  cache_dir: "~/.prefact/cache"
+  cache_size: 524288000  # 500MB
+  chunk_size: 20
+  parallel: true
+
+# Logging configuration
+_logging:
+  level: "INFO"
+  format: "json"
+  file: "logs/prefact.log"
+  
+# Telemetry configuration
+_telemetry:
+  enabled: true
+  prometheus: true
+  endpoint: "https://telemetry.prefact.dev/v1/logs"
+  api_key: "${PREFACT_TELEMETRY_KEY}"
+
+# Environment-specific configurations
+environments:
+  development:
+    rules:
+      print-statements:
+        enabled: true
+      magic-numbers:
+        enabled: false
+    performance:
+      max_workers: 4
+    _logging:
+      level: "DEBUG"
+      
+  testing:
+    rules:
+      llm-hallucinations:
+        enabled: false
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      
+  staging:
+    rules:
+      print-statements:
+        enabled: false
+      magic-numbers:
+        enabled: true
+    performance:
+      max_workers: 6
+      
+  production:
+    rules:
+      print-statements:
+        enabled: false
+      magic-numbers:
+        enabled: true
+      llm-hallucinations:
+        enabled: true
+        patterns:
+          - pattern: "TODO"
+            severity: "error"
+          - pattern: "placeholder"
+            severity: "error"
+    performance:
+      max_workers: 8
+      cache_size: 1073741824  # 1GB
+    _telemetry:
+      enabled: true
+      prometheus: true
+
+# Custom composite rules definition
+_composite:
+  rules:
+    - id: "security-scan"
+      description: "Security-focused composite rule"
+      tools: ["pylint-comprehensive", "llm-hallucinations"]
+      strategy: "sequential"
+      
+    - id: "code-quality"
+      description: "General code quality check"
+      tools: ["composite-imports", "string-concat", "missing-return-type"]
+      strategy: "parallel"

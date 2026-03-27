@@ -1,4 +1,19 @@
-"""Refactoring rules – each rule can scan, fix, and validate."""
+"""prefact.rules
+
+Registry for prefact rules.
+
+The registry uses lazy loading to avoid importing all rule modules at startup,
+significantly improving CLI cold-start performance.
+
+Usage:
+    from prefact.rules import get_rule, get_all_rules
+    
+    # Get a specific rule class
+    rule_class = get_rule("unused-imports")
+    
+    # Get all rule classes (loads them all)
+    all_rules = get_all_rules()
+"""
 
 from __future__ import annotations
 
@@ -9,23 +24,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from prefact.config import Config
     from prefact.models import Fix, Issue, ValidationResult
-
-# Global rule registry
-_REGISTRY: dict[str, type["BaseRule"]] = {}
-
-
-def register(cls: type["BaseRule"]) -> type["BaseRule"]:
-    """Decorator that registers a rule class."""
-    _REGISTRY[cls.rule_id] = cls
-    return cls
-
-
-def get_all_rules() -> dict[str, type["BaseRule"]]:
-    return dict(_REGISTRY)
-
-
-def get_rule(rule_id: str) -> type["BaseRule"]:
-    return _REGISTRY[rule_id]
 
 
 class BaseRule(abc.ABC):
@@ -48,6 +46,27 @@ class BaseRule(abc.ABC):
     @abc.abstractmethod
     def validate(self, path: Path, original: str, fixed: str) -> "ValidationResult":
         """Check that the fix didn't break anything."""
+
+
+# Import lazy registry
+from prefact.rules.registry import get_all_rules as _get_all_rules
+from prefact.rules.registry import get_rule as _get_rule
+from prefact.rules.registry import register as _register
+
+
+def register(cls: type["BaseRule"]) -> type["BaseRule"]:
+    """Decorator that registers a rule class."""
+    return _register(cls)
+
+
+def get_all_rules() -> dict[str, type["BaseRule"]]:
+    """Get all registered rule classes (loads them all)."""
+    return _get_all_rules()
+
+
+def get_rule(rule_id: str) -> type["BaseRule"]:
+    """Get a rule class by ID (loads it if necessary)."""
+    return _get_rule(rule_id)
 
 
 # Force-import concrete rules so they self-register.

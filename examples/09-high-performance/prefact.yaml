@@ -1,0 +1,123 @@
+# High-performance configuration for large codebases
+# Optimized for speed with parallel processing and aggressive caching
+
+project_root: .
+package_name: large_project
+
+include:
+  - "**/*.py"
+  - "**/*.pyi"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/.venv/**"
+  - "**/build/**"
+  - "**/dist/**"
+
+# Performance-optimized tool settings
+tools:
+  # Maximum parallelization
+  parallel: true
+  max_workers: 16  # Use all available cores
+  chunk_size: 50  # Larger chunks for better throughput
+  
+  # Aggressive caching
+  cache: true
+  cache_dir: "/var/cache/prefact"  # Fast SSD location
+  cache_size: 2147483648  # 2GB cache
+  
+  # Tool-specific optimizations
+  ruff:
+    enabled: true
+    # Use Ruff's fast mode
+    fast: true
+    # Limit to most important rules for speed
+    select: ["E", "F", "W", "I"]
+    
+  mypy:
+    enabled: true
+    # Use MyPy's incremental mode
+    incremental: true
+    # Skip expensive checks
+    disallow_untyped_defs: false
+    
+  isort:
+    enabled: true
+    # Faster settings
+    profile: "black"
+
+# Rules optimized for performance
+rules:
+  # Fast rules first
+  unused-imports:
+    enabled: true
+    tools: ["ruff"]  # Use only fastest tool
+    auto_fix: true
+    
+  duplicate-imports:
+    enabled: true
+    tools: ["ruff"]
+    
+  sorted-imports:
+    enabled: true
+    tools: ["isort"]
+    auto_fix: true
+    
+  # Skip expensive rules in quick mode
+  print-statements:
+    enabled: false
+    
+  string-concat:
+    enabled: false
+    
+  missing-return-type:
+    enabled: false
+    
+  # Composite rules for parallel execution
+  composite-imports:
+    enabled: true
+    strategy: "parallel"
+    max_workers: 8
+    tools: ["unused-imports", "duplicate-imports", "sorted-imports"]
+
+# Performance monitoring
+performance:
+  max_workers: 16
+  cache: true
+  cache_size: 2147483648
+  chunk_size: 50
+  parallel: true
+  enable_metrics: true
+
+# Minimal logging for speed
+_logging:
+  level: "WARNING"  # Only log warnings and errors
+  format: "text"  # Faster than JSON
+  file: null  # No file logging
+
+# Disable telemetry for maximum speed
+_telemetry:
+  enabled: false
+
+# Environment-specific optimizations
+environments:
+  ci:
+    # Maximum speed in CI
+    performance:
+      max_workers: 32
+      cache: false  # Fresh cache each run
+    rules:
+      # Only critical rules
+      unused-imports:
+        enabled: true
+      duplicate-imports:
+        enabled: true
+        
+  local:
+    # Balance of speed and features
+    performance:
+      max_workers: 8
+      cache: true
+    rules:
+      print-statements:
+        enabled: true

@@ -1,11 +1,12 @@
 # Requirements for running prefact examples
 # Install with: pip install -r requirements.txt
 
-prefact>=0.1.3
+prefact>=0.1.4
 libcst>=1.1.0
 click>=8.1
 rich>=13.0
 pyyaml>=6.0
+isort>=5.12.0
 
 # For development and testing
 pytest>=7.0

@@ -1,46 +1,268 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "prefact"
-version = "0.1.4"
-description = "Automatic Python refactoring toolkit – detect, fix, and validate common code issues introduced by LLMs and humans alike."
+description = "Python code quality tool with LLM-aware rules, plugin system, and enterprise features"
 readme = "README.md"
-requires-python = ">=3.10"
-license = "Apache-2.0"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.8"
 authors = [
     {name = "Tom Sapletta", email = "tom@sapletta.com"},
 ]
-keywords = ["refactoring", "imports", "linting", "automation", "llm", "prefact"]
+maintainers = [
+    {name = "Prefact Team", email = "team@prefact.dev"},
+]
+keywords = [
+    "python",
+    "linting",
+    "code-quality",
+    "refactoring",
+    "llm",
+    "static-analysis",
+    "plugin-system",
+    "enterprise",
+]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
     "Intended Audience :: Developers",
-    "Topic :: Software Development :: Quality Assurance",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-
 dependencies = [
-    "libcst>=1.1.0",
-    "click>=8.1",
-    "rich>=13.0",
+    "ast-decompiler>=0.7.0",
+    "click>=8.0.0",
+    "libcst>=0.4.0",
     "pyyaml>=6.0",
+    "rich>=12.0.0",
+    "tomli>=2.0.0; python_version<'3.11'",
 ]
+dynamic = ["version"]
 
 [project.optional-dependencies]
+# Core tool integrations
+ruff = ["ruff>=0.5.0"]
+mypy = ["mypy>=1.0.0"]
+isort = ["isort>=5.10.0"]
+autoflake = ["autoflake>=2.0.0"]
+pylint = ["pylint>=3.0.0"]
+unimport = ["unimport>=1.0.0"]
+importchecker = ["importchecker>=0.1.0"]
+import-linter = ["import-linter>=2.0.0"]
+
+# Performance and caching
+performance = ["diskcache>=5.4.0"]
+monitoring = ["prometheus-client>=0.16.0"]
+
+# Development and testing
 dev = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.10.0",
+    "mypy>=1.0.0",
+    "ruff>=0.5.0",
+    "pre-commit>=3.0.0",
 ]
+
+# Documentation
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.22.0",
+]
+
+# All optional dependencies
+all = [
+    "prefact[ruff,mypy,isort,autoflake,pylint,unimport,importchecker,import-linter]",
+    "prefact[performance,monitoring]",
+]
+
+[project.urls]
+Homepage = "https://github.com/prefact/prefact"
+Documentation = "https://prefact.readthedocs.io"
+Repository = "https://github.com/prefact/prefact"
+"Bug Tracker" = "https://github.com/prefact/prefact/issues"
+Changelog = "https://github.com/prefact/prefact/blob/main/CHANGELOG.md"
 
 [project.scripts]
 prefact = "prefact.cli:main"
+prefact-scan = "prefact.cli:scan_main"
+prefact-fix = "prefact.cli:fix_main"
+prefact-config = "prefact.cli:config_main"
+prefact-git-hooks = "prefact.git_hooks:main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[project.entry-points."prefact.plugins"]
+# Built-in plugins
+builtin = "prefact.plugins.builtin"
+
+# Tool integration entry points
+ruff-integration = "prefact.plugins.ruff_integration:register"
+mypy-integration = "prefact.plugins.mypy_integration:register"
+isort-integration = "prefact.plugins.isort_integration:register"
+
+[tool.hatch.version]
+path = "src/prefact/VERSION"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md",
+    "/pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prefact"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "prefact[dev]",
+]
+
+[tool.hatch.envs.test]
+dependencies = [
+    "prefact[dev]",
+    "pytest-xdist>=3.0.0",
+]
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.docs]
+dependencies = [
+    "prefact[docs]",
+]
+
+[tool.hatch.envs.release]
+dependencies = [
+    "build>=0.10.0",
+    "twine>=4.0.0",
+    "wheel>=0.40.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["prefact"]
+known_third_party = ["libcst", "click", "rich", "yaml"]
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "ast_decompiler.*",
+    "diskcache.*",
+    "importchecker.*",
+    "import_linter.*",
+    "unimport.*",
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/*" = ["B011"]
+
+[tool.ruff.isort]
+known-first-party = ["prefact"]
 
 [tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
 testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/site-packages/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]

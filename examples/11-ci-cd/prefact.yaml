@@ -1,0 +1,129 @@
+# CI/CD optimized configuration for automated pipelines
+# Designed for GitHub Actions, GitLab CI, Jenkins, etc.
+
+project_root: .
+package_name: ci_project
+
+include:
+  - "**/*.py"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/.venv/**"
+  - "**/build/**"
+  - "**/dist/**"
+  - "**/migrations/**"
+
+# CI-optimized tool settings
+tools:
+  parallel: true
+  max_workers: 4  # Conservative for CI environments
+  chunk_size: 10
+  
+  cache: true
+  cache_dir: ".prefact_cache"  # Local to repo
+  
+  ruff:
+    enabled: true
+    # Fast rules for CI
+    select: ["E", "F", "W", "I"]
+    ignore: ["E501"]
+    
+  mypy:
+    enabled: true
+    # Incremental for speed
+    incremental: true
+    ignore_missing_imports: true
+    
+  isort:
+    enabled: true
+    profile: "black"
+
+# Critical rules for CI
+rules:
+  unused-imports:
+    enabled: true
+    tools: ["ruff"]
+    auto_fix: true
+    severity: "error"  # Fail CI on unused imports
+    
+  duplicate-imports:
+    enabled: true
+    severity: "error"
+    
+  relative-imports:
+    enabled: true
+    auto_fix: true
+    severity: "error"
+    
+  sorted-imports:
+    enabled: true
+    auto_fix: true
+    severity: "error"
+    
+  missing-return-type:
+    enabled: true
+    severity: "warning"  # Don't fail CI for type hints
+    
+  # Skip expensive rules in CI
+  print-statements:
+    enabled: false
+    
+  string-concat:
+    enabled: false
+    
+  llm-hallucinations:
+    enabled: false
+    
+  magic-numbers:
+    enabled: false
+
+# CI-specific settings
+environments:
+  github_actions:
+    tools:
+      max_workers: 2
+      cache: true
+      cache_dir: "/tmp/prefact_cache"
+    _logging:
+      level: "INFO"
+      format: "json"
+      file: "logs/prefact.log"
+    _telemetry:
+      enabled: false
+      
+  gitlab_ci:
+    tools:
+      max_workers: 8
+      cache: true
+    rules:
+      missing-return-type:
+        enabled: false
+        
+  jenkins:
+    tools:
+      max_workers: 4
+    _logging:
+      level: "DEBUG"
+      file: "${WORKSPACE}/prefact.log"
+      
+  pre_commit:
+    # Fast checks for pre-commit hooks
+    tools:
+      max_workers: 2
+      cache: false
+    rules:
+      unused-imports:
+        enabled: true
+      duplicate-imports:
+        enabled: true
+    exclude:
+      - "tests/**"
+      - "test_*.py"
+
+# Output settings for CI
+output:
+  format: "json"
+  file: "prefact_report.json"
+  include_summary: true
+  include_metrics: true

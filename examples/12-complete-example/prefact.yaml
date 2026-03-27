@@ -1,0 +1,344 @@
+# Complete enterprise configuration showing all features
+# This is a comprehensive example for reference
+
+project_root: .
+package_name: enterprise_app
+
+# File patterns
+include:
+  - "**/*.py"
+  - "**/*.pyi"
+  - "**/*.pyx"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/.venv/**"
+  - "**/venv/**"
+  - "**/.git/**"
+  - "**/build/**"
+  - "**/dist/**"
+  - "**/*.egg-info/**"
+  - "**/migrations/**"
+  - "**/vendor/**"
+  - "**/third_party/**"
+
+# Tool configurations
+tools:
+  # Performance
+  parallel: true
+  max_workers: 12
+  chunk_size: 25
+  
+  # Caching
+  cache: true
+  cache_dir: "${PREFACT_CACHE_DIR:-~/.prefact/cache}"
+  cache_size: 1073741824  # 1GB
+  
+  # Ruff
+  ruff:
+    enabled: true
+    max_line_length: 88
+    select: ["E", "F", "W", "I", "B", "C4", "UP", "SIM"]
+    ignore: ["E501", "B008", "SIM108"]
+    target_version: "py311"
+    fix: true
+    
+  # MyPy
+  mypy:
+    enabled: true
+    strict: true
+    ignore_missing_imports: true
+    warn_return_any: true
+    disallow_untyped_defs: true
+    disallow_any_generics: true
+    show_error_codes: true
+    
+  # ISort
+  isort:
+    enabled: true
+    profile: "black"
+    multi_line_output: 3
+    line_length: 88
+    known_first_party: ["enterprise_app"]
+    known_third_party: ["libcst", "click", "rich"]
+    
+  # Pylint
+  pylint:
+    enabled: true
+    disable_codes: "R0903,C0114,R0913"
+    enable_codes: "print-statement,consider-using-f-string,unused-import"
+    jobs: 4
+    
+  # Import-linter
+  import_linter:
+    enabled: true
+    root_package: "enterprise_app"
+    layers:
+      - name: "domain"
+        modules: ["enterprise_app.domain.*"]
+      - name: "application"
+        modules: ["enterprise_app.application.*"]
+      - name: "infrastructure"
+        modules: ["enterprise_app.infrastructure.*"]
+      - name: "interfaces"
+        modules: ["enterprise_app.interfaces.*"]
+    dependencies:
+      - layers: ["interfaces"]
+        may_depend_on: ["application", "domain"]
+      - layers: ["application"]
+        may_depend_on: ["domain"]
+      - layers: ["infrastructure"]
+        may_depend_on: ["application", "domain"]
+    independence:
+      - modules: ["enterprise_app.domain.*"]
+
+# Comprehensive rule configuration
+rules:
+  # Import rules
+  unused-imports:
+    enabled: true
+    tools: ["ruff", "autoflake", "unimport"]
+    severity: "error"
+    auto_fix: true
+    
+  duplicate-imports:
+    enabled: true
+    tools: ["ruff", "pylint"]
+    severity: "warning"
+    
+  relative-imports:
+    enabled: true
+    tools: ["libcst", "import-linter"]
+    severity: "error"
+    auto_fix: true
+    
+  wildcard-imports:
+    enabled: true
+    tools: ["ruff", "pylint"]
+    severity: "warning"
+    
+  sorted-imports:
+    enabled: true
+    tools: ["isort"]
+    severity: "info"
+    auto_fix: true
+    
+  # Code quality
+  print-statements:
+    enabled: true
+    tools: ["ruff", "pylint"]
+    severity: "warning"
+    ignore_patterns: ["**/tests/**", "**/debug/**", "**/examples/**"]
+    
+  string-concat:
+    enabled: true
+    tools: ["pylint", "libcst"]
+    severity: "info"
+    auto_fix: true
+    
+  missing-return-type:
+    enabled: true
+    tools: ["mypy"]
+    severity: "warning"
+    
+  # LLM rules
+  llm-hallucinations:
+    enabled: true
+    patterns:
+      - pattern: "TODO: implement this properly"
+        severity: "warning"
+        message: "TODO comment - likely incomplete implementation"
+      - pattern: "placeholder code"
+        severity: "error"
+        message: "Placeholder code detected"
+      - pattern: "from openai.api import"
+        severity: "error"
+        message: "Incorrect OpenAI import - API has changed"
+      - pattern: "from langchain.llms import"
+        severity: "warning"
+        message: "Legacy LangChain import detected"
+      - pattern: "raise NotImplementedError("
+        severity: "warning"
+        message: "NotImplementedError - incomplete implementation"
+      - pattern: "# This is a (template|example|placeholder)"
+        severity: "warning"
+        message: "Template/placeholder code detected"
+      - pattern: "import (nonexistent|fake|dummy)_module"
+        severity: "error"
+        message: "Import of non-existent module detected"
+    
+  magic-numbers:
+    enabled: true
+    threshold: 10
+    allowed_numbers: [0, 1, -1, 2, 10, 100, 1000, 24, 60, 3600, 86400]
+    ignore_patterns: ["**/tests/**", "**/constants.py", "**/config.py"]
+    
+  llm-generated-code:
+    enabled: true
+    comment_ratio_threshold: 0.5
+    
+  ai-boilerplate:
+    enabled: true
+    
+  # Composite rules
+  composite-unused-imports:
+    enabled: true
+    strategy: "parallel"
+    max_workers: 4
+    tools: ["ruff-unused-imports", "unused-imports", "unimport-unused-imports"]
+    tool_priorities:
+      ruff-unused-imports: 3
+      unused-imports: 2
+      unimport-unused-imports: 1
+      
+  composite-imports:
+    enabled: true
+    strategy: "priority"
+    tools: ["composite-unused-imports", "duplicate-imports", "sorted-imports", "relative-imports"]
+    
+  composite-type-checking:
+    enabled: true
+    tools: ["mypy-type-checking", "pylint-comprehensive"]
+
+# Plugin system
+plugins:
+  enabled: true
+  directories:
+    - "~/.prefact/plugins"
+    - "./.prefact/plugins"
+    - "./plugins"
+    - "${PREFACT_PLUGIN_DIR}"
+  
+  # Enterprise plugins
+  enterprise_rules:
+    enabled: true
+    api_key: "${ENTERPRISE_API_KEY}"
+    endpoint: "https://api.prefact.dev/v1"
+    
+  # Custom plugins
+  custom_rules:
+    enabled: true
+    config_file: ".prefact/custom_rules.yaml"
+    
+  # Plugin marketplace
+  marketplace:
+    enabled: true
+    registry_url: "https://plugins.prefact.dev"
+    auto_update: true
+
+# Performance configuration
+performance:
+  max_workers: 12
+  cache: true
+  cache_dir: "${PREFACT_CACHE_DIR:-~/.prefact/cache}"
+  cache_size: 1073741824
+  chunk_size: 25
+  parallel: true
+  enable_metrics: true
+  profile: true
+
+# Logging
+_logging:
+  level: "${PREFACT_LOG_LEVEL:-INFO}"
+  format: "json"
+  file: "${PREFACT_LOG_FILE:-logs/prefact.log}"
+  rotation: "daily"
+  retention: 30
+
+# Telemetry
+_telemetry:
+  enabled: "${PREFACT_TELEMETRY:-true}"
+  prometheus: true
+  prometheus_port: 9090
+  endpoint: "${PREFACT_TELEMETRY_ENDPOINT:-https://telemetry.prefact.dev/v1/logs}"
+  api_key: "${PREFACT_TELEMETRY_KEY}"
+  batch_size: 100
+  flush_interval: 5
+
+# Environment configurations
+environments:
+  development:
+    rules:
+      print-statements:
+        enabled: true
+      magic-numbers:
+        enabled: false
+      llm-hallucinations:
+        patterns:
+          - pattern: "TODO"
+            severity: "warning"
+    performance:
+      max_workers: 4
+    _logging:
+      level: "DEBUG"
+    _telemetry:
+      enabled: false
+      
+  testing:
+    rules:
+      llm-hallucinations:
+        enabled: false
+      magic-numbers:
+        enabled: false
+    exclude:
+      - "**/tests/**"
+      - "**/test_*.py"
+      - "**/conftest.py"
+    performance:
+      max_workers: 6
+      
+  staging:
+    rules:
+      print-statements:
+        enabled: false
+      magic-numbers:
+        enabled: true
+      llm-hallucinations:
+        enabled: true
+        patterns:
+          - pattern: "TODO"
+            severity: "error"
+    performance:
+      max_workers: 8
+    _telemetry:
+      enabled: true
+      
+  production:
+    rules:
+      print-statements:
+        enabled: false
+      magic-numbers:
+        enabled: true
+      llm-hallucinations:
+        enabled: true
+        patterns:
+          - pattern: "TODO"
+            severity: "error"
+          - pattern: "placeholder"
+            severity: "error"
+    performance:
+      max_workers: 12
+      cache_size: 2147483648  # 2GB
+    _logging:
+      level: "WARNING"
+    _telemetry:
+      enabled: true
+      prometheus: true
+
+# Custom composite rules
+_composite:
+  rules:
+    - id: "security-scan"
+      description: "Security-focused composite rule"
+      tools: ["pylint-comprehensive", "llm-hallucinations"]
+      strategy: "sequential"
+      
+    - id: "code-quality"
+      description: "General code quality check"
+      tools: ["composite-imports", "string-concat", "missing-return-type"]
+      strategy: "parallel"
+      
+    - id: "llm-review"
+      description: "Comprehensive LLM code review"
+      tools: ["llm-hallucinations", "magic-numbers", "llm-generated-code", "ai-boilerplate"]
+      strategy: "parallel"

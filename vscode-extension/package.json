@@ -1,0 +1,187 @@
+{
+  "name": "prefact",
+  "displayName": "Prefact",
+  "description": "Python code quality tool with LLM-aware rules",
+  "version": "0.1.0",
+  "publisher": "prefact",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Formatters",
+    "Python"
+  ],
+  "keywords": [
+    "python",
+    "linting",
+    "code quality",
+    "llm",
+    "refactoring"
+  ],
+  "activationEvents": [
+    "onLanguage:python",
+    "workspaceContains:**/*.py"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "prefact.scan",
+        "title": "Prefact: Scan File",
+        "icon": "$(search)"
+      },
+      {
+        "command": "prefact.scanWorkspace",
+        "title": "Prefact: Scan Workspace",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "prefact.fix",
+        "title": "Prefact: Fix File",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "prefact.fixWorkspace",
+        "title": "Prefact: Fix Workspace",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "prefact.configure",
+        "title": "Prefact: Configure",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "prefact.installHooks",
+        "title": "Prefact: Install Git Hooks",
+        "icon": "$(git-branch)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == python",
+          "command": "prefact.scan",
+          "group": "1_modification"
+        },
+        {
+          "when": "resourceLangId == python",
+          "command": "prefact.fix",
+          "group": "1_modification"
+        }
+      ],
+      "editor/title": [
+        {
+          "when": "resourceLangId == python",
+          "command": "prefact.scan",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceLangId == python",
+          "command": "prefact.fix",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "when": "resourceLangId == python",
+          "command": "prefact.scan"
+        },
+        {
+          "when": "resourceLangId == python",
+          "command": "prefact.fix"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "prefactDiagnostics",
+          "name": "Prefact Issues",
+          "when": "workspaceContains:**/*.py"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Prefact",
+      "properties": {
+        "prefact.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Prefact scanning"
+        },
+        "prefact.packageName": {
+          "type": "string",
+          "default": "",
+          "description": "Package name for absolute import resolution"
+        },
+        "prefact.scanOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Scan file on save"
+        },
+        "prefact.fixOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-fix issues on save"
+        },
+        "prefact.rules": {
+          "type": "object",
+          "description": "Rule-specific configuration",
+          "default": {}
+        },
+        "prefact.executablePath": {
+          "type": "string",
+          "default": "prefact",
+          "description": "Path to prefact executable"
+        },
+        "prefact.maxParallelProcesses": {
+          "type": "number",
+          "default": 4,
+          "description": "Maximum parallel processes for scanning"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "prefact-output",
+        "aliases": ["Prefact Output"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "prefact-output",
+        "scopeName": "source.prefact-output",
+        "path": "./syntaxes/prefact.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prefact/vscode-prefact.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prefact/vscode-prefact/issues"
+  },
+  "homepage": "https://github.com/prefact/vscode-prefact#readme"
+}

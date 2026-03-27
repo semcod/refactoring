@@ -2,7 +2,7 @@
 
 > 📚 **Main Documentation**: See the [main README.md](../README.md) for installation and usage instructions.
 
-This directory contains comprehensive examples demonstrating all features of the prefact library.
+This directory contains comprehensive examples demonstrating all features of the prefact library, including new enterprise capabilities.
 
 ## 📁 Directory Structure
 
@@ -25,29 +25,174 @@ examples/
 ├── 03-output-formats/       # Console vs JSON output
 ├── 04-custom-rules/         # Writing custom rules
 ├── 05-ci-cd/               # CI/CD integration examples
-└── 06-api-usage/           # Python API examples
+├── 06-api-usage/           # Python API examples
+├── 07-enterprise/          # 🆕 Complete enterprise configuration
+├── 08-llm-focused/         # 🆕 LLM-specific optimizations
+├── 09-high-performance/    # 🆕 Performance-optimized settings
+├── 10-plugin-development/  # 🆕 Plugin development setup
+├── 11-ci-cd/               # 🆕 Updated CI/CD examples
+└── 12-complete-example/    # 🆕 Comprehensive reference
+```
+
+## 🆕 Enterprise Features
+
+The new examples showcase prefact's enterprise capabilities:
+
+### 1. [Enterprise Configuration](./07-enterprise/prefact.yaml)
+Complete enterprise setup with:
+- All tool integrations (Ruff, MyPy, ISort, Pylint, etc.)
+- LLM-specific rules for AI-generated code
+- Plugin system with marketplace support
+- Performance optimization with parallel processing
+- Environment-specific configurations
+- Telemetry and monitoring
+
+### 2. [LLM-Focused Configuration](./08-llm-focused/prefact.yaml)
+Optimized for projects with AI-generated code:
+- Comprehensive hallucination detection
+- Custom patterns for specific LLMs
+- Template/placeholder code detection
+- Incomplete implementation warnings
+
+### 3. [High-Performance Configuration](./09-high-performance/prefact.yaml)
+For large codebases:
+- Maximum parallelization (16 workers)
+- Aggressive caching (2GB)
+- Tool-specific optimizations
+- CI/CD performance profiles
+
+### 4. [Plugin Development](./10-plugin-development/prefact.yaml)
+For custom plugin development:
+- Multiple plugin directories
+- Auto-reload in development
+- Plugin validation
+- Custom registry support
+
+### 5. [Updated CI/CD](./11-ci-cd/prefact.yaml)
+Modern CI/CD integration:
+- GitHub Actions, GitLab CI, Jenkins support
+- Fast feedback rules
+- Environment-specific optimizations
+- JSON output for parsing
+
+### 6. [Complete Reference](./12-complete-example/prefact.yaml)
+Comprehensive example with all features:
+- Every rule and tool configured
+- All environment variables
+- Full plugin setup
+- Complete telemetry configuration
+
+## Key Enterprise Features
+
+### Tool Integrations
+```yaml
+tools:
+  ruff:
+    enabled: true
+    max_line_length: 88
+  mypy:
+    enabled: true
+    strict: true
+  pylint:
+    enabled: true
+    disable_codes: "R0903"
+```
+
+### LLM-Specific Rules
+```yaml
+rules:
+  llm-hallucinations:
+    enabled: true
+    patterns:
+      - pattern: "TODO: implement"
+        severity: "error"
+  magic-numbers:
+    enabled: true
+    threshold: 10
+```
+
+### Performance Optimization
+```yaml
+performance:
+  max_workers: 16
+  cache: true
+  cache_size: 2147483648  # 2GB
+  parallel: true
+```
+
+### Plugin System
+```yaml
+plugins:
+  enabled: true
+  directories:
+    - "~/.prefact/plugins"
+    - "./.prefact/plugins"
+```
+
+### Environment Configurations
+```yaml
+environments:
+  production:
+    rules:
+      print-statements:
+        enabled: false
+  development:
+    _logging:
+      level: "DEBUG"
+```
+
+### Composite Rules
+```yaml
+rules:
+  composite-imports:
+    enabled: true
+    strategy: "parallel"
+    tools: ["unused-imports", "duplicate-imports"]
 ```
 
 ## 🚀 Getting Started
 
-1. **Install prefact**:
+1. **Install prefact with enterprise features**:
    ```bash
-   pip install prefact
-   # or from source
-   pip install -e /path/to/prefact
+   pip install prefact[all]
+   # or specific tools
+   pip install prefact[ruff,mypy,isort,performance]
    ```
 
-2. **Try the sample project**:
+2. **Try the enterprise sample**:
    ```bash
-   cd examples/sample-project
+   cd examples/07-enterprise
    prefact scan --path . --config prefact.yaml
    prefact fix --path . --config prefact.yaml
    ```
 
-3. **Explore individual examples**:
+3. **Copy an example for your project**:
    ```bash
-   cd examples/01-individual-rules/relative-imports
-   prefact scan --path . --config prefact.yaml
+   cp examples/07-enterprise/prefact.yaml ./prefact.yaml
+   # Edit to match your project
+   ```
+
+## Environment Variables
+
+Enterprise configurations support environment variables:
+- `PREFACT_CACHE_DIR` - Cache directory location
+- `PREFACT_LOG_LEVEL` - Logging level
+- `PREFACT_TELEMETRY_KEY` - Telemetry API key
+- `ENTERPRISE_API_KEY` - Enterprise features key
+- `PREFACT_PLUGIN_DIR` - Plugin directory
+
+## Migration Guide
+
+Upgrading from basic to enterprise configuration:
+
+1. Backup current `prefact.yaml`
+2. Copy enterprise example:
+   ```bash
+   cp examples/07-enterprise/prefact.yaml ./prefact.yaml.new
+   ```
+3. Merge your custom settings
+4. Test with `--dry-run`
+5. Gradually enable new features
    ```
 
 ## 📚 Example Details

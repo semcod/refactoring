@@ -1,0 +1,87 @@
+# Plugin development configuration
+# Shows how to configure prefact for developing custom plugins
+
+project_root: .
+package_name: my_plugin_project
+
+include:
+  - "**/*.py"
+  - "plugins/**/*.py"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/.venv/**"
+
+# Plugin development settings
+tools:
+  parallel: true
+  max_workers: 4
+
+rules:
+  # Enable all rules for plugin development
+  unused-imports:
+    enabled: true
+    auto_fix: true
+    
+  relative-imports:
+    enabled: true
+    auto_fix: true
+    
+  missing-return-type:
+    enabled: true
+    
+  # LLM rules if using AI to help develop plugins
+  llm-hallucinations:
+    enabled: true
+    
+  magic-numbers:
+    enabled: true
+
+# Plugin system configuration
+plugins:
+  enabled: true
+  
+  # Multiple plugin directories for development
+  directories:
+    - "./plugins"
+    - "~/.prefact/plugins"
+    - "./test_plugins"
+  
+  # Plugin-specific settings
+  development:
+    auto_reload: true
+    validate_on_save: true
+    
+  # Test plugins
+  test_plugins:
+    enabled: true
+    directory: "./test_plugins"
+    
+  # Custom plugin registry
+  registry:
+    enabled: true
+    endpoints:
+      - "https://plugins.prefact.dev/api/v1"
+      - "https://internal-plugins.company.com/api"
+
+# Development environment settings
+environments:
+  plugin_dev:
+    rules:
+      missing-return-type:
+        enabled: true  # Strict for plugins
+    plugins:
+      development:
+        auto_reload: true
+        validate_on_save: true
+    _logging:
+      level: "DEBUG"
+      
+  plugin_test:
+    rules:
+      # Enable all rules for testing
+      llm-hallucinations:
+        enabled: true
+    plugins:
+      test_plugins:
+        enabled: true

@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-03-27
+
+### Docs
+- Update examples/README.md
+- Update vscode-extension/node_modules/@eslint-community/eslint-utils/README.md
+- Update vscode-extension/node_modules/@eslint-community/regexpp/README.md
+- Update vscode-extension/node_modules/@eslint/eslintrc/README.md
+- Update vscode-extension/node_modules/@eslint/eslintrc/node_modules/brace-expansion/README.md
+- Update vscode-extension/node_modules/@eslint/eslintrc/node_modules/minimatch/README.md
+- Update vscode-extension/node_modules/@eslint/js/README.md
+- Update vscode-extension/node_modules/@humanwhocodes/config-array/README.md
+- Update vscode-extension/node_modules/@humanwhocodes/config-array/node_modules/brace-expansion/README.md
+- Update vscode-extension/node_modules/@humanwhocodes/config-array/node_modules/minimatch/README.md
+- ... and 297 more files
+
+### Other
+- Update examples/07-enterprise/prefact.yaml
+- Update examples/08-llm-focused/prefact.yaml
+- Update examples/09-high-performance/prefact.yaml
+- Update examples/10-plugin-development/prefact.yaml
+- Update examples/11-ci-cd/prefact.yaml
+- Update examples/12-complete-example/prefact.yaml
+- Update examples/requirements.txt
+- Update src/prefact/VERSION
+- Update vscode-extension/node_modules/.bin/acorn
+- Update vscode-extension/node_modules/.bin/eslint
+- ... and 965 more files
+
 ## [0.1.4] - 2026-03-27
 
 ### Docs

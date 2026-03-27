@@ -1,0 +1,101 @@
+# LLM-focused configuration for projects with heavy AI-generated code
+# This configuration emphasizes detecting and fixing LLM-specific issues
+
+project_root: .
+package_name: llm_project
+
+include:
+  - "**/*.py"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/.venv/**"
+  - "**/node_modules/**"
+
+# Enable all LLM-detection tools
+tools:
+  parallel: true
+  max_workers: 6
+  cache: true
+
+# Focus on LLM-specific rules
+rules:
+  # Core LLM detection rules
+  llm-hallucinations:
+    enabled: true
+    # Custom patterns for your specific LLM
+    patterns:
+      - pattern: "TODO: implement this properly"
+        severity: "error"
+        message: "Incomplete implementation detected"
+      - pattern: "placeholder code"
+        severity: "error"
+        message: "Remove placeholder code"
+      - pattern: "from openai.api import"
+        severity: "error"
+        message: "OpenAI API has changed - use new client"
+      - pattern: "from langchain.llms import"
+        severity: "warning"
+        message: "Legacy LangChain import detected"
+      - pattern: "raise NotImplementedError("
+        severity: "error"
+        message: "Complete the implementation"
+      - pattern: "# This is a template"
+        severity: "warning"
+        message: "Template code in production"
+      - pattern: "import (nonexistent|fake|dummy)_module"
+        severity: "error"
+        message: "Invalid module import"
+        
+  magic-numbers:
+    enabled: true
+    threshold: 5  # Lower threshold for stricter checking
+    allowed_numbers: [0, 1, -1, 2]
+    
+  llm-generated-code:
+    enabled: true
+    comment_ratio_threshold: 0.3  # Lower threshold to catch over-commented code
+    
+  ai-boilerplate:
+    enabled: true
+    
+  # Standard rules that work well with LLM code
+  unused-imports:
+    enabled: true
+    tools: ["unimport", "ruff"]
+    auto_fix: true
+    
+  relative-imports:
+    enabled: true
+    auto_fix: true
+    
+  string-concat:
+    enabled: true
+    auto_fix: true
+    
+  print-statements:
+    enabled: true
+    severity: "error"  # LLMs often leave debug prints
+
+# Plugin configuration for custom LLM rules
+plugins:
+  enabled: true
+  custom_llm_rules:
+    enabled: true
+    patterns_file: ".prefact/llm_patterns.yaml"
+
+# Environment settings
+environments:
+  development:
+    rules:
+      llm-hallucinations:
+        patterns:
+          - pattern: "TODO"
+            severity: "warning"  # More lenient in dev
+            
+  production:
+    rules:
+      llm-hallucinations:
+        patterns:
+          - pattern: "TODO"
+            severity: "error"  # Strict in production
