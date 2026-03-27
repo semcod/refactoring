@@ -80,57 +80,93 @@ from prefact.rules.print_statements import PrintStatements as _r7  # noqa: F401,
 from prefact.rules.type_hints import MissingReturnType as _r8  # noqa: F401, E402
 
 # Import new integration rules so they self-register
-from prefact.rules.ruff_based import (  # noqa: F401, E402
-    RuffDuplicateImports as _ruff_1,
-    RuffPrintStatements as _ruff_2,
-    RuffSortedImports as _ruff_3,
-    RuffUnusedImports as _ruff_4,
-    RuffWildcardImports as _ruff_5,
-)
-from prefact.rules.mypy_based import (  # noqa: F401, E402
-    MyPyMissingReturnType as _mypy_1,
-    MyPyTypeChecking as _mypy_2,
-    SmartReturnTypeRule as _mypy_3,
-)
-from prefact.rules.isort_based import (  # noqa: F401, E402
-    ISortedImports as _isort_1,
-    ImportSectionSeparator as _isort_2,
-    CustomImportOrganization as _isort_3,
-)
-from prefact.rules.autoflake_based import (  # noqa: F401, E402
-    AutoflakeUnusedImports as _autoflake_1,
-    AutoflakeUnusedVariables as _autoflake_2,
-    AutoflakeDuplicateKeys as _autoflake_3,
-    AutoflakeAll as _autoflake_4,
-)
-from prefact.rules.string_transformations import (  # noqa: F401, E402
-    StringConcatToFString as _string_1,
-    FlyntStringFormatting as _string_2,
-    ContextAwareStringConcat as _string_3,
-)
-from prefact.rules.pylint_based import (  # noqa: F401, E402
-    PylintPrintStatements as _pylint_1,
-    PylintStringConcat as _pylint_2,
-    PylintComprehensive as _pylint_3,
-)
-from prefact.rules.unimport_based import (  # noqa: F401, E402
-    UnimportUnusedImports as _unimport_1,
-    UnimportDuplicateImports as _unimport_2,
-    UnimportStarImports as _unimport_3,
-    UnimportAll as _unimport_4,
-)
-from prefact.rules.importchecker_based import (  # noqa: F401, E402
-    ImportCheckerUnusedImports as _ic_1,
-    ImportCheckerDuplicateImports as _ic_2,
-    ImportDependencyAnalysis as _ic_3,
-    ImportOptimizer as _ic_4,
-)
-from prefact.rules.import_linter_based import (  # noqa: F401, E402
-    ImportLinterLayers as _il_1,
-    ImportLinterNoRelative as _il_2,
-    ImportLinterIndependence as _il_3,
-    ImportLinterCustomArchitecture as _il_4,
-)
+# Only import if dependencies are available
+try:
+    from prefact.rules.ruff_based import (  # noqa: F401, E402
+        RuffDuplicateImports as _ruff_1,
+        RuffPrintStatements as _ruff_2,
+        RuffSortedImports as _ruff_3,
+        RuffUnusedImports as _ruff_4,
+        RuffWildcardImports as _ruff_5,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.mypy_based import (  # noqa: F401, E402
+        MyPyMissingReturnType as _mypy_1,
+        MyPyTypeChecking as _mypy_2,
+        SmartReturnTypeRule as _mypy_3,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.isort_based import (  # noqa: F401, E402
+        ISortedImports as _isort_1,
+        ImportSectionSeparator as _isort_2,
+        CustomImportOrganization as _isort_3,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.autoflake_based import (  # noqa: F401, E402
+        AutoflakeUnusedImports as _autoflake_1,
+        AutoflakeUnusedVariables as _autoflake_2,
+        AutoflakeDuplicateKeys as _autoflake_3,
+        AutoflakeAll as _autoflake_4,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.string_transformations import (  # noqa: F401, E402
+        StringConcatToFString as _string_1,
+        FlyntStringFormatting as _string_2,
+        ContextAwareStringConcat as _string_3,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.pylint_based import (  # noqa: F401, E402
+        PylintPrintStatements as _pylint_1,
+        PylintStringConcat as _pylint_2,
+        PylintComprehensive as _pylint_3,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.unimport_based import (  # noqa: F401, E402
+        UnimportUnusedImports as _unimport_1,
+        UnimportDuplicateImports as _unimport_2,
+        UnimportStarImports as _unimport_3,
+        UnimportAll as _unimport_4,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.importchecker_based import (  # noqa: F401, E402
+        ImportCheckerUnusedImports as _ic_1,
+        ImportCheckerDuplicateImports as _ic_2,
+        ImportDependencyAnalysis as _ic_3,
+        ImportOptimizer as _ic_4,
+    )
+except ImportError:
+    pass
+
+try:
+    from prefact.rules.import_linter_based import (  # noqa: F401, E402
+        ImportLinterLayers as _il_1,
+        ImportLinterNoRelative as _il_2,
+        ImportLinterIndependence as _il_3,
+        ImportLinterCustomArchitecture as _il_4,
+    )
+except ImportError:
+    pass
 # Import composite rules from new modules
 from prefact.rules.composite_rules import (  # noqa: F401, E402
     CompositeUnusedImports as _comp_1,

@@ -27,7 +27,7 @@ MODULES[50] (top by size):
   M[src/prefact/rules/isort_based.py] 440L C:4 F:23 CC↑12 D:0 (python)
   M[src/prefact/logging.py] 436L C:10 F:28 CC↑4 D:0 (python)
   M[src/prefact/performance/cache.py] 434L C:6 F:37 CC↑5 D:8 (python)
-  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:0 (python)
+  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:1 (python)
   M[src/prefact/rules/mypy_based.py] 400L C:6 F:22 CC↑9 D:0 (python)
   M[src/prefact/git_hooks.py] 391L C:2 F:17 CC↑8 D:0 (python)
   M[src/prefact/performance/parallel.py] 350L C:4 F:23 CC↑7 D:0 (python)

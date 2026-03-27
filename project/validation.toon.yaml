@@ -1,7 +1,7 @@
-# vallm batch | 151f | 86✓ 3⚠ 24✗ | 2026-03-27
+# vallm batch | 150f | 86✓ 3⚠ 24✗ | 2026-03-27
 
 SUMMARY:
-  scanned: 151  passed: 86 (57.0%)  warnings: 3  errors: 24  unsupported: 41
+  scanned: 150  passed: 86 (57.3%)  warnings: 3  errors: 24  unsupported: 40
 
 WARNINGS[3]{path,score}:
   vscode-extension/src/extension.ts,0.92
@@ -116,4 +116,4 @@ UNSUPPORTED[4]{bucket,count}:
   *.md,21
   *.txt,2
   *.yml,1
-  other,17
+  other,16

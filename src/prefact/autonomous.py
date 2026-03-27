@@ -383,7 +383,7 @@ class AutonomousRefact:
             return
         
         # Create changelog entry
-        version = "0.1.0"  # Could be detected from project
+        version = "0.1.10"  # Could be detected from project
         date = datetime.now().strftime("%Y-%m-%d")
         
         entry = f"## [{version}] - {date}\n\n"

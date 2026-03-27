@@ -1,4 +1,4 @@
-"""ISort-based import sorting rules for pprefact.
+"""ISort-based import sorting rules for prefact.
 
 This module provides integration with ISort for sorting and organizing imports
 according to PEP8 conventions.
@@ -10,11 +10,17 @@ import tempfile
 from pathlib import Path
 from typing import Dict, List, Optional
 
-import isort
-
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
+
+# Optional import - only import when needed
+try:
+    import isort
+    HAS_ISORT = True
+except ImportError:
+    HAS_ISORT = False
+    isort = None
 
 
 class ISortHelper:

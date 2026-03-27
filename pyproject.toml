@@ -112,7 +112,8 @@ mypy-integration = "prefact.plugins.mypy_integration:register"
 isort-integration = "prefact.plugins.isort_integration:register"
 
 [tool.hatch.version]
-path = "src/prefact/VERSION"
+path = "src/prefact/__init__.py"
+pattern = "__version__ = \"(?P<version>[^\"]+)\""
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -126,6 +127,21 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/prefact"]
+
+[tool.hatch.build]
+exclude = [
+    "/.git",
+    "/.github",
+    "/.pytest_cache",
+    "/.mypy_cache",
+    "/.tox",
+    "/__pycache__",
+    "/*.pyc",
+    "/.venv",
+    "/venv",
+    "/build",
+    "/dist",
+]
 
 [tool.hatch.envs.default]
 dependencies = [
