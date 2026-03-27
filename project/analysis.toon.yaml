@@ -2,14 +2,14 @@
 # CC̄=3.2 | critical:3/695 | dups:0 | cycles:0
 
 HEALTH[3]:
-  🟡 CC    from_yaml CC=15 (limit:15)
   🟡 CC    scan_file CC=15 (limit:15)
   🟡 CC    fix CC=21 (limit:15)
+  🟡 CC    from_yaml CC=15 (limit:15)
 
 REFACTOR[1]:
   1. split 3 high-CC methods  (CC>15)
 
-PIPELINES[545]:
+PIPELINES[544]:
   [1] Src [main]: main → run_benchmark → create_test_files → range → ...(1 more)
       PURITY: 100% pure
   [2] Src [__init__]: __init__
@@ -33,7 +33,7 @@ LAYERS:
   │ logging                    434L  10C   28m  CC=4      ←0
   │ cache                      433L  6C   37m  CC=5      ←10
   │ mypy_based                 394L  6C   22m  CC=9      ←0
-  │ pylint_based               392L  5C   22m  CC=6      ←1
+  │ pylint_based               392L  5C   22m  CC=6      ←0
   │ git_hooks                  383L  2C   17m  CC=8      ←0
   │ parallel                   348L  4C   23m  CC=7      ←0
   │ __init__                   319L  3C   17m  CC=10     ←0

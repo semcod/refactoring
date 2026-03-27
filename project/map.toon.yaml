@@ -70,6 +70,9 @@ D:
     _get_import_lines(tree)
     _get_attribute_root(node)
     _process_assignment_for_all(node;used)
+  src/prefact/rules/magic_numbers.py:
+    e: MagicNumberRule
+    MagicNumberRule(BaseRule): __init__(1),_load_allowed_numbers(0),scan_file(2),_is_magic_number(1),fix(3),validate(3)  # Detect magic numbers in code...
   src/prefact/config_extended.py:
     e: ExtendedConfig,ConfigValidator,ConfigGenerator,load_config_with_env,merge_configs
     ExtendedConfig(Config): __init__(9),from_yaml(2),_deep_merge(1),get_tool_config(1),get_performance_setting(2),get_plugin_config(1),to_dict(0)  # Extended configuration with additional features...
@@ -77,9 +80,6 @@ D:
     ConfigGenerator: generate_extended_config(2),generate_composite_rule_config(3),save_config(1)  # Generate configuration files...
     load_config_with_env(config_path;environment)
     merge_configs(base;override)
-  src/prefact/rules/magic_numbers.py:
-    e: MagicNumberRule
-    MagicNumberRule(BaseRule): __init__(1),_load_allowed_numbers(0),scan_file(2),_is_magic_number(1),fix(3),validate(3)  # Detect magic numbers in code...
   src/prefact/reporters/console.py:
     e: print_report
     print_report(result)

@@ -158,7 +158,7 @@ Content outside the markers is preserved when regenerating. Enable this with `sy
 
 ```
 prefact/
-    ├── generate_examples        ├── engine        ├── validator        ├── git_hooks    ├── run_examples├── benchmark_ram_optimization        ├── autonomous/        ├── fixer    ├── prefact/        ├── cli        ├── scanner        ├── config        ├── models            ├── builtin            ├── parallel        ├── performance/        ├── plugins/        ├── reporters/            ├── cache            ├── console            ├── json_reporter            ├── docs_manager            ├── todo_manager            ├── setup_manager            ├── project_scanner            ├── _base            ├── magic_numbers        ├── config_extended            ├── ruff_based            ├── unused_imports            ├── composite_factory            ├── importchecker_based            ├── pylint_based            ├── registry            ├── type_hints            ├── strategies        ├── rules/            ├── import_linter_based            ├── wildcard_imports            ├── string_concat            ├── ai_boilerplate            ├── unimport_based            ├── isort_based            ├── sorted_imports            ├── llm_generated_code            ├── benchmark            ├── migration            ├── autoflake_based            ├── llm_hallucinations        ├── logging            ├── composite_rules            ├── duplicate_imports            ├── print_statements        ├── messy_module        ├── cli        ├── utils        ├── models        ├── core        ├── sample_code        ├── example        ├── custom_rules/            ├── mypy_based            ├── after            ├── no_todo_rule            ├── before            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── string_transformations├── project    ├── run_all        ├── extension            ├── relative_imports            ├── after```
+├── benchmark_ram_optimization        ├── engine        ├── validator        ├── git_hooks    ├── generate_examples    ├── run_examples        ├── autonomous/        ├── fixer    ├── prefact/        ├── config        ├── scanner        ├── models        ├── plugins/            ├── builtin            ├── parallel        ├── performance/            ├── cache        ├── reporters/            ├── console            ├── json_reporter            ├── docs_manager        ├── config_extended            ├── setup_manager            ├── project_scanner            ├── _base        ├── cli            ├── magic_numbers            ├── unused_imports            ├── ruff_based            ├── composite_factory            ├── importchecker_based            ├── pylint_based            ├── registry            ├── type_hints            ├── strategies        ├── rules/            ├── wildcard_imports            ├── string_concat            ├── ai_boilerplate            ├── todo_manager            ├── import_linter_based            ├── unimport_based            ├── isort_based            ├── llm_generated_code            ├── sorted_imports            ├── benchmark            ├── migration            ├── autoflake_based            ├── llm_hallucinations        ├── logging            ├── composite_rules            ├── duplicate_imports            ├── print_statements        ├── messy_module        ├── cli        ├── utils        ├── models        ├── core        ├── sample_code        ├── example        ├── custom_rules/            ├── no_todo_rule            ├── after            ├── before            ├── mypy_based            ├── before            ├── after            ├── after            ├── before            ├── after            ├── before            ├── after            ├── after            ├── before            ├── before            ├── after            ├── after            ├── before            ├── before├── project    ├── run_all            ├── string_transformations        ├── extension            ├── relative_imports```
 
 ## API Overview
 
@@ -169,22 +169,22 @@ prefact/
 - **`GitHooks`** — Manages Git hooks for prefact.
 - **`PreCommitConfig`** — Generate pre-commit configuration for prefact.
 - **`Fixer`** — —
-- **`Scanner`** — Discovers Python files and runs all enabled rules against them.
 - **`RuleConfig`** — Configuration for a single rule.
 - **`Config`** — Top-level configuration.
+- **`Scanner`** — Discovers Python files and runs all enabled rules against them.
 - **`Severity`** — How critical an issue is.
 - **`Phase`** — Pipeline phase.
 - **`Issue`** — A single detected problem in the codebase.
 - **`Fix`** — A concrete code change to apply.
 - **`ValidationResult`** — Result of post-fix validation.
 - **`PipelineResult`** — Aggregate result of the full scan → fix → validate pipeline.
+- **`PluginMetadata`** — Metadata for a loaded plugin.
+- **`PluginValidator`** — Validates plugins before loading.
+- **`PluginManager`** — Manages loading and registration of plugins.
 - **`ParallelScanTask`** — A task for parallel scanning.
 - **`ParallelEngine`** — Parallel processing engine for prefact.
 - **`ParallelScanner`** — High-level interface for parallel scanning.
 - **`PerformanceMonitor`** — Monitor performance of parallel operations.
-- **`PluginMetadata`** — Metadata for a loaded plugin.
-- **`PluginValidator`** — Validates plugins before loading.
-- **`PluginManager`** — Manages loading and registration of plugins.
 - **`Cache`** — Wrapper for diskcache with additional functionality.
 - **`ScanResultCache`** — Specialized cache for scan results.
 - **`ConfigCache`** — Cache for rule configurations.
@@ -192,21 +192,21 @@ prefact/
 - **`FileHashCache`** — Cache for file hashes.
 - **`CacheContext`** — Context manager for cache operations.
 - **`DocsManager`** — Manages documentation files - planfile.yaml and CHANGELOG.md.
-- **`TodoManager`** — Manages TODO.md file operations.
+- **`ExtendedConfig`** — Extended configuration with additional features.
+- **`ConfigValidator`** — Validate configuration files.
+- **`ConfigGenerator`** — Generate configuration files.
+- **`AutonomousRefact`** — Autonomous prefact manager.
 - **`SetupManager`** — Handles project setup - configuration and examples.
 - **`ProjectScanner`** — Handles project scanning operations.
 - **`BaseManager`** — Base class for autonomous managers.
 - **`MagicNumberRule`** — Detect magic numbers in code.
-- **`ExtendedConfig`** — Extended configuration with additional features.
-- **`ConfigValidator`** — Validate configuration files.
-- **`ConfigGenerator`** — Generate configuration files.
+- **`UnusedImports`** — —
 - **`RuffHelper`** — Helper class for Ruff operations.
 - **`RuffWildcardImports`** — Wildcard imports detection using Ruff.
 - **`RuffPrintStatements`** — Print statements detection using Ruff.
 - **`RuffUnusedImports`** — Unused imports detection and removal using Ruff.
 - **`RuffSortedImports`** — Import sorting using Ruff.
 - **`RuffDuplicateImports`** — Duplicate imports detection using Ruff.
-- **`UnusedImports`** — —
 - **`CompositeRuleFactory`** — Factory for creating composite rules dynamically.
 - **`ImportCheckerHelper`** — Helper class for importchecker operations.
 - **`ImportCheckerUnusedImports`** — Detect unused imports using importchecker.
@@ -225,15 +225,15 @@ prefact/
 - **`SequentialScanStrategy`** — Run tools sequentially, passing results between them.
 - **`PriorityBasedStrategy`** — Use tool priority to resolve conflicts.
 - **`BaseRule`** — Base class every prefactoring rule must implement.
+- **`WildcardImports`** — —
+- **`StringConcatToFstring`** — —
+- **`AIBoilerplateRule`** — Detect AI boilerplate and template code.
+- **`TodoManager`** — Manages TODO.md file operations.
 - **`ImportLinterHelper`** — Helper class for import-linter operations.
 - **`ImportLinterLayers`** — Enforce import layering rules using import-linter.
 - **`ImportLinterNoRelative`** — Block relative imports using import-linter.
 - **`ImportLinterIndependence`** — Ensure module independence using import-linter.
 - **`ImportLinterCustomArchitecture`** — Enforce custom architectural rules using import-linter.
-- **`WildcardImports`** — —
-- **`StringConcatToFstring`** — —
-- **`AIBoilerplateRule`** — Detect AI boilerplate and template code.
-- **`AutonomousRefact`** — Autonomous prefact manager.
 - **`UnimportHelper`** — Helper class for unimport operations.
 - **`UnimportUnusedImports`** — Remove unused imports using unimport.
 - **`UnimportDuplicateImports`** — Remove duplicate imports using unimport.
@@ -243,8 +243,8 @@ prefact/
 - **`ISortedImports`** — Sort imports using ISort.
 - **`ImportSectionSeparator`** — Ensure import sections are properly separated.
 - **`CustomImportOrganization`** — Organize imports according to custom rules.
-- **`SortedImports`** — —
 - **`LLMGeneratedCodeRule`** — Detect code that appears to be LLM-generated.
+- **`SortedImports`** — —
 - **`RuleMigrationManager`** — Manages migration from AST-based rules to Ruff-based rules.
 - **`HybridScanner`** — Scanner that can use both AST and Ruff-based rules.
 - **`PerformanceProfiler`** — Compare performance between AST and Ruff implementations.
@@ -274,16 +274,16 @@ prefact/
 - **`User`** — User model.
 - **`Post`** — Post model.
 - **`DataProcessor`** — A class that processes data.
+- **`NoTodoRule`** — Rule that detects TODO comments in code.
+- **`NoPrintRule`** — Custom rule that detects print statements (alternative to built-in).
+- **`Processor`** — Processor class with absolute imports.
+- **`Processor`** — Processor class with relative imports.
 - **`MyPyHelper`** — Helper class for MyPy operations.
 - **`MyPyMissingReturnType`** — Detect missing return type annotations using MyPy.
 - **`MyPyTypeChecking`** — General type checking using MyPy.
 - **`ReturnTypeInferrer`** — Infer return types for simple functions.
 - **`ReturnTypeAdder`** — Transformer to add return type annotations to functions.
 - **`SmartReturnTypeRule`** — Smart return type detection with inference suggestions.
-- **`Processor`** — Processor class with absolute imports.
-- **`NoTodoRule`** — Rule that detects TODO comments in code.
-- **`NoPrintRule`** — Custom rule that detects print statements (alternative to built-in).
-- **`Processor`** — Processor class with relative imports.
 - **`Processor`** — Processor class.
 - **`Processor`** — Processor class.
 - **`DataProcessor`** — A class with clean imports.
@@ -303,6 +303,11 @@ prefact/
 
 ### Functions
 
+- `create_test_files(base_dir, num_files, file_size_kb)` — Create test Python files with import issues to benchmark against.
+- `benchmark_without_rampreload(config)` — Run benchmark without RAM preloading (original implementation).
+- `benchmark_with_rampreload(config)` — Run benchmark with RAM preloading (optimized implementation).
+- `run_benchmark(num_files, file_size_kb)` — Run a complete benchmark comparing both implementations.
+- `main()` — Run multiple benchmarks with different file counts and sizes.
 - `install_git_hooks(repo_root)` — Install Git hooks for the current repository.
 - `uninstall_git_hooks(repo_root)` — Uninstall Git hooks for the current repository.
 - `list_git_hooks(repo_root)` — List status of Git hooks.
@@ -310,23 +315,11 @@ prefact/
 - `run_example(example_dir)` — Run a single example and return success status.
 - `find_examples(examples_dir)` — Find all example directories with prefact.yaml.
 - `main()` — Run all examples and show results.
-- `create_test_files(base_dir, num_files, file_size_kb)` — Create test Python files with import issues to benchmark against.
-- `benchmark_without_rampreload(config)` — Run benchmark without RAM preloading (original implementation).
-- `benchmark_with_rampreload(config)` — Run benchmark with RAM preloading (optimized implementation).
-- `run_benchmark(num_files, file_size_kb)` — Run a complete benchmark comparing both implementations.
-- `main()` — Run multiple benchmarks with different file counts and sizes.
-- `main(ctx, autonomous, init_only, skip_tests)` — prefact – automatic Python prefactoring toolkit.
-- `scan()` — Scan for issues without applying fixes.
-- `fix(dry_run, no_backup)` — Scan, fix, and validate in one pass.
-- `check(filepath)` — Scan a single file.
-- `init(project_path)` — Generate a default prefact.yaml in the project directory.
-- `autonomous_cmd(project_path, init_only, skip_tests, skip_examples)` — Run autonomous prefact mode (-a).
-- `rules()` — List all available rules.
+- `get_plugin_manager(config)` — Get the global plugin manager instance.
+- `register_plugin_rule(plugin_name, version)` — Decorator to register a rule as part of a plugin.
 - `init_worker()` — Initialize worker process.
 - `scan_file_worker(args)` — Worker function for scanning a single file.
 - `get_performance_monitor()` — Get the global performance monitor.
-- `get_plugin_manager(config)` — Get the global plugin manager instance.
-- `register_plugin_rule(plugin_name, version)` — Decorator to register a rule as part of a plugin.
 - `initialize_cache(config)` — Initialize the cache system.
 - `get_cache()` — Get the global cache instance.
 - `get_scan_cache()` — Get the scan result cache.
@@ -343,6 +336,13 @@ prefact/
 - `dump(result)` — —
 - `load_config_with_env(config_path, environment)` — Load configuration with environment detection.
 - `merge_configs(base, override)` — Merge two configurations.
+- `main(ctx, autonomous, init_only, skip_tests)` — prefact – automatic Python prefactoring toolkit.
+- `scan()` — Scan for issues without applying fixes.
+- `fix(dry_run, no_backup)` — Scan, fix, and validate in one pass.
+- `check(filepath)` — Scan a single file.
+- `init(project_path)` — Generate a default prefact.yaml in the project directory.
+- `autonomous_cmd(project_path, init_only, skip_tests, skip_examples)` — Run autonomous prefact mode (-a).
+- `rules()` — List all available rules.
 - `register_composite_rules(config)` — Register composite rules defined in configuration.
 - `generate_pylint_rc(config, output_path)` — Generate a .pylintrc file based on prefact configuration.
 - `get_lazy_registry()` — Get the global lazy rule registry.
@@ -386,6 +386,7 @@ prefact/
 - `process()` — Process using wildcard imports.
 - `add(a, b)` — Add two numbers.
 - `get_user(user_id)` — Get user by ID.
+- `process()` — Process using wildcard imports.
 - `add(a, b)` — Add two numbers.
 - `get_user(user_id)` — Get user by ID.
 - `process_data()` — Process data.
@@ -393,23 +394,22 @@ prefact/
 - `process_data(data)` — Process some data.
 - `format_timestamp(ts)` — Format a timestamp.
 - `read_file(filepath)` — Read file contents.
+- `greet(name, age)` — Greet someone.
+- `format_data(data)` — Format data.
+- `greet(name, age)` — Greet someone.
+- `format_data(data)` — Format data.
 - `process_data(data)` — Process some data.
 - `format_timestamp(ts)` — Format a timestamp.
 - `read_file(filepath)` — Read file contents.
-- `greet(name, age)` — Greet someone.
-- `format_data(data)` — Format data.
-- `greet(name, age)` — Greet someone.
-- `format_data(data)` — Format data.
-- `process()` — Process with unsorted imports.
 - `process()` — Process with unsorted imports.
 - `process_data(data)` — Process data with debug prints.
 - `calculate(a, b)` — Calculate with debug output.
+- `process()` — Process with unsorted imports.
 - `process_data(data)` — Process data with debug prints.
 - `calculate(a, b)` — Calculate with debug output.
 - `print_status()` — —
 - `print_warning()` — —
 - `print_error()` — —
-- `process()` — Process using wildcard imports.
 
 
 ## Project Structure
