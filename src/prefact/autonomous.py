@@ -14,6 +14,7 @@ import json
 import shutil
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -211,26 +212,50 @@ class AutonomousRefact:
                 start_time = datetime.now()
                 issues_found = []
                 
-                for i, file_path in enumerate(files_to_scan):
-                    # Update progress
-                    progress.update(scan_task, advance=1, description=f"[cyan]Scanning {file_path.name}")
+                # Use parallel processing if enabled
+                if config.tools.get('parallel', False) and len(files_to_scan) > 1:
+                    max_workers = min(config.performance.get('max_workers', 4), len(files_to_scan))
                     
-                    # Show current file every 10 files
-                    if i % 10 == 0 or i == len(files_to_scan) - 1:
-                        elapsed = (datetime.now() - start_time).total_seconds()
-                        if i > 0:
-                            avg_time = elapsed / i
-                            eta = avg_time * (len(files_to_scan) - i)
-                            console.print(f"  📄 [{i+1}/{len(files_to_scan)}] {file_path} (ETA: {eta:.1f}s)")
+                    def scan_file(file_path):
+                        file_issues = []
+                        try:
+                            source = file_path.read_text(encoding="utf-8")
+                            for rule in scanner._rules:
+                                file_issues.extend(rule.scan_file(file_path, source))
+                        except Exception as e:
+                            console.print(f"  ⚠️ Error scanning {file_path}: {e}")
+                        return file_path, file_issues
                     
-                    # Scan the file
-                    try:
-                        source = file_path.read_text(encoding="utf-8")
-                        for rule in scanner._rules:
-                            file_issues = rule.scan_file(file_path, source)
+                    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                        # Submit all files for scanning
+                        future_to_file = {executor.submit(scan_file, fp): fp for fp in files_to_scan}
+                        
+                        for future in as_completed(future_to_file):
+                            file_path, file_issues = future.result()
                             issues_found.extend(file_issues)
-                    except Exception as e:
-                        console.print(f"  ⚠️ Error scanning {file_path}: {e}")
+                            progress.update(scan_task, advance=1, description=f"[cyan]Scanning {file_path.name}")
+                else:
+                    # Sequential processing
+                    for i, file_path in enumerate(files_to_scan):
+                        # Update progress
+                        progress.update(scan_task, advance=1, description=f"[cyan]Scanning {file_path.name}")
+                        
+                        # Show current file every 10 files
+                        if i % 10 == 0 or i == len(files_to_scan) - 1:
+                            elapsed = (datetime.now() - start_time).total_seconds()
+                            if i > 0:
+                                avg_time = elapsed / i
+                                eta = avg_time * (len(files_to_scan) - i)
+                                console.print(f"  📄 [{i+1}/{len(files_to_scan)}] {file_path} (ETA: {eta:.1f}s)")
+                        
+                        # Scan the file
+                        try:
+                            source = file_path.read_text(encoding="utf-8")
+                            for rule in scanner._rules:
+                                file_issues = rule.scan_file(file_path, source)
+                                issues_found.extend(file_issues)
+                        except Exception as e:
+                            console.print(f"  ⚠️ Error scanning {file_path}: {e}")
             
             # Group issues by type
             self.issues_found = self.group_issues(issues_found)

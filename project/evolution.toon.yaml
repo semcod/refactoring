@@ -1,25 +1,30 @@
 # code2llm/evolution | 576 func | 44f | 2026-03-27
 
-NEXT[3] (ranked by impact):
-  [1] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
+NEXT[4] (ranked by impact):
+  [1] !! SPLIT           src/prefact/autonomous.py
+      WHY: 519L, 1 classes, max CC=12
+      EFFORT: ~4h  IMPACT: 6228
+
+  [2] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
       WHY: CC=21 exceeds 15
       EFFORT: ~1h  IMPACT: 273
 
-  [2] !  SPLIT-FUNC      ExtendedConfig.from_yaml  CC=15  fan=16
+  [3] !  SPLIT-FUNC      ExtendedConfig.from_yaml  CC=15  fan=16
       WHY: CC=15 exceeds 15
       EFFORT: ~1h  IMPACT: 240
 
-  [3] !  SPLIT-FUNC      MagicNumberRule.scan_file  CC=15  fan=9
+  [4] !  SPLIT-FUNC      MagicNumberRule.scan_file  CC=15  fan=9
       WHY: CC=15 exceeds 15
       EFFORT: ~1h  IMPACT: 135
 
 
-RISKS[0]: none
+RISKS[1]:
+  ⚠ Splitting src/prefact/autonomous.py may break 15 import paths
 
 METRICS-TARGET:
   CC̄:          3.2 → ≤2.2
   max-CC:      21 → ≤10
-  god-modules: 0 → 0
+  god-modules: 1 → 0
   high-CC(≥15): 3 → ≤1
   hub-types:   0 → ≤0
 
@@ -48,4 +53,4 @@ PATTERNS (language parser shared logic):
     - Standardized FunctionInfo/ClassInfo models
 
 HISTORY:
-  prev CC̄=3.1 → now CC̄=3.2
+  prev CC̄=3.2 → now CC̄=3.2

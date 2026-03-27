@@ -16,4 +16,2032 @@ sprints:
   duration: 2 weeks
   objectives:
   - Fix code quality issues
-  task_patterns: []
+  task_patterns:
+  - id: ticket-e5c41121
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/01-individual-rules/duplicate-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/duplicate-imports/after.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c7040878
+    name: Fix unused-imports issues
+    description: Resolve 14 unused-imports issues in examples/01-individual-rules/duplicate-imports/after.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/01-individual-rules/duplicate-imports/after.py
+    rule_id: unused-imports
+    count: 14
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2cedfab5
+    name: Fix duplicate-imports issues
+    description: Resolve 3 duplicate-imports issues in examples/01-individual-rules/duplicate-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/duplicate-imports/before.py
+    rule_id: duplicate-imports
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-335bf45a
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/01-individual-rules/duplicate-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/duplicate-imports/before.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-12f6d274
+    name: Fix unused-imports issues
+    description: Resolve 14 unused-imports issues in examples/01-individual-rules/duplicate-imports/before.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/01-individual-rules/duplicate-imports/before.py
+    rule_id: unused-imports
+    count: 14
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-aa700792
+    name: Fix smart-return-type issues
+    description: Resolve 3 smart-return-type issues in examples/01-individual-rules/missing-return-type/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/missing-return-type/after.py
+    rule_id: smart-return-type
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9afae806
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in examples/01-individual-rules/missing-return-type/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/missing-return-type/after.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-68301c01
+    name: Fix smart-return-type issues
+    description: Resolve 3 smart-return-type issues in examples/01-individual-rules/missing-return-type/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/missing-return-type/before.py
+    rule_id: smart-return-type
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d267051a
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in examples/01-individual-rules/missing-return-type/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/missing-return-type/before.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9e8194af
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/01-individual-rules/print-statements/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/print-statements/after.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e2d80bc7
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in examples/01-individual-rules/print-statements/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/print-statements/after.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-1ae4258d
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/01-individual-rules/print-statements/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/print-statements/before.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-bec2cb81
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in examples/01-individual-rules/print-statements/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/print-statements/before.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a2e64792
+    name: Fix wildcard-imports issues
+    description: Resolve 3 wildcard-imports issues in examples/01-individual-rules/relative-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/relative-imports/after.py
+    rule_id: wildcard-imports
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-4cef4c7a
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/01-individual-rules/relative-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/relative-imports/after.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d2c3e43b
+    name: Fix unused-imports issues
+    description: Resolve 8 unused-imports issues in examples/01-individual-rules/relative-imports/after.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/relative-imports/after.py
+    rule_id: unused-imports
+    count: 8
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c0780edb
+    name: Fix relative-imports issues
+    description: Resolve 16 relative-imports issues in examples/01-individual-rules/relative-imports/before.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/01-individual-rules/relative-imports/before.py
+    rule_id: relative-imports
+    count: 16
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7aa3be91
+    name: Fix wildcard-imports issues
+    description: Resolve 3 wildcard-imports issues in examples/01-individual-rules/relative-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/relative-imports/before.py
+    rule_id: wildcard-imports
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-87e8421d
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/01-individual-rules/relative-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/relative-imports/before.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-6ceca6cd
+    name: Fix unused-imports issues
+    description: Resolve 8 unused-imports issues in examples/01-individual-rules/relative-imports/before.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/relative-imports/before.py
+    rule_id: unused-imports
+    count: 8
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9ee30c8e
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in examples/01-individual-rules/sorted-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/sorted-imports/after.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7bd7e33c
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/01-individual-rules/sorted-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/sorted-imports/after.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c8d2b79e
+    name: Fix unused-imports issues
+    description: Resolve 14 unused-imports issues in examples/01-individual-rules/sorted-imports/after.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/01-individual-rules/sorted-imports/after.py
+    rule_id: unused-imports
+    count: 14
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cc0d8678
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in examples/01-individual-rules/sorted-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/sorted-imports/before.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f45edd2b
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/01-individual-rules/sorted-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/sorted-imports/before.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-64105d2e
+    name: Fix unused-imports issues
+    description: Resolve 14 unused-imports issues in examples/01-individual-rules/sorted-imports/before.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/01-individual-rules/sorted-imports/before.py
+    rule_id: unused-imports
+    count: 14
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ae74ef07
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/01-individual-rules/string-concat/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/string-concat/after.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-91f8cb20
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/01-individual-rules/string-concat/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/string-concat/before.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8f7076da
+    name: Fix string-concat issues
+    description: Resolve 5 string-concat issues in examples/01-individual-rules/string-concat/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/string-concat/before.py
+    rule_id: string-concat
+    count: 5
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-42141651
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in examples/01-individual-rules/unused-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/unused-imports/before.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0f5d1f57
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in examples/01-individual-rules/wildcard-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/wildcard-imports/after.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f9a73874
+    name: Fix duplicate-imports issues
+    description: Resolve 6 duplicate-imports issues in examples/01-individual-rules/wildcard-imports/after.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/wildcard-imports/after.py
+    rule_id: duplicate-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8fd5dae2
+    name: Fix wildcard-imports issues
+    description: Resolve 9 wildcard-imports issues in examples/01-individual-rules/wildcard-imports/after.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/wildcard-imports/after.py
+    rule_id: wildcard-imports
+    count: 9
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a9282a1f
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/01-individual-rules/wildcard-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/wildcard-imports/after.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-efb6b7e2
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in examples/01-individual-rules/wildcard-imports/after.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/wildcard-imports/after.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-00a3f06d
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in examples/01-individual-rules/wildcard-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/wildcard-imports/before.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-55266c45
+    name: Fix duplicate-imports issues
+    description: Resolve 6 duplicate-imports issues in examples/01-individual-rules/wildcard-imports/before.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/wildcard-imports/before.py
+    rule_id: duplicate-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-dec18fad
+    name: Fix wildcard-imports issues
+    description: Resolve 9 wildcard-imports issues in examples/01-individual-rules/wildcard-imports/before.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/01-individual-rules/wildcard-imports/before.py
+    rule_id: wildcard-imports
+    count: 9
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-436f3f9d
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/01-individual-rules/wildcard-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/wildcard-imports/before.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a465f85b
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in examples/01-individual-rules/wildcard-imports/before.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/01-individual-rules/wildcard-imports/before.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7b7ddd05
+    name: Fix relative-imports issues
+    description: Resolve 10 relative-imports issues in examples/02-multiple-rules/messy_module.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/02-multiple-rules/messy_module.py
+    rule_id: relative-imports
+    count: 10
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a3daf553
+    name: Fix smart-return-type issues
+    description: Resolve 3 smart-return-type issues in examples/02-multiple-rules/messy_module.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/02-multiple-rules/messy_module.py
+    rule_id: smart-return-type
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-08d58ab6
+    name: Fix string-concat issues
+    description: Resolve 7 string-concat issues in examples/02-multiple-rules/messy_module.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/02-multiple-rules/messy_module.py
+    rule_id: string-concat
+    count: 7
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-16e09896
+    name: Fix unused-imports issues
+    description: Resolve 24 unused-imports issues in examples/02-multiple-rules/messy_module.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/02-multiple-rules/messy_module.py
+    rule_id: unused-imports
+    count: 24
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e0e2d8d3
+    name: Fix relative-imports issues
+    description: Resolve 4 relative-imports issues in examples/03-output-formats/sample_code.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - examples/03-output-formats/sample_code.py
+    rule_id: relative-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7a0af27c
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in examples/03-output-formats/sample_code.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/03-output-formats/sample_code.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-725a26b4
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in examples/03-output-formats/sample_code.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/03-output-formats/sample_code.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c376c43d
+    name: Fix unused-imports issues
+    description: Resolve 12 unused-imports issues in examples/03-output-formats/sample_code.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - examples/03-output-formats/sample_code.py
+    rule_id: unused-imports
+    count: 12
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cefb0cd0
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in examples/04-custom-rules/custom_rules/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/04-custom-rules/custom_rules/__init__.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e54a5b66
+    name: Fix smart-return-type issues
+    description: Resolve 4 smart-return-type issues in examples/06-api-usage/example.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - examples/06-api-usage/example.py
+    rule_id: smart-return-type
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-70a06a1a
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in examples/06-api-usage/example.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/06-api-usage/example.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-174738fc
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in examples/06-api-usage/example.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/06-api-usage/example.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f3bf766d
+    name: Fix llm-hallucinations issues
+    description: Resolve 1 llm-hallucinations issues in examples/06-api-usage/example.py
+    task_type: bugfix
+    priority: critical
+    estimate: 1d
+    files:
+    - examples/06-api-usage/example.py
+    rule_id: llm-hallucinations
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ced904ab
+    name: Fix magic-numbers issues
+    description: Resolve 6 magic-numbers issues in examples/06-api-usage/example.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/06-api-usage/example.py
+    rule_id: magic-numbers
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-3af627ed
+    name: Fix ai-boilerplate issues
+    description: Resolve 2 ai-boilerplate issues in examples/06-api-usage/example.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/06-api-usage/example.py
+    rule_id: ai-boilerplate
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8b59d371
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in examples/generate_examples.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/generate_examples.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-84cb419e
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in examples/run_examples.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/run_examples.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-278ef2b0
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in examples/run_examples.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/run_examples.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2dc37273
+    name: Fix ai-boilerplate issues
+    description: Resolve 2 ai-boilerplate issues in examples/run_examples.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/run_examples.py
+    rule_id: ai-boilerplate
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-abbade75
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in examples/sample-project/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/cli.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cecef1df
+    name: Fix smart-return-type issues
+    description: Resolve 3 smart-return-type issues in examples/sample-project/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/cli.py
+    rule_id: smart-return-type
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a7ba4dbb
+    name: Fix string-concat issues
+    description: Resolve 7 string-concat issues in examples/sample-project/cli.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - examples/sample-project/cli.py
+    rule_id: string-concat
+    count: 7
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2de86a57
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in examples/sample-project/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - examples/sample-project/cli.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cbafd961
+    name: Fix ai-boilerplate issues
+    description: Resolve 1 ai-boilerplate issues in examples/sample-project/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/cli.py
+    rule_id: ai-boilerplate
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e6121711
+    name: Fix wildcard-imports issues
+    description: Resolve 3 wildcard-imports issues in examples/sample-project/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/core.py
+    rule_id: wildcard-imports
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-5a5bf7e1
+    name: Fix smart-return-type issues
+    description: Resolve 4 smart-return-type issues in examples/sample-project/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - examples/sample-project/core.py
+    rule_id: smart-return-type
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-15e3961b
+    name: Fix string-concat issues
+    description: Resolve 3 string-concat issues in examples/sample-project/core.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/core.py
+    rule_id: string-concat
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-697d9c38
+    name: Fix smart-return-type issues
+    description: Resolve 3 smart-return-type issues in examples/sample-project/models.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/models.py
+    rule_id: smart-return-type
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-3872e251
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in examples/sample-project/models.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/models.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-486ac306
+    name: Fix smart-return-type issues
+    description: Resolve 4 smart-return-type issues in examples/sample-project/utils.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - examples/sample-project/utils.py
+    rule_id: smart-return-type
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d2629c69
+    name: Fix string-concat issues
+    description: Resolve 3 string-concat issues in examples/sample-project/utils.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - examples/sample-project/utils.py
+    rule_id: string-concat
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8dcd309d
+    name: Fix string-concat issues
+    description: Resolve 9 string-concat issues in src/prefact/autonomous.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/autonomous.py
+    rule_id: string-concat
+    count: 9
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d724da7f
+    name: Fix unused-imports issues
+    description: Resolve 10 unused-imports issues in src/prefact/autonomous.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/autonomous.py
+    rule_id: unused-imports
+    count: 10
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a7f2cee8
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/cli.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a0b0d439
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/cli.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d7787f83
+    name: Fix ai-boilerplate issues
+    description: Resolve 1 ai-boilerplate issues in src/prefact/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/cli.py
+    rule_id: ai-boilerplate
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c8c68ad9
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/config.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/config.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f1dc440b
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/config.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/config.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a125ae3a
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/config_extended.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/config_extended.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-743317da
+    name: Fix magic-numbers issues
+    description: Resolve 2 magic-numbers issues in src/prefact/config_extended.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/config_extended.py
+    rule_id: magic-numbers
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-567f430c
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/engine.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/engine.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2e3f5471
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in src/prefact/fixer.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/fixer.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f8c0c326
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/fixer.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/fixer.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cb6e6df9
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in src/prefact/git_hooks.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/git_hooks.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cc6e4430
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in src/prefact/git_hooks.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/git_hooks.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-81d2165c
+    name: Fix ai-boilerplate issues
+    description: Resolve 2 ai-boilerplate issues in src/prefact/git_hooks.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/git_hooks.py
+    rule_id: ai-boilerplate
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-00517738
+    name: Fix smart-return-type issues
+    description: Resolve 4 smart-return-type issues in src/prefact/logging.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/logging.py
+    rule_id: smart-return-type
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-6b47cff0
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/logging.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/logging.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7bd1f986
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/models.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/models.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e6cf1eb3
+    name: Fix smart-return-type issues
+    description: Resolve 6 smart-return-type issues in src/prefact/performance/cache.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/performance/cache.py
+    rule_id: smart-return-type
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-38c5eb42
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in src/prefact/performance/cache.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/cache.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-12e03e69
+    name: Fix unused-imports issues
+    description: Resolve 8 unused-imports issues in src/prefact/performance/cache.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/performance/cache.py
+    rule_id: unused-imports
+    count: 8
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-53162289
+    name: Fix magic-numbers issues
+    description: Resolve 2 magic-numbers issues in src/prefact/performance/cache.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/cache.py
+    rule_id: magic-numbers
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9aa919bc
+    name: Fix smart-return-type issues
+    description: Resolve 5 smart-return-type issues in src/prefact/performance/parallel.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/performance/parallel.py
+    rule_id: smart-return-type
+    count: 5
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8142b3c5
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in src/prefact/performance/parallel.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/parallel.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-606216db
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/performance/parallel.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/performance/parallel.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7ee8f0ef
+    name: Fix duplicate-imports issues
+    description: Resolve 4 duplicate-imports issues in src/prefact/plugins/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/plugins/__init__.py
+    rule_id: duplicate-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-b2fb9f0b
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in src/prefact/plugins/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/plugins/__init__.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-32e41cd5
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in src/prefact/plugins/__init__.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/plugins/__init__.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-36c4092a
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/reporters/console.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/reporters/console.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-5bc52af6
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in src/prefact/reporters/json_reporter.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/reporters/json_reporter.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-eb8d091c
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/reporters/json_reporter.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/reporters/json_reporter.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-48240d17
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/__init__.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-60197482
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/rules/ai_boilerplate.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/ai_boilerplate.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7a5bf382
+    name: Fix ai-boilerplate issues
+    description: Resolve 2 ai-boilerplate issues in src/prefact/rules/ai_boilerplate.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/ai_boilerplate.py
+    rule_id: ai-boilerplate
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e6c1f103
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/autoflake_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/autoflake_based.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-1f499a4a
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/rules/autoflake_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/autoflake_based.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a3166b4a
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in src/prefact/rules/benchmark.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/benchmark.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-4f278902
+    name: Fix string-concat issues
+    description: Resolve 3 string-concat issues in src/prefact/rules/benchmark.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/benchmark.py
+    rule_id: string-concat
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-68ac49fc
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in src/prefact/rules/benchmark.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/benchmark.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-05c02e79
+    name: Fix ai-boilerplate issues
+    description: Resolve 2 ai-boilerplate issues in src/prefact/rules/benchmark.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/benchmark.py
+    rule_id: ai-boilerplate
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-facaf445
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/rules/composite_factory.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/composite_factory.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0a68ccfd
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in src/prefact/rules/composite_rules.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/composite_rules.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-13ac6579
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/duplicate_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/duplicate_imports.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7734659e
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in src/prefact/rules/import_linter_based.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/import_linter_based.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-3d5a1915
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/rules/import_linter_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/import_linter_based.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2f2a9221
+    name: Fix string-concat issues
+    description: Resolve 9 string-concat issues in src/prefact/rules/importchecker_based.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/importchecker_based.py
+    rule_id: string-concat
+    count: 9
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7d58a4b6
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/rules/importchecker_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/importchecker_based.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-131fbc36
+    name: Fix string-concat issues
+    description: Resolve 5 string-concat issues in src/prefact/rules/isort_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/isort_based.py
+    rule_id: string-concat
+    count: 5
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-458db142
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/rules/isort_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/isort_based.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2f8b17e3
+    name: Fix magic-numbers issues
+    description: Resolve 3 magic-numbers issues in src/prefact/rules/isort_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/isort_based.py
+    rule_id: magic-numbers
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-dad85add
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/llm_generated_code.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/llm_generated_code.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8aa902e0
+    name: Fix unused-imports issues
+    description: Resolve 6 unused-imports issues in src/prefact/rules/llm_hallucinations.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/llm_hallucinations.py
+    rule_id: unused-imports
+    count: 6
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f64489cc
+    name: Fix llm-hallucinations issues
+    description: Resolve 7 llm-hallucinations issues in src/prefact/rules/llm_hallucinations.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/llm_hallucinations.py
+    rule_id: llm-hallucinations
+    count: 7
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-277e8b8f
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/magic_numbers.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/magic_numbers.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9f7d86b9
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in src/prefact/rules/migration.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/migration.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8f1b147c
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/migration.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/migration.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-257a5ae7
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/mypy_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/mypy_based.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e03eed7f
+    name: Fix duplicate-imports issues
+    description: Resolve 4 duplicate-imports issues in src/prefact/rules/mypy_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/mypy_based.py
+    rule_id: duplicate-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-56ef4f69
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/print_statements.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/print_statements.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-12ffcc71
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in src/prefact/rules/pylint_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/pylint_based.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ee28bc63
+    name: Fix unused-imports issues
+    description: Resolve 8 unused-imports issues in src/prefact/rules/pylint_based.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/pylint_based.py
+    rule_id: unused-imports
+    count: 8
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-89cf2ac3
+    name: Fix unused-imports issues
+    description: Resolve 8 unused-imports issues in src/prefact/rules/registry.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/rules/registry.py
+    rule_id: unused-imports
+    count: 8
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-349127ce
+    name: Fix string-concat issues
+    description: Resolve 3 string-concat issues in src/prefact/rules/relative_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/relative_imports.py
+    rule_id: string-concat
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cde03f37
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/relative_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/relative_imports.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ba72d983
+    name: Fix llm-hallucinations issues
+    description: Resolve 1 llm-hallucinations issues in src/prefact/rules/relative_imports.py
+    task_type: bugfix
+    priority: critical
+    estimate: 1d
+    files:
+    - src/prefact/rules/relative_imports.py
+    rule_id: llm-hallucinations
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-34a2bf6e
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/rules/ruff_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/ruff_based.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0fbf05e2
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/sorted_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/sorted_imports.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-238dae90
+    name: Fix magic-numbers issues
+    description: Resolve 1 magic-numbers issues in src/prefact/rules/sorted_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/sorted_imports.py
+    rule_id: magic-numbers
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-570b6e00
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/strategies.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/strategies.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-aa92c01c
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in src/prefact/rules/string_concat.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/string_concat.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-99263596
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/string_concat.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/string_concat.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-22e7fcbf
+    name: Fix smart-return-type issues
+    description: Resolve 2 smart-return-type issues in src/prefact/rules/string_transformations.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/string_transformations.py
+    rule_id: smart-return-type
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7c04a88f
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/rules/string_transformations.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/rules/string_transformations.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-83c9d2ab
+    name: Fix magic-numbers issues
+    description: Resolve 1 magic-numbers issues in src/prefact/rules/string_transformations.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/string_transformations.py
+    rule_id: magic-numbers
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ac97ab7a
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/type_hints.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/type_hints.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9508f720
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in src/prefact/rules/unimport_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unimport_based.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-76cb20e3
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/unimport_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unimport_based.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0c3365f2
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/rules/unimport_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unimport_based.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-fa84f94a
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in src/prefact/rules/unused_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unused_imports.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7a513113
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/unused_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unused_imports.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9300959f
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/rules/wildcard_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/wildcard_imports.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ace03dcb
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in src/prefact/scanner.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/scanner.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d5b7fa6d
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/scanner.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/scanner.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c1ba2cf8
+    name: Fix unused-imports issues
+    description: Resolve 2 unused-imports issues in src/prefact/validator.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/validator.py
+    rule_id: unused-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-474934b5
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in src/prefact/autonomous.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
