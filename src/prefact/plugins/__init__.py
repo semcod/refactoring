@@ -6,7 +6,6 @@ entry points for third-party plugins and dynamic module loading for user plugins
 
 import importlib
 import importlib.metadata
-import importlib.util
 from pathlib import Path
 from typing import Dict, List, Optional, Type
 

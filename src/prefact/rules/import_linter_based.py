@@ -243,7 +243,6 @@ class ImportLinterNoRelative(BaseRule):
     
     def fix(self, path: Path, source: str, issues: List[Issue]) -> tuple[str, List[Fix]]:
         # Delegate to relative imports fixer
-        from prefact.rules.relative_imports import RelativeToAbsoluteImports
         fixer = RelativeToAbsoluteImports(self.config)
         return fixer.fix(path, source, issues)
     
