@@ -24,6 +24,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.progress import Progress, TaskID
 
+from prefact import __version__
 from prefact.config import Config
 from prefact.config_extended import ConfigGenerator, ExtendedConfig
 from prefact.engine import RefactoringEngine
@@ -48,7 +49,7 @@ class AutonomousRefact:
         
     def run_autonomous(self) -> bool:
         """Run autonomous prefact process."""
-        console.print(Panel.fit("🤖 Autonomous Refact Mode", style="bold blue"))
+        console.print(Panel.fit(f"🤖 Autonomous Refact Mode\nVersion: {__version__}", style="bold blue"))
         
         try:
             # Step 1: Initialize if needed
@@ -215,11 +216,22 @@ class AutonomousRefact:
                 # Use parallel processing if enabled
                 if config.tools.get('parallel', False) and len(files_to_scan) > 1:
                     max_workers = min(config.performance.get('max_workers', 4), len(files_to_scan))
+                    console.print(f"🚀 Using parallel processing with {max_workers} workers")
                     
                     def scan_file(file_path):
                         file_issues = []
                         try:
+                            # Skip large files (>100KB) for speed
+                            if file_path.stat().st_size > 100 * 1024:
+                                console.print(f"  ⏭️  Skipping large file: {file_path} ({file_path.stat().st_size // 1024}KB)")
+                                return file_path, file_issues
+                            
                             source = file_path.read_text(encoding="utf-8")
+                            
+                            # Skip files with no actual code (mostly comments/strings)
+                            if len(source.strip()) < 50:
+                                return file_path, file_issues
+                            
                             for rule in scanner._rules:
                                 file_issues.extend(rule.scan_file(file_path, source))
                         except Exception as e:
@@ -250,7 +262,17 @@ class AutonomousRefact:
                         
                         # Scan the file
                         try:
+                            # Skip large files (>100KB) for speed
+                            if file_path.stat().st_size > 100 * 1024:
+                                console.print(f"  ⏭️  Skipping large file: {file_path} ({file_path.stat().st_size // 1024}KB)")
+                                continue
+                            
                             source = file_path.read_text(encoding="utf-8")
+                            
+                            # Skip files with no actual code (mostly comments/strings)
+                            if len(source.strip()) < 50:
+                                continue
+                            
                             for rule in scanner._rules:
                                 file_issues = rule.scan_file(file_path, source)
                                 issues_found.extend(file_issues)

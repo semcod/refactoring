@@ -12,6 +12,7 @@ exclude:
 - '**/dist/**'
 - '**/*.egg-info/**'
 - '**/tests/**'
+- '**/test*/**'
 - '**/examples/**'
 tools:
   parallel: true
