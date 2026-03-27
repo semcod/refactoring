@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semcod_refactoring"
+version = "0.0.5"
+authors = [
+    {name = "Semcod Team", email = "team@semcod.com"},
+    {name = "Tom Sapletta", email = "tom@sapletta.com"},
+]
+description = "A package for code analysis and refactoring tools"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "click>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black",
+    "flake8",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/semcod/refactoring"
+Repository = "https://github.com/semcod/refactoring"
+Issues = "https://github.com/semcod/refactoring/issues"
+
+[project.scripts]
+semcod-refactor = "refactoring.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["refactoring*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.rst"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

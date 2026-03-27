@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2026-03-27
+
+### Other
+- Update .idea/inspectionProfiles/Project_Default.xml
+- Update .idea/inspectionProfiles/profiles_settings.xml
+- Update .idea/misc.xml
+- Update .idea/modules.xml
+- Update .idea/refactoring.iml
+- Update .idea/vcs.xml
+
 ## [0.0.4] - 2026-03-27
 
 ## [0.0.3] - 2026-03-27
