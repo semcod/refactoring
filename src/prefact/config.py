@@ -57,25 +57,43 @@ class Config:
     def from_yaml(cls, path: Path) -> "Config":
         """Load configuration from a YAML file."""
         raw = yaml.safe_load(path.read_text()) or {}
+        
+        # Extract and parse rules
+        rules = cls._parse_rules(raw.pop("rules", {}))
+        
+        # Get default patterns
+        defaults = cls._get_default_patterns()
+        
+        return cls(
+            project_root=Path(raw.pop("project_root", Path.cwd())),
+            package_name=raw.pop("package_name", ""),
+            include=raw.pop("include", defaults["include"]),
+            exclude=raw.pop("exclude", defaults["exclude"]),
+            rules=rules,
+            **{k: v for k, v in raw.items() if k in cls.__dataclass_fields__},
+        )
+    
+    @classmethod
+    def _parse_rules(cls, rules_raw: dict) -> dict[str, RuleConfig]:
+        """Parse rules configuration from YAML."""
         rules = {}
-        for rule_id, rule_raw in raw.pop("rules", {}).items():
+        for rule_id, rule_raw in rules_raw.items():
             if isinstance(rule_raw, bool):
                 rules[rule_id] = RuleConfig(enabled=rule_raw)
             elif isinstance(rule_raw, dict):
                 rules[rule_id] = RuleConfig(**rule_raw)
-        defaults_include = ["**/*.py"]
-        defaults_exclude = [
-            "**/__pycache__/**", "**/node_modules/**", "**/.venv/**",
-            "**/venv/**", "**/.git/**", "**/build/**", "**/dist/**", "**/*.egg-info/**",
-        ]
-        return cls(
-            project_root=Path(raw.pop("project_root", Path.cwd())),
-            package_name=raw.pop("package_name", ""),
-            include=raw.pop("include", defaults_include),
-            exclude=raw.pop("exclude", defaults_exclude),
-            rules=rules,
-            **{k: v for k, v in raw.items() if k in cls.__dataclass_fields__},
-        )
+        return rules
+    
+    @classmethod
+    def _get_default_patterns(cls) -> dict[str, list[str]]:
+        """Get default include/exclude patterns."""
+        return {
+            "include": ["**/*.py"],
+            "exclude": [
+                "**/__pycache__/**", "**/node_modules/**", "**/.venv/**",
+                "**/venv/**", "**/.git/**", "**/build/**", "**/dist/**", "**/*.egg-info/**",
+            ],
+        }
 
     def rule_enabled(self, rule_id: str) -> bool:
         rc = self.rules.get(rule_id)
@@ -104,41 +122,76 @@ class Config:
         if self.package_name:
             return self.package_name
 
+        # Try different detection strategies in order
+        strategies = [
+            self._detect_from_pyproject,
+            self._detect_from_src_layout,
+            self._detect_from_root_layout
+        ]
+        
+        for strategy in strategies:
+            name = strategy()
+            if name:
+                self.package_name = name
+                return name
+        
+        return ""
+    
+    def _detect_from_pyproject(self) -> Optional[str]:
+        """Detect package name from pyproject.toml."""
         pyproject = self.project_root / "pyproject.toml"
-        if pyproject.exists():
+        if not pyproject.exists():
+            return None
+        
+        # Try different TOML libraries
+        tomllib = self._get_tomllib()
+        if tomllib is None:
+            return None
+        
+        try:
+            data = tomllib.loads(pyproject.read_text())
+            name = data.get("project", {}).get("name", "")
+            if name:
+                return name.replace("-", "_")
+        except Exception:
+            pass
+        
+        return None
+    
+    def _get_tomllib(self) -> Optional[Any]:
+        """Get available TOML library."""
+        try:
+            import tomllib
+            return tomllib
+        except ModuleNotFoundError:
             try:
-                import tomllib
+                import tomli as tomllib  # type: ignore[no-redef]
+                return tomllib
             except ModuleNotFoundError:
-                try:
-                    import tomli as tomllib  # type: ignore[no-redef]
-                except ModuleNotFoundError:
-                    tomllib = None  # type: ignore[assignment]
-            if tomllib is not None:
-                try:
-                    data = tomllib.loads(pyproject.read_text())
-                    name = data.get("project", {}).get("name", "")
-                    if name:
-                        self.package_name = name.replace("-", "_")
-                        return self.package_name
-                except Exception:
-                    pass
-
-        # Fallback: look for src/<pkg>/__init__.py
+                return None
+    
+    def _detect_from_src_layout(self) -> Optional[str]:
+        """Detect package name from src/ layout."""
         src = self.project_root / "src"
-        if src.is_dir():
-            for child in src.iterdir():
-                if child.is_dir() and (child / "__init__.py").exists():
-                    self.package_name = child.name
-                    return self.package_name
-
-        # Fallback: top-level package directory
+        if not src.is_dir():
+            return None
+        
+        for child in src.iterdir():
+            if child.is_dir() and (child / "__init__.py").exists():
+                return child.name
+        
+        return None
+    
+    def _detect_from_root_layout(self) -> Optional[str]:
+        """Detect package name from root layout."""
+        excluded_dirs = {"tests", "test", "docs", "scripts"}
+        
         for child in self.project_root.iterdir():
             if (
                 child.is_dir()
                 and (child / "__init__.py").exists()
-                and child.name not in ("tests", "test", "docs", "scripts")
+                and child.name not in excluded_dirs
             ):
-                self.package_name = child.name
-                return self.package_name
-
-        return ""
+                return child.name
+        
+        return None

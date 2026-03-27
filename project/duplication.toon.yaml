@@ -1,0 +1,275 @@
+# redup/duplication | 38 groups | 64f 11059L | 2026-03-27
+
+SUMMARY:
+  files_scanned: 64
+  total_lines:   11059
+  dup_groups:    38
+  dup_fragments: 106
+  saved_lines:   424
+  scan_ms:       2472
+
+DUPLICATES[38] (ranked by impact):
+  [1343b32626b1ecd1] ! STRU  validate  L=10 N=8 saved=70 sim=1.00
+      src/prefact/rules/isort_based.py:431-440  (validate)
+      src/prefact/rules/unimport_based.py:293-302  (validate)
+      src/prefact/rules/unimport_based.py:360-369  (validate)
+      src/prefact/rules/importchecker_based.py:245-254  (validate)
+      src/prefact/rules/autoflake_based.py:369-378  (validate)
+      src/prefact/rules/llm_specific.py:324-332  (validate)
+      src/prefact/rules/llm_specific.py:497-505  (validate)
+      src/prefact/rules/llm_specific.py:547-555  (validate)
+  [fb8a4c52c4513ef3] ! EXAC  fix  L=3 N=14 saved=39 sim=1.00
+      src/prefact/rules/ruff_based.py:92-94  (fix)
+      src/prefact/rules/ruff_based.py:304-307  (fix)
+      src/prefact/rules/import_linter_based.py:166-169  (fix)
+      src/prefact/rules/import_linter_based.py:305-307  (fix)
+      examples/04-custom-rules/custom_rules/no_todo_rule.py:46-48  (fix)
+      examples/04-custom-rules/custom_rules/no_todo_rule.py:94-96  (fix)
+      src/prefact/rules/mypy_based.py:142-145  (fix)
+      src/prefact/rules/mypy_based.py:206-208  (fix)
+      src/prefact/rules/importchecker_based.py:364-366  (fix)
+      src/prefact/rules/importchecker_based.py:472-474  (fix)
+      src/prefact/rules/llm_specific.py:199-201  (fix)
+      src/prefact/rules/llm_specific.py:320-322  (fix)
+      src/prefact/rules/llm_specific.py:493-495  (fix)
+      src/prefact/rules/llm_specific.py:543-545  (fix)
+  [fd9736dd4e8df736] ! STRU  fix  L=18 N=3 saved=36 sim=1.00
+      src/prefact/rules/unimport_based.py:183-200  (fix)
+      src/prefact/rules/unimport_based.py:274-291  (fix)
+      src/prefact/rules/unimport_based.py:407-424  (fix)
+  [84fe5054e8e5939c] ! STRU  fix  L=18 N=3 saved=36 sim=1.00
+      src/prefact/rules/autoflake_based.py:190-207  (fix)
+      src/prefact/rules/autoflake_based.py:278-295  (fix)
+      src/prefact/rules/autoflake_based.py:421-438  (fix)
+  [fe7129d46d801afa]   STRU  validate  L=10 N=4 saved=30 sim=1.00
+      src/prefact/rules/import_linter_based.py:171-180  (validate)
+      src/prefact/rules/import_linter_based.py:253-262  (validate)
+      src/prefact/rules/import_linter_based.py:309-317  (validate)
+      src/prefact/rules/import_linter_based.py:395-403  (validate)
+  [22f344b07f4e26ff]   STRU  get_cache  L=5 N=6 saved=25 sim=1.00
+      src/prefact/performance/cache.py:268-272  (get_cache)
+      src/prefact/performance/cache.py:275-279  (get_scan_cache)
+      src/prefact/performance/cache.py:282-286  (get_config_cache)
+      src/prefact/performance/cache.py:289-293  (get_rule_cache)
+      src/prefact/performance/cache.py:296-300  (get_hash_cache)
+      src/prefact/logging.py:281-285  (get_logger)
+  [9e61a0169b46b783]   EXAC  validate  L=16 N=2 saved=16 sim=1.00
+      src/prefact/rules/composite.py:313-328  (validate)
+      src/prefact/rules/composite.py:389-404  (validate)
+  [9b03faadcb4a354b]   STRU  validate  L=14 N=2 saved=14 sim=1.00
+      src/prefact/rules/pylint_based.py:150-163  (validate)
+      src/prefact/rules/pylint_based.py:210-223  (validate)
+  [7db25b6baa69639e]   EXAC  scan_file  L=6 N=3 saved=12 sim=1.00
+      src/prefact/rules/composite.py:214-219  (scan_file)
+      src/prefact/rules/composite.py:299-304  (scan_file)
+      src/prefact/rules/composite.py:455-458  (scan_file)
+  [4a3cdf885b861207]   EXAC  fix  L=6 N=3 saved=12 sim=1.00
+      src/prefact/rules/composite.py:221-226  (fix)
+      src/prefact/rules/composite.py:306-311  (fix)
+      src/prefact/rules/composite.py:460-463  (fix)
+  [ad988c8760eff899]   EXAC  validate  L=11 N=2 saved=11 sim=1.00
+      examples/04-custom-rules/custom_rules/no_todo_rule.py:50-60  (validate)
+      examples/04-custom-rules/custom_rules/no_todo_rule.py:98-108  (validate)
+  [c245c0aa11f8ea14]   EXAC  validate  L=8 N=2 saved=8 sim=1.00
+      src/prefact/rules/unused_imports.py:133-140  (validate)
+      src/prefact/rules/duplicate_imports.py:70-77  (validate)
+  [8edfe22670ef44e1]   EXAC  process_data  L=8 N=2 saved=8 sim=1.00
+      examples/01-individual-rules/unused-imports/after.py:7-14  (process_data)
+      examples/01-individual-rules/unused-imports/before.py:7-14  (process_data)
+  [06dc55e08866a299]   EXAC  _load_mypy_config  L=8 N=2 saved=8 sim=1.00
+      src/prefact/rules/mypy_based.py:99-106  (_load_mypy_config)
+      src/prefact/rules/mypy_based.py:174-181  (_load_mypy_config)
+  [94f4bfa96465f169]   EXAC  calculate_sum  L=7 N=2 saved=7 sim=1.00
+      examples/sample-project/core.py:13-19  (calculate_sum)
+      examples/03-output-formats/sample_code.py:15-21  (calculate_sum)
+  [52878821d84977d2]   EXAC  __init__  L=6 N=2 saved=6 sim=1.00
+      src/prefact/validator.py:13-18  (__init__)
+      src/prefact/fixer.py:14-19  (__init__)
+  [50fd28cabdf165f6]   EXAC  __init__  L=3 N=3 saved=6 sim=1.00
+      src/prefact/rules/import_linter_based.py:126-128  (__init__)
+      src/prefact/rules/import_linter_based.py:190-192  (__init__)
+      src/prefact/rules/import_linter_based.py:272-274  (__init__)
+  [53efaf6dde1d343f]   EXAC  process_data  L=6 N=2 saved=6 sim=1.00
+      examples/01-individual-rules/print-statements/after.py:3-8  (process_data)
+      examples/01-individual-rules/print-statements/before.py:3-8  (process_data)
+  [17783b0f3fb50cdb]   EXAC  __init__  L=3 N=3 saved=6 sim=1.00
+      src/prefact/rules/pylint_based.py:87-89  (__init__)
+      src/prefact/rules/pylint_based.py:173-175  (__init__)
+      src/prefact/rules/pylint_based.py:245-247  (__init__)
+  [8e18a9671be36cb9]   STRU  get_lazy_registry  L=6 N=2 saved=6 sim=1.00
+      src/prefact/rules/registry.py:178-183  (get_lazy_registry)
+      src/prefact/performance/parallel.py:345-350  (get_performance_monitor)
+  [772c77ab0afca55b]   EXAC  process_user  L=5 N=2 saved=5 sim=1.00
+      examples/01-individual-rules/relative-imports/before.py:11-15  (process_user)
+      examples/01-individual-rules/relative-imports/after.py:11-15  (process_user)
+  [b2a3226830ad4536]   STRU  __init__  L=5 N=2 saved=5 sim=1.00
+      src/prefact/rules/unimport_based.py:221-225  (__init__)
+      src/prefact/rules/unimport_based.py:313-317  (__init__)
+  [641667a4d5a7609f]   EXAC  process  L=4 N=2 saved=4 sim=1.00
+      examples/01-individual-rules/wildcard-imports/after.py:8-11  (process)
+      examples/01-individual-rules/wildcard-imports/before.py:8-11  (process)
+  [d25fff731ecfc648]   EXAC  read_file  L=4 N=2 saved=4 sim=1.00
+      examples/01-individual-rules/unused-imports/after.py:22-25  (read_file)
+      examples/01-individual-rules/unused-imports/before.py:22-25  (read_file)
+  [8c3b4878cda6c2a9]   EXAC  calculate  L=4 N=2 saved=4 sim=1.00
+      examples/01-individual-rules/print-statements/after.py:10-13  (calculate)
+      examples/01-individual-rules/print-statements/before.py:10-13  (calculate)
+  [8dc8b91166039e40]   STRU  helper_function  L=4 N=2 saved=4 sim=1.00
+      examples/sample-project/utils.py:23-26  (helper_function)
+      examples/01-individual-rules/string-concat/before.py:8-11  (format_data)
+  [d45b7d0f286fc4fd]   EXAC  add  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/missing-return-type/after.py:3-5  (add)
+      examples/01-individual-rules/missing-return-type/before.py:3-5  (add)
+  [9baec9052aef7a75]   EXAC  get_user  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/missing-return-type/after.py:7-9  (get_user)
+      examples/01-individual-rules/missing-return-type/before.py:7-9  (get_user)
+  [47c667d00e4443d6]   EXAC  process  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/missing-return-type/after.py:14-16  (process)
+      examples/01-individual-rules/missing-return-type/before.py:14-16  (process)
+  [ced691da4eea9c77]   EXAC  process_data  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/duplicate-imports/after.py:9-11  (process_data)
+      examples/01-individual-rules/duplicate-imports/before.py:12-14  (process_data)
+  [6979933d3c997c8c]   EXAC  process  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/sorted-imports/after.py:11-13  (process)
+      examples/01-individual-rules/sorted-imports/before.py:11-13  (process)
+  [95b3fc542348f5d0]   EXAC  format_timestamp  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/unused-imports/after.py:17-19  (format_timestamp)
+      examples/01-individual-rules/unused-imports/before.py:17-19  (format_timestamp)
+  [bd51f88e17729153]   EXAC  __init__  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/unused-imports/after.py:31-33  (__init__)
+      examples/01-individual-rules/unused-imports/before.py:31-33  (__init__)
+  [77829e64b838d82d]   EXAC  add_data  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/unused-imports/after.py:35-37  (add_data)
+      examples/01-individual-rules/unused-imports/before.py:35-37  (add_data)
+  [8793c3565817b439]   EXAC  get_data  L=3 N=2 saved=3 sim=1.00
+      examples/01-individual-rules/unused-imports/after.py:39-41  (get_data)
+      examples/01-individual-rules/unused-imports/before.py:39-41  (get_data)
+  [53e9ef8f2a396333]   EXAC  __init__  L=3 N=2 saved=3 sim=1.00
+      src/prefact/rules/mypy_based.py:95-97  (__init__)
+      src/prefact/rules/mypy_based.py:170-172  (__init__)
+  [89f4308d864bd180]   EXAC  __init__  L=3 N=2 saved=3 sim=1.00
+      src/prefact/rules/importchecker_based.py:94-96  (__init__)
+      src/prefact/rules/importchecker_based.py:265-267  (__init__)
+  [69ea50b8135e5e78]   EXAC  __init__  L=3 N=2 saved=3 sim=1.00
+      src/prefact/rules/autoflake_based.py:133-135  (__init__)
+      src/prefact/rules/autoflake_based.py:229-231  (__init__)
+
+REFACTOR[38] (ranked by priority):
+  [1] ○ extract_function   → src/prefact/rules/utils/validate.py
+      WHY: 8 occurrences of 10-line block across 5 files — saves 70 lines
+      FILES: src/prefact/rules/autoflake_based.py, src/prefact/rules/importchecker_based.py, src/prefact/rules/isort_based.py, src/prefact/rules/llm_specific.py, src/prefact/rules/unimport_based.py
+  [2] ○ extract_function   → utils/fix.py
+      WHY: 14 occurrences of 3-line block across 6 files — saves 39 lines
+      FILES: examples/04-custom-rules/custom_rules/no_todo_rule.py, src/prefact/rules/import_linter_based.py, src/prefact/rules/importchecker_based.py, src/prefact/rules/llm_specific.py, src/prefact/rules/mypy_based.py +1 more
+  [3] ○ extract_function   → src/prefact/rules/utils/fix.py
+      WHY: 3 occurrences of 18-line block across 1 files — saves 36 lines
+      FILES: src/prefact/rules/unimport_based.py
+  [4] ○ extract_function   → src/prefact/rules/utils/fix.py
+      WHY: 3 occurrences of 18-line block across 1 files — saves 36 lines
+      FILES: src/prefact/rules/autoflake_based.py
+  [5] ○ extract_function   → src/prefact/rules/utils/validate.py
+      WHY: 4 occurrences of 10-line block across 1 files — saves 30 lines
+      FILES: src/prefact/rules/import_linter_based.py
+  [6] ○ extract_function   → src/prefact/utils/get_cache.py
+      WHY: 6 occurrences of 5-line block across 2 files — saves 25 lines
+      FILES: src/prefact/logging.py, src/prefact/performance/cache.py
+  [7] ○ extract_function   → src/prefact/rules/utils/validate.py
+      WHY: 2 occurrences of 16-line block across 1 files — saves 16 lines
+      FILES: src/prefact/rules/composite.py
+  [8] ○ extract_function   → src/prefact/rules/utils/validate.py
+      WHY: 2 occurrences of 14-line block across 1 files — saves 14 lines
+      FILES: src/prefact/rules/pylint_based.py
+  [9] ○ extract_function   → src/prefact/rules/utils/scan_file.py
+      WHY: 3 occurrences of 6-line block across 1 files — saves 12 lines
+      FILES: src/prefact/rules/composite.py
+  [10] ○ extract_function   → src/prefact/rules/utils/fix.py
+      WHY: 3 occurrences of 6-line block across 1 files — saves 12 lines
+      FILES: src/prefact/rules/composite.py
+  [11] ○ extract_function   → examples/04-custom-rules/custom_rules/utils/validate.py
+      WHY: 2 occurrences of 11-line block across 1 files — saves 11 lines
+      FILES: examples/04-custom-rules/custom_rules/no_todo_rule.py
+  [12] ○ extract_function   → src/prefact/rules/utils/validate.py
+      WHY: 2 occurrences of 8-line block across 2 files — saves 8 lines
+      FILES: src/prefact/rules/duplicate_imports.py, src/prefact/rules/unused_imports.py
+  [13] ○ extract_function   → examples/01-individual-rules/unused-imports/utils/process_data.py
+      WHY: 2 occurrences of 8-line block across 2 files — saves 8 lines
+      FILES: examples/01-individual-rules/unused-imports/after.py, examples/01-individual-rules/unused-imports/before.py
+  [14] ○ extract_function   → src/prefact/rules/utils/_load_mypy_config.py
+      WHY: 2 occurrences of 8-line block across 1 files — saves 8 lines
+      FILES: src/prefact/rules/mypy_based.py
+  [15] ○ extract_function   → examples/utils/calculate_sum.py
+      WHY: 2 occurrences of 7-line block across 2 files — saves 7 lines
+      FILES: examples/03-output-formats/sample_code.py, examples/sample-project/core.py
+  [16] ○ extract_function   → src/prefact/utils/__init__.py
+      WHY: 2 occurrences of 6-line block across 2 files — saves 6 lines
+      FILES: src/prefact/fixer.py, src/prefact/validator.py
+  [17] ○ extract_function   → src/prefact/rules/utils/__init__.py
+      WHY: 3 occurrences of 3-line block across 1 files — saves 6 lines
+      FILES: src/prefact/rules/import_linter_based.py
+  [18] ○ extract_function   → examples/01-individual-rules/print-statements/utils/process_data.py
+      WHY: 2 occurrences of 6-line block across 2 files — saves 6 lines
+      FILES: examples/01-individual-rules/print-statements/after.py, examples/01-individual-rules/print-statements/before.py
+  [19] ○ extract_function   → src/prefact/rules/utils/__init__.py
+      WHY: 3 occurrences of 3-line block across 1 files — saves 6 lines
+      FILES: src/prefact/rules/pylint_based.py
+  [20] ○ extract_function   → src/prefact/utils/get_lazy_registry.py
+      WHY: 2 occurrences of 6-line block across 2 files — saves 6 lines
+      FILES: src/prefact/performance/parallel.py, src/prefact/rules/registry.py
+  [21] ○ extract_function   → examples/01-individual-rules/relative-imports/utils/process_user.py
+      WHY: 2 occurrences of 5-line block across 2 files — saves 5 lines
+      FILES: examples/01-individual-rules/relative-imports/after.py, examples/01-individual-rules/relative-imports/before.py
+  [22] ○ extract_function   → src/prefact/rules/utils/__init__.py
+      WHY: 2 occurrences of 5-line block across 1 files — saves 5 lines
+      FILES: src/prefact/rules/unimport_based.py
+  [23] ○ extract_function   → examples/01-individual-rules/wildcard-imports/utils/process.py
+      WHY: 2 occurrences of 4-line block across 2 files — saves 4 lines
+      FILES: examples/01-individual-rules/wildcard-imports/after.py, examples/01-individual-rules/wildcard-imports/before.py
+  [24] ○ extract_function   → examples/01-individual-rules/unused-imports/utils/read_file.py
+      WHY: 2 occurrences of 4-line block across 2 files — saves 4 lines
+      FILES: examples/01-individual-rules/unused-imports/after.py, examples/01-individual-rules/unused-imports/before.py
+  [25] ○ extract_function   → examples/01-individual-rules/print-statements/utils/calculate.py
+      WHY: 2 occurrences of 4-line block across 2 files — saves 4 lines
+      FILES: examples/01-individual-rules/print-statements/after.py, examples/01-individual-rules/print-statements/before.py
+  [26] ○ extract_function   → examples/utils/helper_function.py
+      WHY: 2 occurrences of 4-line block across 2 files — saves 4 lines
+      FILES: examples/01-individual-rules/string-concat/before.py, examples/sample-project/utils.py
+  [27] ○ extract_function   → examples/01-individual-rules/missing-return-type/utils/add.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/missing-return-type/after.py, examples/01-individual-rules/missing-return-type/before.py
+  [28] ○ extract_function   → examples/01-individual-rules/missing-return-type/utils/get_user.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/missing-return-type/after.py, examples/01-individual-rules/missing-return-type/before.py
+  [29] ○ extract_class      → examples/01-individual-rules/missing-return-type/utils/process.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/missing-return-type/after.py, examples/01-individual-rules/missing-return-type/before.py
+  [30] ○ extract_function   → examples/01-individual-rules/duplicate-imports/utils/process_data.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/duplicate-imports/after.py, examples/01-individual-rules/duplicate-imports/before.py
+  [31] ○ extract_function   → examples/01-individual-rules/sorted-imports/utils/process.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/sorted-imports/after.py, examples/01-individual-rules/sorted-imports/before.py
+  [32] ○ extract_function   → examples/01-individual-rules/unused-imports/utils/format_timestamp.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/unused-imports/after.py, examples/01-individual-rules/unused-imports/before.py
+  [33] ○ extract_class      → examples/01-individual-rules/unused-imports/utils/__init__.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/unused-imports/after.py, examples/01-individual-rules/unused-imports/before.py
+  [34] ○ extract_class      → examples/01-individual-rules/unused-imports/utils/add_data.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/unused-imports/after.py, examples/01-individual-rules/unused-imports/before.py
+  [35] ○ extract_class      → examples/01-individual-rules/unused-imports/utils/get_data.py
+      WHY: 2 occurrences of 3-line block across 2 files — saves 3 lines
+      FILES: examples/01-individual-rules/unused-imports/after.py, examples/01-individual-rules/unused-imports/before.py
+  [36] ○ extract_function   → src/prefact/rules/utils/__init__.py
+      WHY: 2 occurrences of 3-line block across 1 files — saves 3 lines
+      FILES: src/prefact/rules/mypy_based.py
+  [37] ○ extract_function   → src/prefact/rules/utils/__init__.py
+      WHY: 2 occurrences of 3-line block across 1 files — saves 3 lines
+      FILES: src/prefact/rules/importchecker_based.py
+  [38] ○ extract_function   → src/prefact/rules/utils/__init__.py
+      WHY: 2 occurrences of 3-line block across 1 files — saves 3 lines
+      FILES: src/prefact/rules/autoflake_based.py
+
+METRICS-TARGET:
+  dup_groups:  38 → 0
+  saved_lines: 424 lines recoverable

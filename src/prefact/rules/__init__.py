@@ -131,8 +131,13 @@ from prefact.rules.import_linter_based import (  # noqa: F401, E402
     ImportLinterIndependence as _il_3,
     ImportLinterCustomArchitecture as _il_4,
 )
-from prefact.rules.composite import (  # noqa: F401, E402
+# Import composite rules from new modules
+from prefact.rules.composite_rules import (  # noqa: F401, E402
     CompositeUnusedImports as _comp_1,
     CompositeImportRules as _comp_2,
     CompositeTypeChecking as _comp_3,
 )
+from prefact.rules.llm_hallucinations import LLMHallucinationRule as _llm_1  # noqa: F401, E402
+from prefact.rules.magic_numbers import MagicNumberRule as _llm_2  # noqa: F401, E402
+from prefact.rules.llm_generated_code import LLMGeneratedCodeRule as _llm_3  # noqa: F401, E402
+from prefact.rules.ai_boilerplate import AIBoilerplateRule as _llm_4  # noqa: F401, E402

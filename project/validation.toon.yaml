@@ -1,0 +1,360 @@
+# vallm batch | 146f | 45✓ 1⚠ 60✗ | 2026-03-27
+
+SUMMARY:
+  scanned: 146  passed: 45 (30.8%)  warnings: 1  errors: 60  unsupported: 41
+
+WARNINGS[1]{path,score}:
+  vscode-extension/src/extension.ts,0.92
+    issues[1]{rule,severity,message,line}:
+      js.import.resolvable,warning,Module 'vscode' not found,1
+
+ERRORS[60]{path,score}:
+  examples/01-individual-rules/relative-imports/after.py,0.57
+    issues[8]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'mypackage.models' not found,3
+      python.import.resolvable,error,Module 'mypackage.utils' not found,4
+      python.import.resolvable,error,Module 'mypackage.config' not found,5
+      python.import.resolvable,error,Module 'mypackage.models' not found,6
+      python.import.resolvable,error,Module 'mypackage.utils' not found,7
+      python.import.resolvable,error,Module 'mypackage' not found,8
+      python.import.resolvable,error,Module 'mypackage.core' not found,22
+      python.import.resolvable,error,Module 'mypackage.utils' not found,26
+  examples/01-individual-rules/relative-imports/before.py,0.57
+    issues[7]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'models' not found,3
+      python.import.resolvable,error,Module 'utils' not found,4
+      python.import.resolvable,error,Module 'config' not found,5
+      python.import.resolvable,error,Module 'models' not found,6
+      python.import.resolvable,error,Module 'utils' not found,7
+      python.import.resolvable,error,Module 'core' not found,22
+      python.import.resolvable,error,Module 'utils' not found,26
+  examples/04-custom-rules/custom_rules/__init__.py,0.57
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'no_todo_rule' not found,4
+  examples/sample-project/core.py,0.57
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'utils' not found,3
+  examples/tests/test_examples.py,0.57
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'examples' not found,11
+  src/prefact/performance/__init__.py,0.57
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.performance.cache' not found,3
+      python.import.resolvable,error,Module 'prefact.performance.parallel' not found,15
+  tests/test_refactoring.py,0.57
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact' not found,11
+  src/prefact/rules/__init__.py,0.63
+    issues[23]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.rules.registry' not found,52
+      python.import.resolvable,error,Module 'prefact.rules.registry' not found,53
+      python.import.resolvable,error,Module 'prefact.rules.registry' not found,54
+      python.import.resolvable,error,Module 'prefact.rules.relative_imports' not found,73
+      python.import.resolvable,error,Module 'prefact.rules.unused_imports' not found,74
+      python.import.resolvable,error,Module 'prefact.rules.duplicate_imports' not found,75
+      python.import.resolvable,error,Module 'prefact.rules.wildcard_imports' not found,76
+      python.import.resolvable,error,Module 'prefact.rules.sorted_imports' not found,77
+      python.import.resolvable,error,Module 'prefact.rules.string_concat' not found,78
+      python.import.resolvable,error,Module 'prefact.rules.print_statements' not found,79
+      python.import.resolvable,error,Module 'prefact.rules.type_hints' not found,80
+      python.import.resolvable,error,Module 'prefact.rules.ruff_based' not found,83
+      python.import.resolvable,error,Module 'prefact.rules.mypy_based' not found,90
+      python.import.resolvable,error,Module 'prefact.rules.isort_based' not found,95
+      python.import.resolvable,error,Module 'prefact.rules.autoflake_based' not found,100
+      python.import.resolvable,error,Module 'prefact.rules.string_transformations' not found,106
+      python.import.resolvable,error,Module 'prefact.rules.pylint_based' not found,111
+      python.import.resolvable,error,Module 'prefact.rules.unimport_based' not found,116
+      python.import.resolvable,error,Module 'prefact.rules.importchecker_based' not found,122
+      python.import.resolvable,error,Module 'prefact.rules.import_linter_based' not found,128
+      python.import.resolvable,error,Module 'prefact.rules.composite' not found,134
+      python.import.resolvable,error,Module 'prefact.config' not found,25
+      python.import.resolvable,error,Module 'prefact.models' not found,26
+  src/prefact/engine.py,0.69
+    issues[5]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,7
+      python.import.resolvable,error,Module 'prefact.fixer' not found,8
+      python.import.resolvable,error,Module 'prefact.models' not found,9
+      python.import.resolvable,error,Module 'prefact.scanner' not found,10
+      python.import.resolvable,error,Module 'prefact.validator' not found,11
+  tests/test_rules.py,0.69
+    issues[8]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'pytest' not found,8
+      python.import.resolvable,error,Module 'prefact.config' not found,10
+      python.import.resolvable,error,Module 'prefact.rules.duplicate_imports' not found,11
+      python.import.resolvable,error,Module 'prefact.rules.wildcard_imports' not found,12
+      python.import.resolvable,error,Module 'prefact.rules.string_concat' not found,13
+      python.import.resolvable,error,Module 'prefact.rules.print_statements' not found,14
+      python.import.resolvable,error,Module 'prefact.rules.type_hints' not found,15
+      python.import.resolvable,error,Module 'prefact.rules.sorted_imports' not found,16
+  src/prefact/rules/composite.py,0.70
+    issues[14]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,15
+      python.import.resolvable,error,Module 'prefact.models' not found,16
+      python.import.resolvable,error,Module 'prefact.rules' not found,17
+      python.import.resolvable,error,Module 'prefact.rules.ruff_based' not found,192
+      python.import.resolvable,error,Module 'prefact.rules.unused_imports' not found,200
+      python.import.resolvable,error,Module 'prefact.rules.unimport_based' not found,207
+      python.import.resolvable,error,Module 'prefact.rules.pylint_based' not found,356
+      python.import.resolvable,error,Module 'prefact.rules.duplicate_imports' not found,260
+      python.import.resolvable,error,Module 'prefact.rules.ruff_based' not found,268
+      python.import.resolvable,error,Module 'prefact.rules.isort_based' not found,280
+      python.import.resolvable,error,Module 'prefact.rules.relative_imports' not found,292
+      python.import.resolvable,error,Module 'prefact.rules.mypy_based' not found,349
+      python.import.resolvable,error,Module 'prefact.rules.wildcard_imports' not found,272
+      python.import.resolvable,error,Module 'prefact.rules.sorted_imports' not found,284
+  tests/test_integrations.py,0.71
+    issues[12]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'pytest' not found,18
+      python.import.resolvable,error,Module 'prefact.config' not found,20
+      python.import.resolvable,error,Module 'prefact.engine' not found,21
+      python.import.resolvable,error,Module 'prefact.models' not found,22
+      python.import.resolvable,error,Module 'prefact.rules' not found,23
+      python.import.resolvable,error,Module 'prefact.rules.ruff_based' not found,274
+      python.import.resolvable,error,Module 'prefact.rules.mypy_based' not found,302
+      python.import.resolvable,error,Module 'prefact.rules.isort_based' not found,329
+      python.import.resolvable,error,Module 'prefact.rules.autoflake_based' not found,361
+      python.import.resolvable,error,Module 'prefact.rules.string_transformations' not found,385
+      python.import.resolvable,error,Module 'prefact.rules.unused_imports' not found,461
+      python.import.resolvable,error,Module 'prefact.rules.ruff_based' not found,470
+  src/prefact/rules/string_transformations.py,0.73
+    issues[7]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'libcst' not found,13
+      python.import.resolvable,error,Module 'libcst' not found,14
+      python.import.resolvable,error,Module 'prefact.config' not found,16
+      python.import.resolvable,error,Module 'prefact.models' not found,17
+      python.import.resolvable,error,Module 'prefact.rules' not found,18
+      python.import.resolvable,error,Module 'flynt' not found,271
+      python.import.resolvable,error,Module 'flynt.api' not found,272
+  examples/sample-project/cli.py,0.74
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'core' not found,5
+      python.import.resolvable,error,Module 'models' not found,6
+      python.import.resolvable,error,Module 'utils' not found,7
+  src/prefact/validator.py,0.74
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,7
+      python.import.resolvable,error,Module 'prefact.models' not found,8
+      python.import.resolvable,error,Module 'prefact.rules' not found,9
+  src/prefact/rules/relative_imports.py,0.76
+    issues[4]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'libcst' not found,16
+      python.import.resolvable,error,Module 'prefact.config' not found,18
+      python.import.resolvable,error,Module 'prefact.models' not found,19
+      python.import.resolvable,error,Module 'prefact.rules' not found,20
+  tests/test_relative_imports.py,0.76
+    issues[4]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'pytest' not found,8
+      python.import.resolvable,error,Module 'prefact.config' not found,10
+      python.import.resolvable,error,Module 'prefact.models' not found,11
+      python.import.resolvable,error,Module 'prefact.rules.relative_imports' not found,12
+  src/prefact/cli.py,0.77
+    issues[7]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.autonomous' not found,9
+      python.import.resolvable,error,Module 'prefact.config' not found,10
+      python.import.resolvable,error,Module 'prefact.config_extended' not found,11
+      python.import.resolvable,error,Module 'prefact.engine' not found,12
+      python.import.resolvable,error,Module 'prefact.reporters' not found,13
+      python.import.resolvable,error,Module 'prefact.reporters' not found,14
+      python.import.resolvable,error,Module 'prefact.rules' not found,206
+  examples/01-individual-rules/wildcard-imports/after.py,0.79
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'utils' not found,4
+      python.import.resolvable,error,Module 'models' not found,5
+  examples/01-individual-rules/wildcard-imports/before.py,0.79
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'utils' not found,4
+      python.import.resolvable,error,Module 'models' not found,5
+  src/prefact/fixer.py,0.79
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,8
+      python.import.resolvable,error,Module 'prefact.models' not found,9
+      python.import.resolvable,error,Module 'prefact.rules' not found,10
+  src/prefact/rules/importchecker_based.py,0.79
+    issues[6]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,15
+      python.import.resolvable,error,Module 'prefact.models' not found,16
+      python.import.resolvable,error,Module 'prefact.rules' not found,17
+      python.import.resolvable,error,Module 'prefact.rules.unused_imports' not found,170
+      python.import.resolvable,error,Module 'prefact.rules.duplicate_imports' not found,241
+      python.import.resolvable,error,Module 'importchecker' not found,28
+  src/prefact/scanner.py,0.79
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,8
+      python.import.resolvable,error,Module 'prefact.models' not found,9
+      python.import.resolvable,error,Module 'prefact.rules' not found,10
+  tests/test_config.py,0.79
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'pytest' not found,7
+      python.import.resolvable,error,Module 'prefact.config' not found,9
+  tests/test_engine.py,0.79
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'pytest' not found,8
+      python.import.resolvable,error,Module 'prefact.config' not found,10
+      python.import.resolvable,error,Module 'prefact.engine' not found,11
+  tests/test_unused_imports.py,0.79
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'pytest' not found,8
+      python.import.resolvable,error,Module 'prefact.config' not found,10
+      python.import.resolvable,error,Module 'prefact.rules.unused_imports' not found,11
+  src/prefact/rules/isort_based.py,0.81
+    issues[4]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'isort' not found,13
+      python.import.resolvable,error,Module 'prefact.config' not found,15
+      python.import.resolvable,error,Module 'prefact.models' not found,16
+      python.import.resolvable,error,Module 'prefact.rules' not found,17
+  src/prefact/rules/migration.py,0.81
+    issues[4]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,12
+      python.import.resolvable,error,Module 'prefact.models' not found,13
+      python.import.resolvable,error,Module 'prefact.rules' not found,14
+      python.import.resolvable,error,Module 'prefact.rules.ruff_based' not found,46
+  examples/02-multiple-rules/messy_module.py,0.82
+    issues[5]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'utils' not found,7
+      python.import.resolvable,error,Module 'models' not found,8
+      python.import.resolvable,error,Module 'utils' not found,11
+      python.import.resolvable,error,Module 'models' not found,12
+      python.import.resolvable,error,Module 'config' not found,58
+  examples/04-custom-rules/custom_rules/no_todo_rule.py,0.82
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,8
+      python.import.resolvable,error,Module 'prefact.models' not found,9
+      python.import.resolvable,error,Module 'prefact.rules' not found,10
+  examples/03-output-formats/sample_code.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'utils' not found,6
+      python.import.resolvable,error,Module 'models' not found,7
+  src/prefact/rules/duplicate_imports.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,8
+      python.import.resolvable,error,Module 'prefact.rules' not found,9
+  src/prefact/rules/print_statements.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,12
+      python.import.resolvable,error,Module 'prefact.rules' not found,13
+  src/prefact/rules/string_concat.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,16
+      python.import.resolvable,error,Module 'prefact.rules' not found,17
+  src/prefact/rules/type_hints.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,8
+      python.import.resolvable,error,Module 'prefact.rules' not found,9
+  src/prefact/rules/unused_imports.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,8
+      python.import.resolvable,error,Module 'prefact.rules' not found,9
+  src/prefact/rules/wildcard_imports.py,0.83
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,8
+      python.import.resolvable,error,Module 'prefact.rules' not found,9
+  src/prefact/rules/import_linter_based.py,0.84
+    issues[5]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,17
+      python.import.resolvable,error,Module 'prefact.models' not found,18
+      python.import.resolvable,error,Module 'prefact.rules' not found,19
+      python.import.resolvable,error,Module 'prefact.rules.relative_imports' not found,249
+      python.import.resolvable,error,Module 'prefact.rules.relative_imports' not found,389
+  src/prefact/rules/llm_specific.py,0.84
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,14
+      python.import.resolvable,error,Module 'prefact.models' not found,15
+      python.import.resolvable,error,Module 'prefact.rules' not found,16
+  src/prefact/performance/parallel.py,0.85
+    issues[5]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,18
+      python.import.resolvable,error,Module 'prefact.engine' not found,19
+      python.import.resolvable,error,Module 'prefact.models' not found,20
+      python.import.resolvable,error,Module 'prefact.rules.registry' not found,193
+      python.import.resolvable,error,Module 'prefact.performance.cache' not found,51
+  examples/06-api-usage/example.py,0.86
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,9
+      python.import.resolvable,error,Module 'prefact.engine' not found,10
+      python.import.resolvable,error,Module 'examples.custom_rules.no_todo_rule' not found,99
+  src/prefact/rules/benchmark.py,0.86
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,12
+      python.import.resolvable,error,Module 'prefact.rules' not found,13
+      python.import.resolvable,error,Module 'prefact.rules.migration' not found,14
+  src/prefact/rules/registry.py,0.86
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,13
+      python.import.resolvable,error,Module 'prefact.rules' not found,14
+  src/prefact/rules/sorted_imports.py,0.86
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,9
+      python.import.resolvable,error,Module 'prefact.rules' not found,10
+  src/prefact/plugins/__init__.py,0.87
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,16
+      python.import.resolvable,error,Module 'prefact.models' not found,17
+      python.import.resolvable,error,Module 'prefact.rules' not found,18
+  src/prefact/rules/pylint_based.py,0.87
+    issues[4]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,17
+      python.import.resolvable,error,Module 'prefact.models' not found,18
+      python.import.resolvable,error,Module 'prefact.rules' not found,19
+      python.import.resolvable,error,Module 'prefact.rules.string_transformations' not found,206
+  src/prefact/rules/ruff_based.py,0.87
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,10
+      python.import.resolvable,error,Module 'prefact.models' not found,11
+      python.import.resolvable,error,Module 'prefact.rules' not found,12
+  src/prefact/rules/autoflake_based.py,0.88
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,14
+      python.import.resolvable,error,Module 'prefact.models' not found,15
+      python.import.resolvable,error,Module 'prefact.rules' not found,16
+  src/prefact/rules/unimport_based.py,0.88
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,15
+      python.import.resolvable,error,Module 'prefact.models' not found,16
+      python.import.resolvable,error,Module 'prefact.rules' not found,17
+  src/prefact/reporters/json_reporter.py,0.89
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,8
+  src/prefact/rules/mypy_based.py,0.89
+    issues[4]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,16
+      python.import.resolvable,error,Module 'prefact.models' not found,17
+      python.import.resolvable,error,Module 'prefact.rules' not found,18
+      python.import.resolvable,error,Module 'libcst' not found,315
+  src/prefact/git_hooks.py,0.90
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,15
+      python.import.resolvable,error,Module 'prefact.engine' not found,16
+  src/prefact/performance/cache.py,0.90
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,22
+      python.import.resolvable,error,Module 'diskcache' not found,17
+  src/prefact/reporters/console.py,0.91
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.models' not found,9
+  src/prefact/autonomous.py,0.92
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,26
+      python.import.resolvable,error,Module 'prefact.config_extended' not found,27
+      python.import.resolvable,error,Module 'prefact.engine' not found,28
+  src/prefact/config_extended.py,0.93
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,18
+  src/prefact/logging.py,0.93
+    issues[2]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'prefact.config' not found,22
+      python.import.resolvable,error,Module 'prefact.telemetry.prometheus' not found,325
+  examples/01-individual-rules/sorted-imports/after.py,0.94
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'local_module' not found,3
+  examples/01-individual-rules/sorted-imports/before.py,0.94
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'local_module' not found,3
+  src/prefact/config.py,0.94
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'tomli' not found,113
+
+UNSUPPORTED[4]{bucket,count}:
+  *.md,21
+  *.txt,2
+  *.yml,1
+  other,17

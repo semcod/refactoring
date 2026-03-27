@@ -1,13 +1,13 @@
-# code2llm | 45f 10580L | python:43,typescript:1,shell:1 | 2026-03-27
+# code2llm | 45f 10587L | python:43,typescript:1,shell:1 | 2026-03-27
 # CC̄=3.2 | critical:6/639 | dups:0 | cycles:0
 
 HEALTH[8]:
   🔴 GOD   src/prefact/rules/composite.py = 502L, 8 classes, 28m, max CC=12
   🔴 GOD   src/prefact/rules/llm_specific.py = 555L, 4 classes, 27m, max CC=15
   🟡 CC    detect_package_name CC=16 (limit:15)
-  🟡 CC    from_yaml CC=15 (limit:15)
   🟡 CC    _collect_used_names CC=17 (limit:15)
   🟡 CC    fix CC=21 (limit:15)
+  🟡 CC    from_yaml CC=15 (limit:15)
   🟡 CC    scan_file CC=15 (limit:15)
   🟡 CC    infer_return_type CC=16 (limit:15)
 
@@ -16,7 +16,7 @@ REFACTOR[3]:
   2. split src/prefact/rules/llm_specific.py  (god module)
   3. split 6 high-CC methods  (CC>15)
 
-PIPELINES[502]:
+PIPELINES[501]:
   [1] Src [__init__]: __init__
       PURITY: 100% pure
   [2] Src [run]: run
@@ -42,7 +42,7 @@ LAYERS:
   │ isort_based                440L  4C   23m  CC=12     ←0
   │ logging                    436L  10C   28m  CC=4      ←0
   │ cache                      434L  6C   37m  CC=5      ←8
-  │ pylint_based               401L  5C   22m  CC=6      ←1
+  │ pylint_based               401L  5C   22m  CC=6      ←0
   │ git_hooks                  391L  2C   17m  CC=8      ←0
   │ !! mypy_based                 377L  5C   17m  CC=16     ←0
   │ parallel                   350L  4C   23m  CC=7      ←0
@@ -78,7 +78,7 @@ LAYERS:
   │ extension.ts               441L  5C   48m  CC=14     ←17
   │
   ./                              CC̄=0.0    ←in:0  →out:0
-  │ project.sh                  14L  0C    0m  CC=0.0    ←0
+  │ project.sh                  21L  0C    0m  CC=0.0    ←0
   │
 
 COUPLING:

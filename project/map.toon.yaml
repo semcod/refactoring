@@ -1,11 +1,11 @@
-# prefact | 45f 10580L | python:43,typescript:1,shell:1 | 2026-03-27
+# prefact | 45f 10587L | python:43,typescript:1,shell:1 | 2026-03-27
 # stats: 560 func | 0 cls | 45 mod | CC̄=3.2 | critical:6 | cycles:0
 # alerts[5]: fan-out PrefactTreeProvider.activate=20; CC UnusedImports.fix=21; fan-out CompositeRuleFactory.create_composite_rule=18; CC _collect_used_names=17; CC Config.detect_package_name=16
 # hotspots[5]: PrefactTreeProvider.activate fan=20; CompositeRuleFactory.create_composite_rule fan=18; ExtendedConfig.from_yaml fan=16; AutonomousRefact.update_todo_md fan=13; cached_file_operation fan=13
 # evolution: baseline
 # Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
 M[45]:
-  project.sh,14
+  project.sh,21
   src/prefact/__init__.py,3
   src/prefact/autonomous.py,455
   src/prefact/cli.py,240
@@ -226,6 +226,9 @@ D:
   src/prefact/scanner.py:
     e: Scanner
     Scanner: __init__(1),collect_files(0),scan(1),_excluded(1)  # Discovers Python files and runs all enabled rules against th...
+  src/prefact/rules/type_hints.py:
+    e: MissingReturnType
+    MissingReturnType(BaseRule): scan_file(2),fix(3),validate(3)
   src/prefact/rules/pylint_based.py:
     e: PylintHelper,PylintPrintStatements,PylintStringConcat,PrefactPylintPlugin,PylintComprehensive,generate_pylint_rc
     PylintHelper: check_file(1),check_source(1),fix_file(1)  # Helper class for Pylint operations...
@@ -234,9 +237,6 @@ D:
     PrefactPylintPlugin: register(0)  # Custom Pylint plugin for prefact-specific checks...
     PylintComprehensive(BaseRule): __init__(1),_load_pylint_config(0),scan_file(2),_map_pylint_to_prefact(1),_map_pylint_severity(1),fix(3),validate(3)  # Comprehensive analysis using Pylint with custom rules...
     generate_pylint_rc(config;output_path)
-  src/prefact/rules/type_hints.py:
-    e: MissingReturnType
-    MissingReturnType(BaseRule): scan_file(2),fix(3),validate(3)
   src/prefact/rules/string_concat.py:
     e: StringConcatToFstring,_is_str_concat,_flatten_add
     StringConcatToFstring(BaseRule): scan_file(2),fix(3),validate(3)

@@ -1,0 +1,51 @@
+# prefact | 560 func | 39f | 11673L | python | 2026-03-27
+
+HEALTH:
+  CC̄=3.2  critical=18 (limit:10)  dup=0  cycles=0
+
+ALERTS[20]:
+  !!! high_fan_out     PrefactTreeProvider.activate = 20 (limit:10)
+  !!  cc_exceeded      UnusedImports.fix = 21 (limit:15)
+  !!  high_fan_out     CompositeRuleFactory.create_composite_rule = 18 (limit:10)
+  !!  high_fan_out     ExtendedConfig.from_yaml = 16 (limit:10)
+  !   cc_exceeded      _collect_used_names = 17 (limit:15)
+  !   cc_exceeded      Config.detect_package_name = 16 (limit:15)
+  !   cc_exceeded      ReturnTypeInferrer.infer_return_type = 16 (limit:15)
+  !   cc_exceeded      ExtendedConfig.from_yaml = 15 (limit:15)
+  !   cc_exceeded      MagicNumberRule.scan_file = 15 (limit:15)
+  !   high_fan_out     AutonomousRefact.update_todo_md = 13 (limit:10)
+
+MODULES[45] (top by size):
+  M[src/prefact/rules/llm_specific.py] 555L C:4 F:27 CC↑15 D:0 (python)
+  M[src/prefact/rules/composite.py] 502L C:8 F:28 CC↑12 D:0 (python)
+  M[src/prefact/rules/string_transformations.py] 491L C:6 F:27 CC↑8 D:0 (python)
+  M[src/prefact/rules/importchecker_based.py] 482L C:5 F:24 CC↑14 D:0 (python)
+  M[src/prefact/rules/autoflake_based.py] 468L C:5 F:23 CC↑11 D:0 (python)
+  M[src/prefact/config_extended.py] 462L C:3 F:18 CC↑15 D:0 (python)
+  M[src/prefact/autonomous.py] 455L C:1 F:15 CC↑9 D:0 (python)
+  M[src/prefact/rules/unimport_based.py] 454L C:5 F:22 CC↑14 D:0 (python)
+  M[src/prefact/rules/import_linter_based.py] 449L C:5 F:24 CC↑8 D:0 (python)
+  M[vscode-extension/src/extension.ts] 441L C:5 F:48 CC↑14 D:17 (typescript)
+  M[src/prefact/rules/isort_based.py] 440L C:4 F:23 CC↑12 D:0 (python)
+  M[src/prefact/logging.py] 436L C:10 F:28 CC↑4 D:0 (python)
+  M[src/prefact/performance/cache.py] 434L C:6 F:37 CC↑5 D:8 (python)
+  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:0 (python)
+  M[src/prefact/git_hooks.py] 391L C:2 F:17 CC↑8 D:0 (python)
+  LANGS: python:43/typescript:1/shell:1
+
+HOTSPOTS[10]:
+  ★ PrefactTreeProvider.activate fan=20  // Orchestrates 20 calls
+  ★ CompositeRuleFactory.create_composite_rule fan=18  // Create a composite rule dynamically.
+  ★ ExtendedConfig.from_yaml fan=16  // Load configuration from YAML file with environment support.
+  ★ AutonomousRefact.update_todo_md fan=13  // Update TODO.md with current issues.
+  ★ cached_file_operation fan=13  // Decorator to cache file operations.
+
+REFACTOR[11]:
+  [1] H/H Split god module src/prefact/rules/llm_specific.py (555L, 4 classes)
+  [2] H/H Split god module src/prefact/rules/composite.py (502L, 8 classes)
+  [3] M/L Split Config.detect_package_name (CC=16 → target CC<10)
+  [4] M/L Split _collect_used_names (CC=17 → target CC<10)
+  [5] M/L Split UnusedImports.fix (CC=21 → target CC<10)
+
+EVOLUTION:
+  2026-03-27 CC̄=3.2 crit=18 11673L // Automated analysis

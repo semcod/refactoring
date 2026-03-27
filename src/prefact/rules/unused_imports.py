@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 from pathlib import Path
+from typing import Optional
 
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
@@ -29,28 +30,51 @@ def _collect_imported_names(tree: ast.Module) -> dict[str, ast.stmt]:
 def _collect_used_names(tree: ast.Module) -> set[str]:
     """Return all Name.id values used outside import statements."""
     used: set[str] = set()
+    import_lines = _get_import_lines(tree)
+    
+    for node in ast.walk(tree):
+        # Handle direct name usage
+        if isinstance(node, ast.Name) and getattr(node, "lineno", 0) not in import_lines:
+            used.add(node.id)
+        # Handle attribute chains (e.g., module.submodule.func)
+        elif isinstance(node, ast.Attribute):
+            root_name = _get_attribute_root(node)
+            if root_name:
+                used.add(root_name)
+        # Handle __all__ exports
+        elif isinstance(node, ast.Assign):
+            _process_assignment_for_all(node, used)
+    
+    return used
+
+
+def _get_import_lines(tree: ast.Module) -> set[int]:
+    """Get line numbers of all import statements."""
     import_lines = set()
     for node in ast.iter_child_nodes(tree):
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             import_lines.add(node.lineno)
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Name) and getattr(node, "lineno", 0) not in import_lines:
-            used.add(node.id)
-        if isinstance(node, ast.Attribute):
-            root = node
-            while isinstance(root, ast.Attribute):
-                root = root.value
-            if isinstance(root, ast.Name):
-                used.add(root.id)
-        # __all__ exports
-        if isinstance(node, ast.Assign):
-            for target in node.targets:
-                if isinstance(target, ast.Name) and target.id == "__all__":
-                    if isinstance(node.value, (ast.List, ast.Tuple)):
-                        for elt in node.value.elts:
-                            if isinstance(elt, ast.Constant) and isinstance(elt.value, str):
-                                used.add(elt.value)
-    return used
+    return import_lines
+
+
+def _get_attribute_root(node: ast.Attribute) -> Optional[str]:
+    """Get the root name of an attribute chain."""
+    root = node
+    while isinstance(root, ast.Attribute):
+        root = root.value
+    if isinstance(root, ast.Name):
+        return root.id
+    return None
+
+
+def _process_assignment_for_all(node: ast.Assign, used: set[str]) -> None:
+    """Process assignment to __all__ and add exported names to used set."""
+    for target in node.targets:
+        if isinstance(target, ast.Name) and target.id == "__all__":
+            if isinstance(node.value, (ast.List, ast.Tuple)):
+                for elt in node.value.elts:
+                    if isinstance(elt, ast.Constant) and isinstance(elt.value, str):
+                        used.add(elt.value)
 
 
 @register

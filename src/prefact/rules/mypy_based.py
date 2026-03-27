@@ -13,6 +13,8 @@ import tempfile
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import libcst as cst
+
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
@@ -233,39 +235,97 @@ class ReturnTypeInferrer:
             tree = ast.parse(source)
             for node in ast.walk(tree):
                 if isinstance(node, ast.FunctionDef) and node.name == func_name:
-                    # Analyze return statements
-                    return_types = set()
-                    for n in ast.walk(node):
-                        if isinstance(n, ast.Return):
-                            if n.value is None:
-                                return_types.add("None")
-                            elif isinstance(n.value, ast.Constant):
-                                return_types.add(type(n.value.value).__name__)
-                            elif isinstance(n.value, ast.NameConstant):
-                                return_types.add(type(n.value.value).__name__)
-                            elif isinstance(n.value, ast.List):
-                                return_types.add("List")
-                            elif isinstance(n.value, ast.Dict):
-                                return_types.add("Dict")
-                            else:
-                                return_types.add("Any")
-                    
-                    # Determine unified type
-                    if len(return_types) == 0:
-                        return "None"
-                    elif len(return_types) == 1:
-                        return return_types.pop()
-                    elif "None" in return_types and len(return_types) == 2:
-                        return_types_copy = return_types.copy()
-                        return_types_copy.discard("None")
-                        other = return_types_copy.pop()
-                        return f"Optional[{other}]"
-                    else:
-                        return "Any"
+                    return_types = ReturnTypeInferrer._analyze_return_types(node)
+                    return ReturnTypeInferrer._unify_types(return_types)
         except SyntaxError:
             pass
         
         return None
+    
+    @staticmethod
+    def _analyze_return_types(node: ast.FunctionDef) -> set[str]:
+        """Analyze all return statements in a function."""
+        return_types = set()
+        
+        for n in ast.walk(node):
+            if isinstance(n, ast.Return):
+                type_name = ReturnTypeInferrer._get_return_value_type(n.value)
+                if type_name:
+                    return_types.add(type_name)
+        
+        return return_types
+    
+    @staticmethod
+    def _get_return_value_type(value: Optional[ast.expr]) -> str:
+        """Get type name of a return value."""
+        if value is None:
+            return "None"
+        
+        # Type mapping for different AST node types
+        type_map = {
+            ast.Constant: lambda v: type(v.value).__name__,
+            ast.NameConstant: lambda v: type(v.value).__name__,
+            ast.List: lambda v: "List",
+            ast.Dict: lambda v: "Dict",
+        }
+        
+        for ast_type, type_func in type_map.items():
+            if isinstance(value, ast_type):
+                return type_func(value)
+        
+        return "Any"
+    
+    @staticmethod
+    def _unify_types(return_types: set[str]) -> str:
+        """Unify multiple return types into a single type annotation."""
+        if not return_types:
+            return "None"
+        elif len(return_types) == 1:
+            return return_types.pop()
+        elif "None" in return_types and len(return_types) == 2:
+            types_copy = return_types.copy()
+            types_copy.discard("None")
+            other = types_copy.pop()
+            return f"Optional[{other}]"
+        else:
+            return "Any"
+
+
+class ReturnTypeAdder(cst.CSTTransformer):
+    """Transformer to add return type annotations to functions."""
+    
+    def __init__(self, issues: List[Issue], path: Path):
+        self.issues_by_line = {i.line: i for i in issues}
+        self.fixes = []
+        self.path = path
+    
+    def leave_FunctionDef(
+        self,
+        original_node: cst.FunctionDef,
+        updated_node: cst.FunctionDef
+    ) -> cst.FunctionDef:
+        if original_node.name.value in self.issues_by_line:
+            issue = self.issues_by_line[original_node.name.value]
+            inferred = issue.meta.get("inferred_type", "Any")
+            
+            if inferred:
+                # Add return type annotation
+                new_returns = cst.Annotation(
+                    annotation=cst.Name(inferred)
+                )
+                updated_node = updated_node.with_changes(
+                    returns=new_returns
+                )
+                
+                self.fixes.append(Fix(
+                    issue=issue,
+                    file=self.path,
+                    original_code=f"def {original_node.name.value}(...):",
+                    fixed_code=f"def {original_node.name.value}(...) -> {inferred}:",
+                    applied=True
+                ))
+        
+        return updated_node
 
 
 # Example: Enhanced rule with type inference
@@ -317,49 +377,12 @@ class SmartReturnTypeRule(BaseRule):
         if not issues:
             return source, []
         
-        fixes = []
-        
         # Use LibCST for safe transformation
         try:
             cst_tree = cst.parse_module(source)
-            
-            class ReturnTypeAdder(cst.CSTTransformer):
-                def __init__(self, issues: List[Issue]):
-                    self.issues_by_line = {i.line: i for i in issues}
-                    self.fixes = []
-                
-                def leave_FunctionDef(
-                    self,
-                    original_node: cst.FunctionDef,
-                    updated_node: cst.FunctionDef
-                ) -> cst.FunctionDef:
-                    if original_node.name.value in self.issues_by_line:
-                        issue = self.issues_by_line[original_node.name.value]
-                        inferred = issue.meta.get("inferred_type", "Any")
-                        
-                        if inferred:
-                            # Add return type annotation
-                            new_returns = cst.Annotation(
-                                annotation=cst.Name(inferred)
-                            )
-                            updated_node = updated_node.with_changes(
-                                returns=new_returns
-                            )
-                            
-                            self.fixes.append(Fix(
-                                issue=issue,
-                                file=path,
-                                original_code=f"def {original_node.name.value}(...):",
-                                fixed_code=f"def {original_node.name.value}(...) -> {inferred}:",
-                                applied=True
-                            ))
-                    
-                    return updated_node
-            
-            transformer = ReturnTypeAdder(issues)
+            transformer = ReturnTypeAdder(issues, path)
             fixed_tree = cst_tree.visit(transformer)
             return fixed_tree.code, transformer.fixes
-            
         except cst.ParserSyntaxError:
             return source, []
     
