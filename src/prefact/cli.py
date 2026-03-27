@@ -18,9 +18,8 @@ from prefact.reporters import json_reporter
 @click.option("--init-only", is_flag=True, help="Only initialize prefact.yaml without running full process.")
 @click.option("--skip-tests", is_flag=True, help="Skip running tests.")
 @click.option("--skip-examples", is_flag=True, help="Skip running examples.")
-@click.option("--execute-todos", is_flag=True, help="Execute all tasks from TODO.md and mark completed ones.")
 @click.version_option(package_name="prefact")
-def main(ctx, autonomous, init_only, skip_tests, skip_examples, execute_todos) -> None:
+def main(ctx, autonomous, init_only, skip_tests, skip_examples) -> None:
     """prefact – automatic Python prefactoring toolkit.
 
     Detect, fix, and validate common code issues – especially those
@@ -30,7 +29,7 @@ def main(ctx, autonomous, init_only, skip_tests, skip_examples, execute_todos) -
     """
     if autonomous:
         # Run autonomous command directly with all options
-        ctx.invoke(autonomous_cmd, project_path=".", init_only=init_only, skip_tests=skip_tests, skip_examples=skip_examples, execute_todos=execute_todos)
+        ctx.invoke(autonomous_cmd, project_path=".", init_only=init_only, skip_tests=skip_tests, skip_examples=skip_examples)
 
 
 # ── shared options ────────────────────────────────────────────────────
@@ -170,8 +169,7 @@ rules:
 @click.option("--init-only", is_flag=True, help="Only initialize prefact.yaml without running full process.")
 @click.option("--skip-tests", is_flag=True, help="Skip running tests.")
 @click.option("--skip-examples", is_flag=True, help="Skip running examples.")
-@click.option("--execute-todos", is_flag=True, help="Execute all tasks from TODO.md and mark completed ones.")
-def autonomous_cmd(project_path, init_only, skip_tests, skip_examples, execute_todos) -> None:
+def autonomous_cmd(project_path, init_only, skip_tests, skip_examples) -> None:
     """Run autonomous prefact mode (-a).
     
     Automatically initializes prefact.yaml if missing, runs examples,
@@ -191,11 +189,6 @@ def autonomous_cmd(project_path, init_only, skip_tests, skip_examples, execute_t
             console.print("✅ Initialization complete!", style="green")
         else:
             console.print("ℹ️ prefact.yaml already exists", style="blue")
-        return
-    
-    if execute_todos:
-        # Execute tasks from TODO.md
-        auto.execute_todos()
         return
     
     # Run full autonomous process
@@ -238,3 +231,7 @@ def _output(result, kwargs) -> None:
             click.echo(text)
     else:
         console_reporter.print_report(result, verbose=kwargs.get("verbose", False))
+
+
+if __name__ == "__main__":
+    main()

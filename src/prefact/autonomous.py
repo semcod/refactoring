@@ -573,7 +573,7 @@ class AutonomousRefact:
         in_current_section = False
         
         for line in lines:
-            if "Current Issues" in line:
+            if line.strip() == "## 📋 Current Issues":
                 in_current_section = True
                 continue
             elif line.strip().startswith("##") and in_current_section:
