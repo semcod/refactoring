@@ -1,8 +1,8 @@
 """
-Refactoring package for code analysis and transformation tools.
+Prefact package for code analysis and transformation tools.
 """
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __author__ = "Your Name"
 __email__ = "your.email@example.com"
 

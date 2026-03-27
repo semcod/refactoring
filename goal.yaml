@@ -13,7 +13,7 @@
 
 version: '1.0'
 project:
-  name: refactoring
+  name: prefact
   type:
   - python
   description: ''
@@ -22,7 +22,7 @@ versioning:
   files:
   - VERSION
   - pyproject.toml:version
-  - refactoring/__init__.py:__version__
+  - prefact/__init__.py:__version__
   bump_rules:
     patch: 10
     minor: 50
@@ -30,7 +30,7 @@ versioning:
 git:
   commit:
     strategy: conventional
-    scope: refactoring
+    scope: prefact
     abstraction_level: auto
     abstraction_levels:
       high: '{type}({domain}): {benefit}'
@@ -224,7 +224,7 @@ strategies:
   python:
     test: pytest tests/ -v
     build: python -m build
-    publish: twine upload dist/refactoring-{version}*
+    publish: twine upload dist/prefact-{version}*
     publish_enabled: true
     dependencies:
       file: requirements.txt
@@ -232,7 +232,7 @@ strategies:
   nodejs:
     test: npm test
     build: npm run build
-    publish: twine upload dist/refactoring-{version}*
+    publish: twine upload dist/prefact-{version}*
     publish_enabled: true
     dependencies:
       file: package-lock.json
@@ -240,7 +240,7 @@ strategies:
   rust:
     test: cargo test
     build: cargo build --release
-    publish: twine upload dist/refactoring-{version}*
+    publish: twine upload dist/prefact-{version}*
     publish_enabled: true
     dependencies:
       file: Cargo.lock

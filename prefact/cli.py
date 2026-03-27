@@ -1,5 +1,5 @@
 """
-Command line interface for the refactoring package.
+Command line interface for the prefact package.
 """
 
 import click
@@ -13,7 +13,7 @@ from .utils import parse_code, analyze_structure, get_file_stats
 @click.group()
 @click.version_option()
 def main():
-    """Refactoring tools for Python code analysis and transformation."""
+    """Prefact tools for Python code analysis and transformation."""
     pass
 
 

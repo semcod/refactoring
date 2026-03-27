@@ -1,5 +1,5 @@
 """
-Core refactoring engine for code analysis and transformation.
+Core prefact engine for code analysis and transformation.
 """
 
 import ast

@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prefact"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
     {name = "Semcod Team", email = "team@semcod.com"},
     {name = "Tom Sapletta", email = "tom@sapletta.com"},
 ]
-description = "A package for code analysis and refactoring tools"
+description = "A package for code analysis and prefact tools"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.8"
@@ -41,11 +41,11 @@ Repository = "https://github.com/semcod/prefact"
 Issues = "https://github.com/semcod/prefact/issues"
 
 [project.scripts]
-prefact = "refactoring.cli:main"
+prefact = "prefact.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["refactoring*"]
+include = ["prefact*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md", "*.rst", "*.yaml", "*.yml"]
