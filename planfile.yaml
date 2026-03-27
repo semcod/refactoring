@@ -2045,3 +2045,627 @@ sprints:
     model_hints:
       planning: balanced
       implementation: balanced
+  - id: ticket-6d9734af
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/__init__.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-795ea948
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/cli.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/cli.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-fece0ed9
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/config.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/config.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-757cb576
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/autonomous.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a9f2d25a
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/engine.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/engine.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-3200084a
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/fixer.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/fixer.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f60ee670
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/config_extended.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/config_extended.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c3f4716c
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/git_hooks.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/git_hooks.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e548d604
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/performance/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/__init__.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e2222289
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/models.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/models.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-fc637bc5
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/performance/cache.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/cache.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2fa3e811
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/performance/parallel.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/parallel.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-4cb672d3
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/logging.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/logging.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a878d687
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/plugins/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/plugins/__init__.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-df7df4bf
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/plugins/builtin.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/plugins/builtin.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9569e7a8
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/reporters/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/reporters/__init__.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-b05d4c89
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/reporters/json_reporter.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/reporters/json_reporter.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c0f9550b
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/__init__.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-14c47fd3
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/ai_boilerplate.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/ai_boilerplate.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-acbb7841
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/reporters/console.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/reporters/console.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-48264d64
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/autoflake_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/autoflake_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e7625bb7
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/benchmark.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/benchmark.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-686e96f8
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/composite_factory.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/composite_factory.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-c82c5990
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/composite_rules.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/composite_rules.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a22fd598
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/duplicate_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/duplicate_imports.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7ce27c3e
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/import_linter_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/import_linter_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7be9d520
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/importchecker_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/importchecker_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-79bcc9dd
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/isort_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/isort_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-6454bdff
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/llm_generated_code.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/llm_generated_code.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-768aac28
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/llm_hallucinations.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/llm_hallucinations.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2f49542e
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/magic_numbers.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/magic_numbers.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-b2529fa3
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/migration.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/migration.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2f1579b3
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/print_statements.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/print_statements.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7223b67c
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/mypy_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/mypy_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-b80a85fb
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/pylint_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/pylint_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0f492025
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/registry.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/registry.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-10492ac4
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/relative_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/relative_imports.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-7a4239d5
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/ruff_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/ruff_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-a618f91f
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/strategies.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/strategies.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-fa9f7222
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/sorted_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/sorted_imports.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-51e9c5a1
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/string_concat.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/string_concat.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-93495c2a
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/string_transformations.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/string_transformations.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ec5d40e1
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/type_hints.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/type_hints.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f9c1c389
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/wildcard_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/wildcard_imports.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-fae31cac
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/unimport_based.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unimport_based.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e934a0e7
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/rules/unused_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/unused_imports.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-88915d9c
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/scanner.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/scanner.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0aff9891
+    name: Fix print-statements issues
+    description: Resolve 1 print-statements issues in src/prefact/validator.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/validator.py
+    rule_id: print-statements
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced

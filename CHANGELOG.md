@@ -8,6 +8,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.10] - 2026-03-27
 
 ### Fixed
+- Fix print-statements issues (ticket-6d9734af)
+- Fix print-statements issues (ticket-795ea948)
+- Fix print-statements issues (ticket-fece0ed9)
+- Fix print-statements issues (ticket-757cb576)
+- Fix print-statements issues (ticket-a9f2d25a)
+- Fix print-statements issues (ticket-3200084a)
+- Fix print-statements issues (ticket-f60ee670)
+- Fix print-statements issues (ticket-c3f4716c)
+- Fix print-statements issues (ticket-e548d604)
+- Fix print-statements issues (ticket-e2222289)
+- Fix print-statements issues (ticket-fc637bc5)
+- Fix print-statements issues (ticket-2fa3e811)
+- Fix print-statements issues (ticket-4cb672d3)
+- Fix print-statements issues (ticket-a878d687)
+- Fix print-statements issues (ticket-df7df4bf)
+- Fix print-statements issues (ticket-9569e7a8)
+- Fix print-statements issues (ticket-b05d4c89)
+- Fix print-statements issues (ticket-c0f9550b)
+- Fix print-statements issues (ticket-14c47fd3)
+- Fix print-statements issues (ticket-acbb7841)
+- Fix print-statements issues (ticket-48264d64)
+- Fix print-statements issues (ticket-e7625bb7)
+- Fix print-statements issues (ticket-686e96f8)
+- Fix print-statements issues (ticket-c82c5990)
+- Fix print-statements issues (ticket-a22fd598)
+- Fix print-statements issues (ticket-7ce27c3e)
+- Fix print-statements issues (ticket-7be9d520)
+- Fix print-statements issues (ticket-79bcc9dd)
+- Fix print-statements issues (ticket-6454bdff)
+- Fix print-statements issues (ticket-768aac28)
+- Fix print-statements issues (ticket-2f49542e)
+- Fix print-statements issues (ticket-b2529fa3)
+- Fix print-statements issues (ticket-2f1579b3)
+- Fix print-statements issues (ticket-7223b67c)
+- Fix print-statements issues (ticket-b80a85fb)
+- Fix print-statements issues (ticket-0f492025)
+- Fix print-statements issues (ticket-10492ac4)
+- Fix print-statements issues (ticket-7a4239d5)
+- Fix print-statements issues (ticket-a618f91f)
+- Fix print-statements issues (ticket-fa9f7222)
+- Fix print-statements issues (ticket-51e9c5a1)
+- Fix print-statements issues (ticket-93495c2a)
+- Fix print-statements issues (ticket-ec5d40e1)
+- Fix print-statements issues (ticket-f9c1c389)
+- Fix print-statements issues (ticket-fae31cac)
+- Fix print-statements issues (ticket-e934a0e7)
+- Fix print-statements issues (ticket-88915d9c)
+- Fix print-statements issues (ticket-0aff9891)
+
+## [0.1.10] - 2026-03-27
+
+### Fixed
 - Fix smart-return-type issues (ticket-474934b5)
 
 ## [0.1.10] - 2026-03-27
@@ -170,6 +222,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix unused-imports issues (ticket-c1ba2cf8)
 
 ## [Unreleased]
+
+## [0.1.17] - 2026-03-27
+
+### Docs
+- Update CHANGELOG.md
+- Update TODO.md
+
+### Other
+- Update planfile.yaml
 
 ## [0.1.16] - 2026-03-27
 
