@@ -95,7 +95,7 @@ class RuleMigrationManager:
                     return self.ruff_rule.fix(path, source, issues)
                 return self.ast_rule.fix(path, source, issues)
                 
-            def validate(self, path: Path, original: str, fixed: str):
+            def validate(self, path: Path, original: str, fixed: str) -> ValidationResult:
                 if self.migration_manager.should_use_ruff(rule_id):
                     return self.ruff_rule.validate(path, original, fixed)
                 return self.ast_rule.validate(path, original, fixed)

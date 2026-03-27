@@ -4,12 +4,12 @@
 
 - **Project**: /home/tom/github/semcod/prefact
 - **Primary Language**: python
-- **Languages**: python: 75, shell: 2, typescript: 1
+- **Languages**: python: 76, shell: 2, typescript: 1
 - **Analysis Mode**: static
-- **Total Functions**: 660
+- **Total Functions**: 664
 - **Total Classes**: 132
-- **Modules**: 78
-- **Entry Points**: 601
+- **Modules**: 79
+- **Entry Points**: 602
 
 ## Architecture by Module
 
@@ -176,12 +176,9 @@ Main execution flows into the system:
 > Main CLI command.
 - **Calls**: click.command, click.option, click.option, print, User, print, DataProcessor, processor.add_item
 
-### src.prefact.cli.autonomous_cmd
-> Run autonomous prefact mode (-a).
-
-Automatically initializes prefact.yaml if missing, runs examples,
-scans for issues, and creates tickets in planfile
-- **Calls**: main.command, click.option, click.option, click.option, click.option, click.option, Console, AutonomousRefact
+### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports._find_import_lines
+> Find line numbers for each import.
+- **Calls**: source.splitlines, enumerate, line.strip, stripped.startswith, stripped.startswith, stripped.split, None.split, len
 
 ### src.prefact.engine.RefactoringEngine.run
 - **Calls**: PipelineResult, self.scanner.collect_files, self._preload_sources, issues_map.values, issues_map.items, issues_map.update, issues_map.update, result.issues_found.extend
@@ -206,6 +203,13 @@ scans for issues, and creates tickets in planfile
 > Create a hybrid rule that can switch between AST and Ruff.
 - **Calls**: None.get, None.__init__, RuleMigrationManager, self.migration_manager.should_use_ruff, self.ast_rule.scan_file, self.migration_manager.should_use_ruff, self.ast_rule.fix, self.migration_manager.should_use_ruff
 
+### src.prefact.cli.autonomous_cmd
+> Run autonomous prefact mode (-a).
+
+Automatically initializes prefact.yaml if missing, runs examples,
+scans for issues, and creates tickets in planfile
+- **Calls**: main.command, click.option, click.option, click.option, click.option, Console, AutonomousRefact, auto.run_autonomous
+
 ### src.prefact.plugins.PluginManager.load_plugin
 > Load a plugin and register its rules.
 - **Calls**: print, PluginValidator.validate_plugin_module, metadata.entry_point.split, importlib.import_module, getattr, callable, self._loaded_modules.add, print
@@ -225,12 +229,9 @@ scans for issues, and creates tickets in planfile
 > Decorator to cache function results.
 - **Calls**: src.prefact.performance.cache.get_cache, cache.get, func, cache.set, func, key_func, None.hexdigest, None.hexdigest
 
-### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports._find_import_lines
-> Find line numbers for each import.
-- **Calls**: source.splitlines, enumerate, line.strip, stripped.startswith, stripped.startswith, stripped.split, None.split, len
-
-### src.prefact.rules.unimport_based.UnimportAll.validate
-- **Calls**: UnimportUnusedImports, unused_rule.validate, all_checks.extend, all_errors.extend, UnimportDuplicateImports, duplicate_rule.validate, all_checks.extend, all_errors.extend
+### src.prefact.autonomous.AutonomousRefact.update_changelog_md
+> Update CHANGELOG.md with recent changes.
+- **Calls**: None.strftime, self.changelog_path.exists, self.changelog_path.write_text, console.print, self.changelog_path.read_text, existing.split, datetime.now, len
 
 ## Process Flows
 
@@ -452,6 +453,13 @@ Key functions that process and transform data:
 ### src.prefact.rules.magic_numbers.MagicNumberRule.validate
 - **Output to**: self.scan_file, ValidationResult, len, len
 
+### src.prefact.rules.unused_imports._process_assignment_for_all
+> Process assignment to __all__ and add exported names to used set.
+- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
+
+### src.prefact.rules.unused_imports.UnusedImports.validate
+- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
+
 ### src.prefact.rules.ruff_based.RuffWildcardImports.validate
 - **Output to**: ValidationResult
 
@@ -467,13 +475,6 @@ Key functions that process and transform data:
 ### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
 - **Output to**: ValidationResult
 
-### src.prefact.rules.unused_imports._process_assignment_for_all
-> Process assignment to __all__ and add exported names to used set.
-- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
-
-### src.prefact.rules.unused_imports.UnusedImports.validate
-- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
-
 ### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
 - **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
 
@@ -486,8 +487,8 @@ Key functions that process and transform data:
 ### src.prefact.rules.importchecker_based.ImportOptimizer.validate
 - **Output to**: ValidationResult
 
-### src.prefact.rules.pylint_based.PylintPrintStatements.validate
-- **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
+### src.prefact.rules.type_hints.MissingReturnType.validate
+- **Output to**: ValidationResult
 
 ## Behavioral Patterns
 
@@ -531,7 +532,7 @@ Key functions that process and transform data:
 Functions exposed as public API (no underscore prefix):
 
 - `src.prefact.autonomous.AutonomousRefact.scan_project` - 57 calls
-- `src.prefact.autonomous.AutonomousRefact.execute_todos` - 46 calls
+- `src.prefact.autonomous.AutonomousRefact.execute_todos` - 47 calls
 - `src.prefact.autonomous.AutonomousRefact.update_todo_md` - 43 calls
 - `src.prefact.config_extended.ExtendedConfig.from_yaml` - 31 calls
 - `examples.06-api-usage.example.run_prefact_example` - 28 calls
@@ -539,6 +540,7 @@ Functions exposed as public API (no underscore prefix):
 - `src.prefact.reporters.console.print_report` - 24 calls
 - `benchmark_ram_optimization.main` - 22 calls
 - `src.prefact.rules.magic_numbers.MagicNumberRule.scan_file` - 22 calls
+- `src.prefact.rules.benchmark.benchmark_file` - 21 calls
 - `src.prefact.rules.mypy_based.MyPyHelper.check_file` - 21 calls
 - `src.prefact.rules.composite_factory.CompositeRuleFactory.create_composite_rule` - 20 calls
 - `vscode-extension.src.extension.PrefactTreeProvider.activate` - 20 calls
@@ -546,30 +548,29 @@ Functions exposed as public API (no underscore prefix):
 - `src.prefact.rules.unused_imports.UnusedImports.fix` - 19 calls
 - `examples.06-api-usage.example.batch_processing_example` - 19 calls
 - `examples.sample-project.cli.main` - 18 calls
-- `src.prefact.cli.autonomous_cmd` - 17 calls
-- `benchmark_ram_optimization.run_benchmark` - 16 calls
 - `src.prefact.engine.RefactoringEngine.run` - 16 calls
+- `benchmark_ram_optimization.run_benchmark` - 16 calls
 - `src.prefact.performance.cache.cached_file_operation` - 16 calls
 - `src.prefact.autonomous.AutonomousRefact.run_autonomous` - 16 calls
 - `src.prefact.autonomous.AutonomousRefact.update_planfile` - 16 calls
+- `src.prefact.rules.benchmark.print_benchmark_results` - 16 calls
 - `src.prefact.rules.migration.RuleMigrationManager.create_hybrid_rule` - 16 calls
 - `examples.06-api-usage.example.custom_rule_example` - 16 calls
+- `src.prefact.cli.autonomous_cmd` - 15 calls
 - `src.prefact.plugins.PluginManager.load_plugin` - 15 calls
 - `src.prefact.autonomous.AutonomousRefact.run_examples` - 15 calls
 - `src.prefact.rules.unimport_based.UnimportUnusedImports.scan_file` - 15 calls
 - `benchmark_ram_optimization.benchmark_without_rampreload` - 14 calls
 - `src.prefact.performance.cache.cached_result` - 14 calls
+- `src.prefact.autonomous.AutonomousRefact.update_changelog_md` - 14 calls
 - `src.prefact.rules.unimport_based.UnimportAll.validate` - 14 calls
 - `src.prefact.rules.autoflake_based.AutoflakeAll.validate` - 14 calls
 - `src.prefact.config.Config.from_yaml` - 13 calls
 - `vscode-extension.src.extension.PrefactTreeProvider.getChildren` - 13 calls
 - `src.prefact.git_hooks.main` - 12 calls
 - `src.prefact.config_extended.ConfigValidator.validate` - 12 calls
-- `src.prefact.autonomous.AutonomousRefact.update_changelog_md` - 12 calls
 - `src.prefact.rules.import_linter_based.ImportLinterNoRelative.scan_file` - 12 calls
 - `src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule.scan_file` - 12 calls
-- `src.prefact.rules.string_transformations.StringConcatToFString.validate` - 12 calls
-- `src.prefact.git_hooks.PreCommitConfig.install` - 11 calls
 
 ## System Interactions
 

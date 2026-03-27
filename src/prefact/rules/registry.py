@@ -5,7 +5,7 @@ at startup, significantly improving CLI cold-start performance.
 """
 
 import importlib
-from typing import Dict, List, Optional, Type, Union
+from typing import Dict, List, Optional, Type
 
 from prefact.rules import BaseRule
 

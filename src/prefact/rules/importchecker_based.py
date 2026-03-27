@@ -152,14 +152,14 @@ class ImportCheckerUnusedImports(BaseRule):
                         imports = parts[3].split(",")
                         for imp in imports:
                             name = imp.strip().split(" as ")[0]
-                            import_lines[name] = f"{i + 1}"
+                            import_lines[name] = str(i + 1)
                             if module:
-                                import_lines[f"{module}.{name}"] = f"{i + 1}"
+                                import_lines[f"{module}.{name}"] = str(i + 1)
                 else:
                     imports = stripped[6:].split(",")  # Remove "import"
                     for imp in imports:
                         name = imp.strip().split(" as ")[0].split(".")[0]
-                        import_lines[name] = f"{i + 1}"
+                        import_lines[name] = str(i + 1)
         
         return import_lines
     

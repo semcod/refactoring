@@ -1,18 +1,18 @@
-# code2llm | 50f 11274L | python:48,shell:1,typescript:1 | 2026-03-27
-# CC̄=3.3 | critical:5/660 | dups:0 | cycles:0
+# code2llm | 51f 11445L | python:49,shell:1,typescript:1 | 2026-03-27
+# CC̄=3.3 | critical:5/664 | dups:0 | cycles:0
 
 HEALTH[5]:
   🟡 CC    from_yaml CC=15 (limit:15)
   🟡 CC    scan_file CC=15 (limit:15)
-  🟡 CC    fix CC=21 (limit:15)
   🟡 CC    update_todo_md CC=24 (limit:15)
   🟡 CC    execute_todos CC=25 (limit:15)
+  🟡 CC    fix CC=21 (limit:15)
 
 REFACTOR[1]:
   1. split 5 high-CC methods  (CC>15)
 
 PIPELINES[513]:
-  [1] Src [main]: main → run_benchmark → create_test_files → range → ...(1 more)
+  [1] Src [main]: main → find_examples
       PURITY: 100% pure
   [2] Src [__init__]: __init__
       PURITY: 100% pure
@@ -26,7 +26,7 @@ PIPELINES[513]:
 LAYERS:
   src/                            CC̄=3.3    ←in:0  →out:0
   │ !! autonomous                 747L  1C   16m  CC=25     ←0
-  │ string_transformations     488L  6C   27m  CC=8      ←0
+  │ string_transformations     491L  6C   27m  CC=8      ←0
   │ importchecker_based        480L  5C   24m  CC=14     ←0
   │ isort_based                466L  4C   23m  CC=13     ←0
   │ !! config_extended            465L  3C   18m  CC=15     ←2
@@ -42,15 +42,16 @@ LAYERS:
   │ __init__                   319L  3C   17m  CC=10     ←0
   │ ruff_based                 307L  6C   19m  CC=4      ←0
   │ composite_rules            268L  3C   16m  CC=12     ←0
-  │ registry                   250L  1C   13m  CC=8      ←7
-  │ cli                        240L  0C   10m  CC=6      ←1
+  │ registry                   250L  1C   13m  CC=8      ←8
+  │ cli                        237L  0C   10m  CC=6      ←1
   │ migration                  228L  3C   10m  CC=5      ←0
-  │ relative_imports           212L  2C    9m  CC=14     ←0
+  │ relative_imports           215L  2C    9m  CC=14     ←0
   │ llm_hallucinations         210L  1C    9m  CC=8      ←0
   │ config                     192L  2C   13m  CC=5      ←3
   │ llm_generated_code         187L  1C    9m  CC=7      ←0
   │ __init__                   178L  1C    7m  CC=1      ←0
   │ !! unused_imports             163L  1C    8m  CC=21     ←0
+  │ benchmark                  161L  0C    4m  CC=7      ←0
   │ engine                     158L  1C    5m  CC=13     ←0
   │ scanner                    152L  1C    7m  CC=12     ←0
   │ strategies                 148L  4C   10m  CC=5      ←0
@@ -61,10 +62,10 @@ LAYERS:
   │ console                     64L  0C    1m  CC=14     ←0
   │ ai_boilerplate              62L  1C    3m  CC=4      ←0
   │ string_concat               62L  1C    5m  CC=6      ←0
+  │ sorted_imports              59L  1C    4m  CC=7      ←0
   │ json_reporter               57L  0C    2m  CC=4      ←1
-  │ sorted_imports              55L  1C    4m  CC=7      ←0
   │ print_statements            54L  1C    3m  CC=9      ←0
-  │ fixer                       51L  1C    3m  CC=7      ←0
+  │ fixer                       49L  1C    3m  CC=7      ←0
   │ type_hints                  42L  1C    3m  CC=6      ←0
   │ wildcard_imports            41L  1C    3m  CC=7      ←0
   │ __init__                    41L  0C    0m  CC=0.0    ←0
@@ -77,7 +78,7 @@ LAYERS:
   │ extension.ts               441L  5C   48m  CC=14     ←22
   │
   ./                              CC̄=2.6    ←in:0  →out:0
-  │ benchmark_ram_optimization   217L  0C    5m  CC=7      ←0
+  │ benchmark_ram_optimization   222L  0C    5m  CC=7      ←0
   │ project.sh                  23L  0C    0m  CC=0.0    ←0
   │
 

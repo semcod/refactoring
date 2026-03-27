@@ -224,7 +224,7 @@ class PprefactPylintPlugin:
     """Custom Pylint plugin for prefact-specific checks."""
     
     @staticmethod
-    def register(linter):
+    def register(linter) -> None:
         """Register the custom checker with Pylint."""
         # This would be used if creating a proper Pylint plugin
         pass

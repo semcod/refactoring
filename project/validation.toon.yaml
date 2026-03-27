@@ -1,7 +1,7 @@
-# vallm batch | 155f | 89✓ 4⚠ 24✗ | 2026-03-27
+# vallm batch | 155f | 90✓ 4⚠ 23✗ | 2026-03-27
 
 SUMMARY:
-  scanned: 155  passed: 89 (57.4%)  warnings: 4  errors: 24  unsupported: 42
+  scanned: 155  passed: 90 (58.1%)  warnings: 4  errors: 23  unsupported: 42
 
 WARNINGS[4]{path,score}:
   vscode-extension/src/extension.ts,0.92
@@ -21,10 +21,7 @@ WARNINGS[4]{path,score}:
       complexity.cyclomatic,warning,fix has cyclomatic complexity 21 (max: 15),111
       complexity.lizard_cc,warning,fix: CC=19 exceeds limit 15,111
 
-ERRORS[24]{path,score}:
-  src/prefact/rules/benchmark.py,0.00
-    issues[1]{rule,severity,message,line}:
-      syntax.parse,error,SyntaxError: unterminated f-string literal (detected at line 112),112
+ERRORS[23]{path,score}:
   examples/01-individual-rules/relative-imports/after.py,0.57
     issues[8]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'mypackage.models' not found,3
@@ -82,8 +79,8 @@ ERRORS[24]{path,score}:
       python.import.resolvable,error,Module 'pytest' not found,7
   src/prefact/rules/string_transformations.py,0.90
     issues[2]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'flynt' not found,268
-      python.import.resolvable,error,Module 'flynt.api' not found,269
+      python.import.resolvable,error,Module 'flynt' not found,271
+      python.import.resolvable,error,Module 'flynt.api' not found,272
   src/prefact/performance/cache.py,0.93
     issues[1]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'diskcache' not found,16

@@ -14,11 +14,14 @@ from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
 
+# Constants for string transformations
+MAX_LINE_LENGTH = 88
+
 
 class StringConcatTransformer(cst.CSTTransformer):
     """Transform string concatenations to f-strings."""
     
-    def __init__(self):
+    def __init__(self) -> None:
         self.fixes = []
         self.changes = []
     
@@ -61,7 +64,7 @@ class StringConcatTransformer(cst.CSTTransformer):
         """Recursively collect all parts of a string concatenation."""
         parts = []
         
-        def collect(n):
+        def collect(n) -> None:
             if isinstance(n, cst.BinaryOperation) and isinstance(n.operator, cst.Add):
                 collect(n.left)
                 collect(n.right)
@@ -178,7 +181,7 @@ class StringConcatToFString(BaseRule):
     
     def _is_string_concat(self, node: ast.BinOp) -> bool:
         """Check if a BinOp is a string concatenation."""
-        def check(n):
+        def check(n) -> Any:
             if isinstance(n, ast.BinOp) and isinstance(n.op, ast.Add):
                 return check(n.left) and check(n.right)
             elif isinstance(n, ast.Str) or isinstance(n, ast.Constant) and isinstance(n.value, str):
@@ -272,7 +275,7 @@ class FlyntHelper:
             options = {
                 "aggressive": True,
                 "multiline": True,
-                "len_limit": 88,
+                "len_limit": MAX_LINE_LENGTH,
             }
             
             # Apply transformations
@@ -366,7 +369,7 @@ class FlyntStringFormatting(BaseRule):
 class ContextAwareStringTransformer(cst.CSTTransformer):
     """Transform string concatenations with context awareness."""
     
-    def __init__(self, config: Config):
+    def __init__(self, config: Config) -> None:
         self.config = config
         self.fixes = []
         self.in_function_def = False

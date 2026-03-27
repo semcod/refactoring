@@ -82,7 +82,7 @@ class Scanner:
         # Load gitignore patterns
         self._gitignore_patterns = _load_gitignore(config.project_root)
         # Combine with config exclude patterns
-        self._exclude_patterns = list(config.exclude) + self._gitignore_patterns
+        self._exclude_patterns = [*config.exclude, *self._gitignore_patterns]
         for rule_id, rule_cls in get_all_rules().items():
             if config.rule_enabled(rule_id):
                 self._rules.append(rule_cls(config))

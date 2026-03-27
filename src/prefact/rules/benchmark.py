@@ -20,7 +20,7 @@ def benchmark_file(file_path: Path, config: Config) -> Dict:
     results = {
         "file": str(file_path),
         "file_size_bytes": len(source),
-        "lines": f"{source.count("\n")}{1}",
+        "lines": source.count(chr(10)) + 1,
         "rules": {}
     }
     
@@ -109,10 +109,9 @@ def benchmark_project(project_root: Path, config: Config) -> Dict:
 
 def print_benchmark_results(results: Dict) -> None:
     """Print formatted benchmark results."""
-    print(f"
-{"="*60}")
+    print("=" * 60)
     print("PERFORMANCE BENCHMARK RESULTS")
-    print("="*60)
+    print("=" * 60)
     
     # Overall summary
     print(f"\nProject: {results['project_root']}")
@@ -122,10 +121,9 @@ def print_benchmark_results(results: Dict) -> None:
     print(f"Overall speedup: {results['overall_speedup']:.2f}x")
     
     # Per-file details
-    print(f"
-{"-"*60}")
+    print("-" * 60)
     print("PER-FILE RESULTS")
-    print("-"*60)
+    print("-" * 60)
     
     for result in results["results"]:
         file_name = Path(result["file"]).name

@@ -2864,3 +2864,16 @@ sprints:
     model_hints:
       planning: balanced
       implementation: balanced
+  - id: ticket-324f7c1c
+    name: Fix magic-numbers issues
+    description: Resolve 2 magic-numbers issues in src/prefact/rules/relative_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/relative_imports.py
+    rule_id: magic-numbers
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced

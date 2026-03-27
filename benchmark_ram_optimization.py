@@ -24,6 +24,7 @@ LARGE_FILE_COUNT = 500
 SMALL_FILE_SIZE = 1
 MEDIUM_FILE_SIZE = 5
 LARGE_FILE_SIZE = 10
+SEPARATOR_LENGTH = 40
 
 
 def create_test_files(base_dir: Path, num_files: int = 100, file_size_kb: int = 1) -> List[Path]:
@@ -182,7 +183,7 @@ def main() -> None:
     
     for num_files, file_size_kb in test_cases:
         print(f"\nTest case: {num_files} files × {file_size_kb}KB")
-        print("-" * 40)
+        print("-" * SEPARATOR_LENGTH)
         
         try:
             results = run_benchmark(num_files, file_size_kb)
@@ -215,3 +216,7 @@ def main() -> None:
         print("-" * 60)
         print(f"Average improvement: {avg_improvement:.1f}%")
         print(f"Average speedup:     {avg_speedup:.2f}x")
+
+
+if __name__ == "__main__":
+    main()

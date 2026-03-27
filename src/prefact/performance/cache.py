@@ -82,7 +82,7 @@ class Cache:
     
     def get_stats(self) -> Dict[str, Any]:
         """Get cache statistics."""
-        total_requests = f"{self.stats["hits"]}{self.stats["misses"]}"
+        total_requests = self.stats["hits"] + self.stats["misses"]
         hit_rate = self.stats["hits"] / total_requests if total_requests > 0 else 0
         
         return {
@@ -316,8 +316,8 @@ def cleanup_cache() -> None:
 # Cache decorators
 def cached_result(expire: int = 3600, key_func=None) -> Any:
     """Decorator to cache function results."""
-    def decorator(func):
-        def wrapper(*args, **kwargs):
+    def decorator(func) -> Any:
+        def wrapper(*args, **kwargs) -> Any:
             if not DISKCACHE_AVAILABLE:
                 return func(*args, **kwargs)
             
@@ -346,8 +346,8 @@ def cached_result(expire: int = 3600, key_func=None) -> Any:
 
 def cached_file_operation(expire: int = DEFAULT_CACHE_EXPIRE) -> Any:
     """Decorator to cache file operations."""
-    def decorator(func):
-        def wrapper(file_path: Path, *args, **kwargs):
+    def decorator(func) -> Any:
+        def wrapper(file_path: Path, *args, **kwargs) -> Any:
             if not DISKCACHE_AVAILABLE:
                 return func(file_path, *args, **kwargs)
             

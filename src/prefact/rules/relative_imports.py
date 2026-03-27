@@ -15,6 +15,9 @@ import libcst as cst
 
 from prefact.config import Config
 from prefact.models import Fix, Issue, Severity, ValidationResult
+
+# Constants
+DOT_CHAR_CODE = 46
 from prefact.rules import BaseRule, register
 
 
@@ -68,7 +71,7 @@ class _RelativeImportFixer(cst.CSTTransformer):
         new_module = _str_to_module(abs_module)
         self.fixes.append(
             {
-                "original": f"{"." * level}{(_module_to_str(updated_node.module) if updated_node.module else "")}",
+                "original": f"{chr(DOT_CHAR_CODE) * level}{(_module_to_str(updated_node.module) if updated_node.module else '')}",
                 "fixed": abs_module,
             }
         )
@@ -118,7 +121,7 @@ class RelativeToAbsoluteImports(BaseRule):
         for node in ast.walk(tree):
             if isinstance(node, ast.ImportFrom) and (node.level or 0) > 0:
                 module_str = node.module or ""
-                original = f"{"." * node.level}{module_str}"
+                original = f"{chr(DOT_CHAR_CODE) * node.level}{module_str}"
                 issues.append(
                     Issue(
                         rule_id=self.rule_id,

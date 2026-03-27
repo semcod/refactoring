@@ -310,9 +310,9 @@ def get_plugin_manager(config: Optional[Config] = None) -> PluginManager:
 
 
 # Decorator for plugin rules
-def register_plugin_rule(plugin_name: str, version: str = "1.0.0"):
+def register_plugin_rule(plugin_name: str, version: str = "1.0.0") -> Any:
     """Decorator to register a rule as part of a plugin."""
-    def decorator(rule_class: Type[BaseRule]):
+    def decorator(rule_class: Type[BaseRule]) -> Any:
         # This would be used by plugin authors
         # The actual registration happens when the plugin is loaded
         return rule_class

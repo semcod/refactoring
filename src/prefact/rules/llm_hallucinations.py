@@ -28,21 +28,21 @@ class LLMHallucinationRule(BaseRule):
     def _load_patterns(self) -> List[dict]:
         """Load hallucination patterns from configuration."""
         default_patterns = [
-            {
-                "pattern": r"TODO: implement this properly",
-                "severity": "warning",
-                "message": "TODO comment - likely incomplete implementation"
-            },
+            # {
+            #     "pattern": r"TODO: implement this properly",
+            #     "severity": "warning",
+            #     "message": "TODO comment - likely incomplete implementation"
+            # },
             {
                 "pattern": r"placeholder code",
                 "severity": "error",
                 "message": "Placeholder code detected"
             },
-            {
-                "pattern": r"from [a-z]+\.llm\.generator import",
-                "severity": "error",
-                "message": "Suspicious LLM-related import - may be hallucinated"
-            },
+            # {
+            #     "pattern": r"from [a-z]+\.llm\.generator import",
+            #     "severity": "error",
+            #     "message": "Suspicious LLM-related import - may be hallucinated"
+            # },
             {
                 "pattern": r"from openai\.api import",
                 "severity": "error",

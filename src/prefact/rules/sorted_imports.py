@@ -9,6 +9,10 @@ from prefact.rules import BaseRule, register
 
 _STDLIB = set(sys.stdlib_module_names) if hasattr(sys, "stdlib_module_names") else set()
 
+# Constants for import sorting
+MIN_IMPORTS_FOR_SORTING = 2
+DEFAULT_PRIORITY = 99
+
 
 def _sort_key(node: ast.stmt) -> tuple[int, str]:
     if isinstance(node, ast.Import):
@@ -16,7 +20,7 @@ def _sort_key(node: ast.stmt) -> tuple[int, str]:
     elif isinstance(node, ast.ImportFrom):
         name = node.module or ""
     else:
-        return (99, "")
+        return (DEFAULT_PRIORITY, "")
     top = name.split(".")[0]
     group = 0 if top in _STDLIB else (2 if top.startswith("_") else 1)
     return (group, name.lower())
@@ -34,7 +38,7 @@ class SortedImports(BaseRule):
         except SyntaxError:
             return issues
         imports = [n for n in ast.iter_child_nodes(tree) if isinstance(n, (ast.Import, ast.ImportFrom))]
-        if len(imports) < 2:
+        if len(imports) < MIN_IMPORTS_FOR_SORTING:
             return issues
         keys = [_sort_key(n) for n in imports]
         if keys != sorted(keys):

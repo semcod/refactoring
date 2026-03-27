@@ -1,7 +1,5 @@
 """Fixer – applies fixes suggested by rules."""
 
-from __future__ import annotations
-
 import shutil
 from pathlib import Path
 

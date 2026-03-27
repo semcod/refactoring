@@ -313,11 +313,11 @@ class PerformanceMonitor:
         self.stats["files_scanned"] += files_scanned
         self.stats["total_time"] += elapsed
     
-    def record_cache_hit(self):
+    def record_cache_hit(self) -> None:
         """Record a cache hit."""
         self.stats["cache_hits"] += 1
     
-    def record_cache_miss(self):
+    def record_cache_miss(self) -> None:
         """Record a cache miss."""
         self.stats["cache_misses"] += 1
     

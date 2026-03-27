@@ -59,7 +59,7 @@ class ISortHelper:
             for block in import_blocks:
                 if not ISortHelper._is_block_sorted(block, isort_config):
                     issues.append({
-                        "line": f"{block['start_line'] + 1}",
+                        "line": str(block['start_line'] + 1),
                         "message": f"Import block not properly sorted (lines {block['start_line'] + 1}-{block['end_line'] + 1})",
                         "type": "unsorted_imports"
                     })

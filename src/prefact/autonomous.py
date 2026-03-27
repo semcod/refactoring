@@ -28,6 +28,7 @@ from prefact.scanner import Scanner
 
 # Constants for code analysis
 MIN_CODE_SIZE = 50
+HASH_BLOCK_SIZE = 65536
 
 console = Console()
 
@@ -194,7 +195,6 @@ class AutonomousRefact:
             engine = RefactoringEngine(config)
             
             # Get list of files to scan
-            from prefact.scanner import Scanner
             scanner = Scanner(config)
             files_to_scan = list(scanner.collect_files())
             
@@ -693,7 +693,7 @@ class AutonomousRefact:
             while insert_pos < len(lines) and not lines[insert_pos].startswith("##"):
                 insert_pos += 1
             
-            new_content = f"{'\n'.join(lines[:insert_pos])}\n{entry}\n{'\n'.join(lines[insert_pos:])}"
+            new_content = f"{chr(10).join(lines[:insert_pos])}\n{entry}\n{chr(10).join(lines[insert_pos:])}"
         else:
             new_content = f"# Changelog\n\n{entry}"
         

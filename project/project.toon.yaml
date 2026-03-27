@@ -1,4 +1,4 @@
-# prefact | 581 func | 44f | 12625L | python | 2026-03-27
+# prefact | 585 func | 45f | 12629L | python | 2026-03-27
 
 HEALTH:
   CC̄=3.3  critical=21 (limit:10)  dup=0  cycles=0
@@ -15,9 +15,9 @@ ALERTS[20]:
   !!  high_fan_out     ExtendedConfig.from_yaml = 16 (limit:10)
   !!  high_fan_out     RefactoringEngine.run = 15 (limit:10)
 
-MODULES[50] (top by size):
+MODULES[51] (top by size):
   M[src/prefact/autonomous.py] 747L C:1 F:16 CC↑25 D:0 (python)
-  M[src/prefact/rules/string_transformations.py] 488L C:6 F:27 CC↑8 D:0 (python)
+  M[src/prefact/rules/string_transformations.py] 491L C:6 F:27 CC↑8 D:0 (python)
   M[src/prefact/rules/importchecker_based.py] 480L C:5 F:24 CC↑14 D:0 (python)
   M[src/prefact/rules/isort_based.py] 466L C:4 F:23 CC↑13 D:0 (python)
   M[src/prefact/config_extended.py] 465L C:3 F:18 CC↑15 D:0 (python)
@@ -28,10 +28,10 @@ MODULES[50] (top by size):
   M[src/prefact/logging.py] 434L C:10 F:28 CC↑4 D:0 (python)
   M[src/prefact/performance/cache.py] 433L C:6 F:37 CC↑5 D:9 (python)
   M[src/prefact/rules/mypy_based.py] 394L C:6 F:22 CC↑9 D:0 (python)
-  M[src/prefact/rules/pylint_based.py] 392L C:5 F:22 CC↑6 D:0 (python)
+  M[src/prefact/rules/pylint_based.py] 392L C:5 F:22 CC↑6 D:1 (python)
   M[src/prefact/git_hooks.py] 383L C:2 F:17 CC↑8 D:0 (python)
   M[src/prefact/performance/parallel.py] 348L C:4 F:23 CC↑7 D:0 (python)
-  LANGS: python:48/typescript:1/shell:1
+  LANGS: python:49/typescript:1/shell:1
 
 HOTSPOTS[10]:
   ★ AutonomousRefact.execute_todos fan=29  // Execute all tasks from TODO.md, marking completed ones and removing obsolete one
@@ -44,8 +44,8 @@ REFACTOR[9]:
   [1] H/L Split AutonomousRefact.execute_todos (CC=25 → target CC<10)
   [2] H/H Split god module src/prefact/autonomous.py (747L, 1 classes)
   [3] M/L Split ExtendedConfig.from_yaml (CC=15 → target CC<10)
-  [4] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
-  [5] M/L Split UnusedImports.fix (CC=21 → target CC<10)
+  [4] M/L Split AutonomousRefact.update_todo_md (CC=24 → target CC<10)
+  [5] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
 
 EVOLUTION:
-  2026-03-27 CC̄=3.3 crit=21 12625L // Automated analysis
+  2026-03-27 CC̄=3.3 crit=21 12629L // Automated analysis
