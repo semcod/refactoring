@@ -17,7 +17,7 @@ from prefact.reporters import json_reporter
 @click.group(invoke_without_command=True)
 @click.pass_context
 @click.option("-a", "--autonomous", is_flag=True, help="Run autonomous mode (initialize, scan, and create tickets).")
-@click.option("--init-only", is_flag=True, help="Only initialize refact.yaml without running full process.")
+@click.option("--init-only", is_flag=True, help="Only initialize prefact.yaml without running full process.")
 @click.option("--skip-tests", is_flag=True, help="Skip running tests.")
 @click.option("--skip-examples", is_flag=True, help="Skip running examples.")
 @click.version_option(package_name="prefact")
@@ -27,7 +27,7 @@ def main(ctx, autonomous, init_only, skip_tests, skip_examples) -> None:
     Detect, fix, and validate common code issues – especially those
     introduced by LLMs (e.g. relative imports, unused imports).
     
-    Use 'refact -a' for autonomous mode.
+    Use 'prefact -a' for autonomous mode.
     """
     if autonomous:
         # Run autonomous command directly with all options
@@ -168,13 +168,13 @@ rules:
 
 @main.command()
 @click.option("-p", "--path", "project_path", default=".", help="Project root directory.")
-@click.option("--init-only", is_flag=True, help="Only initialize refact.yaml without running full process.")
+@click.option("--init-only", is_flag=True, help="Only initialize prefact.yaml without running full process.")
 @click.option("--skip-tests", is_flag=True, help="Skip running tests.")
 @click.option("--skip-examples", is_flag=True, help="Skip running examples.")
 def autonomous_cmd(project_path, init_only, skip_tests, skip_examples) -> None:
     """Run autonomous refact mode (-a).
     
-    Automatically initializes refact.yaml if missing, runs examples,
+    Automatically initializes prefact.yaml if missing, runs examples,
     scans for issues, and creates tickets in planfile.yaml.
     """
     from rich.console import Console
@@ -186,11 +186,11 @@ def autonomous_cmd(project_path, init_only, skip_tests, skip_examples) -> None:
     
     if init_only:
         if not auto.refact_config_path.exists():
-            console.print("📝 Creating refact.yaml configuration...")
+            console.print("📝 Creating prefact.yaml configuration...")
             auto.create_refact_config()
             console.print("✅ Initialization complete!", style="green")
         else:
-            console.print("ℹ️ refact.yaml already exists", style="blue")
+            console.print("ℹ️ prefact.yaml already exists", style="blue")
         return
     
     # Run full autonomous process

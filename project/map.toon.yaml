@@ -1,15 +1,15 @@
-# prefact | 45f 10587L | python:43,typescript:1,shell:1 | 2026-03-27
-# stats: 560 func | 0 cls | 45 mod | CC̄=3.2 | critical:6 | cycles:0
-# alerts[5]: fan-out PrefactTreeProvider.activate=20; CC UnusedImports.fix=21; fan-out CompositeRuleFactory.create_composite_rule=18; CC _collect_used_names=17; CC Config.detect_package_name=16
+# prefact | 50f 10775L | python:48,typescript:1,shell:1 | 2026-03-27
+# stats: 574 func | 0 cls | 50 mod | CC̄=3.1 | critical:3 | cycles:0
+# alerts[5]: fan-out PrefactTreeProvider.activate=20; CC UnusedImports.fix=21; fan-out CompositeRuleFactory.create_composite_rule=18; fan-out ExtendedConfig.from_yaml=16; CC ExtendedConfig.from_yaml=15
 # hotspots[5]: PrefactTreeProvider.activate fan=20; CompositeRuleFactory.create_composite_rule fan=18; ExtendedConfig.from_yaml fan=16; AutonomousRefact.update_todo_md fan=13; cached_file_operation fan=13
-# evolution: baseline
+# evolution: CC̄ 3.2→3.1 (improved -0.1)
 # Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
-M[45]:
-  project.sh,21
+M[50]:
+  project.sh,22
   src/prefact/__init__.py,3
   src/prefact/autonomous.py,455
   src/prefact/cli.py,240
-  src/prefact/config.py,144
+  src/prefact/config.py,197
   src/prefact/config_extended.py,462
   src/prefact/engine.py,74
   src/prefact/fixer.py,46
@@ -24,49 +24,49 @@ M[45]:
   src/prefact/reporters/__init__.py,1
   src/prefact/reporters/console.py,66
   src/prefact/reporters/json_reporter.py,59
-  src/prefact/rules/__init__.py,138
+  src/prefact/rules/__init__.py,143
+  src/prefact/rules/ai_boilerplate.py,65
   src/prefact/rules/autoflake_based.py,468
   src/prefact/rules/benchmark.py,167
-  src/prefact/rules/composite.py,502
+  src/prefact/rules/composite_factory.py,116
+  src/prefact/rules/composite_rules.py,271
   src/prefact/rules/duplicate_imports.py,77
   src/prefact/rules/import_linter_based.py,449
   src/prefact/rules/importchecker_based.py,482
   src/prefact/rules/isort_based.py,440
-  src/prefact/rules/llm_specific.py,555
+  src/prefact/rules/llm_generated_code.py,189
+  src/prefact/rules/llm_hallucinations.py,212
+  src/prefact/rules/magic_numbers.py,136
   src/prefact/rules/migration.py,230
-  src/prefact/rules/mypy_based.py,377
+  src/prefact/rules/mypy_based.py,400
   src/prefact/rules/print_statements.py,56
   src/prefact/rules/pylint_based.py,401
   src/prefact/rules/registry.py,254
   src/prefact/rules/relative_imports.py,214
   src/prefact/rules/ruff_based.py,310
   src/prefact/rules/sorted_imports.py,57
+  src/prefact/rules/strategies.py,150
   src/prefact/rules/string_concat.py,64
   src/prefact/rules/string_transformations.py,491
   src/prefact/rules/type_hints.py,44
   src/prefact/rules/unimport_based.py,454
-  src/prefact/rules/unused_imports.py,140
+  src/prefact/rules/unused_imports.py,164
   src/prefact/rules/wildcard_imports.py,43
   src/prefact/scanner.py,50
   src/prefact/validator.py,30
   vscode-extension/src/extension.ts,441
 D:
   src/prefact/rules/unused_imports.py:
-    e: UnusedImports,_collect_imported_names,_collect_used_names
+    e: UnusedImports,_collect_imported_names,_collect_used_names,_get_import_lines,_get_attribute_root,_process_assignment_for_all
     UnusedImports(BaseRule): scan_file(2),fix(3),validate(3)
     _collect_imported_names(tree)
     _collect_used_names(tree)
-  src/prefact/config.py:
-    e: RuleConfig,Config
-    RuleConfig:  # Configuration for a single rule...
-    Config: from_yaml(1),rule_enabled(1),is_rule_enabled(1),rule_options(1),get_rule_option(3),set_rule_option(3),detect_package_name(0)  # Top-level configuration...
-  src/prefact/rules/mypy_based.py:
-    e: MyPyHelper,MyPyMissingReturnType,MyPyTypeChecking,ReturnTypeInferrer,SmartReturnTypeRule
-    MyPyHelper: check_file(1),check_source(1)  # Helper class for MyPy operations...
-    MyPyMissingReturnType(BaseRule): __init__(1),_load_mypy_config(0),scan_file(2),_is_public_function(2),fix(3),validate(3)  # Detect missing return type annotations using MyPy...
-    MyPyTypeChecking(BaseRule): __init__(1),_load_mypy_config(0),scan_file(2),fix(3),validate(3)  # General type checking using MyPy...
-    ReturnTypeInferrer: infer_return_type(1)  # Infer return types for simple functions...
-    SmartReturnTypeRule(BaseRule): scan_file(2),fix(3),validate(3)  # Smart return type detection with inference suggestions...
+    _get_import_lines(tree)
+    _get_attribute_root(node)
+    _process_assignment_for_all(node;used)
+  src/prefact/rules/magic_numbers.py:
+    e: MagicNumberRule
+    MagicNumberRule(BaseRule): __init__(1),_load_allowed_numbers(0),scan_file(2),_is_magic_number(1),fix(3),validate(3)  # Detect magic numbers in code...
   src/prefact/config_extended.py:
     e: ExtendedConfig,ConfigValidator,ConfigGenerator,load_config_with_env,merge_configs
     ExtendedConfig(Config): __init__(9),from_yaml(2),_deep_merge(1),get_tool_config(1),get_performance_setting(2),get_plugin_config(1),to_dict(0)  # Extended configuration with additional features...
@@ -74,12 +74,6 @@ D:
     ConfigGenerator: generate_extended_config(2),generate_composite_rule_config(3),save_config(1)  # Generate configuration files...
     load_config_with_env(config_path;environment)
     merge_configs(base;override)
-  src/prefact/rules/llm_specific.py:
-    e: LLMHallucinationRule,MagicNumberRule,LLMGeneratedCodeRule,AIBoilerplateRule
-    LLMHallucinationRule(BaseRule): __init__(1),_load_patterns(0),scan_file(2),_check_ast_patterns(2),_is_suspicious_function_name(1),_is_suspicious_import(1),_map_severity(1),fix(3),validate(3)  # Detect LLM hallucination patterns in code...
-    MagicNumberRule(BaseRule): __init__(1),_load_allowed_numbers(0),scan_file(2),_is_magic_number(1),fix(3),validate(3)  # Detect magic numbers in code...
-    LLMGeneratedCodeRule(BaseRule): __init__(1),_load_indicators(0),scan_file(2),_check_comment_ratio(2),_check_docstring_patterns(2),_has_llm_docstring_pattern(1),_map_severity(1),fix(3),validate(3)  # Detect code that appears to be LLM-generated...
-    AIBoilerplateRule(BaseRule): scan_file(2),fix(3),validate(3)  # Detect AI boilerplate and template code...
   src/prefact/reporters/console.py:
     e: print_report
     print_report(result)
@@ -97,12 +91,6 @@ D:
     UnimportDuplicateImports(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)  # Remove duplicate imports using unimport...
     UnimportStarImports(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)  # Handle star imports using unimport...
     UnimportAll(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)  # Apply all unimport fixes...
-  src/prefact/rules/relative_imports.py:
-    e: _RelativeImportFixer,RelativeToAbsoluteImports,_module_to_str,_str_to_module
-    _RelativeImportFixer(cst.CSTTransformer): __init__(3),leave_ImportFrom(2),_resolve(2)  # Transform relative imports to absolute using the resolved pa...
-    RelativeToAbsoluteImports(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)
-    _module_to_str(node)
-    _str_to_module(dotted)
   vscode-extension/src/extension.ts:
     i: child_process,fs/promises,path,vscode
     e: PrefactIssue,PrefactResult,PrefactDiagnosticsProvider,PrefactTreeItem,PrefactTreeProvider
@@ -111,23 +99,23 @@ D:
     PrefactDiagnosticsProvider: scanFile(-1),config(-1),result(-1),scanWorkspace(-1),workspaceFolders(-1),config(-1),result(-1),fixFile(-1),document(-1),fixWorkspace(-1),workspaceFolders(-1),runPrefact(-1),config(-1),executablePath(-1),child(-1),resolve(-1),reject(-1),reject(-1),updateDiagnostics(-1),range(-1),severity(-1),diagnostic(-1),updateWorkspaceDiagnostics(-1),diagnosticsByFile(-1),diagnostics(-1),range(-1),severity(-1),diagnostic(-1),entries(-1),getSeverity(-1),showOutput(-1),dispose(-1)
     PrefactTreeItem: super(-1)
     PrefactTreeProvider: refresh(-1),getTreeItem(-1),getChildren(-1),issuesByFile(-1),file(-1),item(-1),fileIssues(-1),item(-1),activate(-1),diagnosticsProvider(-1),treeProvider(-1),treeView(-1),scanCommand(-1),document(-1),scanWorkspaceCommand(-1),fixCommand(-1),document(-1),fixWorkspaceCommand(-1),configureCommand(-1),config(-1),installHooksCommand(-1),workspaceFolders(-1),onSave(-1),config(-1),setInterval(-1),deactivate(-1)
-  src/prefact/rules/composite.py:
-    e: ToolStrategy,ParallelScanStrategy,SequentialScanStrategy,PriorityBasedStrategy,CompositeUnusedImports,CompositeImportRules,CompositeTypeChecking,CompositeRuleFactory,register_composite_rules
-    ToolStrategy(ABC): scan(3),fix(4)  # Abstract base class for tool orchestration strategies...
-    ParallelScanStrategy(ToolStrategy): __init__(1),scan(3),fix(4)  # Run all tools in parallel and merge results...
-    SequentialScanStrategy(ToolStrategy): scan(3),fix(4)  # Run tools sequentially, passing results between them...
-    PriorityBasedStrategy(ToolStrategy): __init__(1),scan(3),fix(4)  # Use tool priority to resolve conflicts...
-    CompositeUnusedImports(BaseRule): __init__(1),_create_strategy(0),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for unused imports using multiple tools...
-    CompositeImportRules(BaseRule): __init__(1),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for all import-related checks...
-    CompositeTypeChecking(BaseRule): __init__(1),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for type checking using multiple tools...
-    CompositeRuleFactory: create_composite_rule(4)  # Factory for creating composite rules dynamically...
-    register_composite_rules(config)
+  src/prefact/rules/relative_imports.py:
+    e: _RelativeImportFixer,RelativeToAbsoluteImports,_module_to_str,_str_to_module
+    _RelativeImportFixer(cst.CSTTransformer): __init__(3),leave_ImportFrom(2),_resolve(2)  # Transform relative imports to absolute using the resolved pa...
+    RelativeToAbsoluteImports(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)
+    _module_to_str(node)
+    _str_to_module(dotted)
   src/prefact/rules/isort_based.py:
     e: ISortHelper,ISortedImports,ImportSectionSeparator,CustomImportOrganization
     ISortHelper: check_file(1),check_source(1),_find_import_blocks(0),_is_block_sorted(1),_needs_section_separators(1),fix_file(1),fix_source(1)  # Helper class for ISort operations...
     ISortedImports(BaseRule): __init__(1),_load_isort_config(0),scan_file(2),fix(3),validate(3)  # Sort imports using ISort...
     ImportSectionSeparator(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)  # Ensure import sections are properly separated...
     CustomImportOrganization(BaseRule): __init__(1),_load_custom_rules(0),scan_file(2),_check_grouping(2),_check_alphabetical(2),fix(3),validate(3)  # Organize imports according to custom rules...
+  src/prefact/rules/composite_rules.py:
+    e: CompositeUnusedImports,CompositeImportRules,CompositeTypeChecking
+    CompositeUnusedImports(BaseRule): __init__(1),_create_strategy(0),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for unused imports using multiple tools...
+    CompositeImportRules(BaseRule): __init__(1),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for all import-related checks...
+    CompositeTypeChecking(BaseRule): __init__(1),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for type checking using multiple tools...
   src/prefact/rules/autoflake_based.py:
     e: AutoflakeHelper,AutoflakeUnusedImports,AutoflakeUnusedVariables,AutoflakeDuplicateKeys,AutoflakeAll
     AutoflakeHelper: check_file(1),check_source(1),fix_file(1),fix_source(1)  # Helper class for Autoflake operations...
@@ -151,6 +139,14 @@ D:
   src/prefact/rules/print_statements.py:
     e: PrintStatements
     PrintStatements(BaseRule): scan_file(2),fix(3),validate(3)
+  src/prefact/rules/mypy_based.py:
+    e: MyPyHelper,MyPyMissingReturnType,MyPyTypeChecking,ReturnTypeInferrer,ReturnTypeAdder,SmartReturnTypeRule
+    MyPyHelper: check_file(1),check_source(1)  # Helper class for MyPy operations...
+    MyPyMissingReturnType(BaseRule): __init__(1),_load_mypy_config(0),scan_file(2),_is_public_function(2),fix(3),validate(3)  # Detect missing return type annotations using MyPy...
+    MyPyTypeChecking(BaseRule): __init__(1),_load_mypy_config(0),scan_file(2),fix(3),validate(3)  # General type checking using MyPy...
+    ReturnTypeInferrer: infer_return_type(1),_analyze_return_types(0),_get_return_value_type(0),_unify_types(0)  # Infer return types for simple functions...
+    ReturnTypeAdder(cst.CSTTransformer): __init__(2),leave_FunctionDef(2)  # Transformer to add return type annotations to functions...
+    SmartReturnTypeRule(BaseRule): scan_file(2),fix(3),validate(3)  # Smart return type detection with inference suggestions...
   src/prefact/git_hooks.py:
     e: GitHooks,PreCommitConfig,install_git_hooks,uninstall_git_hooks,list_git_hooks,main
     GitHooks: __init__(2),_find_git_dir(0),install_hooks(1),_install_hook(2),_generate_hook_script(1),_pre_commit_hook(0),_pre_push_hook(0),_commit_msg_hook(0),uninstall_hooks(1),list_hooks(0),test_hook(1)  # Manages Git hooks for prefact...
@@ -178,6 +174,9 @@ D:
     ImportLinterIndependence(BaseRule): __init__(1),_load_linter_config(0),scan_file(2),fix(3),validate(3)  # Ensure module independence using import-linter...
     ImportLinterCustomArchitecture(BaseRule): __init__(1),_load_custom_config(0),scan_file(2),fix(3),validate(3)  # Enforce custom architectural rules using import-linter...
     generate_import_linter_config(config;output_path)
+  src/prefact/rules/llm_hallucinations.py:
+    e: LLMHallucinationRule
+    LLMHallucinationRule(BaseRule): __init__(1),_load_patterns(0),scan_file(2),_check_ast_patterns(2),_is_suspicious_function_name(1),_is_suspicious_import(1),_map_severity(1),fix(3),validate(3)  # Detect LLM hallucination patterns in code...
   src/prefact/rules/string_transformations.py:
     e: StringConcatTransformer,StringConcatToFString,FlyntHelper,FlyntStringFormatting,ContextAwareStringTransformer,ContextAwareStringConcat
     StringConcatTransformer(cst.CSTTransformer): __init__(0),_get_line_number(1),leave_BinaryOperation(2),_collect_string_parts(1),_eval_string(1),_should_transform(1),_create_fstring(1)  # Transform string concatenations to f-strings...
@@ -201,6 +200,9 @@ D:
   src/prefact/rules/wildcard_imports.py:
     e: WildcardImports
     WildcardImports(BaseRule): scan_file(2),fix(3),validate(3)
+  src/prefact/rules/llm_generated_code.py:
+    e: LLMGeneratedCodeRule
+    LLMGeneratedCodeRule(BaseRule): __init__(1),_load_indicators(0),scan_file(2),_check_comment_ratio(2),_check_docstring_patterns(2),_has_llm_docstring_pattern(1),_map_severity(1),fix(3),validate(3)  # Detect code that appears to be LLM-generated...
   src/prefact/rules/sorted_imports.py:
     e: SortedImports,_sort_key
     SortedImports(BaseRule): scan_file(2),fix(3),validate(3)
@@ -211,6 +213,9 @@ D:
     benchmark_project(project_root;config)
     print_benchmark_results(results)
     main()
+  src/prefact/scanner.py:
+    e: Scanner
+    Scanner: __init__(1),collect_files(0),scan(1),_excluded(1)  # Discovers Python files and runs all enabled rules against th...
   src/prefact/cli.py:
     e: main,_common_options,_build_config,scan,fix,check,init,autonomous_cmd,rules,_output
     main(ctx;autonomous;init_only;skip_tests;skip_examples)
@@ -223,12 +228,14 @@ D:
     autonomous_cmd(project_path;init_only;skip_tests;skip_examples)
     rules()
     _output(result;kwargs)
-  src/prefact/scanner.py:
-    e: Scanner
-    Scanner: __init__(1),collect_files(0),scan(1),_excluded(1)  # Discovers Python files and runs all enabled rules against th...
   src/prefact/rules/type_hints.py:
     e: MissingReturnType
     MissingReturnType(BaseRule): scan_file(2),fix(3),validate(3)
+  src/prefact/rules/string_concat.py:
+    e: StringConcatToFstring,_is_str_concat,_flatten_add
+    StringConcatToFstring(BaseRule): scan_file(2),fix(3),validate(3)
+    _is_str_concat(node)
+    _flatten_add(node)
   src/prefact/rules/pylint_based.py:
     e: PylintHelper,PylintPrintStatements,PylintStringConcat,PrefactPylintPlugin,PylintComprehensive,generate_pylint_rc
     PylintHelper: check_file(1),check_source(1),fix_file(1)  # Helper class for Pylint operations...
@@ -237,11 +244,10 @@ D:
     PrefactPylintPlugin: register(0)  # Custom Pylint plugin for prefact-specific checks...
     PylintComprehensive(BaseRule): __init__(1),_load_pylint_config(0),scan_file(2),_map_pylint_to_prefact(1),_map_pylint_severity(1),fix(3),validate(3)  # Comprehensive analysis using Pylint with custom rules...
     generate_pylint_rc(config;output_path)
-  src/prefact/rules/string_concat.py:
-    e: StringConcatToFstring,_is_str_concat,_flatten_add
-    StringConcatToFstring(BaseRule): scan_file(2),fix(3),validate(3)
-    _is_str_concat(node)
-    _flatten_add(node)
+  src/prefact/config.py:
+    e: RuleConfig,Config
+    RuleConfig:  # Configuration for a single rule...
+    Config: from_yaml(1),_parse_rules(1),_get_default_patterns(0),rule_enabled(1),is_rule_enabled(1),rule_options(1),get_rule_option(3),set_rule_option(3),detect_package_name(0),_detect_from_pyproject(0),_get_tomllib(0),_detect_from_src_layout(0),_detect_from_root_layout(0)  # Top-level configuration...
   src/prefact/performance/cache.py:
     e: Cache,ScanResultCache,ConfigCache,RuleResultCache,FileHashCache,CacheContext,initialize_cache,get_cache,get_scan_cache,get_config_cache,get_rule_cache,get_hash_cache,cleanup_cache,cached_result,cached_file_operation,clear_cache,get_cache_info
     Cache: __init__(2),get(2),set(3),delete(1),clear(0),get_stats(0),close(0)  # Wrapper for diskcache with additional functionality...
@@ -261,6 +267,12 @@ D:
     cached_file_operation(expire)
     clear_cache(pattern)
     get_cache_info()
+  src/prefact/rules/strategies.py:
+    e: ToolStrategy,ParallelScanStrategy,SequentialScanStrategy,PriorityBasedStrategy
+    ToolStrategy(ABC): scan(3),fix(4)  # Abstract base class for tool orchestration strategies...
+    ParallelScanStrategy(ToolStrategy): __init__(1),scan(3),fix(4)  # Run all tools in parallel and merge results...
+    SequentialScanStrategy(ToolStrategy): scan(3),fix(4)  # Run tools sequentially, passing results between them...
+    PriorityBasedStrategy(ToolStrategy): __init__(1),scan(3),fix(4)  # Use tool priority to resolve conflicts...
   src/prefact/rules/migration.py:
     e: RuleMigrationManager,HybridScanner,PerformanceProfiler,add_ruff_config_to_prefact_yaml
     RuleMigrationManager: __init__(1),get_migrated_rule(1),should_use_ruff(1),create_hybrid_rule(1)  # Manages migration from AST-based rules to Ruff-based rules...
@@ -282,6 +294,13 @@ D:
     RuffUnusedImports(BaseRule): scan_file(2),fix(3),validate(3)  # Unused imports detection and removal using Ruff...
     RuffSortedImports(BaseRule): scan_file(2),fix(3),validate(3)  # Import sorting using Ruff...
     RuffDuplicateImports(BaseRule): scan_file(2),fix(3),validate(3)  # Duplicate imports detection using Ruff...
+  src/prefact/rules/composite_factory.py:
+    e: CompositeRuleFactory,register_composite_rules
+    CompositeRuleFactory: create_composite_rule(4)  # Factory for creating composite rules dynamically...
+    register_composite_rules(config)
+  src/prefact/rules/ai_boilerplate.py:
+    e: AIBoilerplateRule
+    AIBoilerplateRule(BaseRule): scan_file(2),fix(3),validate(3)  # Detect AI boilerplate and template code...
   src/prefact/logging.py:
     e: LogLevel,PrefactLogger,JsonFormatter,PrefactException,ConfigurationError,RuleError,PluginError,CacheError,PerformanceError,LogContext,get_logger,setup_logging,setup_telemetry,log_execution,handle_exception
     LogLevel(str,Enum):  # Log levels for prefact...
@@ -306,9 +325,6 @@ D:
     get_all_rules()
     get_rule(rule_id)
   src/prefact/__init__.py:
-  src/prefact/plugins/builtin.py:
-  src/prefact/performance/__init__.py:
-  src/prefact/reporters/__init__.py:
   src/prefact/models.py:
     e: Severity,Phase,Issue,Fix,ValidationResult,PipelineResult
     Severity(enum.Enum):  # How critical an issue is...
@@ -317,4 +333,7 @@ D:
     Fix:  # A concrete code change to apply...
     ValidationResult:  # Result of post-fix validation...
     PipelineResult:  # Aggregate result of the full scan → fix → validate pipeline...
+  src/prefact/plugins/builtin.py:
+  src/prefact/performance/__init__.py:
+  src/prefact/reporters/__init__.py:
   project.sh:

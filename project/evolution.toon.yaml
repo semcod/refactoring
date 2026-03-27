@@ -1,48 +1,26 @@
-# code2llm/evolution | 560 func | 39f | 2026-03-27
+# code2llm/evolution | 574 func | 44f | 2026-03-27
 
-NEXT[8] (ranked by impact):
-  [1] !! SPLIT           src/prefact/rules/llm_specific.py
-      WHY: 555L, 4 classes, max CC=15
-      EFFORT: ~4h  IMPACT: 8325
-
-  [2] !! SPLIT           src/prefact/rules/composite.py
-      WHY: 502L, 8 classes, max CC=12
-      EFFORT: ~4h  IMPACT: 6024
-
-  [3] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
+NEXT[3] (ranked by impact):
+  [1] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
       WHY: CC=21 exceeds 15
       EFFORT: ~1h  IMPACT: 273
 
-  [4] !  SPLIT-FUNC      ExtendedConfig.from_yaml  CC=15  fan=16
+  [2] !  SPLIT-FUNC      ExtendedConfig.from_yaml  CC=15  fan=16
       WHY: CC=15 exceeds 15
       EFFORT: ~1h  IMPACT: 240
 
-  [5] !  SPLIT-FUNC      Config.detect_package_name  CC=16  fan=11
-      WHY: CC=16 exceeds 15
-      EFFORT: ~1h  IMPACT: 176
-
-  [6] !  SPLIT-FUNC      ReturnTypeInferrer.infer_return_type  CC=16  fan=11
-      WHY: CC=16 exceeds 15
-      EFFORT: ~1h  IMPACT: 176
-
-  [7] !  SPLIT-FUNC      MagicNumberRule.scan_file  CC=15  fan=9
+  [3] !  SPLIT-FUNC      MagicNumberRule.scan_file  CC=15  fan=9
       WHY: CC=15 exceeds 15
       EFFORT: ~1h  IMPACT: 135
 
-  [8] !  SPLIT-FUNC      _collect_used_names  CC=17  fan=7
-      WHY: CC=17 exceeds 15
-      EFFORT: ~1h  IMPACT: 119
 
-
-RISKS[2]:
-  ⚠ Splitting src/prefact/rules/llm_specific.py may break 27 import paths
-  ⚠ Splitting src/prefact/rules/composite.py may break 28 import paths
+RISKS[0]: none
 
 METRICS-TARGET:
-  CC̄:          3.2 → ≤2.2
+  CC̄:          3.1 → ≤2.2
   max-CC:      21 → ≤10
-  god-modules: 2 → 0
-  high-CC(≥15): 6 → ≤3
+  god-modules: 0 → 0
+  high-CC(≥15): 3 → ≤1
   hub-types:   0 → ≤0
 
 PATTERNS (language parser shared logic):
@@ -70,4 +48,4 @@ PATTERNS (language parser shared logic):
     - Standardized FunctionInfo/ClassInfo models
 
 HISTORY:
-  (first run — no previous data)
+  prev CC̄=3.2 → now CC̄=3.1

@@ -4,12 +4,12 @@
 
 - **Project**: /home/tom/github/semcod/prefact
 - **Primary Language**: python
-- **Languages**: python: 70, shell: 2, typescript: 1
+- **Languages**: python: 75, shell: 2, typescript: 1
 - **Analysis Mode**: static
-- **Total Functions**: 639
-- **Total Classes**: 131
-- **Modules**: 73
-- **Entry Points**: 586
+- **Total Functions**: 653
+- **Total Classes**: 132
+- **Modules**: 78
+- **Entry Points**: 597
 
 ## Architecture by Module
 
@@ -23,20 +23,10 @@
 - **Classes**: 6
 - **File**: `cache.py`
 
-### src.prefact.rules.composite
-- **Functions**: 28
-- **Classes**: 8
-- **File**: `composite.py`
-
 ### src.prefact.logging
 - **Functions**: 28
 - **Classes**: 10
 - **File**: `logging.py`
-
-### src.prefact.rules.llm_specific
-- **Functions**: 27
-- **Classes**: 4
-- **File**: `llm_specific.py`
 
 ### src.prefact.rules.string_transformations
 - **Functions**: 27
@@ -78,6 +68,11 @@
 - **Classes**: 5
 - **File**: `unimport_based.py`
 
+### src.prefact.rules.mypy_based
+- **Functions**: 22
+- **Classes**: 6
+- **File**: `mypy_based.py`
+
 ### src.prefact.rules.ruff_based
 - **Functions**: 19
 - **Classes**: 6
@@ -98,15 +93,20 @@
 - **Classes**: 3
 - **File**: `__init__.py`
 
-### src.prefact.rules.mypy_based
-- **Functions**: 17
-- **Classes**: 5
-- **File**: `mypy_based.py`
+### src.prefact.rules.composite_rules
+- **Functions**: 16
+- **Classes**: 3
+- **File**: `composite_rules.py`
 
 ### src.prefact.autonomous
 - **Functions**: 15
 - **Classes**: 1
 - **File**: `autonomous.py`
+
+### src.prefact.config
+- **Functions**: 13
+- **Classes**: 2
+- **File**: `config.py`
 
 ### src.prefact.rules.registry
 - **Functions**: 13
@@ -129,34 +129,30 @@ Main execution flows into the system:
 > Run all examples and show results.
 - **Calls**: console.print, examples.run_examples.find_examples, console.print, Table, table.add_column, table.add_column, table.add_column, console.print
 
-### src.prefact.rules.mypy_based.ReturnTypeInferrer.infer_return_type
-> Try to infer return type of a function.
-- **Calls**: ast.parse, ast.walk, isinstance, src.prefact.performance.cache.Cache.set, ast.walk, isinstance, len, len
-
 ### src.prefact.reporters.console.print_report
 - **Calls**: Console, console.print, console.print, console.print, console.print, console.print, Panel, Table
 
-### src.prefact.rules.llm_specific.MagicNumberRule.scan_file
+### src.prefact.rules.magic_numbers.MagicNumberRule.scan_file
 - **Calls**: any, ast.parse, ast.walk, re.match, isinstance, isinstance, isinstance, self._is_magic_number
 
 ### src.prefact.rules.mypy_based.MyPyHelper.check_file
 > Run MyPy on a single file and return JSON results.
 - **Calls**: tempfile.TemporaryDirectory, Path, str, str, config.get, config.get, subprocess.run, report_file.exists
 
-### src.prefact.rules.composite.CompositeRuleFactory.create_composite_rule
+### src.prefact.rules.composite_factory.CompositeRuleFactory.create_composite_rule
 > Create a composite rule dynamically.
 - **Calls**: None.__init__, self._create_strategy, self._load_tools, src.prefact.rules.registry.LazyRuleRegistry.get_all_rules, self.strategy.scan, self.strategy.fix, ValidationResult, SequentialScanStrategy
-
-### src.prefact.rules.relative_imports.RelativeToAbsoluteImports.validate
-- **Calls**: ValidationResult, ast.parse, checks.append, ast.parse, ast.walk, sum, sum, errors.append
 
 ### vscode-extension.src.extension.PrefactTreeProvider.activate
 - **Calls**: vscode-extension.src.extension.log, vscode-extension.src.extension.PrefactDiagnosticsProvider, vscode-extension.src.extension.PrefactTreeProvider, vscode-extension.src.extension.createTreeView, vscode-extension.src.extension.registerCommand, vscode-extension.src.extension.openTextDocument, vscode-extension.src.extension.PrefactDiagnosticsProvider.scanFile, vscode-extension.src.extension.PrefactDiagnosticsProvider.scanWorkspace
 
+### src.prefact.rules.relative_imports.RelativeToAbsoluteImports.validate
+- **Calls**: ValidationResult, ast.parse, checks.append, ast.parse, ast.walk, sum, sum, errors.append
+
 ### src.prefact.rules.unused_imports.UnusedImports.fix
 - **Calls**: source.splitlines, src.prefact.performance.cache.Cache.set, ast.iter_child_nodes, ast.parse, isinstance, None.join, isinstance, enumerate
 
-### src.prefact.rules.composite.CompositeImportRules._load_tools
+### src.prefact.rules.composite_rules.CompositeImportRules._load_tools
 > Load all import-related tools.
 - **Calls**: self.config.is_rule_enabled, self.config.is_rule_enabled, self.config.is_rule_enabled, self.config.is_rule_enabled, self.config.is_rule_enabled, tools.extend, tools.append, tools.append
 
@@ -167,10 +163,6 @@ Main execution flows into the system:
 ### src.prefact.autonomous.AutonomousRefact.run_autonomous
 > Run autonomous refact process.
 - **Calls**: console.print, Panel.fit, console.print, console.print, self.scan_project, console.print, self.update_planfile, console.print
-
-### src.prefact.config.Config.from_yaml
-> Load configuration from a YAML file.
-- **Calls**: None.items, cls, yaml.safe_load, isinstance, path.read_text, raw.pop, RuleConfig, isinstance
 
 ### src.prefact.performance.cache.cached_file_operation
 > Decorator to cache file operations.
@@ -184,13 +176,6 @@ Main execution flows into the system:
 > Create a hybrid rule that can switch between AST and Ruff.
 - **Calls**: None.get, None.__init__, RuleMigrationManager, self.migration_manager.should_use_ruff, self.ast_rule.scan_file, self.migration_manager.should_use_ruff, self.ast_rule.fix, self.migration_manager.should_use_ruff
 
-### src.prefact.cli.autonomous_cmd
-> Run autonomous refact mode (-a).
-
-Automatically initializes refact.yaml if missing, runs examples,
-scans for issues, and creates tickets in planfile.y
-- **Calls**: main.command, click.option, click.option, click.option, click.option, Console, AutonomousRefact, auto.run_autonomous
-
 ### src.prefact.autonomous.AutonomousRefact.run_examples
 > Run all examples and verify they work.
 - **Calls**: list, self.examples_dir.exists, console.print, self.examples_dir.rglob, console.print, Progress, progress.add_task, progress.advance
@@ -198,6 +183,13 @@ scans for issues, and creates tickets in planfile.y
 ### src.prefact.plugins.PluginManager.load_plugin
 > Load a plugin and register its rules.
 - **Calls**: print, PluginValidator.validate_plugin_module, metadata.entry_point.split, importlib.import_module, getattr, callable, self._loaded_modules.add, print
+
+### src.prefact.cli.autonomous_cmd
+> Run autonomous refact mode (-a).
+
+Automatically initializes refact.yaml if missing, runs examples,
+scans for issues, and creates tickets in planfile.y
+- **Calls**: main.command, click.option, click.option, click.option, click.option, Console, AutonomousRefact, auto.run_autonomous
 
 ### src.prefact.rules.unimport_based.UnimportUnusedImports.scan_file
 - **Calls**: UnimportHelper.check_source, source.splitlines, enumerate, line.strip, stripped.startswith, item.get, import_lines.get, issues.append
@@ -228,9 +220,16 @@ scans for issues, and creates tickets in planfile.y
 > Update planfile.yaml with new tickets.
 - **Calls**: self.planfile_path.exists, None.extend, console.print, self.create_default_planfile, self.create_ticket_from_issue, None.append, open, yaml.dump
 
-### src.prefact.config.Config.detect_package_name
-> Try to auto-detect the package name from pyproject.toml or project layout.
-- **Calls**: pyproject.exists, src.is_dir, self.project_root.iterdir, src.iterdir, child.is_dir, None.exists, tomllib.loads, None.get
+### src.prefact.config.Config.from_yaml
+> Load configuration from a YAML file.
+- **Calls**: cls._parse_rules, cls._get_default_patterns, cls, yaml.safe_load, raw.pop, path.read_text, Path, raw.pop
+
+### vscode-extension.src.extension.PrefactTreeProvider.getChildren
+- **Calls**: vscode-extension.src.extension.has, vscode-extension.src.extension.set, vscode-extension.src.extension.get, vscode-extension.src.extension.push, vscode-extension.src.extension.from, vscode-extension.src.extension.PrefactDiagnosticsProvider.entries, vscode-extension.src.extension.map, vscode-extension.src.extension.PrefactTreeItem
+
+### src.prefact.git_hooks.main
+> Main CLI for Git hooks management.
+- **Calls**: argparse.ArgumentParser, parser.add_argument, parser.add_argument, parser.add_argument, parser.parse_args, src.prefact.git_hooks.install_git_hooks, Path.cwd, src.prefact.git_hooks.uninstall_git_hooks
 
 ## Process Flows
 
@@ -253,31 +252,30 @@ main [examples.run_examples]
   └─> find_examples
 ```
 
-### Flow 4: infer_return_type
-```
-infer_return_type [src.prefact.rules.mypy_based.ReturnTypeInferrer]
-  └─ →> set
-```
-
-### Flow 5: print_report
+### Flow 4: print_report
 ```
 print_report [src.prefact.reporters.console]
 ```
 
-### Flow 6: scan_file
+### Flow 5: scan_file
 ```
-scan_file [src.prefact.rules.llm_specific.MagicNumberRule]
+scan_file [src.prefact.rules.magic_numbers.MagicNumberRule]
 ```
 
-### Flow 7: check_file
+### Flow 6: check_file
 ```
 check_file [src.prefact.rules.mypy_based.MyPyHelper]
 ```
 
-### Flow 8: create_composite_rule
+### Flow 7: create_composite_rule
 ```
-create_composite_rule [src.prefact.rules.composite.CompositeRuleFactory]
+create_composite_rule [src.prefact.rules.composite_factory.CompositeRuleFactory]
   └─ →> get_all_rules
+```
+
+### Flow 8: activate
+```
+activate [vscode-extension.src.extension.PrefactTreeProvider]
 ```
 
 ### Flow 9: validate
@@ -285,9 +283,10 @@ create_composite_rule [src.prefact.rules.composite.CompositeRuleFactory]
 validate [src.prefact.rules.relative_imports.RelativeToAbsoluteImports]
 ```
 
-### Flow 10: activate
+### Flow 10: fix
 ```
-activate [vscode-extension.src.extension.PrefactTreeProvider]
+fix [src.prefact.rules.unused_imports.UnusedImports]
+  └─ →> set
 ```
 
 ## Key Classes
@@ -310,6 +309,11 @@ activate [vscode-extension.src.extension.PrefactTreeProvider]
 - **Methods**: 15
 - **Key Methods**: src.prefact.logging.PrefactLogger.__init__, src.prefact.logging.PrefactLogger._setup_handlers, src.prefact.logging.PrefactLogger.debug, src.prefact.logging.PrefactLogger.info, src.prefact.logging.PrefactLogger.warning, src.prefact.logging.PrefactLogger.error, src.prefact.logging.PrefactLogger.critical, src.prefact.logging.PrefactLogger._log, src.prefact.logging.PrefactLogger._send_telemetry, src.prefact.logging.PrefactLogger.add_telemetry_callback
 
+### src.prefact.config.Config
+> Top-level configuration.
+- **Methods**: 13
+- **Key Methods**: src.prefact.config.Config.from_yaml, src.prefact.config.Config._parse_rules, src.prefact.config.Config._get_default_patterns, src.prefact.config.Config.rule_enabled, src.prefact.config.Config.is_rule_enabled, src.prefact.config.Config.rule_options, src.prefact.config.Config.get_rule_option, src.prefact.config.Config.set_rule_option, src.prefact.config.Config.detect_package_name, src.prefact.config.Config._detect_from_pyproject
+
 ### src.prefact.git_hooks.GitHooks
 > Manages Git hooks for prefact.
 - **Methods**: 11
@@ -320,16 +324,16 @@ activate [vscode-extension.src.extension.PrefactTreeProvider]
 - **Methods**: 11
 - **Key Methods**: src.prefact.plugins.PluginManager.__init__, src.prefact.plugins.PluginManager.discover_plugins, src.prefact.plugins.PluginManager._discover_entry_point_plugins, src.prefact.plugins.PluginManager._discover_local_plugins, src.prefact.plugins.PluginManager.load_plugin, src.prefact.plugins.PluginManager.load_all_plugins, src.prefact.plugins.PluginManager.get_rule, src.prefact.plugins.PluginManager._load_plugin_for_rule, src.prefact.plugins.PluginManager.list_plugins, src.prefact.plugins.PluginManager._is_rule_from_plugin
 
-### src.prefact.rules.llm_specific.LLMHallucinationRule
-> Detect LLM hallucination patterns in code.
-- **Methods**: 9
-- **Key Methods**: src.prefact.rules.llm_specific.LLMHallucinationRule.__init__, src.prefact.rules.llm_specific.LLMHallucinationRule._load_patterns, src.prefact.rules.llm_specific.LLMHallucinationRule.scan_file, src.prefact.rules.llm_specific.LLMHallucinationRule._check_ast_patterns, src.prefact.rules.llm_specific.LLMHallucinationRule._is_suspicious_function_name, src.prefact.rules.llm_specific.LLMHallucinationRule._is_suspicious_import, src.prefact.rules.llm_specific.LLMHallucinationRule._map_severity, src.prefact.rules.llm_specific.LLMHallucinationRule.fix, src.prefact.rules.llm_specific.LLMHallucinationRule.validate
-- **Inherits**: BaseRule
-
-### src.prefact.rules.llm_specific.LLMGeneratedCodeRule
+### src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule
 > Detect code that appears to be LLM-generated.
 - **Methods**: 9
-- **Key Methods**: src.prefact.rules.llm_specific.LLMGeneratedCodeRule.__init__, src.prefact.rules.llm_specific.LLMGeneratedCodeRule._load_indicators, src.prefact.rules.llm_specific.LLMGeneratedCodeRule.scan_file, src.prefact.rules.llm_specific.LLMGeneratedCodeRule._check_comment_ratio, src.prefact.rules.llm_specific.LLMGeneratedCodeRule._check_docstring_patterns, src.prefact.rules.llm_specific.LLMGeneratedCodeRule._has_llm_docstring_pattern, src.prefact.rules.llm_specific.LLMGeneratedCodeRule._map_severity, src.prefact.rules.llm_specific.LLMGeneratedCodeRule.fix, src.prefact.rules.llm_specific.LLMGeneratedCodeRule.validate
+- **Key Methods**: src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule.__init__, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule._load_indicators, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule.scan_file, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule._check_comment_ratio, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule._check_docstring_patterns, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule._has_llm_docstring_pattern, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule._map_severity, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule.fix, src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule.validate
+- **Inherits**: BaseRule
+
+### src.prefact.rules.llm_hallucinations.LLMHallucinationRule
+> Detect LLM hallucination patterns in code.
+- **Methods**: 9
+- **Key Methods**: src.prefact.rules.llm_hallucinations.LLMHallucinationRule.__init__, src.prefact.rules.llm_hallucinations.LLMHallucinationRule._load_patterns, src.prefact.rules.llm_hallucinations.LLMHallucinationRule.scan_file, src.prefact.rules.llm_hallucinations.LLMHallucinationRule._check_ast_patterns, src.prefact.rules.llm_hallucinations.LLMHallucinationRule._is_suspicious_function_name, src.prefact.rules.llm_hallucinations.LLMHallucinationRule._is_suspicious_import, src.prefact.rules.llm_hallucinations.LLMHallucinationRule._map_severity, src.prefact.rules.llm_hallucinations.LLMHallucinationRule.fix, src.prefact.rules.llm_hallucinations.LLMHallucinationRule.validate
 - **Inherits**: BaseRule
 
 ### src.prefact.rules.registry.LazyRuleRegistry
@@ -343,11 +347,6 @@ activate [vscode-extension.src.extension.PrefactTreeProvider]
 - **Key Methods**: src.prefact.rules.string_transformations.ContextAwareStringTransformer.__init__, src.prefact.rules.string_transformations.ContextAwareStringTransformer.visit_FunctionDef, src.prefact.rules.string_transformations.ContextAwareStringTransformer.leave_FunctionDef, src.prefact.rules.string_transformations.ContextAwareStringTransformer.visit_ClassDef, src.prefact.rules.string_transformations.ContextAwareStringTransformer.leave_ClassDef, src.prefact.rules.string_transformations.ContextAwareStringTransformer.leave_BinaryOperation, src.prefact.rules.string_transformations.ContextAwareStringTransformer._should_skip_context, src.prefact.rules.string_transformations.ContextAwareStringTransformer._is_in_logging_statement
 - **Inherits**: cst.CSTTransformer
 
-### src.prefact.config.Config
-> Top-level configuration.
-- **Methods**: 7
-- **Key Methods**: src.prefact.config.Config.from_yaml, src.prefact.config.Config.rule_enabled, src.prefact.config.Config.is_rule_enabled, src.prefact.config.Config.rule_options, src.prefact.config.Config.get_rule_option, src.prefact.config.Config.set_rule_option, src.prefact.config.Config.detect_package_name
-
 ### src.prefact.performance.parallel.ParallelEngine
 > Parallel processing engine for prefact.
 - **Methods**: 7
@@ -358,17 +357,17 @@ activate [vscode-extension.src.extension.PrefactTreeProvider]
 - **Methods**: 7
 - **Key Methods**: src.prefact.performance.cache.Cache.__init__, src.prefact.performance.cache.Cache.get, src.prefact.performance.cache.Cache.set, src.prefact.performance.cache.Cache.delete, src.prefact.performance.cache.Cache.clear, src.prefact.performance.cache.Cache.get_stats, src.prefact.performance.cache.Cache.close
 
-### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
-> Analyze import dependencies using importchecker.
-- **Methods**: 7
-- **Key Methods**: src.prefact.rules.importchecker_based.ImportDependencyAnalysis.__init__, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._load_checker_config, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.scan_file, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._extract_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._detect_circular_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.fix, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
-- **Inherits**: BaseRule
-
 ### src.prefact.config_extended.ExtendedConfig
 > Extended configuration with additional features.
 - **Methods**: 7
 - **Key Methods**: src.prefact.config_extended.ExtendedConfig.__init__, src.prefact.config_extended.ExtendedConfig.from_yaml, src.prefact.config_extended.ExtendedConfig._deep_merge, src.prefact.config_extended.ExtendedConfig.get_tool_config, src.prefact.config_extended.ExtendedConfig.get_performance_setting, src.prefact.config_extended.ExtendedConfig.get_plugin_config, src.prefact.config_extended.ExtendedConfig.to_dict
 - **Inherits**: Config
+
+### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
+> Analyze import dependencies using importchecker.
+- **Methods**: 7
+- **Key Methods**: src.prefact.rules.importchecker_based.ImportDependencyAnalysis.__init__, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._load_checker_config, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.scan_file, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._extract_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._detect_circular_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.fix, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
+- **Inherits**: BaseRule
 
 ### src.prefact.rules.pylint_based.PylintComprehensive
 > Comprehensive analysis using Pylint with custom rules.
@@ -405,6 +404,10 @@ Key functions that process and transform data:
 ### src.prefact.validator.Validator.validate_file
 - **Output to**: self._rules.get, results.append, rule.validate
 
+### src.prefact.config.Config._parse_rules
+> Parse rules configuration from YAML.
+- **Output to**: rules_raw.items, isinstance, RuleConfig, isinstance, RuleConfig
+
 ### src.prefact.plugins.PluginValidator.validate_plugin_module
 > Validate that a plugin module is safe to load.
 - **Output to**: hasattr, hasattr, isinstance, issubclass
@@ -420,35 +423,8 @@ Key functions that process and transform data:
 ### src.prefact.performance.cache.ScanResultCache.invalidate_file
 > Invalidate all cache entries for a file.
 
-### src.prefact.rules.ruff_based.RuffWildcardImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffPrintStatements.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffUnusedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len, len
-
-### src.prefact.rules.ruff_based.RuffSortedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len
-
-### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.unused_imports.UnusedImports.validate
-- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
-
-### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
-- **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
-
-### src.prefact.rules.importchecker_based.ImportCheckerDuplicateImports.validate
+### src.prefact.rules.magic_numbers.MagicNumberRule.validate
 - **Output to**: self.scan_file, ValidationResult, len, len
-
-### src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
-- **Output to**: self.scan_file, ValidationResult, len
-
-### src.prefact.rules.importchecker_based.ImportOptimizer.validate
-- **Output to**: ValidationResult
 
 ### src.prefact.config_extended.ConfigValidator.validate
 > Validate configuration and return list of errors.
@@ -474,17 +450,39 @@ Key functions that process and transform data:
 > Validate individual rule configuration.
 - **Output to**: errors.append, isinstance, all, isinstance, errors.append
 
-### src.prefact.rules.composite.CompositeUnusedImports.validate
-> Validate using the highest priority tool.
-- **Output to**: None.validate, ValidationResult
+### src.prefact.rules.ruff_based.RuffWildcardImports.validate
+- **Output to**: ValidationResult
 
-### src.prefact.rules.composite.CompositeImportRules.validate
-> Validate all import rules.
-- **Output to**: ValidationResult, tool.validate, all_checks.extend, all_errors.extend, len
+### src.prefact.rules.ruff_based.RuffPrintStatements.validate
+- **Output to**: ValidationResult
 
-### src.prefact.rules.composite.CompositeTypeChecking.validate
-> Validate type checking.
-- **Output to**: ValidationResult, tool.validate, all_checks.extend, all_errors.extend, len
+### src.prefact.rules.ruff_based.RuffUnusedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len, len
+
+### src.prefact.rules.ruff_based.RuffSortedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len
+
+### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.unused_imports._process_assignment_for_all
+> Process assignment to __all__ and add exported names to used set.
+- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
+
+### src.prefact.rules.unused_imports.UnusedImports.validate
+- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
+
+### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
+- **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
+
+### src.prefact.rules.importchecker_based.ImportCheckerDuplicateImports.validate
+- **Output to**: self.scan_file, ValidationResult, len, len
+
+### src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
+- **Output to**: self.scan_file, ValidationResult, len
+
+### src.prefact.rules.importchecker_based.ImportOptimizer.validate
+- **Output to**: ValidationResult
 
 ### src.prefact.rules.type_hints.MissingReturnType.validate
 - **Output to**: ValidationResult
@@ -516,15 +514,15 @@ Key functions that process and transform data:
 - **Confidence**: 0.70
 - **Functions**: src.prefact.rules.pylint_based.PylintPrintStatements.__init__, src.prefact.rules.pylint_based.PylintPrintStatements._load_pylint_config, src.prefact.rules.pylint_based.PylintPrintStatements.scan_file, src.prefact.rules.pylint_based.PylintPrintStatements.fix, src.prefact.rules.pylint_based.PylintPrintStatements.validate
 
-### state_machine_PrintStatements
-- **Type**: state_machine
-- **Confidence**: 0.70
-- **Functions**: src.prefact.rules.print_statements.PrintStatements.scan_file, src.prefact.rules.print_statements.PrintStatements.fix, src.prefact.rules.print_statements.PrintStatements.validate
-
 ### state_machine_LogContext
 - **Type**: state_machine
 - **Confidence**: 0.70
 - **Functions**: src.prefact.logging.LogContext.__init__, src.prefact.logging.LogContext.__enter__, src.prefact.logging.LogContext.__exit__, src.prefact.logging.LogContext.log
+
+### state_machine_PrintStatements
+- **Type**: state_machine
+- **Confidence**: 0.70
+- **Functions**: src.prefact.rules.print_statements.PrintStatements.scan_file, src.prefact.rules.print_statements.PrintStatements.fix, src.prefact.rules.print_statements.PrintStatements.validate
 
 ## Public API Surface
 
@@ -533,42 +531,42 @@ Functions exposed as public API (no underscore prefix):
 - `src.prefact.config_extended.ExtendedConfig.from_yaml` - 31 calls
 - `examples.06-api-usage.example.run_prefact_example` - 28 calls
 - `examples.run_examples.main` - 25 calls
-- `src.prefact.rules.mypy_based.ReturnTypeInferrer.infer_return_type` - 25 calls
 - `src.prefact.reporters.console.print_report` - 24 calls
-- `src.prefact.rules.llm_specific.MagicNumberRule.scan_file` - 22 calls
+- `src.prefact.rules.magic_numbers.MagicNumberRule.scan_file` - 22 calls
 - `src.prefact.rules.mypy_based.MyPyHelper.check_file` - 21 calls
-- `src.prefact.rules.composite.CompositeRuleFactory.create_composite_rule` - 20 calls
+- `src.prefact.rules.composite_factory.CompositeRuleFactory.create_composite_rule` - 20 calls
 - `src.prefact.rules.benchmark.benchmark_file` - 20 calls
-- `src.prefact.rules.relative_imports.RelativeToAbsoluteImports.validate` - 20 calls
 - `vscode-extension.src.extension.PrefactTreeProvider.activate` - 20 calls
+- `src.prefact.rules.relative_imports.RelativeToAbsoluteImports.validate` - 20 calls
 - `src.prefact.rules.unused_imports.UnusedImports.fix` - 19 calls
 - `examples.06-api-usage.example.batch_processing_example` - 19 calls
 - `examples.sample-project.cli.main` - 18 calls
 - `src.prefact.autonomous.AutonomousRefact.run_autonomous` - 16 calls
-- `src.prefact.config.Config.from_yaml` - 16 calls
 - `src.prefact.performance.cache.cached_file_operation` - 16 calls
 - `src.prefact.rules.benchmark.print_benchmark_results` - 16 calls
 - `src.prefact.rules.migration.RuleMigrationManager.create_hybrid_rule` - 16 calls
 - `examples.06-api-usage.example.custom_rule_example` - 16 calls
-- `src.prefact.cli.autonomous_cmd` - 15 calls
 - `src.prefact.autonomous.AutonomousRefact.run_examples` - 15 calls
 - `src.prefact.plugins.PluginManager.load_plugin` - 15 calls
+- `src.prefact.cli.autonomous_cmd` - 15 calls
 - `src.prefact.rules.unimport_based.UnimportUnusedImports.scan_file` - 15 calls
 - `src.prefact.autonomous.AutonomousRefact.update_todo_md` - 14 calls
 - `src.prefact.performance.cache.cached_result` - 14 calls
 - `src.prefact.rules.unimport_based.UnimportAll.validate` - 14 calls
 - `src.prefact.rules.autoflake_based.AutoflakeAll.validate` - 14 calls
 - `src.prefact.autonomous.AutonomousRefact.update_planfile` - 13 calls
-- `src.prefact.config.Config.detect_package_name` - 13 calls
+- `src.prefact.config.Config.from_yaml` - 13 calls
 - `vscode-extension.src.extension.PrefactTreeProvider.getChildren` - 13 calls
 - `src.prefact.git_hooks.main` - 12 calls
 - `src.prefact.autonomous.AutonomousRefact.update_changelog_md` - 12 calls
 - `src.prefact.config_extended.ConfigValidator.validate` - 12 calls
-- `src.prefact.rules.llm_specific.LLMGeneratedCodeRule.scan_file` - 12 calls
 - `src.prefact.rules.import_linter_based.ImportLinterNoRelative.scan_file` - 12 calls
+- `src.prefact.rules.llm_generated_code.LLMGeneratedCodeRule.scan_file` - 12 calls
 - `src.prefact.rules.benchmark.main` - 12 calls
 - `src.prefact.rules.string_transformations.StringConcatToFString.validate` - 12 calls
 - `src.prefact.git_hooks.PreCommitConfig.install` - 11 calls
+- `src.prefact.autonomous.AutonomousRefact.group_issues` - 11 calls
+- `src.prefact.autonomous.AutonomousRefact.run_tests` - 11 calls
 - `src.prefact.cli.rules` - 11 calls
 
 ## System Interactions
@@ -585,10 +583,6 @@ graph TD
     main --> find_examples
     main --> Table
     main --> add_column
-    infer_return_type --> parse
-    infer_return_type --> walk
-    infer_return_type --> isinstance
-    infer_return_type --> set
     print_report --> Console
     print_report --> print
     scan_file --> any
@@ -605,8 +599,12 @@ graph TD
     create_composite_rul --> _load_tools
     create_composite_rul --> get_all_rules
     create_composite_rul --> scan
+    activate --> log
+    activate --> PrefactDiagnosticsPr
+    activate --> PrefactTreeProvider
+    activate --> createTreeView
+    activate --> registerCommand
     validate --> ValidationResult
-    validate --> parse
 ```
 
 ## Reverse Engineering Guidelines

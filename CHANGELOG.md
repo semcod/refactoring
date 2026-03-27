@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-03-27
+
+### Docs
+- Update CHANGELOG.md
+- Update README.md
+- Update docs/README.md
+- Update project/README.md
+- Update project/context.md
+
+### Other
+- Update prefact.yaml
+- Update project/analysis.toon.yaml
+- Update project/calls.mmd
+- Update project/calls.png
+- Update project/compact_flow.mmd
+- Update project/compact_flow.png
+- Update project/duplication.toon.yaml
+- Update project/evolution.toon.yaml
+- Update project/flow.mmd
+- Update project/flow.png
+- ... and 7 more files
+
 ## [0.1.8] - 2026-03-27
 
 ### Docs
@@ -47,7 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Other
 - Update examples/run_examples.py
 - Update planfile.yaml
-- Update refact.yaml
+- Update prefact.yaml
 
 ## [0.1.5] - 2026-03-27
 
@@ -160,7 +182,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update README.md
 
 ### Test
-- Update tests/test_refactoring.py
+- Update tests/test_prefactoring.py
 
 ### Other
 - Update MANIFEST.in
@@ -176,7 +198,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update .idea/inspectionProfiles/profiles_settings.xml
 - Update .idea/misc.xml
 - Update .idea/modules.xml
-- Update .idea/refactoring.iml
+- Update .idea/prefactoring.iml
 - Update .idea/vcs.xml
 
 ## [0.0.4] - 2026-03-27
@@ -189,13 +211,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.2] - 2026-03-27
 
 ### Test
-- Update tests/test_refactoring.py
+- Update tests/test_prefactoring.py
 
 ### Other
-- Update refactoring/__init__.py
-- Update refactoring/cli.py
-- Update refactoring/core.py
-- Update refactoring/utils.py
+- Update prefactoring/__init__.py
+- Update prefactoring/cli.py
+- Update prefactoring/core.py
+- Update prefactoring/utils.py
 
 ## [0.0.1] - 2026-03-27
 

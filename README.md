@@ -5,7 +5,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Automatic Python refactoring toolkit — detect, fix, and validate common code issues introduced by LLMs and humans alike.
+Automatic Python prefactoring toolkit — detect, fix, and validate common code issues introduced by LLMs and humans alike.
 
 ## The Problem
 
@@ -48,7 +48,7 @@ The `examples/` directory contains comprehensive examples for different use case
 | [01-individual-rules](examples/01-individual-rules/) | Each rule explained with before/after code |
 | [02-multiple-rules](examples/02-multiple-rules/) | Combining multiple rules for comprehensive cleanup |
 | [03-output-formats](examples/03-output-formats/) | Console vs JSON output examples |
-| [04-custom-rules](examples/04-custom-rules/) | Writing your own refactoring rules |
+| [04-custom-rules](examples/04-custom-rules/) | Writing your own prefactoring rules |
 | [05-ci-cd](examples/05-ci-cd/) | GitHub Actions, GitLab CI, Azure DevOps configs |
 | [06-api-usage](examples/06-api-usage/) | Using prefact programmatically from Python |
 

@@ -101,7 +101,6 @@ prefact-scan = "prefact.cli:scan_main"
 prefact-fix = "prefact.cli:fix_main"
 prefact-config = "prefact.cli:config_main"
 prefact-git-hooks = "prefact.git_hooks:main"
-refact = "prefact.cli:main"
 
 [project.entry-points."prefact.plugins"]
 # Built-in plugins
