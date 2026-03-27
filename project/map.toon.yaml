@@ -1,11 +1,11 @@
-# prefact | 50f 10878L | python:48,shell:1,typescript:1 | 2026-03-27
-# stats: 574 func | 0 cls | 50 mod | CC̄=3.1 | critical:3 | cycles:0
+# prefact | 50f 10974L | python:48,shell:1,typescript:1 | 2026-03-27
+# stats: 576 func | 0 cls | 50 mod | CC̄=3.2 | critical:3 | cycles:0
 # alerts[5]: fan-out PrefactTreeProvider.activate=20; CC UnusedImports.fix=21; fan-out AutonomousRefact.scan_project=18; fan-out CompositeRuleFactory.create_composite_rule=18; fan-out ExtendedConfig.from_yaml=16
 # hotspots[5]: PrefactTreeProvider.activate fan=20; AutonomousRefact.scan_project fan=18; CompositeRuleFactory.create_composite_rule fan=18; ExtendedConfig.from_yaml fan=16; AutonomousRefact.update_todo_md fan=13
-# evolution: CC̄ 3.1→3.1 (flat 0.0)
+# evolution: CC̄ 3.1→3.2 (regressed +0.1)
 # Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
 M[50]:
-  project.sh,22
+  project.sh,23
   src/prefact/__init__.py,3
   src/prefact/autonomous.py,494
   src/prefact/cli.py,240
@@ -52,7 +52,7 @@ M[50]:
   src/prefact/rules/unimport_based.py,454
   src/prefact/rules/unused_imports.py,164
   src/prefact/rules/wildcard_imports.py,43
-  src/prefact/scanner.py,50
+  src/prefact/scanner.py,145
   src/prefact/validator.py,30
   vscode-extension/src/extension.ts,441
 D:
@@ -64,6 +64,9 @@ D:
     _get_import_lines(tree)
     _get_attribute_root(node)
     _process_assignment_for_all(node;used)
+  src/prefact/rules/magic_numbers.py:
+    e: MagicNumberRule
+    MagicNumberRule(BaseRule): __init__(1),_load_allowed_numbers(0),scan_file(2),_is_magic_number(1),fix(3),validate(3)  # Detect magic numbers in code...
   src/prefact/config_extended.py:
     e: ExtendedConfig,ConfigValidator,ConfigGenerator,load_config_with_env,merge_configs
     ExtendedConfig(Config): __init__(9),from_yaml(2),_deep_merge(1),get_tool_config(1),get_performance_setting(2),get_plugin_config(1),to_dict(0)  # Extended configuration with additional features...
@@ -71,9 +74,6 @@ D:
     ConfigGenerator: generate_extended_config(2),generate_composite_rule_config(3),save_config(1)  # Generate configuration files...
     load_config_with_env(config_path;environment)
     merge_configs(base;override)
-  src/prefact/rules/magic_numbers.py:
-    e: MagicNumberRule
-    MagicNumberRule(BaseRule): __init__(1),_load_allowed_numbers(0),scan_file(2),_is_magic_number(1),fix(3),validate(3)  # Detect magic numbers in code...
   src/prefact/reporters/console.py:
     e: print_report
     print_report(result)
@@ -111,6 +111,11 @@ D:
     ISortedImports(BaseRule): __init__(1),_load_isort_config(0),scan_file(2),fix(3),validate(3)  # Sort imports using ISort...
     ImportSectionSeparator(BaseRule): __init__(1),scan_file(2),fix(3),validate(3)  # Ensure import sections are properly separated...
     CustomImportOrganization(BaseRule): __init__(1),_load_custom_rules(0),scan_file(2),_check_grouping(2),_check_alphabetical(2),fix(3),validate(3)  # Organize imports according to custom rules...
+  src/prefact/scanner.py:
+    e: Scanner,_load_gitignore,_match_gitignore_pattern
+    Scanner: __init__(1),collect_files(0),scan(1),_excluded(1)  # Discovers Python files and runs all enabled rules against th...
+    _load_gitignore(root)
+    _match_gitignore_pattern(path;pattern)
   src/prefact/rules/composite_rules.py:
     e: CompositeUnusedImports,CompositeImportRules,CompositeTypeChecking
     CompositeUnusedImports(BaseRule): __init__(1),_create_strategy(0),_load_tools(0),scan_file(2),fix(3),validate(3)  # Composite rule for unused imports using multiple tools...
@@ -200,22 +205,19 @@ D:
   src/prefact/rules/wildcard_imports.py:
     e: WildcardImports
     WildcardImports(BaseRule): scan_file(2),fix(3),validate(3)
+  src/prefact/rules/llm_generated_code.py:
+    e: LLMGeneratedCodeRule
+    LLMGeneratedCodeRule(BaseRule): __init__(1),_load_indicators(0),scan_file(2),_check_comment_ratio(2),_check_docstring_patterns(2),_has_llm_docstring_pattern(1),_map_severity(1),fix(3),validate(3)  # Detect code that appears to be LLM-generated...
   src/prefact/rules/sorted_imports.py:
     e: SortedImports,_sort_key
     SortedImports(BaseRule): scan_file(2),fix(3),validate(3)
     _sort_key(node)
-  src/prefact/rules/llm_generated_code.py:
-    e: LLMGeneratedCodeRule
-    LLMGeneratedCodeRule(BaseRule): __init__(1),_load_indicators(0),scan_file(2),_check_comment_ratio(2),_check_docstring_patterns(2),_has_llm_docstring_pattern(1),_map_severity(1),fix(3),validate(3)  # Detect code that appears to be LLM-generated...
   src/prefact/rules/benchmark.py:
     e: benchmark_file,benchmark_project,print_benchmark_results,main
     benchmark_file(file_path;config)
     benchmark_project(project_root;config)
     print_benchmark_results(results)
     main()
-  src/prefact/scanner.py:
-    e: Scanner
-    Scanner: __init__(1),collect_files(0),scan(1),_excluded(1)  # Discovers Python files and runs all enabled rules against th...
   src/prefact/cli.py:
     e: main,_common_options,_build_config,scan,fix,check,init,autonomous_cmd,rules,_output
     main(ctx;autonomous;init_only;skip_tests;skip_examples)
@@ -228,6 +230,9 @@ D:
     autonomous_cmd(project_path;init_only;skip_tests;skip_examples)
     rules()
     _output(result;kwargs)
+  src/prefact/rules/type_hints.py:
+    e: MissingReturnType
+    MissingReturnType(BaseRule): scan_file(2),fix(3),validate(3)
   src/prefact/rules/pylint_based.py:
     e: PylintHelper,PylintPrintStatements,PylintStringConcat,PprefactPylintPlugin,PylintComprehensive,generate_pylint_rc
     PylintHelper: check_file(1),check_source(1),fix_file(1)  # Helper class for Pylint operations...
@@ -236,9 +241,6 @@ D:
     PprefactPylintPlugin: register(0)  # Custom Pylint plugin for prefact-specific checks...
     PylintComprehensive(BaseRule): __init__(1),_load_pylint_config(0),scan_file(2),_map_pylint_to_prefact(1),_map_pylint_severity(1),fix(3),validate(3)  # Comprehensive analysis using Pylint with custom rules...
     generate_pylint_rc(config;output_path)
-  src/prefact/rules/type_hints.py:
-    e: MissingReturnType
-    MissingReturnType(BaseRule): scan_file(2),fix(3),validate(3)
   src/prefact/rules/string_concat.py:
     e: StringConcatToFstring,_is_str_concat,_flatten_add
     StringConcatToFstring(BaseRule): scan_file(2),fix(3),validate(3)

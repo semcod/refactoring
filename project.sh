@@ -20,3 +20,4 @@ venv/bin/redup scan . --format toon --output ./project
 #venv/bin/vallm batch ./src --recursive --semantic --model qwen2.5-coder:7b
 #vallm batch --parallel .
 venv/bin/vallm batch . --recursive --format toon --output ./project
+venv/bin/prefact -a

@@ -22,9 +22,9 @@ class RuffHelper:
             result = subprocess.run([
                 "ruff", "check", str(file_path),
                 "--select", ",".join(select_codes),
-                "--format", "json",
+                "--output-format", "json",
                 "--no-fix"
-            ], capture_output=True, text=True, check=True)
+            ], capture_output=True, text=True, check=False)  # Use check=False to handle non-zero exit
             
             if result.stdout.strip():
                 return json.loads(result.stdout)

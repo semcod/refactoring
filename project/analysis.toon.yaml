@@ -1,24 +1,24 @@
-# code2llm | 50f 10878L | python:48,shell:1,typescript:1 | 2026-03-27
-# CC̄=3.1 | critical:3/653 | dups:0 | cycles:0
+# code2llm | 50f 10974L | python:48,shell:1,typescript:1 | 2026-03-27
+# CC̄=3.2 | critical:3/655 | dups:0 | cycles:0
 
 HEALTH[3]:
-  🟡 CC    from_yaml CC=15 (limit:15)
-  🟡 CC    fix CC=21 (limit:15)
   🟡 CC    scan_file CC=15 (limit:15)
+  🟡 CC    fix CC=21 (limit:15)
+  🟡 CC    from_yaml CC=15 (limit:15)
 
 REFACTOR[1]:
   1. split 3 high-CC methods  (CC>15)
 
-PIPELINES[510]:
+PIPELINES[509]:
   [1] Src [__init__]: __init__ → get_all_rules
       PURITY: 100% pure
   [2] Src [validate_file]: validate_file
       PURITY: 100% pure
   [3] Src [__init__]: __init__
       PURITY: 100% pure
-  [4] Src [_find_git_dir]: _find_git_dir
+  [4] Src [run]: run
       PURITY: 100% pure
-  [5] Src [install_hooks]: install_hooks
+  [5] Src [scan_only]: scan_only
       PURITY: 100% pure
 
 LAYERS:
@@ -33,7 +33,7 @@ LAYERS:
   │ import_linter_based        449L  5C   24m  CC=8      ←0
   │ logging                    436L  10C   28m  CC=4      ←0
   │ cache                      434L  6C   37m  CC=5      ←8
-  │ pylint_based               401L  5C   22m  CC=6      ←1
+  │ pylint_based               401L  5C   22m  CC=6      ←0
   │ mypy_based                 400L  6C   22m  CC=9      ←0
   │ git_hooks                  391L  2C   17m  CC=8      ←0
   │ parallel                   350L  4C   23m  CC=7      ←0
@@ -51,6 +51,7 @@ LAYERS:
   │ benchmark                  167L  0C    4m  CC=7      ←0
   │ !! unused_imports             164L  1C    8m  CC=21     ←0
   │ strategies                 150L  4C   10m  CC=5      ←0
+  │ scanner                    145L  1C    6m  CC=12     ←0
   │ !! magic_numbers              136L  1C    6m  CC=15     ←0
   │ composite_factory          116L  1C    2m  CC=4      ←0
   │ models                      92L  6C    0m  CC=0.0    ←0
@@ -62,7 +63,6 @@ LAYERS:
   │ json_reporter               59L  0C    2m  CC=4      ←1
   │ sorted_imports              57L  1C    4m  CC=7      ←0
   │ print_statements            56L  1C    3m  CC=9      ←0
-  │ scanner                     50L  1C    4m  CC=6      ←0
   │ fixer                       46L  1C    2m  CC=8      ←0
   │ type_hints                  44L  1C    3m  CC=6      ←0
   │ wildcard_imports            43L  1C    3m  CC=7      ←0
@@ -73,19 +73,19 @@ LAYERS:
   │ __init__                     1L  0C    0m  CC=0.0    ←0
   │
   vscode-extension/               CC̄=2.9    ←in:0  →out:0
-  │ extension.ts               441L  5C   48m  CC=14     ←20
+  │ extension.ts               441L  5C   48m  CC=14     ←21
   │
   ./                              CC̄=0.0    ←in:0  →out:0
-  │ project.sh                  22L  0C    0m  CC=0.0    ←0
+  │ project.sh                  23L  0C    0m  CC=0.0    ←0
   │
 
 COUPLING:
                                  src.prefact  vscode-extension.src
-           src.prefact                    ──                    40  !! fan-out
-  vscode-extension.src                   ←40                    ──  hub
+           src.prefact                    ──                    41  !! fan-out
+  vscode-extension.src                   ←41                    ──  hub
   CYCLES: none
-  HUB: vscode-extension.src/ (fan-in=40)
-  SMELL: src.prefact/ fan-out=40 → split needed
+  HUB: vscode-extension.src/ (fan-in=41)
+  SMELL: src.prefact/ fan-out=41 → split needed
 
 EXTERNAL:
   validation: run `vallm batch .` → validation.toon

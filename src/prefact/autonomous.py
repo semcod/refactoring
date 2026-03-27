@@ -194,7 +194,7 @@ class AutonomousRefact:
             # Get list of files to scan
             from prefact.scanner import Scanner
             scanner = Scanner(config)
-            files_to_scan = list(scanner.get_files())
+            files_to_scan = list(scanner.collect_files())
             
             console.print(f"📂 Found {len(files_to_scan)} files to scan")
             
@@ -226,7 +226,7 @@ class AutonomousRefact:
                     # Scan the file
                     try:
                         source = file_path.read_text(encoding="utf-8")
-                        for rule in scanner.rules:
+                        for rule in scanner._rules:
                             file_issues = rule.scan_file(file_path, source)
                             issues_found.extend(file_issues)
                     except Exception as e:
