@@ -73,7 +73,21 @@ class ExtendedConfig(Config):
             if isinstance(rule_raw, bool):
                 rules[rule_id] = RuleConfig(enabled=rule_raw)
             elif isinstance(rule_raw, dict):
-                rules[rule_id] = RuleConfig(**rule_raw)
+                # Filter out extended fields that RuleConfig doesn't support
+                basic_fields = {
+                    k: v for k, v in rule_raw.items() 
+                    if k in ['enabled', 'severity', 'options']
+                }
+                rules[rule_id] = RuleConfig(**basic_fields)
+                
+                # Store extended fields separately
+                if hasattr(rules[rule_id], '_extended'):
+                    rules[rule_id]._extended.update(rule_raw)
+                else:
+                    rules[rule_id]._extended = {
+                        k: v for k, v in rule_raw.items()
+                        if k not in ['enabled', 'severity', 'options']
+                    }
         
         # Extract tool configurations
         tools = raw.pop("tools", {})

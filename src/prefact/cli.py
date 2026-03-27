@@ -6,20 +6,32 @@ from pathlib import Path
 
 import click
 
+from prefact.autonomous import AutonomousRefact
 from prefact.config import Config
+from prefact.config_extended import ExtendedConfig
 from prefact.engine import RefactoringEngine
 from prefact.reporters import console as console_reporter
 from prefact.reporters import json_reporter
 
 
-@click.group()
+@click.group(invoke_without_command=True)
+@click.pass_context
+@click.option("-a", "--autonomous", is_flag=True, help="Run autonomous mode (initialize, scan, and create tickets).")
+@click.option("--init-only", is_flag=True, help="Only initialize refact.yaml without running full process.")
+@click.option("--skip-tests", is_flag=True, help="Skip running tests.")
+@click.option("--skip-examples", is_flag=True, help="Skip running examples.")
 @click.version_option(package_name="prefact")
-def main() -> None:
+def main(ctx, autonomous, init_only, skip_tests, skip_examples) -> None:
     """prefact – automatic Python refactoring toolkit.
 
     Detect, fix, and validate common code issues – especially those
     introduced by LLMs (e.g. relative imports, unused imports).
+    
+    Use 'refact -a' for autonomous mode.
     """
+    if autonomous:
+        # Run autonomous command directly with all options
+        ctx.invoke(autonomous_cmd, project_path=".", init_only=init_only, skip_tests=skip_tests, skip_examples=skip_examples)
 
 
 # ── shared options ────────────────────────────────────────────────────
@@ -37,12 +49,20 @@ def _common_options(fn):
 
 def _build_config(project_path, package_name, config_file, verbose, **_kw) -> Config:
     if config_file:
-        cfg = Config.from_yaml(Path(config_file))
+        # Try extended config first, fall back to basic config
+        try:
+            cfg = ExtendedConfig.from_yaml(Path(config_file))
+        except Exception:
+            cfg = Config.from_yaml(Path(config_file))
     else:
         # Auto-discover prefact.yaml
         candidate = Path(project_path).resolve() / "prefact.yaml"
         if candidate.exists():
-            cfg = Config.from_yaml(candidate)
+            # Try extended config first, fall back to basic config
+            try:
+                cfg = ExtendedConfig.from_yaml(candidate)
+            except Exception:
+                cfg = Config.from_yaml(candidate)
         else:
             cfg = Config()
     cfg.project_root = Path(project_path).resolve()
@@ -144,6 +164,40 @@ rules:
         raise SystemExit(1)
     dest.write_text(default)
     click.echo(f"Created {dest}")
+
+
+@main.command()
+@click.option("-p", "--path", "project_path", default=".", help="Project root directory.")
+@click.option("--init-only", is_flag=True, help="Only initialize refact.yaml without running full process.")
+@click.option("--skip-tests", is_flag=True, help="Skip running tests.")
+@click.option("--skip-examples", is_flag=True, help="Skip running examples.")
+def autonomous_cmd(project_path, init_only, skip_tests, skip_examples) -> None:
+    """Run autonomous refact mode (-a).
+    
+    Automatically initializes refact.yaml if missing, runs examples,
+    scans for issues, and creates tickets in planfile.yaml.
+    """
+    from rich.console import Console
+    
+    console = Console()
+    
+    # Initialize autonomous refact
+    auto = AutonomousRefact(Path(project_path))
+    
+    if init_only:
+        if not auto.refact_config_path.exists():
+            console.print("📝 Creating refact.yaml configuration...")
+            auto.create_refact_config()
+            console.print("✅ Initialization complete!", style="green")
+        else:
+            console.print("ℹ️ refact.yaml already exists", style="blue")
+        return
+    
+    # Run full autonomous process
+    success = auto.run_autonomous()
+    
+    if not success:
+        raise SystemExit(1)
 
 
 @main.command()

@@ -6,6 +6,7 @@ particularly missing return type annotations.
 
 from __future__ import annotations
 
+import ast
 import json
 import subprocess
 import tempfile
@@ -255,7 +256,9 @@ class ReturnTypeInferrer:
                     elif len(return_types) == 1:
                         return return_types.pop()
                     elif "None" in return_types and len(return_types) == 2:
-                        other = return_types - {"None"}.pop()
+                        return_types_copy = return_types.copy()
+                        return_types_copy.discard("None")
+                        other = return_types_copy.pop()
                         return f"Optional[{other}]"
                     else:
                         return "Any"

@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "prefact"
 description = "Python code quality tool with LLM-aware rules, plugin system, and enterprise features"
 readme = "README.md"
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
 requires-python = ">=3.8"
 authors = [
     {name = "Tom Sapletta", email = "tom@sapletta.com"},
@@ -28,7 +28,6 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
@@ -102,6 +101,7 @@ prefact-scan = "prefact.cli:scan_main"
 prefact-fix = "prefact.cli:fix_main"
 prefact-config = "prefact.cli:config_main"
 prefact-git-hooks = "prefact.git_hooks:main"
+refact = "prefact.cli:main"
 
 [project.entry-points."prefact.plugins"]
 # Built-in plugins

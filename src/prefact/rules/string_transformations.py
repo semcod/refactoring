@@ -25,6 +25,16 @@ class StringConcatTransformer(cst.CSTTransformer):
         self.fixes = []
         self.changes = []
     
+    def _get_line_number(self, node: cst.CSTNode) -> int:
+        """Get line number from CST node metadata."""
+        if hasattr(node, 'position') and node.position:
+            return node.position.start.line
+        # Try to get from the first child if position is not available
+        for child in node.children:
+            if hasattr(child, 'position') and child.position:
+                return child.position.start.line
+        return 0
+    
     def leave_BinaryOperation(
         self,
         original_node: cst.BinaryOperation,
@@ -42,7 +52,7 @@ class StringConcatTransformer(cst.CSTTransformer):
             fstring = self._create_fstring(parts)
             if fstring:
                 self.fixes.append({
-                    "line": original_node.position.start.line if original_node.position else 0,
+                    "line": self._get_line_number(original_node),
                     "original": cst.Module([]).code_for_node(original_node),
                     "fixed": cst.Module([]).code_for_node(fstring)
                 })
