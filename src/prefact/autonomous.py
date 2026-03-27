@@ -191,13 +191,52 @@ class AutonomousRefact:
             config = ExtendedConfig.from_yaml(self.refact_config_path)
             engine = RefactoringEngine(config)
             
-            # Run full scan
-            result = engine.run(dry_run=True)
+            # Get list of files to scan
+            from prefact.scanner import Scanner
+            scanner = Scanner(config)
+            files_to_scan = list(scanner.get_files())
+            
+            console.print(f"📂 Found {len(files_to_scan)} files to scan")
+            
+            # Show progress bar
+            with Progress() as progress:
+                scan_task = progress.add_task(
+                    "[cyan]Scanning files...", 
+                    total=len(files_to_scan),
+                    show_speed=True,
+                    show_eta=True,
+                    show_remaining=True
+                )
+                
+                start_time = datetime.now()
+                issues_found = []
+                
+                for i, file_path in enumerate(files_to_scan):
+                    # Update progress
+                    progress.update(scan_task, advance=1, description=f"[cyan]Scanning {file_path.name}")
+                    
+                    # Show current file every 10 files
+                    if i % 10 == 0 or i == len(files_to_scan) - 1:
+                        elapsed = (datetime.now() - start_time).total_seconds()
+                        if i > 0:
+                            avg_time = elapsed / i
+                            eta = avg_time * (len(files_to_scan) - i)
+                            console.print(f"  📄 [{i+1}/{len(files_to_scan)}] {file_path} (ETA: {eta:.1f}s)")
+                    
+                    # Scan the file
+                    try:
+                        source = file_path.read_text(encoding="utf-8")
+                        for rule in scanner.rules:
+                            file_issues = rule.scan_file(file_path, source)
+                            issues_found.extend(file_issues)
+                    except Exception as e:
+                        console.print(f"  ⚠️ Error scanning {file_path}: {e}")
             
             # Group issues by type
-            self.issues_found = self.group_issues(result.issues_found)
+            self.issues_found = self.group_issues(issues_found)
             
-            console.print(f"📊 Found {len(result.issues_found)} issues across {len(self.issues_found)} categories")
+            elapsed_time = (datetime.now() - start_time).total_seconds()
+            console.print(f"📊 Found {len(issues_found)} issues across {len(self.issues_found)} categories in {elapsed_time:.1f}s")
             
         except Exception as e:
             console.print(f"❌ Error scanning project: {e}", style="red")

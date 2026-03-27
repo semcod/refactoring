@@ -1,12 +1,12 @@
-# redup/duplication | 30 groups | 69f 11246L | 2026-03-27
+# redup/duplication | 30 groups | 69f 11310L | 2026-03-27
 
 SUMMARY:
   files_scanned: 69
-  total_lines:   11246
+  total_lines:   11310
   dup_groups:    30
-  dup_fragments: 112
-  saved_lines:   668
-  scan_ms:       2737
+  dup_fragments: 111
+  saved_lines:   658
+  scan_ms:       2730
 
 DUPLICATES[30] (ranked by impact):
   [f11aebe1fba0e2ff] ! STRU  fix  L=20 N=6 saved=100 sim=1.00
@@ -17,50 +17,49 @@ DUPLICATES[30] (ranked by impact):
       src/prefact/rules/autoflake_based.py:0-19  (fix)
       src/prefact/rules/autoflake_based.py:0-19  (fix)
   [d272190ecc2d3852] ! STRU  __init__  L=5 N=19 saved=90 sim=1.00
+      src/prefact/rules/pylint_based.py:0-4  (__init__)
+      src/prefact/rules/pylint_based.py:0-4  (__init__)
+      src/prefact/rules/pylint_based.py:0-4  (__init__)
+      src/prefact/rules/importchecker_based.py:0-4  (__init__)
+      src/prefact/rules/importchecker_based.py:0-4  (__init__)
       src/prefact/rules/llm_generated_code.py:0-4  (__init__)
-      src/prefact/rules/pylint_based.py:0-4  (__init__)
-      src/prefact/rules/pylint_based.py:0-4  (__init__)
-      src/prefact/rules/pylint_based.py:0-4  (__init__)
-      src/prefact/rules/llm_hallucinations.py:0-4  (__init__)
-      src/prefact/rules/import_linter_based.py:0-4  (__init__)
-      src/prefact/rules/import_linter_based.py:0-4  (__init__)
-      src/prefact/rules/import_linter_based.py:0-4  (__init__)
-      src/prefact/rules/import_linter_based.py:0-4  (__init__)
       src/prefact/rules/mypy_based.py:0-4  (__init__)
       src/prefact/rules/mypy_based.py:0-4  (__init__)
       src/prefact/rules/unimport_based.py:0-4  (__init__)
-      src/prefact/rules/autoflake_based.py:0-4  (__init__)
-      src/prefact/rules/autoflake_based.py:0-4  (__init__)
       src/prefact/rules/composite_rules.py:0-4  (__init__)
+      src/prefact/rules/llm_hallucinations.py:0-4  (__init__)
       src/prefact/rules/isort_based.py:0-4  (__init__)
       src/prefact/rules/isort_based.py:0-4  (__init__)
-      src/prefact/rules/importchecker_based.py:0-4  (__init__)
-      src/prefact/rules/importchecker_based.py:0-4  (__init__)
-  [4b82d8f808f776cf] ! STRU  validate  L=11 N=9 saved=88 sim=1.00
+      src/prefact/rules/import_linter_based.py:0-4  (__init__)
+      src/prefact/rules/import_linter_based.py:0-4  (__init__)
+      src/prefact/rules/import_linter_based.py:0-4  (__init__)
+      src/prefact/rules/import_linter_based.py:0-4  (__init__)
+      src/prefact/rules/autoflake_based.py:0-4  (__init__)
+      src/prefact/rules/autoflake_based.py:0-4  (__init__)
+  [4b82d8f808f776cf] ! STRU  validate  L=11 N=8 saved=77 sim=1.00
       src/prefact/rules/magic_numbers.py:0-10  (validate)
       src/prefact/rules/ai_boilerplate.py:0-10  (validate)
-      src/prefact/rules/llm_generated_code.py:0-10  (validate)
-      src/prefact/rules/llm_hallucinations.py:0-11  (validate)
-      src/prefact/rules/unimport_based.py:0-11  (validate)
-      src/prefact/rules/unimport_based.py:0-11  (validate)
-      src/prefact/rules/autoflake_based.py:0-11  (validate)
-      src/prefact/rules/isort_based.py:0-11  (validate)
       src/prefact/rules/importchecker_based.py:0-11  (validate)
+      src/prefact/rules/llm_generated_code.py:0-10  (validate)
+      src/prefact/rules/unimport_based.py:0-11  (validate)
+      src/prefact/rules/unimport_based.py:0-11  (validate)
+      src/prefact/rules/llm_hallucinations.py:0-11  (validate)
+      src/prefact/rules/autoflake_based.py:0-11  (validate)
   [fb8a4c52c4513ef3] ! EXAC  fix  L=5 N=14 saved=65 sim=1.00
       src/prefact/rules/magic_numbers.py:0-4  (fix)
       src/prefact/rules/ruff_based.py:0-4  (fix)
       src/prefact/rules/ruff_based.py:0-5  (fix)
       src/prefact/rules/ai_boilerplate.py:0-4  (fix)
+      src/prefact/rules/importchecker_based.py:0-4  (fix)
+      src/prefact/rules/importchecker_based.py:0-4  (fix)
       src/prefact/rules/llm_generated_code.py:0-4  (fix)
-      src/prefact/rules/llm_hallucinations.py:0-4  (fix)
-      src/prefact/rules/import_linter_based.py:0-5  (fix)
-      src/prefact/rules/import_linter_based.py:0-4  (fix)
       src/prefact/rules/mypy_based.py:0-5  (fix)
       src/prefact/rules/mypy_based.py:0-4  (fix)
       examples/04-custom-rules/custom_rules/no_todo_rule.py:0-4  (fix)
       examples/04-custom-rules/custom_rules/no_todo_rule.py:0-4  (fix)
-      src/prefact/rules/importchecker_based.py:0-4  (fix)
-      src/prefact/rules/importchecker_based.py:0-4  (fix)
+      src/prefact/rules/llm_hallucinations.py:0-4  (fix)
+      src/prefact/rules/import_linter_based.py:0-5  (fix)
+      src/prefact/rules/import_linter_based.py:0-4  (fix)
   [a315aab451a10132] ! STRU  check_source  L=14 N=4 saved=42 sim=1.00
       src/prefact/rules/pylint_based.py:0-13  (check_source)
       src/prefact/rules/mypy_based.py:0-13  (check_source)
@@ -78,16 +77,16 @@ DUPLICATES[30] (ranked by impact):
       src/prefact/rules/autoflake_based.py:0-30  (validate)
   [d2f1e634ceaaaada]   STRU  fix  L=7 N=4 saved=21 sim=1.00
       src/prefact/rules/pylint_based.py:0-6  (fix)
+      src/prefact/rules/importchecker_based.py:0-6  (fix)
+      src/prefact/rules/importchecker_based.py:0-6  (fix)
       src/prefact/rules/import_linter_based.py:0-6  (fix)
-      src/prefact/rules/importchecker_based.py:0-6  (fix)
-      src/prefact/rules/importchecker_based.py:0-6  (fix)
   [a0482a72d9d5e386]   STRU  validate  L=4 N=6 saved=20 sim=1.00
-      src/prefact/rules/wildcard_imports.py:0-3  (validate)
       src/prefact/rules/type_hints.py:0-3  (validate)
+      src/prefact/rules/wildcard_imports.py:0-3  (validate)
       src/prefact/rules/string_concat.py:0-3  (validate)
       src/prefact/rules/sorted_imports.py:0-3  (validate)
-      src/prefact/rules/print_statements.py:0-3  (validate)
       src/prefact/rules/importchecker_based.py:0-8  (validate)
+      src/prefact/rules/print_statements.py:0-3  (validate)
   [e4a9753f15559bff]   STRU  scan_file  L=19 N=2 saved=19 sim=1.00
       src/prefact/rules/unimport_based.py:0-18  (scan_file)
       src/prefact/rules/autoflake_based.py:0-18  (scan_file)
@@ -100,18 +99,18 @@ DUPLICATES[30] (ranked by impact):
   [c245c0aa11f8ea14]   EXAC  validate  L=10 N=2 saved=10 sim=1.00
       src/prefact/rules/unused_imports.py:0-9  (validate)
       src/prefact/rules/duplicate_imports.py:0-9  (validate)
+  [94f4bfa96465f169]   EXAC  calculate_sum  L=10 N=2 saved=10 sim=1.00
+      examples/sample-project/core.py:0-9  (calculate_sum)
+      examples/03-output-formats/sample_code.py:0-8  (calculate_sum)
   [aa29c6f1b1b4dcf2]   STRU  _map_severity  L=10 N=2 saved=10 sim=1.00
       src/prefact/rules/llm_generated_code.py:0-9  (_map_severity)
       src/prefact/rules/llm_hallucinations.py:0-9  (_map_severity)
-  [94f4bfa96465f169]   EXAC  calculate_sum  L=9 N=2 saved=9 sim=1.00
-      examples/03-output-formats/sample_code.py:0-8  (calculate_sum)
-      examples/sample-project/core.py:0-9  (calculate_sum)
   [8e18a9671be36cb9]   STRU  get_performance_monitor  L=9 N=2 saved=9 sim=1.00
       src/prefact/performance/parallel.py:0-8  (get_performance_monitor)
       src/prefact/rules/registry.py:0-8  (get_lazy_registry)
   [772c77ab0afca55b]   EXAC  process_user  L=8 N=2 saved=8 sim=1.00
-      examples/01-individual-rules/relative-imports/after.py:0-7  (process_user)
       examples/01-individual-rules/relative-imports/before.py:0-7  (process_user)
+      examples/01-individual-rules/relative-imports/after.py:0-7  (process_user)
   [53efaf6dde1d343f]   EXAC  process_data  L=8 N=2 saved=8 sim=1.00
       examples/01-individual-rules/print-statements/before.py:0-7  (process_data)
       examples/01-individual-rules/print-statements/after.py:0-7  (process_data)
@@ -140,8 +139,8 @@ DUPLICATES[30] (ranked by impact):
       examples/01-individual-rules/duplicate-imports/after.py:0-4  (process_data)
       examples/01-individual-rules/duplicate-imports/before.py:0-4  (process_data)
   [6979933d3c997c8c]   EXAC  process  L=5 N=2 saved=5 sim=1.00
-      examples/01-individual-rules/sorted-imports/after.py:0-4  (process)
       examples/01-individual-rules/sorted-imports/before.py:0-4  (process)
+      examples/01-individual-rules/sorted-imports/after.py:0-4  (process)
   [bd51f88e17729153]   EXAC  __init__  L=5 N=2 saved=5 sim=1.00
       examples/01-individual-rules/unused-imports/after.py:0-4  (__init__)
       examples/01-individual-rules/unused-imports/before.py:0-4  (__init__)
@@ -149,8 +148,8 @@ DUPLICATES[30] (ranked by impact):
       examples/sample-project/utils.py:0-4  (__init__)
       examples/sample-project/core.py:0-4  (__init__)
   [03d62cc317f2db9c]   STRU  __init__  L=5 N=2 saved=5 sim=1.00
-      examples/01-individual-rules/relative-imports/after.py:0-4  (__init__)
       examples/01-individual-rules/relative-imports/before.py:0-4  (__init__)
+      examples/01-individual-rules/relative-imports/after.py:0-4  (__init__)
 
 REFACTOR[30] (ranked by priority):
   [1] ○ extract_function   → src/prefact/rules/utils/fix.py
@@ -160,8 +159,8 @@ REFACTOR[30] (ranked by priority):
       WHY: 19 occurrences of 5-line block across 10 files — saves 90 lines
       FILES: src/prefact/rules/autoflake_based.py, src/prefact/rules/composite_rules.py, src/prefact/rules/import_linter_based.py, src/prefact/rules/importchecker_based.py, src/prefact/rules/isort_based.py +5 more
   [3] ○ extract_function   → src/prefact/rules/utils/validate.py
-      WHY: 9 occurrences of 11-line block across 8 files — saves 88 lines
-      FILES: src/prefact/rules/ai_boilerplate.py, src/prefact/rules/autoflake_based.py, src/prefact/rules/importchecker_based.py, src/prefact/rules/isort_based.py, src/prefact/rules/llm_generated_code.py +3 more
+      WHY: 8 occurrences of 11-line block across 7 files — saves 77 lines
+      FILES: src/prefact/rules/ai_boilerplate.py, src/prefact/rules/autoflake_based.py, src/prefact/rules/importchecker_based.py, src/prefact/rules/llm_generated_code.py, src/prefact/rules/llm_hallucinations.py +2 more
   [4] ○ extract_function   → utils/fix.py
       WHY: 14 occurrences of 5-line block across 9 files — saves 65 lines
       FILES: examples/04-custom-rules/custom_rules/no_todo_rule.py, src/prefact/rules/ai_boilerplate.py, src/prefact/rules/import_linter_based.py, src/prefact/rules/importchecker_based.py, src/prefact/rules/llm_generated_code.py +4 more
@@ -192,12 +191,12 @@ REFACTOR[30] (ranked by priority):
   [13] ○ extract_function   → src/prefact/rules/utils/validate.py
       WHY: 2 occurrences of 10-line block across 2 files — saves 10 lines
       FILES: src/prefact/rules/duplicate_imports.py, src/prefact/rules/unused_imports.py
-  [14] ○ extract_function   → src/prefact/rules/utils/_map_severity.py
+  [14] ○ extract_function   → examples/utils/calculate_sum.py
+      WHY: 2 occurrences of 10-line block across 2 files — saves 10 lines
+      FILES: examples/03-output-formats/sample_code.py, examples/sample-project/core.py
+  [15] ○ extract_function   → src/prefact/rules/utils/_map_severity.py
       WHY: 2 occurrences of 10-line block across 2 files — saves 10 lines
       FILES: src/prefact/rules/llm_generated_code.py, src/prefact/rules/llm_hallucinations.py
-  [15] ○ extract_function   → examples/utils/calculate_sum.py
-      WHY: 2 occurrences of 9-line block across 2 files — saves 9 lines
-      FILES: examples/03-output-formats/sample_code.py, examples/sample-project/core.py
   [16] ○ extract_function   → src/prefact/utils/get_performance_monitor.py
       WHY: 2 occurrences of 9-line block across 2 files — saves 9 lines
       FILES: src/prefact/performance/parallel.py, src/prefact/rules/registry.py
@@ -246,4 +245,4 @@ REFACTOR[30] (ranked by priority):
 
 METRICS-TARGET:
   dup_groups:  30 → 0
-  saved_lines: 668 lines recoverable
+  saved_lines: 658 lines recoverable

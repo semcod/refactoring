@@ -158,16 +158,16 @@ Content outside the markers is preserved when regenerating. Enable this with `sy
 
 ```
 prefact/
-    ├── generate_examples        ├── validator        ├── engine    ├── run_examples        ├── git_hooks        ├── autonomous        ├── fixer    ├── prefact/        ├── config        ├── scanner        ├── models        ├── plugins/            ├── builtin            ├── parallel        ├── performance/            ├── cache        ├── reporters/            ├── console            ├── json_reporter            ├── magic_numbers            ├── ruff_based            ├── unused_imports        ├── config_extended        ├── cli            ├── importchecker_based            ├── composite_factory            ├── strategies            ├── registry            ├── type_hints        ├── rules/            ├── wildcard_imports            ├── pylint_based            ├── string_concat            ├── ai_boilerplate            ├── import_linter_based            ├── unimport_based            ├── llm_generated_code            ├── isort_based            ├── sorted_imports            ├── benchmark            ├── migration            ├── autoflake_based            ├── llm_hallucinations        ├── logging            ├── composite_rules            ├── duplicate_imports            ├── print_statements        ├── messy_module        ├── cli        ├── utils        ├── models        ├── core        ├── sample_code        ├── example        ├── custom_rules/            ├── no_todo_rule            ├── after            ├── before            ├── mypy_based            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before        ├── extension├── project    ├── run_all            ├── string_transformations            ├── relative_imports            ├── after```
+    ├── run_examples        ├── engine        ├── validator    ├── generate_examples        ├── git_hooks        ├── autonomous        ├── fixer    ├── prefact/        ├── config        ├── scanner        ├── models        ├── plugins/            ├── builtin            ├── parallel        ├── performance/            ├── cache        ├── reporters/            ├── console            ├── json_reporter            ├── magic_numbers            ├── ruff_based            ├── unused_imports        ├── config_extended            ├── composite_factory            ├── importchecker_based            ├── registry            ├── strategies            ├── type_hints        ├── cli        ├── rules/            ├── wildcard_imports            ├── string_concat            ├── ai_boilerplate            ├── import_linter_based            ├── pylint_based            ├── unimport_based            ├── isort_based            ├── sorted_imports            ├── llm_generated_code            ├── benchmark            ├── migration            ├── autoflake_based            ├── llm_hallucinations        ├── logging            ├── composite_rules            ├── duplicate_imports            ├── print_statements        ├── messy_module        ├── cli        ├── utils        ├── models        ├── core        ├── sample_code        ├── example        ├── custom_rules/            ├── no_todo_rule            ├── after            ├── before            ├── mypy_based            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── string_transformations        ├── extension├── project    ├── run_all            ├── relative_imports            ├── after```
 
 ## API Overview
 
 ### Classes
 
-- **`Validator`** — —
 - **`RefactoringEngine`** — Main entry point: scan the project, apply fixes, validate results.
-- **`GitHooks`** — Manages Git hooks for pprefact.
-- **`PreCommitConfig`** — Generate pre-commit configuration for pprefact.
+- **`Validator`** — —
+- **`GitHooks`** — Manages Git hooks for prefact.
+- **`PreCommitConfig`** — Generate pre-commit configuration for prefact.
 - **`AutonomousRefact`** — Autonomous prefact manager.
 - **`Fixer`** — —
 - **`RuleConfig`** — Configuration for a single rule.
@@ -183,7 +183,7 @@ prefact/
 - **`PluginValidator`** — Validates plugins before loading.
 - **`PluginManager`** — Manages loading and registration of plugins.
 - **`ParallelScanTask`** — A task for parallel scanning.
-- **`ParallelEngine`** — Parallel processing engine for pprefact.
+- **`ParallelEngine`** — Parallel processing engine for prefact.
 - **`ParallelScanner`** — High-level interface for parallel scanning.
 - **`PerformanceMonitor`** — Monitor performance of parallel operations.
 - **`Cache`** — Wrapper for diskcache with additional functionality.
@@ -203,25 +203,20 @@ prefact/
 - **`ExtendedConfig`** — Extended configuration with additional features.
 - **`ConfigValidator`** — Validate configuration files.
 - **`ConfigGenerator`** — Generate configuration files.
+- **`CompositeRuleFactory`** — Factory for creating composite rules dynamically.
 - **`ImportCheckerHelper`** — Helper class for importchecker operations.
 - **`ImportCheckerUnusedImports`** — Detect unused imports using importchecker.
 - **`ImportCheckerDuplicateImports`** — Detect duplicate imports using importchecker.
 - **`ImportDependencyAnalysis`** — Analyze import dependencies using importchecker.
 - **`ImportOptimizer`** — Optimize imports based on importchecker analysis.
-- **`CompositeRuleFactory`** — Factory for creating composite rules dynamically.
+- **`LazyRuleRegistry`** — Registry that lazily loads rule classes.
 - **`ToolStrategy`** — Abstract base class for tool orchestration strategies.
 - **`ParallelScanStrategy`** — Run all tools in parallel and merge results.
 - **`SequentialScanStrategy`** — Run tools sequentially, passing results between them.
 - **`PriorityBasedStrategy`** — Use tool priority to resolve conflicts.
-- **`LazyRuleRegistry`** — Registry that lazily loads rule classes.
 - **`MissingReturnType`** — —
 - **`BaseRule`** — Base class every prefactoring rule must implement.
 - **`WildcardImports`** — —
-- **`PylintHelper`** — Helper class for Pylint operations.
-- **`PylintPrintStatements`** — Detect print statements using Pylint.
-- **`PylintStringConcat`** — Detect string concatenation using Pylint.
-- **`PprefactPylintPlugin`** — Custom Pylint plugin for pprefact-specific checks.
-- **`PylintComprehensive`** — Comprehensive analysis using Pylint with custom rules.
 - **`StringConcatToFstring`** — —
 - **`AIBoilerplateRule`** — Detect AI boilerplate and template code.
 - **`ImportLinterHelper`** — Helper class for import-linter operations.
@@ -229,17 +224,22 @@ prefact/
 - **`ImportLinterNoRelative`** — Block relative imports using import-linter.
 - **`ImportLinterIndependence`** — Ensure module independence using import-linter.
 - **`ImportLinterCustomArchitecture`** — Enforce custom architectural rules using import-linter.
+- **`PylintHelper`** — Helper class for Pylint operations.
+- **`PylintPrintStatements`** — Detect print statements using Pylint.
+- **`PylintStringConcat`** — Detect string concatenation using Pylint.
+- **`PprefactPylintPlugin`** — Custom Pylint plugin for prefact-specific checks.
+- **`PylintComprehensive`** — Comprehensive analysis using Pylint with custom rules.
 - **`UnimportHelper`** — Helper class for unimport operations.
 - **`UnimportUnusedImports`** — Remove unused imports using unimport.
 - **`UnimportDuplicateImports`** — Remove duplicate imports using unimport.
 - **`UnimportStarImports`** — Handle star imports using unimport.
 - **`UnimportAll`** — Apply all unimport fixes.
-- **`LLMGeneratedCodeRule`** — Detect code that appears to be LLM-generated.
 - **`ISortHelper`** — Helper class for ISort operations.
 - **`ISortedImports`** — Sort imports using ISort.
 - **`ImportSectionSeparator`** — Ensure import sections are properly separated.
 - **`CustomImportOrganization`** — Organize imports according to custom rules.
 - **`SortedImports`** — —
+- **`LLMGeneratedCodeRule`** — Detect code that appears to be LLM-generated.
 - **`RuleMigrationManager`** — Manages migration from AST-based rules to Ruff-based rules.
 - **`HybridScanner`** — Scanner that can use both AST and Ruff-based rules.
 - **`PerformanceProfiler`** — Compare performance between AST and Ruff implementations.
@@ -249,10 +249,10 @@ prefact/
 - **`AutoflakeDuplicateKeys`** — Remove duplicate keys in dictionaries using Autoflake.
 - **`AutoflakeAll`** — Apply all Autoflake fixes: unused imports, variables, and duplicate keys.
 - **`LLMHallucinationRule`** — Detect LLM hallucination patterns in code.
-- **`LogLevel`** — Log levels for pprefact.
-- **`PprefactLogger`** — Structured logger for pprefact with enterprise features.
+- **`LogLevel`** — Log levels for prefact.
+- **`PprefactLogger`** — Structured logger for prefact with enterprise features.
 - **`JsonFormatter`** — JSON formatter for structured logging.
-- **`PprefactException`** — Base exception for pprefact.
+- **`PprefactException`** — Base exception for prefact.
 - **`ConfigurationError`** — Raised when configuration is invalid.
 - **`RuleError`** — Raised when a rule encounters an error.
 - **`PluginError`** — Raised when a plugin encounters an error.
@@ -283,17 +283,17 @@ prefact/
 - **`Processor`** — Processor class.
 - **`DataProcessor`** — A class with clean imports.
 - **`DataProcessor`** — A class with unused imports.
-- **`PrefactIssue`** — —
-- **`PrefactResult`** — —
-- **`PrefactDiagnosticsProvider`** — —
-- **`PrefactTreeItem`** — —
-- **`PrefactTreeProvider`** — —
 - **`StringConcatTransformer`** — Transform string concatenations to f-strings.
 - **`StringConcatToFString`** — Convert string concatenations to f-strings.
 - **`FlyntHelper`** — Helper for using flynt library for string formatting.
 - **`FlyntStringFormatting`** — Use flynt library for string formatting optimizations.
 - **`ContextAwareStringTransformer`** — Transform string concatenations with context awareness.
 - **`ContextAwareStringConcat`** — Context-aware string concatenation to f-string conversion.
+- **`PrefactIssue`** — —
+- **`PrefactResult`** — —
+- **`PrefactDiagnosticsProvider`** — —
+- **`PrefactTreeItem`** — —
+- **`PrefactTreeProvider`** — —
 - **`RelativeToAbsoluteImports`** — —
 
 ### Functions
@@ -326,6 +326,11 @@ prefact/
 - `dump(result)` — —
 - `load_config_with_env(config_path, environment)` — Load configuration with environment detection.
 - `merge_configs(base, override)` — Merge two configurations.
+- `register_composite_rules(config)` — Register composite rules defined in configuration.
+- `get_lazy_registry()` — Get the global lazy rule registry.
+- `get_all_rules()` — Get all rule classes (loads them all).
+- `get_rule(rule_id)` — Get a rule class by ID.
+- `register(rule_class)` — Decorator to register a rule class.
 - `main(ctx, autonomous, init_only, skip_tests)` — prefact – automatic Python prefactoring toolkit.
 - `scan()` — Scan for issues without applying fixes.
 - `fix(dry_run, no_backup)` — Scan, fix, and validate in one pass.
@@ -333,21 +338,16 @@ prefact/
 - `init(project_path)` — Generate a default prefact.yaml in the project directory.
 - `autonomous_cmd(project_path, init_only, skip_tests, skip_examples)` — Run autonomous prefact mode (-a).
 - `rules()` — List all available rules.
-- `register_composite_rules(config)` — Register composite rules defined in configuration.
-- `get_lazy_registry()` — Get the global lazy rule registry.
-- `get_all_rules()` — Get all rule classes (loads them all).
-- `get_rule(rule_id)` — Get a rule class by ID.
-- `register(rule_class)` — Decorator to register a rule class.
 - `register(cls)` — Decorator that registers a rule class.
 - `get_all_rules()` — Get all registered rule classes (loads them all).
 - `get_rule(rule_id)` — Get a rule class by ID (loads it if necessary).
-- `generate_pylint_rc(config, output_path)` — Generate a .pylintrc file based on pprefact configuration.
 - `generate_import_linter_config(config, output_path)` — Generate a comprehensive import-linter configuration.
+- `generate_pylint_rc(config, output_path)` — Generate a .pylintrc file based on prefact configuration.
 - `benchmark_file(file_path, config)` — Benchmark a single file with both AST and Ruff implementations.
 - `benchmark_project(project_root, config)` — Benchmark entire project.
 - `print_benchmark_results(results)` — Print formatted benchmark results.
 - `main()` — Run benchmark on current project.
-- `add_ruff_config_to_pprefact_yaml(config_path)` — Add Ruff-specific configuration to pprefact.yaml.
+- `add_ruff_config_to_prefact_yaml(config_path)` — Add Ruff-specific configuration to prefact.yaml.
 - `get_logger()` — Get the global logger instance.
 - `setup_logging(config)` — Setup logging from configuration.
 - `setup_telemetry(config)` — Setup telemetry callbacks.

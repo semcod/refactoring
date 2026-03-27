@@ -117,13 +117,13 @@
 
 Main execution flows into the system:
 
-### src.prefact.rules.registry._initialize_built_in_rules
-> Initialize built-in rule mappings.
-- **Calls**: src.prefact.rules.registry.get_lazy_registry, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module
-
 ### src.prefact.config_extended.ExtendedConfig.from_yaml
 > Load configuration from YAML file with environment support.
 - **Calls**: None.items, raw.pop, raw.pop, raw.pop, raw.pop, raw.pop, raw.pop, cls
+
+### src.prefact.rules.registry._initialize_built_in_rules
+> Initialize built-in rule mappings.
+- **Calls**: src.prefact.rules.registry.get_lazy_registry, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module, registry.register_rule_module
 
 ### examples.run_examples.main
 > Run all examples and show results.
@@ -235,15 +235,15 @@ scans for issues, and creates tickets in planfile
 
 Key execution flows identified:
 
-### Flow 1: _initialize_built_in_rules
+### Flow 1: from_yaml
+```
+from_yaml [src.prefact.config_extended.ExtendedConfig]
+```
+
+### Flow 2: _initialize_built_in_rules
 ```
 _initialize_built_in_rules [src.prefact.rules.registry]
   └─> get_lazy_registry
-```
-
-### Flow 2: from_yaml
-```
-from_yaml [src.prefact.config_extended.ExtendedConfig]
 ```
 
 ### Flow 3: main
@@ -305,7 +305,7 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 - **Key Methods**: src.prefact.autonomous.AutonomousRefact.__init__, src.prefact.autonomous.AutonomousRefact.run_autonomous, src.prefact.autonomous.AutonomousRefact.create_refact_config, src.prefact.autonomous.AutonomousRefact.detect_project_info, src.prefact.autonomous.AutonomousRefact.run_examples, src.prefact.autonomous.AutonomousRefact.scan_project, src.prefact.autonomous.AutonomousRefact.group_issues, src.prefact.autonomous.AutonomousRefact.update_planfile, src.prefact.autonomous.AutonomousRefact.create_default_planfile, src.prefact.autonomous.AutonomousRefact.create_ticket_from_issue
 
 ### src.prefact.logging.PprefactLogger
-> Structured logger for pprefact with enterprise features.
+> Structured logger for prefact with enterprise features.
 - **Methods**: 15
 - **Key Methods**: src.prefact.logging.PprefactLogger.__init__, src.prefact.logging.PprefactLogger._setup_handlers, src.prefact.logging.PprefactLogger.debug, src.prefact.logging.PprefactLogger.info, src.prefact.logging.PprefactLogger.warning, src.prefact.logging.PprefactLogger.error, src.prefact.logging.PprefactLogger.critical, src.prefact.logging.PprefactLogger._log, src.prefact.logging.PprefactLogger._send_telemetry, src.prefact.logging.PprefactLogger.add_telemetry_callback
 
@@ -315,7 +315,7 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 - **Key Methods**: src.prefact.config.Config.from_yaml, src.prefact.config.Config._parse_rules, src.prefact.config.Config._get_default_patterns, src.prefact.config.Config.rule_enabled, src.prefact.config.Config.is_rule_enabled, src.prefact.config.Config.rule_options, src.prefact.config.Config.get_rule_option, src.prefact.config.Config.set_rule_option, src.prefact.config.Config.detect_package_name, src.prefact.config.Config._detect_from_pyproject
 
 ### src.prefact.git_hooks.GitHooks
-> Manages Git hooks for pprefact.
+> Manages Git hooks for prefact.
 - **Methods**: 11
 - **Key Methods**: src.prefact.git_hooks.GitHooks.__init__, src.prefact.git_hooks.GitHooks._find_git_dir, src.prefact.git_hooks.GitHooks.install_hooks, src.prefact.git_hooks.GitHooks._install_hook, src.prefact.git_hooks.GitHooks._generate_hook_script, src.prefact.git_hooks.GitHooks._pre_commit_hook, src.prefact.git_hooks.GitHooks._pre_push_hook, src.prefact.git_hooks.GitHooks._commit_msg_hook, src.prefact.git_hooks.GitHooks.uninstall_hooks, src.prefact.git_hooks.GitHooks.list_hooks
 
@@ -348,7 +348,7 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 - **Inherits**: cst.CSTTransformer
 
 ### src.prefact.performance.parallel.ParallelEngine
-> Parallel processing engine for pprefact.
+> Parallel processing engine for prefact.
 - **Methods**: 7
 - **Key Methods**: src.prefact.performance.parallel.ParallelEngine.__init__, src.prefact.performance.parallel.ParallelEngine.scan_files, src.prefact.performance.parallel.ParallelEngine._scan_with_thread_pool, src.prefact.performance.parallel.ParallelEngine._scan_with_process_pool, src.prefact.performance.parallel.ParallelEngine._execute_task_wrapper, src.prefact.performance.parallel.ParallelEngine._get_enabled_rule_ids, src.prefact.performance.parallel.ParallelEngine.fix_files
 
@@ -356,6 +356,12 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 > Wrapper for diskcache with additional functionality.
 - **Methods**: 7
 - **Key Methods**: src.prefact.performance.cache.Cache.__init__, src.prefact.performance.cache.Cache.get, src.prefact.performance.cache.Cache.set, src.prefact.performance.cache.Cache.delete, src.prefact.performance.cache.Cache.clear, src.prefact.performance.cache.Cache.get_stats, src.prefact.performance.cache.Cache.close
+
+### src.prefact.config_extended.ExtendedConfig
+> Extended configuration with additional features.
+- **Methods**: 7
+- **Key Methods**: src.prefact.config_extended.ExtendedConfig.__init__, src.prefact.config_extended.ExtendedConfig.from_yaml, src.prefact.config_extended.ExtendedConfig._deep_merge, src.prefact.config_extended.ExtendedConfig.get_tool_config, src.prefact.config_extended.ExtendedConfig.get_performance_setting, src.prefact.config_extended.ExtendedConfig.get_plugin_config, src.prefact.config_extended.ExtendedConfig.to_dict
+- **Inherits**: Config
 
 ### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
 > Analyze import dependencies using importchecker.
@@ -366,14 +372,8 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 ### src.prefact.rules.pylint_based.PylintComprehensive
 > Comprehensive analysis using Pylint with custom rules.
 - **Methods**: 7
-- **Key Methods**: src.prefact.rules.pylint_based.PylintComprehensive.__init__, src.prefact.rules.pylint_based.PylintComprehensive._load_pylint_config, src.prefact.rules.pylint_based.PylintComprehensive.scan_file, src.prefact.rules.pylint_based.PylintComprehensive._map_pylint_to_pprefact, src.prefact.rules.pylint_based.PylintComprehensive._map_pylint_severity, src.prefact.rules.pylint_based.PylintComprehensive.fix, src.prefact.rules.pylint_based.PylintComprehensive.validate
+- **Key Methods**: src.prefact.rules.pylint_based.PylintComprehensive.__init__, src.prefact.rules.pylint_based.PylintComprehensive._load_pylint_config, src.prefact.rules.pylint_based.PylintComprehensive.scan_file, src.prefact.rules.pylint_based.PylintComprehensive._map_pylint_to_prefact, src.prefact.rules.pylint_based.PylintComprehensive._map_pylint_severity, src.prefact.rules.pylint_based.PylintComprehensive.fix, src.prefact.rules.pylint_based.PylintComprehensive.validate
 - **Inherits**: BaseRule
-
-### src.prefact.config_extended.ExtendedConfig
-> Extended configuration with additional features.
-- **Methods**: 7
-- **Key Methods**: src.prefact.config_extended.ExtendedConfig.__init__, src.prefact.config_extended.ExtendedConfig.from_yaml, src.prefact.config_extended.ExtendedConfig._deep_merge, src.prefact.config_extended.ExtendedConfig.get_tool_config, src.prefact.config_extended.ExtendedConfig.get_performance_setting, src.prefact.config_extended.ExtendedConfig.get_plugin_config, src.prefact.config_extended.ExtendedConfig.to_dict
-- **Inherits**: Config
 
 ### src.prefact.rules.isort_based.ISortHelper
 > Helper class for ISort operations.
@@ -448,6 +448,30 @@ Key functions that process and transform data:
 ### src.prefact.rules.unused_imports.UnusedImports.validate
 - **Output to**: ValidationResult, ast.parse, checks.append, errors.append
 
+### src.prefact.config_extended.ConfigValidator.validate
+> Validate configuration and return list of errors.
+- **Output to**: config.tools.items, errors.extend, config.rules.items, ConfigValidator._validate_performance_config, errors.extend
+
+### src.prefact.config_extended.ConfigValidator._validate_ruff_config
+> Validate Ruff configuration.
+- **Output to**: errors.append, isinstance, errors.append, isinstance
+
+### src.prefact.config_extended.ConfigValidator._validate_mypy_config
+> Validate MyPy configuration.
+- **Output to**: isinstance, errors.append
+
+### src.prefact.config_extended.ConfigValidator._validate_isort_config
+> Validate ISort configuration.
+- **Output to**: errors.append
+
+### src.prefact.config_extended.ConfigValidator._validate_performance_config
+> Validate performance configuration.
+- **Output to**: errors.append, errors.append, isinstance, isinstance
+
+### src.prefact.config_extended.ConfigValidator._validate_rule_config
+> Validate individual rule configuration.
+- **Output to**: errors.append, isinstance, all, isinstance, errors.append
+
 ### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
 - **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
 
@@ -462,26 +486,6 @@ Key functions that process and transform data:
 
 ### src.prefact.rules.pylint_based.PylintPrintStatements.validate
 - **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
-
-### src.prefact.rules.pylint_based.PylintStringConcat.validate
-- **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
-
-### src.prefact.rules.pylint_based.PylintComprehensive.validate
-- **Output to**: ValidationResult, PylintHelper.check_source, all_checks.append, all_errors.append, len
-
-### src.prefact.rules.type_hints.MissingReturnType.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.BaseRule.validate
-> Check that the fix didn't break anything.
-
-### src.prefact.config_extended.ConfigValidator.validate
-> Validate configuration and return list of errors.
-- **Output to**: config.tools.items, errors.extend, config.rules.items, ConfigValidator._validate_performance_config, errors.extend
-
-### src.prefact.config_extended.ConfigValidator._validate_ruff_config
-> Validate Ruff configuration.
-- **Output to**: errors.append, isinstance, errors.append, isinstance
 
 ## Behavioral Patterns
 
@@ -571,10 +575,10 @@ How components interact:
 
 ```mermaid
 graph TD
-    _initialize_built_in --> get_lazy_registry
-    _initialize_built_in --> register_rule_module
     from_yaml --> items
     from_yaml --> pop
+    _initialize_built_in --> get_lazy_registry
+    _initialize_built_in --> register_rule_module
     main --> print
     main --> find_examples
     main --> Table

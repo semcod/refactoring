@@ -4,10 +4,10 @@ flowchart TD
     classDef entry fill:#4dabf7,stroke:#1971c2,color:#fff
 
     subgraph Core
+        src__prefact__validator__Validator__validate_file["validate_file"]
         src__prefact__engine__RefactoringEngine__run["run"]
         src__prefact__engine__RefactoringEngine__scan_only["scan_only"]
         src__prefact__engine__RefactoringEngine__run_file["run_file"]
-        src__prefact__validator__Validator__validate_file["validate_file"]
         src__prefact__git_hooks__GitHooks___find_git_dir["_find_git_dir"]
         src__prefact__git_hooks__GitHooks__install_hooks["install_hooks"]
         src__prefact__git_hooks__GitHooks___install_hook["_install_hook"]
@@ -22,4 +22,4 @@ flowchart TD
         ...["+458 more"]
     end
 
-    class src__prefact__engine__RefactoringEngine__run,src__prefact__engine__RefactoringEngine__scan_only,src__prefact__engine__RefactoringEngine__run_file,src__prefact__validator__Validator__validate_file,src__prefact__git_hooks__GitHooks___find_git_dir,src__prefact__git_hooks__GitHooks__install_hooks,src__prefact__git_hooks__GitHooks___install_hook,src__prefact__git_hooks__GitHooks___generate_hook_script,src__prefact__git_hooks__GitHooks___pre_commit_hook,src__prefact__git_hooks__GitHooks___pre_push_hook entry
+    class src__prefact__validator__Validator__validate_file,src__prefact__engine__RefactoringEngine__run,src__prefact__engine__RefactoringEngine__scan_only,src__prefact__engine__RefactoringEngine__run_file,src__prefact__git_hooks__GitHooks___find_git_dir,src__prefact__git_hooks__GitHooks__install_hooks,src__prefact__git_hooks__GitHooks___install_hook,src__prefact__git_hooks__GitHooks___generate_hook_script,src__prefact__git_hooks__GitHooks___pre_commit_hook,src__prefact__git_hooks__GitHooks___pre_push_hook entry

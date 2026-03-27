@@ -1,4 +1,4 @@
-# code2llm | 50f 10775L | python:48,shell:1,typescript:1 | 2026-03-27
+# code2llm | 50f 10839L | python:48,shell:1,typescript:1 | 2026-03-27
 # CC̄=3.1 | critical:3/653 | dups:0 | cycles:0
 
 HEALTH[3]:
@@ -9,31 +9,31 @@ HEALTH[3]:
 REFACTOR[1]:
   1. split 3 high-CC methods  (CC>15)
 
-PIPELINES[510]:
+PIPELINES[508]:
   [1] Src [main]: main → find_examples
       PURITY: 100% pure
-  [2] Src [__init__]: __init__
+  [2] Src [__init__]: __init__ → get_all_rules
       PURITY: 100% pure
-  [3] Src [run]: run
+  [3] Src [validate_file]: validate_file
       PURITY: 100% pure
-  [4] Src [scan_only]: scan_only
+  [4] Src [__init__]: __init__
       PURITY: 100% pure
-  [5] Src [run_file]: run_file
+  [5] Src [run]: run
       PURITY: 100% pure
 
 LAYERS:
-  src/                            CC̄=3.1    ←in:0  →out:0
+  src/                            CC̄=3.2    ←in:0  →out:0
   │ string_transformations     491L  6C   27m  CC=8      ←0
   │ importchecker_based        482L  5C   24m  CC=14     ←0
+  │ isort_based                468L  4C   23m  CC=13     ←0
   │ autoflake_based            468L  5C   23m  CC=11     ←0
   │ !! config_extended            462L  3C   18m  CC=15     ←2
   │ autonomous                 455L  1C   15m  CC=9      ←0
   │ unimport_based             454L  5C   22m  CC=14     ←0
   │ import_linter_based        449L  5C   24m  CC=8      ←0
-  │ isort_based                440L  4C   23m  CC=12     ←0
   │ logging                    436L  10C   28m  CC=4      ←0
   │ cache                      434L  6C   37m  CC=5      ←8
-  │ pylint_based               401L  5C   22m  CC=6      ←1
+  │ pylint_based               401L  5C   22m  CC=6      ←0
   │ mypy_based                 400L  6C   22m  CC=9      ←0
   │ git_hooks                  391L  2C   17m  CC=8      ←0
   │ parallel                   350L  4C   23m  CC=7      ←0
@@ -47,10 +47,10 @@ LAYERS:
   │ llm_hallucinations         212L  1C    9m  CC=8      ←0
   │ config                     197L  2C   13m  CC=5      ←2
   │ llm_generated_code         189L  1C    9m  CC=7      ←0
+  │ __init__                   179L  1C    7m  CC=1      ←0
   │ benchmark                  167L  0C    4m  CC=7      ←0
   │ !! unused_imports             164L  1C    8m  CC=21     ←0
   │ strategies                 150L  4C   10m  CC=5      ←0
-  │ __init__                   143L  1C    7m  CC=1      ←0
   │ !! magic_numbers              136L  1C    6m  CC=15     ←0
   │ composite_factory          116L  1C    2m  CC=4      ←0
   │ models                      92L  6C    0m  CC=0.0    ←0

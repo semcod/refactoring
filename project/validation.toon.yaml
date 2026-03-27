@@ -101,7 +101,7 @@ ERRORS[24]{path,score}:
       python.import.resolvable,error,Module 'diskcache' not found,17
   src/prefact/rules/isort_based.py,0.95
     issues[1]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'isort' not found,13
+      python.import.resolvable,error,Module 'isort' not found,19
   src/prefact/rules/importchecker_based.py,0.96
     issues[1]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'importchecker' not found,28

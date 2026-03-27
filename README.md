@@ -9,6 +9,8 @@ Automatic Python prefactoring toolkit — detect, fix, and validate common code 
 
 ## The Problem
 
+![img.png](img.png)
+
 When using LLMs for code generation, they often silently change import paths from absolute to deep relative:
 
 ```python
