@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "semcod_refactoring"
+name = "prefact"
 version = "0.0.5"
 authors = [
     {name = "Semcod Team", email = "team@semcod.com"},
@@ -36,19 +36,19 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/semcod/refactoring"
-Repository = "https://github.com/semcod/refactoring"
-Issues = "https://github.com/semcod/refactoring/issues"
+Homepage = "https://github.com/semcod/prefact"
+Repository = "https://github.com/semcod/prefact"
+Issues = "https://github.com/semcod/prefact/issues"
 
 [project.scripts]
-semcod-refactor = "refactoring.cli:main"
+prefact = "refactoring.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["refactoring*"]
 
 [tool.setuptools.package-data]
-"*" = ["*.txt", "*.md", "*.rst"]
+"*" = ["*.txt", "*.md", "*.rst", "*.yaml", "*.yml"]
 
 [tool.black]
 line-length = 88
