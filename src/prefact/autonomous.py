@@ -47,7 +47,7 @@ class AutonomousRefact:
         
     def run_autonomous(self) -> bool:
         """Run autonomous prefact process."""
-        console.print(Panel.fit(f"🤖 Autonomous Refact Mode\nVersion: {__version__}", style="bold blue"))
+        console.print(Panel.fit(f"🤖 Prefact v {__version__}", style="bold blue"))
         
         try:
             # Step 1: Initialize if needed
@@ -434,11 +434,15 @@ class AutonomousRefact:
     def update_todo_md(self) -> None:
         """Update TODO.md with current issues."""
         todos = []
+        seen = set()
         
-        # Add issues as TODOs
+        # Add issues as TODOs with deduplication
         for issue_group in self.issues_found:
             for example in issue_group["examples"]:
-                todos.append(f"- [ ] {issue_group['file']}:{example['line']} - {example['message']}")
+                todo_key = (issue_group['file'], example['line'], example['message'])
+                if todo_key not in seen:
+                    todos.append(f"- [ ] {issue_group['file']}:{example['line']} - {example['message']}")
+                    seen.add(todo_key)
         
         # Write TODO.md
         if todos:

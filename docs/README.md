@@ -158,7 +158,7 @@ Content outside the markers is preserved when regenerating. Enable this with `sy
 
 ```
 prefact/
-        ├── engine        ├── validator    ├── generate_examples        ├── git_hooks    ├── run_examples        ├── autonomous        ├── fixer    ├── prefact/        ├── config        ├── scanner        ├── models        ├── plugins/            ├── builtin            ├── parallel        ├── performance/            ├── cache        ├── reporters/            ├── console            ├── json_reporter        ├── cli            ├── magic_numbers            ├── ruff_based        ├── config_extended            ├── unused_imports            ├── composite_factory            ├── registry            ├── importchecker_based            ├── type_hints            ├── strategies            ├── pylint_based        ├── rules/            ├── wildcard_imports            ├── string_concat            ├── ai_boilerplate            ├── import_linter_based            ├── unimport_based            ├── llm_generated_code            ├── isort_based            ├── sorted_imports            ├── benchmark            ├── migration            ├── autoflake_based            ├── llm_hallucinations        ├── logging            ├── composite_rules            ├── duplicate_imports            ├── print_statements        ├── messy_module        ├── cli        ├── utils        ├── models        ├── core        ├── sample_code        ├── example        ├── custom_rules/            ├── no_todo_rule            ├── after            ├── before            ├── mypy_based            ├── before            ├── after            ├── before            ├── after            ├── before            ├── relative_imports            ├── after            ├── after            ├── string_transformations            ├── before            ├── before            ├── before            ├── after            ├── after            ├── before├── project    ├── run_all        ├── extension            ├── after```
+        ├── engine    ├── generate_examples        ├── validator        ├── git_hooks    ├── run_examples        ├── autonomous        ├── fixer    ├── prefact/        ├── config        ├── scanner        ├── models        ├── plugins/            ├── builtin            ├── parallel        ├── performance/            ├── cache        ├── reporters/            ├── console            ├── json_reporter            ├── magic_numbers            ├── ruff_based            ├── unused_imports        ├── cli        ├── config_extended            ├── composite_factory            ├── registry            ├── importchecker_based            ├── type_hints            ├── strategies        ├── rules/            ├── pylint_based            ├── wildcard_imports            ├── string_concat            ├── ai_boilerplate            ├── unimport_based            ├── import_linter_based            ├── llm_generated_code            ├── sorted_imports            ├── isort_based            ├── benchmark            ├── migration            ├── autoflake_based            ├── llm_hallucinations        ├── logging            ├── composite_rules            ├── duplicate_imports            ├── print_statements        ├── messy_module        ├── cli        ├── utils        ├── models        ├── core        ├── sample_code        ├── example        ├── custom_rules/            ├── no_todo_rule            ├── after            ├── before            ├── mypy_based            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before            ├── after            ├── before        ├── extension├── project    ├── run_all            ├── string_transformations            ├── after            ├── relative_imports```
 
 ## API Overview
 
@@ -199,10 +199,10 @@ prefact/
 - **`RuffUnusedImports`** — Unused imports detection and removal using Ruff.
 - **`RuffSortedImports`** — Import sorting using Ruff.
 - **`RuffDuplicateImports`** — Duplicate imports detection using Ruff.
+- **`UnusedImports`** — —
 - **`ExtendedConfig`** — Extended configuration with additional features.
 - **`ConfigValidator`** — Validate configuration files.
 - **`ConfigGenerator`** — Generate configuration files.
-- **`UnusedImports`** — —
 - **`CompositeRuleFactory`** — Factory for creating composite rules dynamically.
 - **`LazyRuleRegistry`** — Registry that lazily loads rule classes.
 - **`ImportCheckerHelper`** — Helper class for importchecker operations.
@@ -215,31 +215,31 @@ prefact/
 - **`ParallelScanStrategy`** — Run all tools in parallel and merge results.
 - **`SequentialScanStrategy`** — Run tools sequentially, passing results between them.
 - **`PriorityBasedStrategy`** — Use tool priority to resolve conflicts.
+- **`BaseRule`** — Base class every prefactoring rule must implement.
 - **`PylintHelper`** — Helper class for Pylint operations.
 - **`PylintPrintStatements`** — Detect print statements using Pylint.
 - **`PylintStringConcat`** — Detect string concatenation using Pylint.
 - **`PprefactPylintPlugin`** — Custom Pylint plugin for prefact-specific checks.
 - **`PylintComprehensive`** — Comprehensive analysis using Pylint with custom rules.
-- **`BaseRule`** — Base class every prefactoring rule must implement.
 - **`WildcardImports`** — —
 - **`StringConcatToFstring`** — —
 - **`AIBoilerplateRule`** — Detect AI boilerplate and template code.
-- **`ImportLinterHelper`** — Helper class for import-linter operations.
-- **`ImportLinterLayers`** — Enforce import layering rules using import-linter.
-- **`ImportLinterNoRelative`** — Block relative imports using import-linter.
-- **`ImportLinterIndependence`** — Ensure module independence using import-linter.
-- **`ImportLinterCustomArchitecture`** — Enforce custom architectural rules using import-linter.
 - **`UnimportHelper`** — Helper class for unimport operations.
 - **`UnimportUnusedImports`** — Remove unused imports using unimport.
 - **`UnimportDuplicateImports`** — Remove duplicate imports using unimport.
 - **`UnimportStarImports`** — Handle star imports using unimport.
 - **`UnimportAll`** — Apply all unimport fixes.
+- **`ImportLinterHelper`** — Helper class for import-linter operations.
+- **`ImportLinterLayers`** — Enforce import layering rules using import-linter.
+- **`ImportLinterNoRelative`** — Block relative imports using import-linter.
+- **`ImportLinterIndependence`** — Ensure module independence using import-linter.
+- **`ImportLinterCustomArchitecture`** — Enforce custom architectural rules using import-linter.
 - **`LLMGeneratedCodeRule`** — Detect code that appears to be LLM-generated.
+- **`SortedImports`** — —
 - **`ISortHelper`** — Helper class for ISort operations.
 - **`ISortedImports`** — Sort imports using ISort.
 - **`ImportSectionSeparator`** — Ensure import sections are properly separated.
 - **`CustomImportOrganization`** — Organize imports according to custom rules.
-- **`SortedImports`** — —
 - **`RuleMigrationManager`** — Manages migration from AST-based rules to Ruff-based rules.
 - **`HybridScanner`** — Scanner that can use both AST and Ruff-based rules.
 - **`PerformanceProfiler`** — Compare performance between AST and Ruff implementations.
@@ -281,20 +281,20 @@ prefact/
 - **`SmartReturnTypeRule`** — Smart return type detection with inference suggestions.
 - **`Processor`** — Processor class.
 - **`Processor`** — Processor class.
-- **`RelativeToAbsoluteImports`** — —
 - **`DataProcessor`** — A class with clean imports.
-- **`StringConcatTransformer`** — Transform string concatenations to f-strings.
-- **`StringConcatToFString`** — Convert string concatenations to f-strings.
-- **`FlyntHelper`** — Helper for using flynt library for string formatting.
-- **`FlyntStringFormatting`** — Use flynt library for string formatting optimizations.
-- **`ContextAwareStringTransformer`** — Transform string concatenations with context awareness.
-- **`ContextAwareStringConcat`** — Context-aware string concatenation to f-string conversion.
 - **`DataProcessor`** — A class with unused imports.
 - **`PrefactIssue`** — —
 - **`PrefactResult`** — —
 - **`PrefactDiagnosticsProvider`** — —
 - **`PrefactTreeItem`** — —
 - **`PrefactTreeProvider`** — —
+- **`StringConcatTransformer`** — Transform string concatenations to f-strings.
+- **`StringConcatToFString`** — Convert string concatenations to f-strings.
+- **`FlyntHelper`** — Helper for using flynt library for string formatting.
+- **`FlyntStringFormatting`** — Use flynt library for string formatting optimizations.
+- **`ContextAwareStringTransformer`** — Transform string concatenations with context awareness.
+- **`ContextAwareStringConcat`** — Context-aware string concatenation to f-string conversion.
+- **`RelativeToAbsoluteImports`** — —
 
 ### Functions
 
@@ -338,10 +338,10 @@ prefact/
 - `get_all_rules()` — Get all rule classes (loads them all).
 - `get_rule(rule_id)` — Get a rule class by ID.
 - `register(rule_class)` — Decorator to register a rule class.
-- `generate_pylint_rc(config, output_path)` — Generate a .pylintrc file based on prefact configuration.
 - `register(cls)` — Decorator that registers a rule class.
 - `get_all_rules()` — Get all registered rule classes (loads them all).
 - `get_rule(rule_id)` — Get a rule class by ID (loads it if necessary).
+- `generate_pylint_rc(config, output_path)` — Generate a .pylintrc file based on prefact configuration.
 - `generate_import_linter_config(config, output_path)` — Generate a comprehensive import-linter configuration.
 - `benchmark_file(file_path, config)` — Benchmark a single file with both AST and Ruff implementations.
 - `benchmark_project(project_root, config)` — Benchmark entire project.
@@ -383,14 +383,14 @@ prefact/
 - `process_data(data)` — Process some data.
 - `format_timestamp(ts)` — Format a timestamp.
 - `read_file(filepath)` — Read file contents.
+- `process_data(data)` — Process some data.
+- `format_timestamp(ts)` — Format a timestamp.
+- `read_file(filepath)` — Read file contents.
 - `greet(name, age)` — Greet someone.
 - `format_data(data)` — Format data.
 - `greet(name, age)` — Greet someone.
 - `format_data(data)` — Format data.
 - `process()` — Process with unsorted imports.
-- `process_data(data)` — Process some data.
-- `format_timestamp(ts)` — Format a timestamp.
-- `read_file(filepath)` — Read file contents.
 - `process()` — Process with unsorted imports.
 - `process_data(data)` — Process data with debug prints.
 - `calculate(a, b)` — Calculate with debug output.

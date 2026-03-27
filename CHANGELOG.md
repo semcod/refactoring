@@ -229,6 +229,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.21] - 2026-03-27
+
+### Docs
+- Update TODO.md
+- Update docs/README.md
+
+### Other
+- Update project/duplication.toon.yaml
+
 ## [0.1.20] - 2026-03-27
 
 ### Docs
