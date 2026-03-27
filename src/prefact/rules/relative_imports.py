@@ -68,7 +68,7 @@ class _RelativeImportFixer(cst.CSTTransformer):
         new_module = _str_to_module(abs_module)
         self.fixes.append(
             {
-                "original": "." * level + (_module_to_str(updated_node.module) if updated_node.module else ""),
+                "original": f"{"." * level}{(_module_to_str(updated_node.module) if updated_node.module else "")}",
                 "fixed": abs_module,
             }
         )
@@ -92,7 +92,7 @@ class _RelativeImportFixer(cst.CSTTransformer):
         base_parts = parts[: len(parts) - up] if up else parts
 
         module_str = _module_to_str(module_node) if module_node else ""
-        result_parts = list(base_parts) + ([module_str] if module_str else [])
+        result_parts = f"{list(base_parts)}{([module_str] if module_str else [])}"
         return ".".join(result_parts) if result_parts else None
 
 
@@ -118,7 +118,7 @@ class RelativeToAbsoluteImports(BaseRule):
         for node in ast.walk(tree):
             if isinstance(node, ast.ImportFrom) and (node.level or 0) > 0:
                 module_str = node.module or ""
-                original = "." * node.level + module_str
+                original = f"{"." * node.level}{module_str}"
                 issues.append(
                     Issue(
                         rule_id=self.rule_id,

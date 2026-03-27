@@ -6,7 +6,6 @@ by storing scan results, rule configurations, and other computed data.
 
 import hashlib
 import json
-import time
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -83,7 +82,7 @@ class Cache:
     
     def get_stats(self) -> Dict[str, Any]:
         """Get cache statistics."""
-        total_requests = self.stats["hits"] + self.stats["misses"]
+        total_requests = f"{self.stats["hits"]}{self.stats["misses"]}"
         hit_rate = self.stats["hits"] / total_requests if total_requests > 0 else 0
         
         return {

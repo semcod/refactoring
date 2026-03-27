@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.10] - 2026-03-27
+
+### Fixed
+- Fix wildcard-imports issues (ticket-f59adb71)
+- Fix wildcard-imports issues (ticket-e0342587)
+- Fix wildcard-imports issues (ticket-f50ed65e)
+
+## [0.1.10] - 2026-03-27
+
+### Fixed
+- Fix duplicate-imports issues (ticket-49d37755)
+
+## [0.1.10] - 2026-03-27
+
+### Fixed
+- Fix smart-return-type issues (ticket-7adcbb2b)
+- Fix string-concat issues (ticket-242b0517)
+- Fix unused-imports issues (ticket-de239fa7)
+- Fix magic-numbers issues (ticket-02dc0d73)
+- Fix ai-boilerplate issues (ticket-b38b2991)
+- Fix llm-generated-code issues (ticket-b3a94431)
+- Fix smart-return-type issues (ticket-e338c3a9)
+- Fix string-concat issues (ticket-133af5e9)
+- Fix ai-boilerplate issues (ticket-054d6766)
+
 ## [0.1.22] - 2026-03-27
 
 ### Added
@@ -253,6 +278,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix unused-imports issues (ticket-c1ba2cf8)
 
 ## [Unreleased]
+
+## [0.1.25] - 2026-03-27
+
+### Docs
+- Update CHANGELOG.md
+- Update TODO.md
+- Update docs/RAM_OPTIMIZATION.md
+- Update docs/README.md
+- Update project/README.md
+- Update project/context.md
+
+### Test
+- Update test_large_files.py
+- Update test_ram_implementation.py
+
+### Other
+- Update benchmark_ram_optimization.py
+- Update planfile.yaml
+- Update project/analysis.toon.yaml
+- Update project/calls.mmd
+- Update project/calls.png
+- Update project/compact_flow.mmd
+- Update project/compact_flow.png
+- Update project/duplication.toon.yaml
+- Update project/evolution.toon.yaml
+- Update project/flow.mmd
+- ... and 5 more files
 
 ## [0.1.24] - 2026-03-27
 

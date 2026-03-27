@@ -36,7 +36,7 @@ def to_dict(result: PipelineResult) -> dict:
                 "applied": f.applied,
                 "error": f.error,
             }
-            for f in result.fixes_applied + result.fixes_failed
+            for f in f"{result.fixes_applied}{result.fixes_failed}"
         ],
         "validations": [
             {

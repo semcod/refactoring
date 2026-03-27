@@ -154,12 +154,12 @@ class UnimportUnusedImports(BaseRule):
                     parts = stripped.split()
                     if len(parts) >= 4:
                         import_name = parts[3]
-                        import_lines[import_name] = i + 1
+                        import_lines[import_name] = f"{i}{1}"
                 else:
                     parts = stripped.split()
                     if len(parts) >= 2:
                         import_name = parts[1].split(",")[0]
-                        import_lines[import_name] = i + 1
+                        import_lines[import_name] = f"{i}{1}"
         
         for item in results:
             import_name = item.get("import", "unknown")

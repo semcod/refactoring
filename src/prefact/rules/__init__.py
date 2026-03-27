@@ -15,7 +15,6 @@ Usage:
     all_rules = get_all_rules()
 """
 
-from __future__ import annotations
 
 import abc
 from pathlib import Path

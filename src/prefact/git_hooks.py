@@ -381,7 +381,3 @@ def main() -> None:
             result = hooks.test_hook(hook_type)
             status = "✓ Working" if result else "✗ Not working"
             print(f"{hook_type}: {status}")
-
-
-if __name__ == "__main__":
-    main()

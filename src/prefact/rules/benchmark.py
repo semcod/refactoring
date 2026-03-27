@@ -20,7 +20,7 @@ def benchmark_file(file_path: Path, config: Config) -> Dict:
     results = {
         "file": str(file_path),
         "file_size_bytes": len(source),
-        "lines": source.count("\n") + 1,
+        "lines": f"{source.count("\n")}{1}",
         "rules": {}
     }
     
@@ -109,7 +109,8 @@ def benchmark_project(project_root: Path, config: Config) -> Dict:
 
 def print_benchmark_results(results: Dict) -> None:
     """Print formatted benchmark results."""
-    print("\n" + "="*60)
+    print(f"
+{"="*60}")
     print("PERFORMANCE BENCHMARK RESULTS")
     print("="*60)
     
@@ -121,7 +122,8 @@ def print_benchmark_results(results: Dict) -> None:
     print(f"Overall speedup: {results['overall_speedup']:.2f}x")
     
     # Per-file details
-    print("\n" + "-"*60)
+    print(f"
+{"-"*60}")
     print("PER-FILE RESULTS")
     print("-"*60)
     
@@ -136,7 +138,7 @@ def print_benchmark_results(results: Dict) -> None:
             print(f"  {rule_id}: {speedup:.2f}x speedup, issues match: {match}")
 
 
-def main():
+def main() -> None:
     """Run benchmark on current project."""
     import argparse
     
@@ -159,7 +161,3 @@ def main():
     with open(output_file, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nDetailed results saved to: {output_file}")
-
-
-if __name__ == "__main__":
-    main()

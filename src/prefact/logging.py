@@ -375,10 +375,10 @@ class LogContext:
 
 
 # Decorator for logging function calls
-def log_execution(logger: Optional[PprefactLogger] = None):
+def log_execution(logger: Optional[PprefactLogger] = None) -> Any:
     """Decorator to log function execution."""
-    def decorator(func):
-        def wrapper(*args, **kwargs):
+    def decorator(func) -> Any:
+        def wrapper(*args, **kwargs) -> Any:
             nonlocal logger
             if logger is None:
                 logger = get_logger()
@@ -416,7 +416,7 @@ def log_execution(logger: Optional[PprefactLogger] = None):
 
 
 # Exception handler for unhandled exceptions
-def handle_exception(exc_type, exc_value, exc_traceback):
+def handle_exception(exc_type, exc_value, exc_traceback) -> None:
     """Handle unhandled exceptions."""
     if issubclass(exc_type, KeyboardInterrupt):
         sys.__excepthook__(exc_type, exc_value, exc_traceback)

@@ -8,7 +8,6 @@ This module provides advanced configuration parsing with support for:
 - Environment-specific overrides
 """
 
-from __future__ import annotations
 
 import os
 import yaml
@@ -57,7 +56,7 @@ class ExtendedConfig(Config):
             setattr(self, key, value)
     
     @classmethod
-    def from_yaml(cls, path: Path, environment: Optional[str] = None) -> ExtendedConfig:
+    def from_yaml(cls, path: Path, environment: Optional[str] = None) -> "ExtendedConfig":
         """Load configuration from YAML file with environment support."""
         if not path.exists():
             return cls(project_root=Path.cwd())

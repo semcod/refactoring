@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 from prefact.config import Config
+from prefact.config_extended import DEFAULT_MAX_LINE_LENGTH
 from prefact.models import Fix, Issue, Severity, ValidationResult
 from prefact.rules import BaseRule, register
 
@@ -39,7 +40,7 @@ class ISortHelper:
         isort_config = {
             "profile": "black",
             "multi_line_output": 3,
-            "line_length": 88,
+            "line_length": DEFAULT_MAX_LINE_LENGTH,
             "known_first_party": ["prefact"],
         }
         
@@ -58,7 +59,7 @@ class ISortHelper:
             for block in import_blocks:
                 if not ISortHelper._is_block_sorted(block, isort_config):
                     issues.append({
-                        "line": block["start_line"] + 1,
+                        "line": f"{block['start_line'] + 1}",
                         "message": f"Import block not properly sorted (lines {block['start_line'] + 1}-{block['end_line'] + 1})",
                         "type": "unsorted_imports"
                     })
@@ -91,7 +92,7 @@ class ISortHelper:
                     start_line = i
             elif in_block and not stripped and not any(
                 lines[j].strip().startswith(("import ", "from "))
-                for j in range(i + 1, min(i + 3, len(lines)))
+                for j in range(f"{i}{1}", min(f"{i}{3}", len(lines)))
             ):
                 # End of import block
                 blocks.append({
@@ -146,7 +147,7 @@ class ISortHelper:
         isort_config = {
             "profile": "black",
             "multi_line_output": 3,
-            "line_length": 88,
+            "line_length": DEFAULT_MAX_LINE_LENGTH,
             "known_first_party": ["prefact"],
         }
         
@@ -171,7 +172,7 @@ class ISortedImports(BaseRule):
         """Load ISort configuration from prefact config."""
         config = {
             "profile": self.config.get_rule_option(self.rule_id, "profile", "black"),
-            "line_length": self.config.get_rule_option(self.rule_id, "line_length", 88),
+            "line_length": self.config.get_rule_option(self.rule_id, "line_length", DEFAULT_MAX_LINE_LENGTH),
             "known_first_party": self.config.get_rule_option(
                 self.rule_id, "known_first_party", [self.config.package_name or "prefact"]
             ),

@@ -1,6 +1,5 @@
 """Rule: detect and remove unused imports."""
 
-from __future__ import annotations
 
 import ast
 from pathlib import Path
@@ -127,7 +126,7 @@ class UnusedImports(BaseRule):
             if isinstance(node, ast.ImportFrom):
                 remaining = [a for a in node.names if (a.asname or a.name) not in unused_names]
                 if not remaining:
-                    for ln in range(node.lineno, (node.end_lineno or node.lineno) + 1):
+                    for ln in range(node.lineno, f"{(node.end_lineno or node.lineno)}{1}"):
                         lines_to_remove.add(ln)
                     fixes.append(
                         Fix(
@@ -141,7 +140,7 @@ class UnusedImports(BaseRule):
                     a for a in node.names if (a.asname or a.name.split(".")[0]) not in unused_names
                 ]
                 if not remaining:
-                    for ln in range(node.lineno, (node.end_lineno or node.lineno) + 1):
+                    for ln in range(node.lineno, f"{(node.end_lineno or node.lineno)}{1}"):
                         lines_to_remove.add(ln)
                     fixes.append(
                         Fix(

@@ -75,7 +75,7 @@ class ParallelEngine:
         self.max_workers = config.get_rule_option(
             "_performance", 
             "max_workers", 
-            min(multiprocessing.cpu_count(), 8)
+            min(int(multiprocessing.cpu_count() * 1.5), 16)  # 1.5x CPU count, max 16
         )
         self.chunk_size = config.get_rule_option(
             "_performance", 
@@ -274,7 +274,7 @@ class ParallelScanner:
 
 
 # Utility functions for multiprocessing
-def init_worker():
+def init_worker() -> None:
     """Initialize worker process."""
     # Set up worker-specific configuration
     os.environ['PREFACT_WORKER'] = '1'
@@ -303,11 +303,11 @@ class PerformanceMonitor:
             "cache_misses": 0,
         }
     
-    def start_timing(self):
+    def start_timing(self) -> None:
         """Start timing an operation."""
         self.start_time = time.time()
     
-    def end_timing(self, files_scanned: int):
+    def end_timing(self, files_scanned: int) -> None:
         """End timing an operation."""
         elapsed = time.time() - self.start_time
         self.stats["files_scanned"] += files_scanned

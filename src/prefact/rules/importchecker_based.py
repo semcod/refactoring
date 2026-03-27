@@ -60,9 +60,9 @@ class ImportCheckerHelper:
         
         # Remove common parent directories
         if "src" in parts:
-            parts = parts[parts.index("src") + 1:]
+            parts = parts[f"{parts.index('src')}{1}":]
         elif "lib" in parts:
-            parts = parts[parts.index("lib") + 1:]
+            parts = parts[f"{parts.index('lib')}{1}":]
         
         return ".".join(parts)
     
@@ -152,14 +152,14 @@ class ImportCheckerUnusedImports(BaseRule):
                         imports = parts[3].split(",")
                         for imp in imports:
                             name = imp.strip().split(" as ")[0]
-                            import_lines[name] = i + 1
+                            import_lines[name] = f"{i + 1}"
                             if module:
-                                import_lines[f"{module}.{name}"] = i + 1
+                                import_lines[f"{module}.{name}"] = f"{i + 1}"
                 else:
                     imports = stripped[6:].split(",")  # Remove "import"
                     for imp in imports:
                         name = imp.strip().split(" as ")[0].split(".")[0]
-                        import_lines[name] = i + 1
+                        import_lines[name] = f"{i + 1}"
         
         return import_lines
     
@@ -324,7 +324,7 @@ class ImportDependencyAnalysis(BaseRule):
                         module = parts[1]
                         imports.append({
                             "name": module,
-                            "line": i + 1,
+                            "line": f"{i}{1}",
                             "type": "from"
                         })
                 else:
@@ -333,7 +333,7 @@ class ImportDependencyAnalysis(BaseRule):
                         module = parts[1].split(".")[0]
                         imports.append({
                             "name": module,
-                            "line": i + 1,
+                            "line": f"{i}{1}",
                             "type": "import"
                         })
         
@@ -431,7 +431,7 @@ class ImportOptimizer(BaseRule):
                             clean_name = name.strip().split(" as ")[0]
                             imports.append({
                                 "name": clean_name,
-                                "line": i + 1,
+                                "line": f"{i}{1}",
                                 "module": module
                             })
                 else:
@@ -440,7 +440,7 @@ class ImportOptimizer(BaseRule):
                         clean_name = name.strip().split(" as ")[0].split(".")[0]
                         imports.append({
                             "name": clean_name,
-                            "line": i + 1,
+                            "line": f"{i}{1}",
                             "module": None
                         })
         

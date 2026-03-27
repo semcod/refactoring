@@ -367,7 +367,6 @@ class SmartReturnTypeRule(BaseRule):
         return issues
     
     def fix(self, path: Path, source: str, issues: List[Issue]) -> tuple[str, List[Fix]]:
-        import libcst as cst
         
         if not issues:
             return source, []

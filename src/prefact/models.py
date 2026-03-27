@@ -1,6 +1,5 @@
 """Data models for the prefact pipeline."""
 
-from __future__ import annotations
 
 import enum
 from dataclasses import dataclass, field

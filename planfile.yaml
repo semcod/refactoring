@@ -2695,3 +2695,172 @@ sprints:
     model_hints:
       planning: balanced
       implementation: balanced
+  - id: ticket-7adcbb2b
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in benchmark_ram_optimization.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - benchmark_ram_optimization.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-242b0517
+    name: Fix string-concat issues
+    description: Resolve 3 string-concat issues in benchmark_ram_optimization.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - benchmark_ram_optimization.py
+    rule_id: string-concat
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-de239fa7
+    name: Fix unused-imports issues
+    description: Resolve 8 unused-imports issues in benchmark_ram_optimization.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - benchmark_ram_optimization.py
+    rule_id: unused-imports
+    count: 8
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-02dc0d73
+    name: Fix magic-numbers issues
+    description: Resolve 3 magic-numbers issues in benchmark_ram_optimization.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - benchmark_ram_optimization.py
+    rule_id: magic-numbers
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-b38b2991
+    name: Fix ai-boilerplate issues
+    description: Resolve 3 ai-boilerplate issues in benchmark_ram_optimization.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - benchmark_ram_optimization.py
+    rule_id: ai-boilerplate
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-b3a94431
+    name: Fix llm-generated-code issues
+    description: Resolve 1 llm-generated-code issues in src/prefact/engine.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/engine.py
+    rule_id: llm-generated-code
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e338c3a9
+    name: Fix smart-return-type issues
+    description: Resolve 1 smart-return-type issues in test_large_files.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - test_large_files.py
+    rule_id: smart-return-type
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-133af5e9
+    name: Fix string-concat issues
+    description: Resolve 2 string-concat issues in test_large_files.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - test_large_files.py
+    rule_id: string-concat
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-054d6766
+    name: Fix ai-boilerplate issues
+    description: Resolve 1 ai-boilerplate issues in test_large_files.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - test_large_files.py
+    rule_id: ai-boilerplate
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-49d37755
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/autonomous.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f59adb71
+    name: Fix wildcard-imports issues
+    description: Resolve 2 wildcard-imports issues in src/prefact/performance/cache.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/performance/cache.py
+    rule_id: wildcard-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-e0342587
+    name: Fix wildcard-imports issues
+    description: Resolve 32 wildcard-imports issues in src/prefact/rules/benchmark.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - src/prefact/rules/benchmark.py
+    rule_id: wildcard-imports
+    count: 32
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-f50ed65e
+    name: Fix wildcard-imports issues
+    description: Resolve 3 wildcard-imports issues in src/prefact/rules/relative_imports.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/rules/relative_imports.py
+    rule_id: wildcard-imports
+    count: 3
+    model_hints:
+      planning: balanced
+      implementation: balanced

@@ -1,6 +1,5 @@
 """Validator – runs post-fix checks to ensure nothing is broken."""
 
-from __future__ import annotations
 
 from pathlib import Path
 

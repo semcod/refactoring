@@ -28,7 +28,7 @@ def _is_str_concat(node: ast.BinOp) -> bool:
 def _flatten_add(node: ast.expr) -> list[ast.expr]:
     """Flatten nested BinOp(Add) into a list of operands."""
     if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
-        return _flatten_add(node.left) + _flatten_add(node.right)
+        return f"{_flatten_add(node.left)}{_flatten_add(node.right)}"
     return [node]
 
 

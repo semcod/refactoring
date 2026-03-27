@@ -1,6 +1,5 @@
 """Scanner – walks the project tree and collects issues."""
 
-from __future__ import annotations
 
 import fnmatch
 import os
@@ -34,7 +33,7 @@ def _match_gitignore_pattern(path: str, pattern: str) -> bool:
     if pattern.endswith("/"):
         pattern = pattern.rstrip("/")
         if not path.endswith("/"):
-            path = path + "/"
+            path = f"{path}/"
     
     # Handle negation patterns (starting with !)
     if pattern.startswith("!"):
@@ -100,12 +99,20 @@ class Scanner:
     def scan(self, files: list[Path] | None = None) -> dict[Path, list[Issue]]:
         if files is None:
             files = self.collect_files()
-        results: dict[Path, list[Issue]] = {}
+        # For backward compatibility, load sources if not provided
+        sources = {}
         for path in files:
             try:
                 source = path.read_text(encoding="utf-8")
+                sources[path] = source
             except (OSError, UnicodeDecodeError):
                 continue
+        return self.scan_sources(sources)
+    
+    def scan_sources(self, sources: dict[Path, str]) -> dict[Path, list[Issue]]:
+        """Scan files using preloaded sources to avoid I/O operations."""
+        results: dict[Path, list[Issue]] = {}
+        for path, source in sources.items():
             file_issues: list[Issue] = []
             for rule in self._rules:
                 file_issues.extend(rule.scan_file(path, source))
