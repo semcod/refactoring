@@ -1,0 +1,35 @@
+package_name: sample_project
+
+include:
+  - "**/*.py"
+
+exclude:
+  - "**/__pycache__/**"
+  - "**/venv/**"
+  - "**/.venv/**"
+
+rules:
+  relative-imports:
+    enabled: true
+    severity: warning
+  unused-imports:
+    enabled: true
+    severity: info
+  duplicate-imports:
+    enabled: true
+    severity: warning
+  wildcard-imports:
+    enabled: true
+    severity: error
+  sorted-imports:
+    enabled: true
+    severity: info
+  string-concat:
+    enabled: true
+    severity: info
+  print-statements:
+    enabled: true
+    severity: warning
+  missing-return-type:
+    enabled: true
+    severity: info

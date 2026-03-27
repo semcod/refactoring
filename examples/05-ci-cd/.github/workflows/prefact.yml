@@ -1,0 +1,99 @@
+name: prefact Check
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  prefact:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', '**/pyproject.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install prefact
+        # Or install from local source
+        # pip install -e .
+    
+    - name: Run prefact scan
+      run: |
+        prefact scan --path . --format json -o prefact-report.json
+    
+    - name: Run prefact fix (dry-run)
+      run: |
+        prefact fix --path . --dry-run --format json -o prefact-fix-report.json
+    
+    - name: Upload reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: prefact-reports
+        path: |
+          prefact-report.json
+          prefact-fix-report.json
+    
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          try {
+            const report = JSON.parse(fs.readFileSync('prefact-report.json', 'utf8'));
+            const fixReport = JSON.parse(fs.readFileSync('prefact-fix-report.json', 'utf8'));
+            
+            const comment = `## 🤖 prefact Report
+            
+            ### Issues Found
+            - Total issues: ${report.total_issues}
+            - Fixable issues: ${report.fixable_issues}
+            
+            ### Auto-fix Preview
+            - Would fix: ${fixReport.total_fixed} issues
+            
+            ${report.total_issues > 0 ? '⚠️ Issues detected. Please review and fix.' : '✅ No issues found!'}
+            
+            [View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          } catch (error) {
+            console.log('Could not read reports:', error);
+          }
+    
+    - name: Fail on issues
+      run: |
+        python -c "
+        import json
+        with open('prefact-report.json') as f:
+            report = json.load(f)
+        if report['total_issues'] > 0:
+            print(f'❌ Found {report[\"total_issues\"]} issues')
+            exit(1)
+        else:
+            print('✅ No issues found')
+        "

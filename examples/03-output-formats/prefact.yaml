@@ -1,0 +1,18 @@
+package_name: output_example
+
+include:
+  - "**/*.py"
+
+exclude:
+  - "**/__pycache__/**"
+
+rules:
+  relative-imports:
+    enabled: true
+    severity: warning
+  unused-imports:
+    enabled: true
+    severity: info
+  string-concat:
+    enabled: true
+    severity: info

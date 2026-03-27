@@ -1,0 +1,108 @@
+stages:
+  - test
+  - report
+
+variables:
+  PYTHON_VERSION: "3.11"
+
+before_script:
+  - python -m venv venv
+  - source venv/bin/activate
+  - pip install --upgrade pip
+  - pip install prefact
+
+prefact:scan:
+  stage: test
+  script:
+    - prefact scan --path . --format json -o prefact-report.json
+    - prefact scan --path . --dry-run --format json -o prefact-fix-report.json
+  artifacts:
+    reports:
+      junit: prefact-report.json
+    paths:
+      - prefact-report.json
+      - prefact-fix-report.json
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main
+    - develop
+
+prefact:fail_on_issues:
+  stage: test
+  script:
+    - prefact scan --path . --format json -o prefact-report.json
+    - |
+      python -c "
+      import json
+      with open('prefact-report.json') as f:
+          report = json.load(f)
+      if report['total_issues'] > 0:
+          print(f'❌ Found {report[\"total_issues\"]} issues')
+          print('Run prefact fix to resolve issues')
+          exit(1)
+      else:
+          print('✅ No issues found')
+      "
+  allow_failure: false
+  only:
+    - merge_requests
+
+prefact:fix:
+  stage: test
+  script:
+    - prefact fix --path . --format json -o prefact-fixed.json
+    - git diff --exit-code || (echo "Changes were applied" && git diff)
+  when: manual
+  allow_failure: true
+  only:
+    - merge_requests
+
+code_quality:
+  stage: report
+  dependencies:
+    - prefact:scan
+  script:
+    - |
+      python -c "
+      import json
+      with open('prefact-report.json') as f:
+          report = json.load(f)
+      
+      print('## prefact Code Quality Report')
+      print(f'- Total issues: {report[\"total_issues\"]}')
+      print(f'- Files scanned: {report[\"files_scanned\"]}')
+      
+      if report['issues_by_rule']:
+          print('\\n### Issues by Rule:')
+          for rule, issues in report['issues_by_rule'].items():
+              print(f'- {rule}: {len(issues)}')
+      
+      # Create GitLab code quality report
+      cq_report = []
+      for issue in report.get('all_issues', []):
+          cq_report.append({
+              'type': 'issue',
+              'check_name': issue['rule_id'],
+              'description': issue['message'],
+              'severity': 'minor' if issue['severity'] == 'info' else 'major',
+              'location': {
+                  'path': issue['path'],
+                  'lines': {
+                      'begin': issue['line']
+                  }
+              }
+          })
+      
+      with open('gl-code-quality-report.json', 'w') as f:
+          json.dump(cq_report, f, indent=2)
+      "
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+    paths:
+      - prefact-report.json
+    expire_in: 1 week
+  only:
+    - merge_requests
+    - main

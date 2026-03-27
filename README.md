@@ -33,6 +33,31 @@ from planfile.loaders.yaml_loader import save_strategy_yaml
 
 ✅ = auto-fix  ·  🔍 = scan-only (report)
 
+## Examples
+
+The `examples/` directory contains comprehensive examples for different use cases:
+
+| Example | Description |
+|---|---|
+| [sample-project](examples/sample-project/) | Realistic project with all issues demonstrated |
+| [01-individual-rules](examples/01-individual-rules/) | Each rule explained with before/after code |
+| [02-multiple-rules](examples/02-multiple-rules/) | Combining multiple rules for comprehensive cleanup |
+| [03-output-formats](examples/03-output-formats/) | Console vs JSON output examples |
+| [04-custom-rules](examples/04-custom-rules/) | Writing your own refactoring rules |
+| [05-ci-cd](examples/05-ci-cd/) | GitHub Actions, GitLab CI, Azure DevOps configs |
+| [06-api-usage](examples/06-api-usage/) | Using prefact programmatically from Python |
+
+### Quick Example
+
+```bash
+# Try the sample project
+cd examples/sample-project
+prefact scan --path . --config prefact.yaml
+prefact fix --path . --config prefact.yaml
+```
+
+See [examples/README.md](examples/README.md) for a detailed guide to all examples.
+
 ## Installation
 
 ```bash
