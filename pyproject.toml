@@ -1,67 +1,47 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "prefact"
-version = "0.0.6"
+version = "0.1.1"
+description = "Automatic Python refactoring toolkit – detect, fix, and validate common code issues introduced by LLMs and humans alike."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
 authors = [
-    {name = "Semcod Team", email = "team@semcod.com"},
+    {name = "planfile-team"},
     {name = "Tom Sapletta", email = "tom@sapletta.com"},
 ]
-description = "A package for code analysis and prefact tools"
-readme = "README.md"
-license = "Apache-2.0"
-requires-python = ">=3.8"
+keywords = ["refactoring", "imports", "linting", "automation", "llm", "prefact"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Quality Assurance",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
+
 dependencies = [
-    "click>=8.0.0",
+    "libcst>=1.1.0",
+    "click>=8.1",
+    "rich>=13.0",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=6.0",
-    "black",
-    "flake8",
-    "mypy",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
 ]
-
-[project.urls]
-Homepage = "https://github.com/semcod/prefact"
-Repository = "https://github.com/semcod/prefact"
-Issues = "https://github.com/semcod/prefact/issues"
 
 [project.scripts]
 prefact = "prefact.cli:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["prefact*"]
-
-[tool.setuptools.package-data]
-"*" = ["*.txt", "*.md", "*.rst", "*.yaml", "*.yml"]
-
-[tool.black]
-line-length = 88
-target-version = ['py38']
-
-[tool.mypy]
-python_version = "3.8"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]

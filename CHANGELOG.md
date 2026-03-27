@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-03-27
+
+### Docs
+- Update README.md
+
+### Test
+- Update tests/test_config.py
+- Update tests/test_engine.py
+- Update tests/test_relative_imports.py
+- Update tests/test_rules.py
+- Update tests/test_unused_imports.py
+
+### Other
+- Update PKG-INFO
+- Update VERSION
+- Update prefact/__init__.py
+- Update prefact/cli.py
+- Update prefact/core.py
+- Update prefact/utils.py
+
 ## [0.0.6] - 2026-03-27
 
 ### Docs
