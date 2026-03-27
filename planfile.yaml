@@ -2877,3 +2877,172 @@ sprints:
     model_hints:
       planning: balanced
       implementation: balanced
+  - id: ticket-c0e4d079
+    name: Fix unused-imports issues
+    description: Resolve 16 unused-imports issues in src/prefact/autonomous/_base.py
+    task_type: prefactor
+    priority: high
+    estimate: 3d
+    files:
+    - src/prefact/autonomous/_base.py
+    rule_id: unused-imports
+    count: 16
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-29beceb4
+    name: Fix magic-numbers issues
+    description: Resolve 1 magic-numbers issues in src/prefact/autonomous/_base.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/_base.py
+    rule_id: magic-numbers
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-8920ec64
+    name: Fix relative-imports issues
+    description: Resolve 10 relative-imports issues in src/prefact/autonomous/__init__.py
+    task_type: prefactor
+    priority: high
+    estimate: 2d
+    files:
+    - src/prefact/autonomous/__init__.py
+    rule_id: relative-imports
+    count: 10
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-2d98e168
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/autonomous/__init__.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/autonomous/__init__.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-9801b62d
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in src/prefact/autonomous/docs_manager.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/docs_manager.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-04bf7323
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in src/prefact/autonomous/project_scanner.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/project_scanner.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-d4263e88
+    name: Fix string-concat issues
+    description: Resolve 1 string-concat issues in src/prefact/autonomous/project_scanner.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/project_scanner.py
+    rule_id: string-concat
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-cb48b598
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in src/prefact/autonomous/setup_manager.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/setup_manager.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-84838c10
+    name: Fix unused-imports issues
+    description: Resolve 4 unused-imports issues in src/prefact/autonomous/setup_manager.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/autonomous/setup_manager.py
+    rule_id: unused-imports
+    count: 4
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-1895af28
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in src/prefact/autonomous/todo_manager.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/todo_manager.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-0b11f372
+    name: Fix string-concat issues
+    description: Resolve 5 string-concat issues in src/prefact/autonomous/todo_manager.py
+    task_type: prefactor
+    priority: medium
+    estimate: 2d
+    files:
+    - src/prefact/autonomous/todo_manager.py
+    rule_id: string-concat
+    count: 5
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-ae96df0a
+    name: Fix duplicate-imports issues
+    description: Resolve 1 duplicate-imports issues in src/prefact/autonomous/todo_manager.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous/todo_manager.py
+    rule_id: duplicate-imports
+    count: 1
+    model_hints:
+      planning: balanced
+      implementation: balanced
+  - id: ticket-5d99b02e
+    name: Fix relative-imports issues
+    description: Resolve 2 relative-imports issues in src/prefact/autonomous.py
+    task_type: prefactor
+    priority: medium
+    estimate: 1d
+    files:
+    - src/prefact/autonomous.py
+    rule_id: relative-imports
+    count: 2
+    model_hints:
+      planning: balanced
+      implementation: balanced

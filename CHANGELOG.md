@@ -8,6 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.10] - 2026-03-27
 
 ### Fixed
+- Fix unused-imports issues (ticket-c0e4d079)
+- Fix magic-numbers issues (ticket-29beceb4)
+- Fix relative-imports issues (ticket-8920ec64)
+- Fix unused-imports issues (ticket-2d98e168)
+- Fix relative-imports issues (ticket-9801b62d)
+- Fix relative-imports issues (ticket-04bf7323)
+- Fix string-concat issues (ticket-d4263e88)
+- Fix relative-imports issues (ticket-cb48b598)
+- Fix unused-imports issues (ticket-84838c10)
+- Fix relative-imports issues (ticket-1895af28)
+- Fix string-concat issues (ticket-0b11f372)
+- Fix duplicate-imports issues (ticket-ae96df0a)
+- Fix relative-imports issues (ticket-5d99b02e)
+
+## [0.1.10] - 2026-03-27
+
+### Fixed
 - Fix magic-numbers issues (ticket-324f7c1c)
 
 ## [0.1.10] - 2026-03-27
@@ -283,6 +300,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix unused-imports issues (ticket-c1ba2cf8)
 
 ## [Unreleased]
+
+## [0.1.29] - 2026-03-27
+
+### Docs
+- Update CHANGELOG.md
+- Update TODO.md
+- Update docs/README.md
+- Update project/README.md
+- Update project/context.md
+
+### Other
+- Update planfile.yaml
+- Update project/analysis.toon.yaml
+- Update project/calls.mmd
+- Update project/calls.png
+- Update project/compact_flow.mmd
+- Update project/compact_flow.png
+- Update project/duplication.toon.yaml
+- Update project/evolution.toon.yaml
+- Update project/flow.mmd
+- Update project/flow.png
+- ... and 5 more files
 
 ## [0.1.28] - 2026-03-27
 

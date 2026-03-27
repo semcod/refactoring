@@ -258,8 +258,14 @@ pytest -v
 
 ## License
 
+Licensed under Apache-2.0.
+
+
 Apache License 2.0 - see [LICENSE](LICENSE) for details.
 
 ## Author
+
+Tom Sapletta
+
 
 Created by **Tom Sapletta** - [tom@sapletta.com](mailto:tom@sapletta.com)

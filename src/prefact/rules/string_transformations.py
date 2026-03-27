@@ -6,7 +6,7 @@ using LibCST for safe, formatting-preserving transformations.
 
 import ast
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, List, Optional
 
 import libcst as cst
 
