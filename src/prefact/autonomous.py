@@ -452,9 +452,9 @@ class AutonomousRefact:
                     # Update existing
                     lines = existing.split("\n")
                     todo_start = next(i for i, line in enumerate(lines) if line.startswith("# TODO"))
-                    new_content = f"{'\n'.join(lines[:todo_start])}\n{content}"
+                    new_content = '\n'.join(lines[:todo_start]) + '\n' + content
                 else:
-                    new_content = f"{existing}\n\n{content}"
+                    new_content = existing + '\n\n' + content
             else:
                 new_content = content
             
@@ -485,7 +485,7 @@ class AutonomousRefact:
             while insert_pos < len(lines) and not lines[insert_pos].startswith("##"):
                 insert_pos += 1
             
-            new_content = f"{'\n'.join(lines[:insert_pos])}\n{entry}\n{'\n'.join(lines[insert_pos:])}"
+            new_content = '\n'.join(lines[:insert_pos]) + '\n' + entry + '\n' + '\n'.join(lines[insert_pos:])
         else:
             new_content = f"# Changelog\n\n{entry}"
         

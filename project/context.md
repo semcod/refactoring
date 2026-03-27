@@ -356,17 +356,17 @@ validate [src.prefact.rules.relative_imports.RelativeToAbsoluteImports]
 - **Methods**: 7
 - **Key Methods**: src.prefact.performance.cache.Cache.__init__, src.prefact.performance.cache.Cache.get, src.prefact.performance.cache.Cache.set, src.prefact.performance.cache.Cache.delete, src.prefact.performance.cache.Cache.clear, src.prefact.performance.cache.Cache.get_stats, src.prefact.performance.cache.Cache.close
 
-### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
-> Analyze import dependencies using importchecker.
-- **Methods**: 7
-- **Key Methods**: src.prefact.rules.importchecker_based.ImportDependencyAnalysis.__init__, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._load_checker_config, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.scan_file, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._extract_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._detect_circular_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.fix, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
-- **Inherits**: BaseRule
-
 ### src.prefact.config_extended.ExtendedConfig
 > Extended configuration with additional features.
 - **Methods**: 7
 - **Key Methods**: src.prefact.config_extended.ExtendedConfig.__init__, src.prefact.config_extended.ExtendedConfig.from_yaml, src.prefact.config_extended.ExtendedConfig._deep_merge, src.prefact.config_extended.ExtendedConfig.get_tool_config, src.prefact.config_extended.ExtendedConfig.get_performance_setting, src.prefact.config_extended.ExtendedConfig.get_plugin_config, src.prefact.config_extended.ExtendedConfig.to_dict
 - **Inherits**: Config
+
+### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
+> Analyze import dependencies using importchecker.
+- **Methods**: 7
+- **Key Methods**: src.prefact.rules.importchecker_based.ImportDependencyAnalysis.__init__, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._load_checker_config, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.scan_file, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._extract_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._detect_circular_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.fix, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
+- **Inherits**: BaseRule
 
 ### src.prefact.rules.pylint_based.PylintComprehensive
 > Comprehensive analysis using Pylint with custom rules.
@@ -447,18 +447,6 @@ Key functions that process and transform data:
 ### src.prefact.rules.unused_imports.UnusedImports.validate
 - **Output to**: ValidationResult, ast.parse, checks.append, errors.append
 
-### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
-- **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
-
-### src.prefact.rules.importchecker_based.ImportCheckerDuplicateImports.validate
-- **Output to**: self.scan_file, ValidationResult, len, len
-
-### src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
-- **Output to**: self.scan_file, ValidationResult, len
-
-### src.prefact.rules.importchecker_based.ImportOptimizer.validate
-- **Output to**: ValidationResult
-
 ### src.prefact.config_extended.ConfigValidator.validate
 > Validate configuration and return list of errors.
 - **Output to**: config.tools.items, errors.extend, config.rules.items, ConfigValidator._validate_performance_config, errors.extend
@@ -482,6 +470,18 @@ Key functions that process and transform data:
 ### src.prefact.config_extended.ConfigValidator._validate_rule_config
 > Validate individual rule configuration.
 - **Output to**: errors.append, isinstance, all, isinstance, errors.append
+
+### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
+- **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
+
+### src.prefact.rules.importchecker_based.ImportCheckerDuplicateImports.validate
+- **Output to**: self.scan_file, ValidationResult, len, len
+
+### src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
+- **Output to**: self.scan_file, ValidationResult, len
+
+### src.prefact.rules.importchecker_based.ImportOptimizer.validate
+- **Output to**: ValidationResult
 
 ### src.prefact.rules.pylint_based.PylintPrintStatements.validate
 - **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower

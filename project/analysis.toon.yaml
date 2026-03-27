@@ -1,4 +1,4 @@
-# code2llm | 50f 11021L | python:48,shell:1,typescript:1 | 2026-03-27
+# code2llm | 50f 11010L | python:48,typescript:1,shell:1 | 2026-03-27
 # CC̄=3.2 | critical:3/655 | dups:0 | cycles:0
 
 HEALTH[3]:
@@ -9,7 +9,7 @@ HEALTH[3]:
 REFACTOR[1]:
   1. split 3 high-CC methods  (CC>15)
 
-PIPELINES[509]:
+PIPELINES[510]:
   [1] Src [__init__]: __init__ → get_all_rules
       PURITY: 100% pure
   [2] Src [validate_file]: validate_file
@@ -23,29 +23,29 @@ PIPELINES[509]:
 
 LAYERS:
   src/                            CC̄=3.2    ←in:0  →out:0
-  │ !! autonomous                 541L  1C   15m  CC=14     ←0
+  │ !! autonomous                 539L  1C   15m  CC=14     ←0
   │ string_transformations     491L  6C   27m  CC=8      ←0
   │ importchecker_based        482L  5C   24m  CC=14     ←0
   │ isort_based                468L  4C   23m  CC=13     ←0
-  │ autoflake_based            468L  5C   23m  CC=11     ←0
+  │ autoflake_based            467L  5C   23m  CC=11     ←0
   │ !! config_extended            462L  3C   18m  CC=15     ←2
-  │ unimport_based             454L  5C   22m  CC=14     ←0
+  │ unimport_based             453L  5C   22m  CC=14     ←0
   │ import_linter_based        449L  5C   24m  CC=8      ←0
   │ logging                    436L  10C   28m  CC=4      ←0
   │ cache                      434L  6C   37m  CC=5      ←8
-  │ pylint_based               401L  5C   22m  CC=6      ←0
+  │ pylint_based               401L  5C   22m  CC=6      ←1
   │ mypy_based                 400L  6C   22m  CC=9      ←0
   │ git_hooks                  391L  2C   17m  CC=8      ←0
   │ parallel                   350L  4C   23m  CC=7      ←0
-  │ __init__                   325L  3C   17m  CC=10     ←0
+  │ __init__                   323L  3C   17m  CC=10     ←0
   │ ruff_based                 310L  6C   19m  CC=4      ←0
   │ composite_rules            271L  3C   16m  CC=12     ←0
   │ registry                   254L  1C   13m  CC=8      ←8
-  │ cli                        240L  0C   10m  CC=6      ←1
+  │ cli                        239L  0C   10m  CC=6      ←1
   │ migration                  230L  3C   10m  CC=5      ←0
   │ relative_imports           214L  2C    9m  CC=14     ←0
   │ llm_hallucinations         212L  1C    9m  CC=8      ←0
-  │ config                     197L  2C   13m  CC=5      ←2
+  │ config                     193L  2C   13m  CC=5      ←2
   │ llm_generated_code         189L  1C    9m  CC=7      ←0
   │ __init__                   179L  1C    7m  CC=1      ←0
   │ benchmark                  167L  0C    4m  CC=7      ←0

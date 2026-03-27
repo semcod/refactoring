@@ -1,4 +1,4 @@
-# prefact | 576 func | 44f | 12105L | python | 2026-03-27
+# prefact | 576 func | 44f | 12096L | python | 2026-03-27
 
 HEALTH:
   CC̄=3.2  critical=18 (limit:10)  dup=0  cycles=0
@@ -20,14 +20,14 @@ MODULES[50] (top by size):
   M[src/prefact/rules/string_transformations.py] 491L C:6 F:27 CC↑8 D:0 (python)
   M[src/prefact/rules/importchecker_based.py] 482L C:5 F:24 CC↑14 D:0 (python)
   M[src/prefact/rules/isort_based.py] 468L C:4 F:23 CC↑13 D:0 (python)
-  M[src/prefact/rules/autoflake_based.py] 468L C:5 F:23 CC↑11 D:0 (python)
+  M[src/prefact/rules/autoflake_based.py] 467L C:5 F:23 CC↑11 D:0 (python)
   M[src/prefact/config_extended.py] 462L C:3 F:18 CC↑15 D:0 (python)
-  M[src/prefact/rules/unimport_based.py] 454L C:5 F:22 CC↑14 D:0 (python)
+  M[src/prefact/rules/unimport_based.py] 453L C:5 F:22 CC↑14 D:0 (python)
   M[src/prefact/rules/import_linter_based.py] 449L C:5 F:24 CC↑8 D:0 (python)
   M[vscode-extension/src/extension.ts] 441L C:5 F:48 CC↑14 D:21 (typescript)
   M[src/prefact/logging.py] 436L C:10 F:28 CC↑4 D:0 (python)
   M[src/prefact/performance/cache.py] 434L C:6 F:37 CC↑5 D:8 (python)
-  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:0 (python)
+  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:1 (python)
   M[src/prefact/rules/mypy_based.py] 400L C:6 F:22 CC↑9 D:0 (python)
   M[src/prefact/git_hooks.py] 391L C:2 F:17 CC↑8 D:0 (python)
   M[src/prefact/performance/parallel.py] 350L C:4 F:23 CC↑7 D:0 (python)
@@ -48,4 +48,4 @@ REFACTOR[7]:
   [5] M/M Reduce AutonomousRefact.scan_project fan-out (currently 28)
 
 EVOLUTION:
-  2026-03-27 CC̄=3.2 crit=18 12105L // Automated analysis
+  2026-03-27 CC̄=3.2 crit=18 12096L // Automated analysis
