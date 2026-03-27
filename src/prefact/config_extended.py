@@ -1,4 +1,4 @@
-"""Extended YAML configuration parser for pprefact.
+"""Extended YAML configuration parser for prefact.
 
 This module provides advanced configuration parsing with support for:
 - Tool-specific configurations
@@ -275,7 +275,7 @@ class ConfigGenerator:
         tools: Optional[List[str]] = None,
         rules: Optional[List[str]] = None
     ) -> str:
-        """Generate an extended pprefact.yaml configuration."""
+        """Generate an extended prefact.yaml configuration."""
         if tools is None:
             tools = ["ruff", "mypy", "isort"]
         
@@ -310,8 +310,8 @@ class ConfigGenerator:
             "plugins": {
                 "enabled": True,
                 "directories": [
-                    "~/.pprefact/plugins",
-                    "./.pprefact/plugins",
+                    "~/.prefact/plugins",
+                    "./.prefact/plugins",
                 ],
             },
             "environments": {
@@ -427,10 +427,10 @@ def load_config_with_env(
 ) -> ExtendedConfig:
     """Load configuration with environment detection."""
     if config_path is None:
-        # Look for pprefact.yaml in common locations
+        # Look for prefact.yaml in common locations
         cwd = Path.cwd()
-        for path in [cwd, cwd / ".pprefact", cwd.parent]:
-            config_file = path / "pprefact.yaml"
+        for path in [cwd, cwd / ".prefact", cwd.parent]:
+            config_file = path / "prefact.yaml"
             if config_file.exists():
                 config_path = config_file
                 break

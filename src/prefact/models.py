@@ -1,4 +1,4 @@
-"""Data models for the pprefact pipeline."""
+"""Data models for the prefact pipeline."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""ImportChecker-based precise import analysis for pprefact.
+"""ImportChecker-based precise import analysis for prefact.
 
 This module provides integration with importchecker for detailed analysis
 of unused and duplicate imports with high precision.

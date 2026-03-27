@@ -1,4 +1,4 @@
-"""Structured logging system for pprefact.
+"""Structured logging system for prefact.
 
 This module provides enterprise-grade logging with:
 - Structured JSON logging
@@ -23,7 +23,7 @@ from prefact.config import Config
 
 
 class LogLevel(str, Enum):
-    """Log levels for pprefact."""
+    """Log levels for prefact."""
     DEBUG = "DEBUG"
     INFO = "INFO"
     WARNING = "WARNING"
@@ -32,11 +32,11 @@ class LogLevel(str, Enum):
 
 
 class PprefactLogger:
-    """Structured logger for pprefact with enterprise features."""
+    """Structured logger for prefact with enterprise features."""
     
     def __init__(
         self,
-        name: str = "pprefact",
+        name: str = "prefact",
         level: Union[LogLevel, str] = LogLevel.INFO,
         format_type: str = "json",
         output_file: Optional[Path] = None,
@@ -217,7 +217,7 @@ class JsonFormatter(logging.Formatter):
 
 
 class PprefactException(Exception):
-    """Base exception for pprefact."""
+    """Base exception for prefact."""
     
     def __init__(
         self,

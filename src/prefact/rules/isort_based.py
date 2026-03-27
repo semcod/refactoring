@@ -43,7 +43,7 @@ class ISortHelper:
             "profile": "black",
             "multi_line_output": 3,
             "line_length": 88,
-            "known_first_party": ["pprefact"],
+            "known_first_party": ["prefact"],
         }
         
         if config:
@@ -150,7 +150,7 @@ class ISortHelper:
             "profile": "black",
             "multi_line_output": 3,
             "line_length": 88,
-            "known_first_party": ["pprefact"],
+            "known_first_party": ["prefact"],
         }
         
         if config:
@@ -176,7 +176,7 @@ class ISortedImports(BaseRule):
             "profile": self.config.get_rule_option(self.rule_id, "profile", "black"),
             "line_length": self.config.get_rule_option(self.rule_id, "line_length", 88),
             "known_first_party": self.config.get_rule_option(
-                self.rule_id, "known_first_party", [self.config.package_name or "pprefact"]
+                self.rule_id, "known_first_party", [self.config.package_name or "prefact"]
             ),
             "sections": self.config.get_rule_option(
                 self.rule_id, "sections", ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
@@ -190,6 +190,13 @@ class ISortedImports(BaseRule):
         return config
     
     def scan_file(self, path: Path, source: str) -> List[Issue]:
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return []
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return []
+            
         issues = []
         results = ISortHelper.check_source(source, self.isort_config)
         
@@ -207,7 +214,7 @@ class ISortedImports(BaseRule):
         return issues
     
     def fix(self, path: Path, source: str, issues: List[Issue]) -> tuple[str, List[Fix]]:
-        if not issues:
+        if not issues or not HAS_ISORT:
             return source, []
         
         fixed_source = ISortHelper.fix_source(source, self.isort_config)
@@ -226,6 +233,9 @@ class ISortedImports(BaseRule):
         return fixed_source, fixes
     
     def validate(self, path: Path, original: str, fixed: str) -> ValidationResult:
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return ValidationResult(file=path, passed=True, checks=[], errors=[])
         # Verify imports are sorted
         remaining_issues = ISortHelper.check_source(fixed, self.isort_config)
         
@@ -248,10 +258,13 @@ class ImportSectionSeparator(BaseRule):
         super().__init__(config)
         self.isort_config = {
             "profile": config.get_rule_option("sorted-imports", "profile", "black"),
-            "known_first_party": [config.package_name or "pprefact"],
+            "known_first_party": [config.package_name or "prefact"],
         }
     
     def scan_file(self, path: Path, source: str) -> List[Issue]:
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return []
         issues = []
         
         # Check for missing section separators
@@ -269,7 +282,7 @@ class ImportSectionSeparator(BaseRule):
         return issues
     
     def fix(self, path: Path, source: str, issues: List[Issue]) -> tuple[str, List[Fix]]:
-        if not issues:
+        if not issues or not HAS_ISORT:
             return source, []
         
         fixed_source = ISortHelper.fix_source(source, self.isort_config)
@@ -287,6 +300,9 @@ class ImportSectionSeparator(BaseRule):
         return fixed_source, fixes
     
     def validate(self, path: Path, original: str, fixed: str) -> ValidationResult:
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return ValidationResult(file=path, passed=True, checks=[], errors=[])
         needs_separators = ISortHelper._needs_section_separators(fixed, self.isort_config)
         
         return ValidationResult(
@@ -327,6 +343,9 @@ class CustomImportOrganization(BaseRule):
         }
     
     def scan_file(self, path: Path, source: str) -> List[Issue]:
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return []
         import ast
         
         issues = []
@@ -435,6 +454,9 @@ class CustomImportOrganization(BaseRule):
         return fixed_source, fixes
     
     def validate(self, path: Path, original: str, fixed: str) -> ValidationResult:
+        # Skip if isort is not available
+        if not HAS_ISORT:
+            return ValidationResult(file=path, passed=True, checks=[], errors=[])
         # Re-scan to check if organization is correct
         issues = self.scan_file(path, fixed)
         

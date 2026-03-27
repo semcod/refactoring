@@ -1,4 +1,4 @@
-"""Configuration management for pprefact."""
+"""Configuration management for prefact."""
 
 from __future__ import annotations
 

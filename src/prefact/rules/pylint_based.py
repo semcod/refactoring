@@ -1,4 +1,4 @@
-"""Pylint-based rules for pprefact integration.
+"""Pylint-based rules for prefact integration.
 
 This module provides integration with Pylint for advanced static analysis,
 including custom checkers for print statements and string concatenations.
@@ -25,7 +25,7 @@ class PylintHelper:
     @staticmethod
     def check_file(file_path: Path, config: Optional[Dict] = None) -> List[Dict]:
         """Run Pylint on a file and return parsed results."""
-        # Default Pylint configuration for pprefact
+        # Default Pylint configuration for prefact
         cmd = [
             "pylint",
             "--output-format=json",
@@ -225,7 +225,7 @@ class PylintStringConcat(BaseRule):
 
 # Custom Pylint checker implementation
 class PprefactPylintPlugin:
-    """Custom Pylint plugin for pprefact-specific checks."""
+    """Custom Pylint plugin for prefact-specific checks."""
     
     @staticmethod
     def register(linter):
@@ -240,7 +240,7 @@ class PylintComprehensive(BaseRule):
     """Comprehensive analysis using Pylint with custom rules."""
     
     rule_id = "pylint-comprehensive"
-    description = "Run comprehensive Pylint analysis with pprefact rules"
+    description = "Run comprehensive Pylint analysis with prefact rules"
     
     def __init__(self, config: Config) -> None:
         super().__init__(config)
@@ -267,8 +267,8 @@ class PylintComprehensive(BaseRule):
         results = PylintHelper.check_source(source, self.pylint_config)
         
         for item in results:
-            # Map Pylint message IDs to pprefact rule IDs
-            rule_id = self._map_pylint_to_pprefact(item.get("message-id", ""))
+            # Map Pylint message IDs to prefact rule IDs
+            rule_id = self._map_pylint_to_prefact(item.get("message-id", ""))
             
             if rule_id:
                 severity = self._map_pylint_severity(item.get("type", ""))
@@ -285,8 +285,8 @@ class PylintComprehensive(BaseRule):
         
         return issues
     
-    def _map_pylint_to_pprefact(self, pylint_id: str) -> Optional[str]:
-        """Map Pylint message IDs to pprefact rule IDs."""
+    def _map_pylint_to_prefact(self, pylint_id: str) -> Optional[str]:
+        """Map Pylint message IDs to prefact rule IDs."""
         mapping = {
             "W1201": "print-statements",
             "W1308": "string-concat",
@@ -298,7 +298,7 @@ class PylintComprehensive(BaseRule):
         return mapping.get(pylint_id)
     
     def _map_pylint_severity(self, pylint_type: str) -> Severity:
-        """Map Pylint message types to pprefact severities."""
+        """Map Pylint message types to prefact severities."""
         mapping = {
             "error": Severity.ERROR,
             "warning": Severity.WARNING,
@@ -363,7 +363,7 @@ class PylintComprehensive(BaseRule):
 
 # Pylint configuration generator
 def generate_pylint_rc(config: Config, output_path: Path) -> None:
-    """Generate a .pylintrc file based on pprefact configuration."""
+    """Generate a .pylintrc file based on prefact configuration."""
     content = """[MAIN]
 disable=all
 

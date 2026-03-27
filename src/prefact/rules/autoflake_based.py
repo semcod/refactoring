@@ -1,4 +1,4 @@
-"""Autoflake-based unused import and variable removal for pprefact.
+"""Autoflake-based unused import and variable removal for prefact.
 
 This module provides integration with Autoflake for removing unused imports,
 unused variables, and duplicate keys.

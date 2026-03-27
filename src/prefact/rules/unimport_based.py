@@ -1,4 +1,4 @@
-"""Unimport-based unused import detection and removal for pprefact.
+"""Unimport-based unused import detection and removal for prefact.
 
 This module provides integration with the unimport library for fast and accurate
 unused import detection and removal.

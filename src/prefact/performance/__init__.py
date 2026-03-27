@@ -1,4 +1,4 @@
-"""Performance optimization modules for pprefact."""
+"""Performance optimization modules for prefact."""
 
 from prefact.performance.cache import (
     Cache,

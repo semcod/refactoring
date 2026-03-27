@@ -1,6 +1,6 @@
-"""pprefact.rules
+"""prefact.rules
 
-Registry for pprefact rules.
+Registry for prefact rules.
 
 The registry uses lazy loading to avoid importing all rule modules at startup,
 significantly improving CLI cold-start performance.
