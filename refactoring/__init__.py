@@ -2,7 +2,7 @@
 Refactoring package for code analysis and transformation tools.
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Your Name"
 __email__ = "your.email@example.com"
 

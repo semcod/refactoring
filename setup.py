@@ -12,14 +12,14 @@ except FileNotFoundError:
     version = "0.0.1"
 
 setup(
-    name="refactoring",
+    name="semcod-refactoring",
     version=version,
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Semcod Team",
+    author_email="team@semcod.com",
     description="A package for code analysis and refactoring tools",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/refactoring",
+    url="https://github.com/semcod/refactoring",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -39,7 +39,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "refactor=refactoring.cli:main",
+            "semcod-refactor=refactoring.cli:main",
         ],
     },
 )
