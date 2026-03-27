@@ -168,6 +168,14 @@ Main execution flows into the system:
 > Run autonomous prefact process.
 - **Calls**: console.print, Panel.fit, console.print, console.print, self.scan_project, console.print, self.update_planfile, console.print
 
+### src.prefact.autonomous.AutonomousRefact.update_planfile
+> Update planfile.yaml with new tickets.
+- **Calls**: self.planfile_path.exists, src.prefact.performance.cache.Cache.set, None.extend, console.print, self.create_default_planfile, self.create_ticket_from_issue, None.append, open
+
+### src.prefact.autonomous.AutonomousRefact.update_todo_md
+> Update TODO.md with current issues.
+- **Calls**: src.prefact.performance.cache.Cache.set, None.join, self.todo_path.exists, self.todo_path.write_text, console.print, self.todo_path.read_text, todos.append, seen.add
+
 ### src.prefact.performance.cache.cached_file_operation
 > Decorator to cache file operations.
 - **Calls**: src.prefact.performance.cache.get_hash_cache, hash_cache.get_hash, src.prefact.performance.cache.get_cache, cache.get, func, cache.set, func, hash_cache.set_hash
@@ -198,10 +206,6 @@ scans for issues, and creates tickets in planfile
 ### src.prefact.rules.unimport_based.UnimportUnusedImports.scan_file
 - **Calls**: UnimportHelper.check_source, source.splitlines, enumerate, line.strip, stripped.startswith, item.get, import_lines.get, issues.append
 
-### src.prefact.autonomous.AutonomousRefact.update_todo_md
-> Update TODO.md with current issues.
-- **Calls**: None.join, self.todo_path.exists, self.todo_path.write_text, console.print, todos.append, self.todo_path.read_text, None.isoformat, existing.split
-
 ### src.prefact.plugins.PluginManager._discover_local_plugins
 > Discover plugins in a local directory.
 - **Calls**: plugin_dir.glob, PluginValidator.validate_plugin_path, importlib.util.spec_from_file_location, importlib.util.module_from_spec, spec.loader.exec_module, PluginMetadata, plugins.append, print
@@ -219,10 +223,6 @@ scans for issues, and creates tickets in planfile
 
 ### src.prefact.rules.autoflake_based.AutoflakeAll.validate
 - **Calls**: AutoflakeUnusedImports, unused_rule.validate, all_checks.extend, all_errors.extend, AutoflakeUnusedVariables, var_rule.validate, all_checks.extend, all_errors.extend
-
-### src.prefact.autonomous.AutonomousRefact.update_planfile
-> Update planfile.yaml with new tickets.
-- **Calls**: self.planfile_path.exists, None.extend, console.print, self.create_default_planfile, self.create_ticket_from_issue, None.append, open, yaml.dump
 
 ### src.prefact.config.Config.from_yaml
 > Load configuration from a YAML file.
@@ -483,8 +483,8 @@ Key functions that process and transform data:
 ### src.prefact.rules.importchecker_based.ImportOptimizer.validate
 - **Output to**: ValidationResult
 
-### src.prefact.rules.pylint_based.PylintPrintStatements.validate
-- **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
+### src.prefact.rules.type_hints.MissingReturnType.validate
+- **Output to**: ValidationResult
 
 ## Behavioral Patterns
 
@@ -542,6 +542,8 @@ Functions exposed as public API (no underscore prefix):
 - `examples.06-api-usage.example.batch_processing_example` - 19 calls
 - `examples.sample-project.cli.main` - 18 calls
 - `src.prefact.autonomous.AutonomousRefact.run_autonomous` - 16 calls
+- `src.prefact.autonomous.AutonomousRefact.update_planfile` - 16 calls
+- `src.prefact.autonomous.AutonomousRefact.update_todo_md` - 16 calls
 - `src.prefact.performance.cache.cached_file_operation` - 16 calls
 - `src.prefact.rules.benchmark.print_benchmark_results` - 16 calls
 - `src.prefact.rules.migration.RuleMigrationManager.create_hybrid_rule` - 16 calls
@@ -550,11 +552,9 @@ Functions exposed as public API (no underscore prefix):
 - `src.prefact.plugins.PluginManager.load_plugin` - 15 calls
 - `src.prefact.cli.autonomous_cmd` - 15 calls
 - `src.prefact.rules.unimport_based.UnimportUnusedImports.scan_file` - 15 calls
-- `src.prefact.autonomous.AutonomousRefact.update_todo_md` - 14 calls
 - `src.prefact.performance.cache.cached_result` - 14 calls
 - `src.prefact.rules.unimport_based.UnimportAll.validate` - 14 calls
 - `src.prefact.rules.autoflake_based.AutoflakeAll.validate` - 14 calls
-- `src.prefact.autonomous.AutonomousRefact.update_planfile` - 13 calls
 - `src.prefact.config.Config.from_yaml` - 13 calls
 - `vscode-extension.src.extension.PrefactTreeProvider.getChildren` - 13 calls
 - `src.prefact.git_hooks.main` - 12 calls

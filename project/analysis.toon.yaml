@@ -1,4 +1,4 @@
-# code2llm | 50f 11010L | python:48,typescript:1,shell:1 | 2026-03-27
+# code2llm | 50f 11019L | python:48,typescript:1,shell:1 | 2026-03-27
 # CC̄=3.2 | critical:3/655 | dups:0 | cycles:0
 
 HEALTH[3]:
@@ -9,21 +9,21 @@ HEALTH[3]:
 REFACTOR[1]:
   1. split 3 high-CC methods  (CC>15)
 
-PIPELINES[510]:
+PIPELINES[509]:
   [1] Src [__init__]: __init__ → get_all_rules
       PURITY: 100% pure
   [2] Src [validate_file]: validate_file
       PURITY: 100% pure
-  [3] Src [main]: main → find_examples
+  [3] Src [__init__]: __init__
       PURITY: 100% pure
-  [4] Src [__init__]: __init__
+  [4] Src [run]: run
       PURITY: 100% pure
-  [5] Src [_find_git_dir]: _find_git_dir
+  [5] Src [scan_only]: scan_only
       PURITY: 100% pure
 
 LAYERS:
   src/                            CC̄=3.2    ←in:0  →out:0
-  │ !! autonomous                 539L  1C   15m  CC=14     ←0
+  │ !! autonomous                 548L  1C   15m  CC=14     ←0
   │ string_transformations     491L  6C   27m  CC=8      ←0
   │ importchecker_based        482L  5C   24m  CC=14     ←0
   │ isort_based                468L  4C   23m  CC=13     ←0
@@ -32,8 +32,8 @@ LAYERS:
   │ unimport_based             453L  5C   22m  CC=14     ←0
   │ import_linter_based        449L  5C   24m  CC=8      ←0
   │ logging                    436L  10C   28m  CC=4      ←0
-  │ cache                      434L  6C   37m  CC=5      ←8
-  │ pylint_based               401L  5C   22m  CC=6      ←1
+  │ cache                      434L  6C   37m  CC=5      ←9
+  │ pylint_based               401L  5C   22m  CC=6      ←0
   │ mypy_based                 400L  6C   22m  CC=9      ←0
   │ git_hooks                  391L  2C   17m  CC=8      ←0
   │ parallel                   350L  4C   23m  CC=7      ←0

@@ -328,12 +328,17 @@ class AutonomousRefact:
         
         # Add tickets for issues
         new_tickets = []
+        seen_tickets = set()
         for issue_group in self.issues_found:
             ticket = self.create_ticket_from_issue(issue_group)
             
-            # Check if ticket already exists
-            if not self.ticket_exists(planfile, ticket):
+            # Create unique key for deduplication
+            ticket_key = (ticket["rule_id"], tuple(ticket["files"]))
+            
+            # Check if ticket already exists in planfile or current run
+            if ticket_key not in seen_tickets and not self.ticket_exists(planfile, ticket):
                 new_tickets.append(ticket)
+                seen_tickets.add(ticket_key)
         
         # Add tickets to planfile
         if "sprints" not in planfile:
