@@ -1,0 +1,6 @@
+include VERSION
+include README.md
+include LICENSE
+include CHANGELOG.md
+recursive-include refactoring *.py
+recursive-include tests *.py

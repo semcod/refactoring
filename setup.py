@@ -1,10 +1,15 @@
 from setuptools import setup, find_packages
+import os
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-with open("VERSION", "r", encoding="utf-8") as fh:
-    version = fh.read().strip()
+# Try to read VERSION file, fallback to default if not found
+try:
+    with open("VERSION", "r", encoding="utf-8") as fh:
+        version = fh.read().strip()
+except FileNotFoundError:
+    version = "0.0.1"
 
 setup(
     name="refactoring",
