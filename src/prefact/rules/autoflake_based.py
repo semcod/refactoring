@@ -119,7 +119,6 @@ class AutoflakeHelper:
                     return f.read()
             return source
         finally:
-            import os
             os.unlink(tmp_path)
 
 

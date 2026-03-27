@@ -1,7 +1,7 @@
-# vallm batch | 151f | 86✓ 3⚠ 24✗ | 2026-03-27
+# vallm batch | 151f | 87✓ 3⚠ 23✗ | 2026-03-27
 
 SUMMARY:
-  scanned: 151  passed: 86 (57.0%)  warnings: 3  errors: 24  unsupported: 41
+  scanned: 151  passed: 87 (57.6%)  warnings: 3  errors: 23  unsupported: 41
 
 WARNINGS[3]{path,score}:
   vscode-extension/src/extension.ts,0.92
@@ -15,7 +15,7 @@ WARNINGS[3]{path,score}:
       complexity.cyclomatic,warning,fix has cyclomatic complexity 21 (max: 15),112
       complexity.lizard_cc,warning,fix: CC=21 exceeds limit 15,112
 
-ERRORS[24]{path,score}:
+ERRORS[23]{path,score}:
   examples/01-individual-rules/relative-imports/after.py,0.57
     issues[8]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'mypackage.models' not found,3
@@ -87,9 +87,6 @@ ERRORS[24]{path,score}:
   examples/01-individual-rules/sorted-imports/before.py,0.94
     issues[1]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'local_module' not found,3
-  src/prefact/config.py,0.94
-    issues[1]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'tomli' not found,168
   tests/test_relative_imports.py,0.94
     issues[1]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'pytest' not found,8

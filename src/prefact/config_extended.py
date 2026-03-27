@@ -13,7 +13,7 @@ from __future__ import annotations
 import os
 import yaml
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
 from prefact.config import Config, RuleConfig
 

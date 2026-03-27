@@ -2,8 +2,8 @@
 
 NEXT[4] (ranked by impact):
   [1] !! SPLIT           src/prefact/autonomous.py
-      WHY: 519L, 1 classes, max CC=12
-      EFFORT: ~4h  IMPACT: 6228
+      WHY: 539L, 1 classes, max CC=14
+      EFFORT: ~4h  IMPACT: 7546
 
   [2] !  SPLIT-FUNC      UnusedImports.fix  CC=21  fan=13
       WHY: CC=21 exceeds 15

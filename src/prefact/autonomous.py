@@ -10,19 +10,17 @@ This module provides autonomous functionality for prefact including:
 from __future__ import annotations
 
 import hashlib
-import json
-import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 from rich.console import Console
 from rich.panel import Panel
-from rich.progress import Progress, TaskID
+from rich.progress import Progress
 
 from prefact import __version__
 from prefact.config import Config
@@ -218,7 +216,7 @@ class AutonomousRefact:
                     max_workers = min(config.performance.get('max_workers', 4), len(files_to_scan))
                     console.print(f"🚀 Using parallel processing with {max_workers} workers")
                     
-                    def scan_file(file_path):
+                    def scan_file(file_path: Path) -> Tuple[Path, List[Any]]:
                         file_issues = []
                         try:
                             # Skip large files (>100KB) for speed
@@ -454,9 +452,9 @@ class AutonomousRefact:
                     # Update existing
                     lines = existing.split("\n")
                     todo_start = next(i for i, line in enumerate(lines) if line.startswith("# TODO"))
-                    new_content = "\n".join(lines[:todo_start]) + "\n" + content
+                    new_content = f"{'\n'.join(lines[:todo_start])}\n{content}"
                 else:
-                    new_content = existing + "\n\n" + content
+                    new_content = f"{existing}\n\n{content}"
             else:
                 new_content = content
             
@@ -487,7 +485,7 @@ class AutonomousRefact:
             while insert_pos < len(lines) and not lines[insert_pos].startswith("##"):
                 insert_pos += 1
             
-            new_content = "\n".join(lines[:insert_pos]) + "\n" + entry + "\n" + "\n".join(lines[insert_pos:])
+            new_content = f"{'\n'.join(lines[:insert_pos])}\n{entry}\n{'\n'.join(lines[insert_pos:])}"
         else:
             new_content = f"# Changelog\n\n{entry}"
         

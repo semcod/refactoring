@@ -40,7 +40,7 @@ class Fixer:
 
         if not dry_run and all_fixes:
             if self.config.backup:
-                shutil.copy2(path, path.with_suffix(path.suffix + ".bak"))
+                shutil.copy2(path, path.with_suffix(f"{path.suffix}.bak"))
             path.write_text(source, encoding="utf-8")
 
         return source, all_fixes

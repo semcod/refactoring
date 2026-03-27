@@ -205,7 +205,6 @@ def rules() -> None:
     """List all available rules."""
     from prefact.rules import get_all_rules
 
-    from rich.console import Console
     from rich.table import Table
 
     console = Console()

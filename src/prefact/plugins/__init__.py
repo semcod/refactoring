@@ -9,12 +9,10 @@ from __future__ import annotations
 import importlib
 import importlib.metadata
 import importlib.util
-import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Type, Union
+from typing import Dict, List, Optional, Type
 
 from prefact.config import Config
-from prefact.models import Issue
 from prefact.rules import BaseRule
 
 # Plugin API version - increment when breaking changes are made

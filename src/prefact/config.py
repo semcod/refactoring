@@ -164,11 +164,7 @@ class Config:
             import tomllib
             return tomllib
         except ModuleNotFoundError:
-            try:
-                import tomli as tomllib  # type: ignore[no-redef]
-                return tomllib
-            except ModuleNotFoundError:
-                return None
+            return None
     
     def _detect_from_src_layout(self) -> Optional[str]:
         """Detect package name from src/ layout."""
