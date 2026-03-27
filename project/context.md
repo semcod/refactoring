@@ -117,6 +117,10 @@
 
 Main execution flows into the system:
 
+### src.prefact.autonomous.AutonomousRefact.scan_project
+> Scan project for issues.
+- **Calls**: ExtendedConfig.from_yaml, RefactoringEngine, Scanner, list, console.print, self.group_issues, None.total_seconds, console.print
+
 ### src.prefact.config_extended.ExtendedConfig.from_yaml
 > Load configuration from YAML file with environment support.
 - **Calls**: None.items, raw.pop, raw.pop, raw.pop, raw.pop, raw.pop, raw.pop, cls
@@ -216,77 +220,72 @@ scans for issues, and creates tickets in planfile
 ### src.prefact.rules.autoflake_based.AutoflakeAll.validate
 - **Calls**: AutoflakeUnusedImports, unused_rule.validate, all_checks.extend, all_errors.extend, AutoflakeUnusedVariables, var_rule.validate, all_checks.extend, all_errors.extend
 
-### src.prefact.autonomous.AutonomousRefact.update_planfile
-> Update planfile.yaml with new tickets.
-- **Calls**: self.planfile_path.exists, None.extend, console.print, self.create_default_planfile, self.create_ticket_from_issue, None.append, open, yaml.dump
-
 ### src.prefact.config.Config.from_yaml
 > Load configuration from a YAML file.
 - **Calls**: cls._parse_rules, cls._get_default_patterns, cls, yaml.safe_load, raw.pop, path.read_text, Path, raw.pop
 
+### src.prefact.autonomous.AutonomousRefact.update_planfile
+> Update planfile.yaml with new tickets.
+- **Calls**: self.planfile_path.exists, None.extend, console.print, self.create_default_planfile, self.create_ticket_from_issue, None.append, open, yaml.dump
+
 ### vscode-extension.src.extension.PrefactTreeProvider.getChildren
 - **Calls**: vscode-extension.src.extension.has, vscode-extension.src.extension.set, vscode-extension.src.extension.get, vscode-extension.src.extension.push, vscode-extension.src.extension.from, vscode-extension.src.extension.PrefactDiagnosticsProvider.entries, vscode-extension.src.extension.map, vscode-extension.src.extension.PrefactTreeItem
-
-### src.prefact.git_hooks.main
-> Main CLI for Git hooks management.
-- **Calls**: argparse.ArgumentParser, parser.add_argument, parser.add_argument, parser.add_argument, parser.parse_args, src.prefact.git_hooks.install_git_hooks, Path.cwd, src.prefact.git_hooks.uninstall_git_hooks
 
 ## Process Flows
 
 Key execution flows identified:
 
-### Flow 1: from_yaml
+### Flow 1: scan_project
+```
+scan_project [src.prefact.autonomous.AutonomousRefact]
+```
+
+### Flow 2: from_yaml
 ```
 from_yaml [src.prefact.config_extended.ExtendedConfig]
 ```
 
-### Flow 2: _initialize_built_in_rules
+### Flow 3: _initialize_built_in_rules
 ```
 _initialize_built_in_rules [src.prefact.rules.registry]
   └─> get_lazy_registry
 ```
 
-### Flow 3: main
+### Flow 4: main
 ```
 main [examples.run_examples]
   └─> find_examples
 ```
 
-### Flow 4: print_report
+### Flow 5: print_report
 ```
 print_report [src.prefact.reporters.console]
 ```
 
-### Flow 5: scan_file
+### Flow 6: scan_file
 ```
 scan_file [src.prefact.rules.magic_numbers.MagicNumberRule]
 ```
 
-### Flow 6: check_file
+### Flow 7: check_file
 ```
 check_file [src.prefact.rules.mypy_based.MyPyHelper]
 ```
 
-### Flow 7: create_composite_rule
+### Flow 8: create_composite_rule
 ```
 create_composite_rule [src.prefact.rules.composite_factory.CompositeRuleFactory]
   └─ →> get_all_rules
 ```
 
-### Flow 8: activate
+### Flow 9: activate
 ```
 activate [vscode-extension.src.extension.PrefactTreeProvider]
 ```
 
-### Flow 9: validate
+### Flow 10: validate
 ```
 validate [src.prefact.rules.relative_imports.RelativeToAbsoluteImports]
-```
-
-### Flow 10: fix
-```
-fix [src.prefact.rules.unused_imports.UnusedImports]
-  └─ →> set
 ```
 
 ## Key Classes
@@ -363,16 +362,16 @@ fix [src.prefact.rules.unused_imports.UnusedImports]
 - **Key Methods**: src.prefact.config_extended.ExtendedConfig.__init__, src.prefact.config_extended.ExtendedConfig.from_yaml, src.prefact.config_extended.ExtendedConfig._deep_merge, src.prefact.config_extended.ExtendedConfig.get_tool_config, src.prefact.config_extended.ExtendedConfig.get_performance_setting, src.prefact.config_extended.ExtendedConfig.get_plugin_config, src.prefact.config_extended.ExtendedConfig.to_dict
 - **Inherits**: Config
 
-### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
-> Analyze import dependencies using importchecker.
-- **Methods**: 7
-- **Key Methods**: src.prefact.rules.importchecker_based.ImportDependencyAnalysis.__init__, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._load_checker_config, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.scan_file, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._extract_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._detect_circular_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.fix, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
-- **Inherits**: BaseRule
-
 ### src.prefact.rules.pylint_based.PylintComprehensive
 > Comprehensive analysis using Pylint with custom rules.
 - **Methods**: 7
 - **Key Methods**: src.prefact.rules.pylint_based.PylintComprehensive.__init__, src.prefact.rules.pylint_based.PylintComprehensive._load_pylint_config, src.prefact.rules.pylint_based.PylintComprehensive.scan_file, src.prefact.rules.pylint_based.PylintComprehensive._map_pylint_to_prefact, src.prefact.rules.pylint_based.PylintComprehensive._map_pylint_severity, src.prefact.rules.pylint_based.PylintComprehensive.fix, src.prefact.rules.pylint_based.PylintComprehensive.validate
+- **Inherits**: BaseRule
+
+### src.prefact.rules.importchecker_based.ImportDependencyAnalysis
+> Analyze import dependencies using importchecker.
+- **Methods**: 7
+- **Key Methods**: src.prefact.rules.importchecker_based.ImportDependencyAnalysis.__init__, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._load_checker_config, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.scan_file, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._extract_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis._detect_circular_imports, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.fix, src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
 - **Inherits**: BaseRule
 
 ### src.prefact.rules.isort_based.ISortHelper
@@ -423,31 +422,6 @@ Key functions that process and transform data:
 ### src.prefact.performance.cache.ScanResultCache.invalidate_file
 > Invalidate all cache entries for a file.
 
-### src.prefact.rules.magic_numbers.MagicNumberRule.validate
-- **Output to**: self.scan_file, ValidationResult, len, len
-
-### src.prefact.rules.ruff_based.RuffWildcardImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffPrintStatements.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.ruff_based.RuffUnusedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len, len
-
-### src.prefact.rules.ruff_based.RuffSortedImports.validate
-- **Output to**: RuffHelper.check_file, ValidationResult, len
-
-### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.unused_imports._process_assignment_for_all
-> Process assignment to __all__ and add exported names to used set.
-- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
-
-### src.prefact.rules.unused_imports.UnusedImports.validate
-- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
-
 ### src.prefact.config_extended.ConfigValidator.validate
 > Validate configuration and return list of errors.
 - **Output to**: config.tools.items, errors.extend, config.rules.items, ConfigValidator._validate_performance_config, errors.extend
@@ -472,6 +446,37 @@ Key functions that process and transform data:
 > Validate individual rule configuration.
 - **Output to**: errors.append, isinstance, all, isinstance, errors.append
 
+### src.prefact.rules.ruff_based.RuffWildcardImports.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.ruff_based.RuffPrintStatements.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.ruff_based.RuffUnusedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len, len
+
+### src.prefact.rules.ruff_based.RuffSortedImports.validate
+- **Output to**: RuffHelper.check_file, ValidationResult, len
+
+### src.prefact.rules.ruff_based.RuffDuplicateImports.validate
+- **Output to**: ValidationResult
+
+### src.prefact.rules.unused_imports._process_assignment_for_all
+> Process assignment to __all__ and add exported names to used set.
+- **Output to**: isinstance, isinstance, isinstance, isinstance, used.add
+
+### src.prefact.rules.unused_imports.UnusedImports.validate
+- **Output to**: ValidationResult, ast.parse, checks.append, errors.append
+
+### src.prefact.rules.pylint_based.PylintPrintStatements.validate
+- **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
+
+### src.prefact.rules.pylint_based.PylintStringConcat.validate
+- **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
+
+### src.prefact.rules.pylint_based.PylintComprehensive.validate
+- **Output to**: ValidationResult, PylintHelper.check_source, all_checks.append, all_errors.append, len
+
 ### src.prefact.rules.importchecker_based.ImportCheckerUnusedImports.validate
 - **Output to**: ImportCheckerHelper.check_file, ValidationResult, len, len
 
@@ -480,12 +485,6 @@ Key functions that process and transform data:
 
 ### src.prefact.rules.importchecker_based.ImportDependencyAnalysis.validate
 - **Output to**: self.scan_file, ValidationResult, len
-
-### src.prefact.rules.importchecker_based.ImportOptimizer.validate
-- **Output to**: ValidationResult
-
-### src.prefact.rules.pylint_based.PylintPrintStatements.validate
-- **Output to**: PylintHelper.check_source, ValidationResult, len, r.get, None.lower
 
 ## Behavioral Patterns
 
@@ -528,6 +527,7 @@ Key functions that process and transform data:
 
 Functions exposed as public API (no underscore prefix):
 
+- `src.prefact.autonomous.AutonomousRefact.scan_project` - 31 calls
 - `src.prefact.config_extended.ExtendedConfig.from_yaml` - 31 calls
 - `examples.06-api-usage.example.run_prefact_example` - 28 calls
 - `examples.run_examples.main` - 25 calls
@@ -554,8 +554,8 @@ Functions exposed as public API (no underscore prefix):
 - `src.prefact.performance.cache.cached_result` - 14 calls
 - `src.prefact.rules.unimport_based.UnimportAll.validate` - 14 calls
 - `src.prefact.rules.autoflake_based.AutoflakeAll.validate` - 14 calls
-- `src.prefact.autonomous.AutonomousRefact.update_planfile` - 13 calls
 - `src.prefact.config.Config.from_yaml` - 13 calls
+- `src.prefact.autonomous.AutonomousRefact.update_planfile` - 13 calls
 - `vscode-extension.src.extension.PrefactTreeProvider.getChildren` - 13 calls
 - `src.prefact.git_hooks.main` - 12 calls
 - `src.prefact.autonomous.AutonomousRefact.update_changelog_md` - 12 calls
@@ -567,7 +567,6 @@ Functions exposed as public API (no underscore prefix):
 - `src.prefact.git_hooks.PreCommitConfig.install` - 11 calls
 - `src.prefact.autonomous.AutonomousRefact.group_issues` - 11 calls
 - `src.prefact.autonomous.AutonomousRefact.run_tests` - 11 calls
-- `src.prefact.cli.rules` - 11 calls
 
 ## System Interactions
 
@@ -575,6 +574,11 @@ How components interact:
 
 ```mermaid
 graph TD
+    scan_project --> from_yaml
+    scan_project --> RefactoringEngine
+    scan_project --> Scanner
+    scan_project --> list
+    scan_project --> print
     from_yaml --> items
     from_yaml --> pop
     _initialize_built_in --> get_lazy_registry
@@ -600,11 +604,6 @@ graph TD
     create_composite_rul --> get_all_rules
     create_composite_rul --> scan
     activate --> log
-    activate --> PrefactDiagnosticsPr
-    activate --> PrefactTreeProvider
-    activate --> createTreeView
-    activate --> registerCommand
-    validate --> ValidationResult
 ```
 
 ## Reverse Engineering Guidelines

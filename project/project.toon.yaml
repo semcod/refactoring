@@ -1,4 +1,4 @@
-# prefact | 574 func | 44f | 11925L | python | 2026-03-27
+# prefact | 574 func | 44f | 11964L | python | 2026-03-27
 
 HEALTH:
   CC̄=3.1  critical=15 (limit:10)  dup=0  cycles=0
@@ -6,28 +6,28 @@ HEALTH:
 ALERTS[20]:
   !!! high_fan_out     PrefactTreeProvider.activate = 20 (limit:10)
   !!  cc_exceeded      UnusedImports.fix = 21 (limit:15)
+  !!  high_fan_out     AutonomousRefact.scan_project = 18 (limit:10)
   !!  high_fan_out     CompositeRuleFactory.create_composite_rule = 18 (limit:10)
   !!  high_fan_out     ExtendedConfig.from_yaml = 16 (limit:10)
-  !   cc_exceeded      MagicNumberRule.scan_file = 15 (limit:15)
   !   cc_exceeded      ExtendedConfig.from_yaml = 15 (limit:15)
+  !   cc_exceeded      MagicNumberRule.scan_file = 15 (limit:15)
   !   high_fan_out     AutonomousRefact.update_todo_md = 13 (limit:10)
   !   high_fan_out     cached_file_operation = 13 (limit:10)
   !   high_fan_out     UnusedImports.fix = 13 (limit:10)
-  !   high_fan_out     benchmark_file = 13 (limit:10)
 
 MODULES[50] (top by size):
+  M[src/prefact/autonomous.py] 494L C:1 F:15 CC↑9 D:0 (python)
   M[src/prefact/rules/string_transformations.py] 491L C:6 F:27 CC↑8 D:0 (python)
   M[src/prefact/rules/importchecker_based.py] 482L C:5 F:24 CC↑14 D:0 (python)
   M[src/prefact/rules/isort_based.py] 468L C:4 F:23 CC↑13 D:0 (python)
   M[src/prefact/rules/autoflake_based.py] 468L C:5 F:23 CC↑11 D:0 (python)
   M[src/prefact/config_extended.py] 462L C:3 F:18 CC↑15 D:0 (python)
-  M[src/prefact/autonomous.py] 455L C:1 F:15 CC↑9 D:0 (python)
   M[src/prefact/rules/unimport_based.py] 454L C:5 F:22 CC↑14 D:0 (python)
   M[src/prefact/rules/import_linter_based.py] 449L C:5 F:24 CC↑8 D:0 (python)
   M[vscode-extension/src/extension.ts] 441L C:5 F:48 CC↑14 D:20 (typescript)
   M[src/prefact/logging.py] 436L C:10 F:28 CC↑4 D:0 (python)
   M[src/prefact/performance/cache.py] 434L C:6 F:37 CC↑5 D:8 (python)
-  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:0 (python)
+  M[src/prefact/rules/pylint_based.py] 401L C:5 F:22 CC↑6 D:1 (python)
   M[src/prefact/rules/mypy_based.py] 400L C:6 F:22 CC↑9 D:0 (python)
   M[src/prefact/git_hooks.py] 391L C:2 F:17 CC↑8 D:0 (python)
   M[src/prefact/performance/parallel.py] 350L C:4 F:23 CC↑7 D:0 (python)
@@ -35,17 +35,17 @@ MODULES[50] (top by size):
 
 HOTSPOTS[10]:
   ★ PrefactTreeProvider.activate fan=20  // Orchestrates 20 calls
+  ★ AutonomousRefact.scan_project fan=18  // Scan project for issues.
   ★ CompositeRuleFactory.create_composite_rule fan=18  // Create a composite rule dynamically.
   ★ ExtendedConfig.from_yaml fan=16  // Load configuration from YAML file with environment support.
   ★ AutonomousRefact.update_todo_md fan=13  // Update TODO.md with current issues.
-  ★ cached_file_operation fan=13  // Decorator to cache file operations.
 
 REFACTOR[6]:
-  [1] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
+  [1] M/L Split ExtendedConfig.from_yaml (CC=15 → target CC<10)
   [2] M/L Split UnusedImports.fix (CC=21 → target CC<10)
-  [3] M/L Split ExtendedConfig.from_yaml (CC=15 → target CC<10)
+  [3] M/L Split MagicNumberRule.scan_file (CC=15 → target CC<10)
   [4] M/M Reduce PrefactTreeProvider.activate fan-out (currently 20)
-  [5] M/M Reduce CompositeRuleFactory.create_composite_rule fan-out (currently 18)
+  [5] M/M Reduce AutonomousRefact.scan_project fan-out (currently 18)
 
 EVOLUTION:
-  2026-03-27 CC̄=3.1 crit=15 11925L // Automated analysis
+  2026-03-27 CC̄=3.1 crit=15 11964L // Automated analysis
